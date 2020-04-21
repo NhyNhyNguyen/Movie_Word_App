@@ -1,8 +1,9 @@
 import 'dart:core';
 
 class StringConstant{
-  static const EMAIL = 'Email';
-  static const EMAIL_HINT = 'Enter your email';
+  static const APP_NAME = 'Movie\'s World';
+  static const USERNAME = 'Username';
+  static const USERNAME_HINT = 'Enter your username';
   static const PASSWORD = 'Password';
   static const PASSWORD_HINT = 'Enter your password';
   static const FORGOT_PASS = 'Forgot password';
@@ -11,4 +12,15 @@ class StringConstant{
   static const LOGIN = 'LOGIN';
   static const SIGN_IN = 'SIGN IN';
   static const HAVE_ACCOUNT = 'Don\'s have account? ';
+
+  //sign up
+  static const FULL_NAME = 'Fullname';
+  static const FULL_NAME_HINT = 'Enter your fullname';
+  static const GENDER = 'Gender';
+  static const ADDRESS = 'Address';
+  static const ADDRESS_HINT = 'Enter your address';
+  static const EMAIL = 'Email';
+  static const EMAIL_HINT = 'Enter your email';
+  static const PHONE = 'Phone number';
+  static const PHONE_HINT = 'Enter your phone number';
 }

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'ColorConstant.dart';
+
 class StyleConstant {
   static const TextStyle normalTextStyle = TextStyle(
       color: Colors.black,
@@ -34,6 +36,6 @@ class StyleConstant {
   static const UnderlineInputBorder enabledBorder =
       UnderlineInputBorder(borderSide: BorderSide(color: Colors.grey));
   static const focusedBorder = UnderlineInputBorder(
-    borderSide: BorderSide(color: Colors.red),
+    borderSide: BorderSide(color: ColorConstant.RED),
   );
 }
