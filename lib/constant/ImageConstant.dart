@@ -10,5 +10,6 @@ class ImageConstant{
   static const HOME_YELLOW = "assets/icon_home_yellow.png";
   static const PERSON_GRAY = "assets/icon_person_gray.png";
   static const PERSON_YELLOW = "assets/icon_person_yellow.png";
+  static const TICKET = "assets/ticket.png";
 
 }

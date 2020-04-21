@@ -9,10 +9,11 @@ class TextFieldWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
+        SizedBox(height:3),
         Text(name, style: StyleConstant.normalTextStyle),
         Container(
           alignment: Alignment.centerLeft,
-          height: 55 ,
+          height: 45 ,
           child: TextFormField(
             keyboardType: textInputType,
             style: StyleConstant.normalTextStyle,
@@ -33,7 +34,7 @@ class TextFieldWidget {
           ),
         ),
         SizedBox(
-          height: 10,
+          height:7,
         ),
       ],
     );
