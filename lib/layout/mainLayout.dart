@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:MovieWorld/constant/ColorConstant.dart';
 import 'package:MovieWorld/constant/ImageConstant.dart';
 import 'package:MovieWorld/constant/StringConstant.dart';
+import 'package:MovieWorld/screens/News/TicketPrice.dart';
 import 'package:MovieWorld/screens/User/ChoosePage.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -105,12 +106,20 @@ class MainLayOut {
                                     ),
                                   ),
                                   InkWell(
-                                    onTap: () {},
+                                    onTap: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  TicketPriceScreen()));
+                                    },
                                     child: type == 'FILM'
-                                        ? Image.asset(ImageConstant.FILM_YELLOW,
-                                            height: MediaQuery.of(context).size.height * 0.06)
-                                        : Image.asset(ImageConstant.FILM_GRAY,
-                                            height: MediaQuery.of(context).size.height * 0.06),
+                                        ? Image.asset(
+                                          ImageConstant.FILM_YELLOW,
+                                          height: 45)
+                                        : Image.asset(
+                                          ImageConstant.FILM_GRAY,
+                                          height: 45),
                                   ),
                                   InkWell(
                                     onTap: () {
