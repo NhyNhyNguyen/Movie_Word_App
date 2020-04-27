@@ -30,7 +30,7 @@ class StyleConstant {
   static const TextStyle buttonTextStyle = TextStyle(
       color: Colors.white,
       fontFamily: "Poppins-Medium",
-      fontSize: 30,
+      fontSize: 23,
       fontWeight: FontWeight.bold
   );
   static const UnderlineInputBorder enabledBorder =

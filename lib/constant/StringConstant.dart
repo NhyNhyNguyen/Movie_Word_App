@@ -23,4 +23,8 @@ class StringConstant{
   static const EMAIL_HINT = 'Enter your email';
   static const PHONE = 'Phone number';
   static const PHONE_HINT = 'Enter your phone number';
+
+  //Edit
+  static const SAVE = "SAVE";
+  static const CANCEL = "CANCEL";
 }

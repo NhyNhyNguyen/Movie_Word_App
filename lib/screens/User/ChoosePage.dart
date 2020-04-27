@@ -3,6 +3,7 @@ import 'package:MovieWorld/constant/ImageConstant.dart';
 import 'package:MovieWorld/constant/StringConstant.dart';
 import 'package:MovieWorld/constant/StyleConstant.dart';
 import 'package:MovieWorld/layout/mainLayout.dart';
+import 'package:MovieWorld/screens/User/DetailScreen.dart';
 import 'package:MovieWorld/screens/User/LoginScreen.dart';
 import 'package:MovieWorld/screens/User/SignUpScreen.dart';
 import 'package:MovieWorld/screens/User/TextfieldWidget.dart';

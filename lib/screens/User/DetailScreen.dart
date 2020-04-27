@@ -3,19 +3,20 @@ import 'package:MovieWorld/constant/ImageConstant.dart';
 import 'package:MovieWorld/constant/StringConstant.dart';
 import 'package:MovieWorld/constant/StyleConstant.dart';
 import 'package:MovieWorld/layout/mainLayout.dart';
-import 'package:MovieWorld/modal.dart';
-import 'package:MovieWorld/screens/User/LoginScreen.dart';
+import 'package:MovieWorld/model/UserDetail.dart';
 import 'package:MovieWorld/screens/User/TextfieldWidget.dart';
 import 'package:MovieWorld/utils/DateTimeUtils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 
-class SignUpScreen extends StatefulWidget {
+class DetailScreen extends StatefulWidget {
   @override
-  _SignUpScreenState createState() => _SignUpScreenState();
+  _DetailScreenState createState() => _DetailScreenState();
 }
 
-class _SignUpScreenState extends State<SignUpScreen> {
+class _DetailScreenState extends State<DetailScreen> {
+  UserDetail userDetail = UserDetail(1, "nhinhi", "nhinguyen", "nhinhi@gmail.com", "1323322", "08 Ha Van Tinh");
+
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController fullNameController = TextEditingController();
@@ -25,11 +26,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   DateTime selectedDate = DateTime.now();
   final _formKey = GlobalKey<FormState>();
-  void onPressed(BuildContext context){
-    Navigator.push(context, MaterialPageRoute(builder: (context) => LoginScreen()));
-  }
 
-  Widget _signUpBtn(BuildContext context) {
+  Widget _SaveBtn() {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 25),
       child: RaisedButton(
@@ -39,13 +37,29 @@ class _SignUpScreenState extends State<SignUpScreen> {
             Scaffold.of(context)
                 .showSnackBar(SnackBar(content: Text('Processing Data')));
           }
-          Modal.showSimpleCustomDialog(context, "Sign up success!", onPressed);
         },
         padding: EdgeInsets.all(10.0),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        color: ColorConstant.RED,
+        color: ColorConstant.GREEN,
         child:
-            Text(StringConstant.SIGN_UP, style: StyleConstant.buttonTextStyle),
+            Text(StringConstant.SAVE, style: StyleConstant.buttonTextStyle),
+      ),
+    );
+  }
+
+  Widget _Cancel() {
+    return Container(
+      padding: EdgeInsets.symmetric(vertical: 25),
+      child: RaisedButton(
+        elevation: 5.0,
+        onPressed: () {
+
+        },
+        padding: EdgeInsets.all(10.0),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        color: ColorConstant.GREY,
+        child:
+        Text(StringConstant.CANCEL, style: StyleConstant.buttonTextStyle),
       ),
     );
   }
@@ -90,37 +104,31 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       children: <Widget>[
                         TextFieldWidget.buildTextField(
                             StringConstant.USERNAME,
-                            StringConstant.USERNAME_HINT,
+                            userDetail.username,
                             Icon(Icons.account_circle),
                             TextInputType.text,
                             usernameController),
                         TextFieldWidget.buildTextField(
-                            StringConstant.PASSWORD,
-                            StringConstant.PASSWORD_HINT,
-                            Icon(Icons.vpn_key),
-                            TextInputType.visiblePassword,
-                            passwordController),
-                        TextFieldWidget.buildTextField(
                             StringConstant.FULL_NAME,
-                            StringConstant.FULL_NAME_HINT,
+                            userDetail.fullName,
                             Icon(Icons.edit),
                             TextInputType.text,
                             fullNameController),
                         TextFieldWidget.buildTextField(
                             StringConstant.EMAIL,
-                            StringConstant.EMAIL_HINT,
+                            userDetail.email,
                             Icon(Icons.email),
                             TextInputType.visiblePassword,
                             emailController),
                         TextFieldWidget.buildTextField(
                             StringConstant.PHONE,
-                            StringConstant.PHONE_HINT,
+                            userDetail.phone,
                             Icon(Icons.phone_in_talk),
                             TextInputType.visiblePassword,
                             phoneController),
                         TextFieldWidget.buildTextField(
                             StringConstant.ADDRESS,
-                            StringConstant.ADDRESS_HINT,
+                            userDetail.address,
                             Icon(Icons.add_to_photos),
                             TextInputType.visiblePassword,
                             addressController),
@@ -128,7 +136,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                   ),
                 ),
-                _signUpBtn(context),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    _SaveBtn(),
+                    _Cancel(),
+                  ],
+                )
               ],
             ),
           ),

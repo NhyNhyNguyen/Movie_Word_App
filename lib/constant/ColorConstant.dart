@@ -7,4 +7,5 @@ class ColorConstant{
   static const Color BLUE_ACCENT = Colors.blueAccent;
   static const Color WHITE = Colors.white;
   static const Color BLACK = Colors.black;
+  static const Color GREEN = Colors.green;
 }
