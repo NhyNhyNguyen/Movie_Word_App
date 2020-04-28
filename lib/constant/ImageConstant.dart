@@ -12,4 +12,9 @@ class ImageConstant{
   static const PERSON_YELLOW = "assets/icon_person_yellow.png";
   static const TICKET = "assets/ticket.png";
 
+  static const TICKET_PRICE = "assets/giave.jpg";
+  static const NEWS1 = "assets/n1.PNG";
+  static const NEWS2 = "assets/n2.PNG";
+  static const NEWS3 = "assets/n3.PNG";
+
 }
