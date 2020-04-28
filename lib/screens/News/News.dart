@@ -1,4 +1,5 @@
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -40,19 +41,21 @@ class _NewsScreen extends State<NewsScreen>  {
 //];
 
  static List listImage() {
-  return data.map((item) => Image.asset(item['image'], height: 150,)).toList();
+  return data.map((item) => Image.asset(item['image'],fit: BoxFit.fill )).toList();
 }
 
 
   @override
   Widget build(BuildContext context) {
-    List<InkWell> myWidgets = listImage().asMap().entries.map((item) {
-      return InkWell(
-        child: item.value,
-        onTap: (){
-          Navigator.push(context, MaterialPageRoute(builder: (context) => NewsDetailScreen(item.key, data)));
-
-        },
+    List<Widget> myWidgets = listImage().asMap().entries.map((item) {
+      return Container(
+        padding: EdgeInsets.all(5.0),
+        child: InkWell(
+          child: item.value,
+          onTap: (){
+            Navigator.push(context, MaterialPageRoute(builder: (context) => NewsDetailScreen(item.key, data)));
+          },
+        ),
       );
     }).toList();
 
