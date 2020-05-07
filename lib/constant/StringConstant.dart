@@ -61,4 +61,14 @@ Không áp dụng cho các ngày Lễ, Tết, suất chiếu đặc biệt, ho�
   //Edit
   static const SAVE = "SAVE";
   static const CANCEL = "CANCEL";
+
+  //Home page
+  static const NOW_SHOWING = "Now Showing";
+  static const COMMING_SOON = "Comming soon";
+  static const SEARCH = "search";
+
+  //homepage_movie
+static const NAME1= "Spdierman";
+static const NAME2 = "High Kick";
+static const NAME3 =" Frozen";
 }

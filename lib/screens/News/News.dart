@@ -73,9 +73,6 @@ class _NewsScreen extends State<NewsScreen>  {
             children: <Widget>[
               OptionTab('news'),
               _listImage(),
-//              Image.asset(ImageConstant.NEWS1, height: 150),
-//              Image.asset(ImageConstant.NEWS2, height: 150),
-//              Image.asset(ImageConstant.NEWS3, height: 150),
             ],
           ),
           ),

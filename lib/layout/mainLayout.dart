@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:MovieWorld/constant/ColorConstant.dart';
 import 'package:MovieWorld/constant/ImageConstant.dart';
 import 'package:MovieWorld/constant/StringConstant.dart';
+import 'package:MovieWorld/screens/Homepage/NowshowingScreen.dart';
 import 'package:MovieWorld/screens/News/TicketPrice.dart';
 import 'package:MovieWorld/screens/User/ChoosePage.dart';
 import 'package:flutter/material.dart';
@@ -79,7 +80,13 @@ class MainLayOut {
                                     MainAxisAlignment.spaceAround,
                                 children: <Widget>[
                                   InkWell(
-                                    onTap: () {},
+                                    onTap: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  NowshowingScreen()));
+                                    },
                                     child: type == 'HOME'
                                         ? Image.asset(ImageConstant.HOME_YELLOW,
                                             height: MediaQuery.of(context).size.height * 0.05)

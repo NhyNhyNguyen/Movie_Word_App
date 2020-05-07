@@ -30,6 +30,7 @@ dependencies:
   flutter_datetime_picker: 1.2.5
   intl: ^0.15.8
   google_fonts: ^0.6.2
+  carousel_slider: ^2.0.0
 
 
 dev_dependencies:

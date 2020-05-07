@@ -17,4 +17,17 @@ class ImageConstant{
   static const NEWS2 = "assets/n2.PNG";
   static const NEWS3 = "assets/n3.PNG";
 
+  static const SEARCH_ICON = "assets/search.PNG";
+  static const RATE_ICON = "assets/rate.png";
+
+  static const POSTER1 = "assets/theshack.jpg";
+  static const POSTER2 = "assets/avenger.jpg";
+  static const POSTER3 = "assets/chieclacuonbay.jpg";
+  static const POSTER4 = "assets/china.jpg";
+  static const POSTER5 = "assets/haiphuong.jpg";
+  static const POSTER6 = "assets/iteawonclass.jpg";
+  static const POSTER7 = "assets/kingdom.jpg";
+  static const POSTER8 = "assets/matbiec.jpg";
+  static const POSTER9 = "assets/nguoiphanxu.jpg";
+
 }
