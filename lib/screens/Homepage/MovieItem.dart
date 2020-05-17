@@ -35,9 +35,10 @@ class MovieItem extends StatelessWidget {
                   child: Image.asset(imageUrl, fit: BoxFit.cover, )),),
                 Positioned(
                   bottom: 0,
+
                   child: Container(
                     padding: EdgeInsets.all(5),
-                    width: 340,
+                    width: MediaQuery.of(context).size.width * 0.945,
                     height: 50,
                     decoration: new BoxDecoration(
                       borderRadius: BorderRadius.only(

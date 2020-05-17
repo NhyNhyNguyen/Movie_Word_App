@@ -26,6 +26,7 @@ class Search extends StatelessWidget  {
     return Container(
       //height: 40,
       margin: EdgeInsets.fromLTRB(10, 8, 10, 8),
+      padding: EdgeInsets.only(left: 10),
       decoration: new BoxDecoration(
         border: Border.all( color: Colors.black38),
         borderRadius: const BorderRadius.all(const Radius.circular(8)),
