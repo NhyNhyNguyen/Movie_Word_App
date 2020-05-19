@@ -24,22 +24,20 @@ class Search extends StatelessWidget  {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: EdgeInsets.only(left: 15, right: 15),
+      margin: EdgeInsets.only(bottom:5),
       //height: 40,
-      margin: EdgeInsets.fromLTRB(10, 8, 10, 8),
-      padding: EdgeInsets.only(left: 10),
-      decoration: new BoxDecoration(
-        border: Border.all( color: Colors.black38),
-        borderRadius: const BorderRadius.all(const Radius.circular(8)),
-        color: ColorConstant.WHITE,
-      ),
-      child: TextField(
+      child: TextFormField(
+        style: StyleConstant.normalTextStyle,
         decoration: InputDecoration(
-            border: InputBorder.none,
+            enabledBorder: StyleConstant.enabledBorder,
+            focusedBorder: StyleConstant.focusedBorder,
+            contentPadding: EdgeInsets.only(top: 14),
             hintText: 'Enter a search term',
-            icon: Image.asset(ImageConstant.SEARCH_ICON, height: 30, width: 30, ),
-
-        ),
+            prefixIcon: Icon(Icons.search),
+            hintStyle: StyleConstant.hintTextStyle),
       ),
+
     );
   }
 

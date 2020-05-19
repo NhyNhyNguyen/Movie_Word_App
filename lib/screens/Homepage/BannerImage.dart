@@ -17,7 +17,7 @@ final List<Widget> imageSliders = imgList.map((item) => Container(
     child: ClipRRect(
       borderRadius: BorderRadius.all(Radius.circular(5.0)),
       child:
-      Image.asset(item, fit: BoxFit.cover, width: 1000.0),
+      Image.asset(item, fit: BoxFit.cover,),
     ),
   ),
 )).toList();
@@ -30,7 +30,7 @@ class BannerImage extends StatelessWidget {
     return Container(
       //height: 200,
       height: MediaQuery.of(context).size.height * 0.27,
-       color: ColorConstant.YELLOW,
+       //color: ColorConstant.YELLOW,
        child:
        CarouselSlider(
          options: CarouselOptions(
