@@ -23,7 +23,8 @@ class MovieItem extends StatelessWidget {
       child: Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         elevation: 4,
-        margin: EdgeInsets.all(10.0),
+        //margin: EdgeInsets.all(10.0),
+        margin: EdgeInsets.only(bottom: 10, left: 10, right: 10),
         child:
             Stack(
               children: <Widget>[
@@ -61,7 +62,7 @@ class MovieItem extends StatelessWidget {
                           child: Text(
                             name,
                             style: TextStyle(
-                              fontSize: 25,
+                              fontSize: 20,
                               color: ColorConstant.WHITE,
                             ),
                           ),
