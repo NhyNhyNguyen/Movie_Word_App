@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:http/http.dart' as http;
 
+import '../ButtonGradientLarge.dart';
 import 'SignUpScreen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -52,7 +53,7 @@ class _LoginScreenState extends State<LoginScreen> {
         child: Text(
           StringConstant.FORGOT_PASS,
           style: TextStyle(
-              color: Colors.blueAccent, decoration: TextDecoration.underline),
+              color: ColorConstant.BLUE_TEXT, decoration: TextDecoration.underline),
         ),
       ),
     );
@@ -83,25 +84,36 @@ class _LoginScreenState extends State<LoginScreen> {
     ));
   }
 
-  Widget _loginBtn() {
-    return Container(
-      padding: EdgeInsets.symmetric(vertical: 25),
-      width: double.infinity,
-      child: RaisedButton(
-        elevation: 5.0,
-        onPressed: () {
-          if (_formKey.currentState.validate()) {
-            Scaffold.of(context)
-                .showSnackBar(SnackBar(content: Text('Processing Data')));
-          }
-        },
-        padding: EdgeInsets.all(10.0),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        color: ColorConstant.RED,
-        child:
-            Text(StringConstant.SIGN_IN, style: StyleConstant.buttonTextStyle),
-      ),
-    );
+//  Widget _loginBtn() {
+//    return Container(
+//      padding: EdgeInsets.symmetric(vertical: 25),
+//      width: double.infinity,
+//      child: RaisedButton(
+//        elevation: 5.0,
+//        onPressed: () {
+//          if (_formKey.currentState.validate()) {
+//            Scaffold.of(context)
+//                .showSnackBar(SnackBar(content: Text('Processing Data')));
+//          }
+//        },
+//        padding: EdgeInsets.all(10.0),
+//        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+//        color: ColorConstant.RED,
+//        child:
+//            Text(StringConstant.SIGN_IN, style: StyleConstant.buttonTextStyle),
+//      ),
+//    );
+//  }
+
+  Widget _loginBtn(){
+    return ButtonGradientLarge(
+        StringConstant.SIGN_IN,
+            () {
+            if (_formKey.currentState.validate()) {
+                  Scaffold.of(context)
+                  .showSnackBar(SnackBar(content: Text('Processing Data')));
+            }
+        });
   }
 
   Widget _signInBtn() {
@@ -117,7 +129,7 @@ class _LoginScreenState extends State<LoginScreen> {
           TextSpan(
               text: StringConstant.SIGN_UP,
               style: TextStyle(
-                  color: ColorConstant.BLACK,
+                  color: ColorConstant.BLUE_TEXT,
                   decoration: TextDecoration.underline,
                   fontWeight: FontWeight.bold,
                   fontSize: 18))
@@ -131,6 +143,7 @@ class _LoginScreenState extends State<LoginScreen> {
     return MainLayOut.getMailLayout(
       context,
       Container(
+        color: ColorConstant.VIOLET,
         margin: EdgeInsets.only(bottom:  MediaQuery.of(context).size.height*0.1),
         width: double.infinity,
         child: SingleChildScrollView(

@@ -1,4 +1,5 @@
 
+import 'package:MovieWorld/screens/ButtonGradient.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -22,41 +23,37 @@ class OptionTab extends StatelessWidget  {
   final String type;
   OptionTab(this.type);
 
+
+
   @override
   Widget build(BuildContext context) {
+
+    void choseOption(type){
+      if(type == "nowshowing"){
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => NowshowingScreen()),
+        );
+      };
+      if(type == "comingsoon"){
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => CommingsoonScreen()),
+        );
+      };
+    }
+
     return Container(
       //padding: EdgeInsets.symmetric(vertical: 10),
-      padding: EdgeInsets.only(bottom: 9, top: 5),
+      padding: EdgeInsets.only(bottom: 8),
       width: double.infinity,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
-          RaisedButton(
-            elevation: 5.0,
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => NowshowingScreen()),
-              );
-            },
-            padding: EdgeInsets.all(15.0),
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-            color: ColorConstant.RED,
-            child: type == 'nowshowing' ? Text(StringConstant.NOW_SHOWING, style:TextStyle(color:ColorConstant.YELLOW )) : Text(StringConstant.NOW_SHOWING, style:TextStyle(color:ColorConstant.BLACK )),
-          ),
-          RaisedButton(
-            elevation: 5.0,
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => CommingsoonScreen()),
-              );
-            },
-            padding: EdgeInsets.all(15.0),
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-            color: ColorConstant.RED,
-            child: type == 'commingsoon' ? Text(StringConstant.COMMING_SOON, style:TextStyle(color:ColorConstant.YELLOW )) : Text(StringConstant.COMMING_SOON, style:TextStyle(color:ColorConstant.BLACK )),
-          ),
+          ButtonGradient(type, "nowshowing", StringConstant.NOW_SHOWING, () => choseOption("nowshowing")),
+          ButtonGradient(type, "comingsoon", StringConstant.COMMING_SOON, () => choseOption("comingsoon")),
+
+
         ],
       ),
     );

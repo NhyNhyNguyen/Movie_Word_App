@@ -46,14 +46,15 @@ class MovieItem extends StatelessWidget {
                         bottomRight: Radius.circular(10),
                         bottomLeft: Radius.circular(10),
                       ),
-                      gradient: LinearGradient(
-                        colors: [
-                          Color.fromARGB(250, 50, 50, 50),
-                          Color.fromARGB(0, 0, 0, 0)
-                        ],
-                        begin: Alignment.bottomCenter,
-                        end: Alignment.topCenter,
-                      ),
+//                      gradient: LinearGradient(
+//                        colors: [
+//                          Color.fromARGB(250, 50, 50, 50),
+//                          Color.fromARGB(0, 0, 0, 0)
+//                        ],
+//                        begin: Alignment.bottomCenter,
+//                        end: Alignment.topCenter,
+//                      ),
+                    gradient: ColorConstant.GRD_BLACK,
                     ),
                     child: Row(
                       children: <Widget>[

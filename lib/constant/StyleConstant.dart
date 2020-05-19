@@ -4,7 +4,7 @@ import 'ColorConstant.dart';
 
 class StyleConstant {
   static const TextStyle normalTextStyle = TextStyle(
-      color: Colors.black,
+      color: ColorConstant.GRAY_TEXT,
       fontFamily: "Poppins-Medium",
       fontSize: 20,
       fontWeight: FontWeight.normal);
@@ -16,12 +16,12 @@ class StyleConstant {
   );
 
   static const TextStyle smallTextStyle = TextStyle(
-      color: Colors.black,
+      color: ColorConstant.GRAY_TEXT,
       fontFamily: "Poppins-Medium",
       fontSize: 15,
       fontWeight: FontWeight.normal);
   static const TextStyle headerTextStyle = TextStyle(
-      color: Colors.black,
+      color: ColorConstant.GRAY_TEXT,
       fontFamily: "Poppins-Medium",
       fontSize: 30,
       fontWeight: FontWeight.bold
@@ -33,9 +33,29 @@ class StyleConstant {
       fontSize: 23,
       fontWeight: FontWeight.bold
   );
+
+  static const TextStyle btnSelectedStyle = TextStyle(
+    color: ColorConstant.WHITE,
+    fontSize: 17
+  );
+
+  static const TextStyle btnNormalStyle = TextStyle(
+    color: ColorConstant.BLACK,
+  );
+
+  static const btnLargeStyle = TextStyle(
+    color: ColorConstant.WHITE,
+    fontSize: 30,
+
+  );
+
+
   static const UnderlineInputBorder enabledBorder =
       UnderlineInputBorder(borderSide: BorderSide(color: Colors.grey));
   static const focusedBorder = UnderlineInputBorder(
     borderSide: BorderSide(color: ColorConstant.RED),
   );
+
+
+
 }

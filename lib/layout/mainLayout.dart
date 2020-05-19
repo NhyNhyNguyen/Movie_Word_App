@@ -23,12 +23,12 @@ class MainLayOut {
               preferredSize:
                   Size.fromHeight(MediaQuery.of(context).size.height * 0.08),
               child: AppBar(
-                backgroundColor: ColorConstant.RED,
+                backgroundColor: ColorConstant.LIGHT_VIOLET,
                 title: Stack(
                   children: <Widget>[
                     Container(
                       child: IconButton(
-                        icon: Icon(Icons.arrow_back_ios),
+                        icon: Icon(Icons.arrow_back_ios,color: ColorConstant.WHITE,),
                         onPressed: () {
                           Navigator.pop(context);
                         },
@@ -71,7 +71,7 @@ class MainLayOut {
                             Container(
                               height: MediaQuery.of(context).size.height * 0.07,
                               alignment: Alignment.bottomCenter,
-                              color: ColorConstant.RED,
+                              color: ColorConstant.LIGHT_VIOLET,
                               padding: EdgeInsets.symmetric(
                                   horizontal: 20, vertical: MediaQuery.of(context).size.height * 0.01),
                               child: Row(
@@ -148,7 +148,7 @@ class MainLayOut {
                             ),
                             Container(
                               height: MediaQuery.of(context).size.height * 0.015,
-                              color: ColorConstant.RED,
+                              color: ColorConstant.LIGHT_VIOLET,
                             )
                           ],
                         ),
