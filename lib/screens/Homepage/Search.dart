@@ -26,15 +26,15 @@ class Search extends StatelessWidget  {
     return Container(
       padding: EdgeInsets.only(left: 15, right: 15),
       margin: EdgeInsets.only(bottom:5),
-      //height: 40,
       child: TextFormField(
         style: StyleConstant.normalTextStyle,
         decoration: InputDecoration(
+
             enabledBorder: StyleConstant.enabledBorder,
             focusedBorder: StyleConstant.focusedBorder,
             contentPadding: EdgeInsets.only(top: 14),
             hintText: 'Enter a search term',
-            prefixIcon: Icon(Icons.search),
+            prefixIcon: Icon(Icons.search, color: ColorConstant.GRAY_TEXT,),
             hintStyle: StyleConstant.hintTextStyle),
       ),
 

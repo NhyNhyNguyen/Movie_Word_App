@@ -31,7 +31,7 @@ const FAKE_DATA = const [
     name: "China",
     rate: 5.0,
     imageUrl: ImageConstant.POSTER4,
-    status: "commingsoon",
+    status: "comingsoon",
   ),
 
   Movie(
@@ -39,7 +39,7 @@ const FAKE_DATA = const [
     name: "Hai Phượng",
     rate: 6.4,
     imageUrl: ImageConstant.POSTER5,
-    status: "commingsoon",
+    status: "comingsoon",
   ),
 
   Movie(
@@ -47,7 +47,7 @@ const FAKE_DATA = const [
     name: "Iteawon Class",
     rate: 6.4,
     imageUrl: ImageConstant.POSTER6,
-    status: "commingsoon",
+    status: "comingsoon",
   ),
 
   Movie(
@@ -55,7 +55,7 @@ const FAKE_DATA = const [
     name: "Kingdom",
     rate: 6.4,
     imageUrl: ImageConstant.POSTER7,
-    status: "commingsoon",
+    status: "comingsoon",
   ),
 
   Movie(

@@ -31,22 +31,22 @@ class _CommingsoonScreen extends State<CommingsoonScreen>  {
     return MainLayOut.getMailLayout(
         context,
         Container(
+          color: ColorConstant.VIOLET,
           child: Column(
             children: <Widget>[
               Container(
-                  color: ColorConstant.YELLOW,
                   child: Search()),
               Container(
                 //height: 500,
-                height: MediaQuery.of(context).size.height * 0.7,
+                height: MediaQuery.of(context).size.height * 0.695,
                 child: ListView(
                   children: <Widget>[
                     BannerImage(),
-                    OptionTab('commingsoon'),
+                    OptionTab('comingsoon'),
                     Container(
                         //height: 435,
                         height: MediaQuery.of(context).size.height * 0.6,
-                        child: CategoryMovie('commingsoon')),
+                        child: CategoryMovie('comingsoon')),
                   ],
                 ),
               )

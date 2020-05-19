@@ -13,6 +13,7 @@ import 'package:MovieWorld/screens/News/News.dart';
 import '../../constant/ColorConstant.dart';
 import '../../constant/StringConstant.dart';
 import '../../constant/StyleConstant.dart';
+import '../ButtonGradient.dart';
 import 'TicketPrice.dart';
 
 
@@ -22,38 +23,30 @@ class OptionTab extends StatelessWidget  {
 
   @override
   Widget build(BuildContext context) {
+    void choseOption(type){
+      if(type == "ticketprice"){
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => TicketPriceScreen()),
+        );
+      };
+      if(type == "news"){
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => NewsScreen()),
+        );
+      };
+    }
+
       return Container(
         padding: EdgeInsets.symmetric(vertical: 10),
         width: double.infinity,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
-            RaisedButton(
-              elevation: 5.0,
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => TicketPriceScreen()),
-                );
-              },
-              padding: EdgeInsets.all(15.0),
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-              color: ColorConstant.RED,
-              child: type == 'ticketprice' ? Text(StringConstant.TICKET_PRICE, style:TextStyle(color:ColorConstant.YELLOW )) : Text(StringConstant.TICKET_PRICE, style:TextStyle(color:ColorConstant.BLACK )),
-            ),
-            RaisedButton(
-              elevation: 5.0,
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => NewsScreen()),
-                );
-              },
-              padding: EdgeInsets.all(15.0),
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-              color: ColorConstant.RED,
-              child: type == 'news' ? Text(StringConstant.NEWS, style:TextStyle(color:ColorConstant.YELLOW )) : Text(StringConstant.NEWS, style:TextStyle(color:ColorConstant.BLACK )),
-            ),
+            ButtonGradient(type, "ticketprice", StringConstant.TICKET_PRICE, () => choseOption("ticketprice")),
+            ButtonGradient(type, "news", StringConstant.NEWS, () => choseOption("news")),
+
           ],
         ),
       );

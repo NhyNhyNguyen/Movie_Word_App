@@ -69,6 +69,7 @@ class _NewsScreen extends State<NewsScreen>  {
     return MainLayOut.getMailLayout(
         context,
         Container(
+          color: ColorConstant.VIOLET,
           child: Column(
             children: <Widget>[
               OptionTab('news'),

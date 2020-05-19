@@ -24,13 +24,14 @@ class NewsDetailScreen extends StatelessWidget  {
     return MainLayOut.getMailLayout(
         context,
         Container(
+          color: ColorConstant.VIOLET,
           padding: EdgeInsets.all(10.0),
           child: Column(
             children: <Widget>[
               Image.asset(data[index]['image'], height: 150),
               Container(
                 padding: EdgeInsets.all(5.0),
-                child: Text(data[index]['detail']),
+                child: Text(data[index]['detail'], style: TextStyle(color: ColorConstant.WHITE),),
               )
               
 
