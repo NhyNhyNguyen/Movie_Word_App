@@ -64,7 +64,7 @@ Không áp dụng cho các ngày Lễ, Tết, suất chiếu đặc biệt, ho�
 
   //Home page
   static const NOW_SHOWING = "Now Showing";
-  static const COMMING_SOON = "Comming soon";
+  static const COMMING_SOON = "Coming soon";
   static const SEARCH = "search";
 
   //homepage_movie

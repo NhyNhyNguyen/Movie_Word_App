@@ -31,6 +31,7 @@ class _NowshowingScreen extends State<NowshowingScreen>  {
     return MainLayOut.getMailLayout(
         context,
         Container(
+          color: ColorConstant.VIOLET,
           child: Column(
             children: <Widget>[
               Container(
@@ -38,14 +39,14 @@ class _NowshowingScreen extends State<NowshowingScreen>  {
                   child: Search()),
               Container(
                 //height: 500,
-                height: MediaQuery.of(context).size.height * 0.715,
+                height: MediaQuery.of(context).size.height * 0.695,
                   child: ListView(
                     children: <Widget>[
                       BannerImage(),
                       OptionTab('nowshowing'),
                       Container(
                          // height: 435,
-                          height: MediaQuery.of(context).size.height * 0.63,
+                          height: MediaQuery.of(context).size.height * 0.6,
                           child: CategoryMovie('nowshowing')),
                     ],
                   ),
