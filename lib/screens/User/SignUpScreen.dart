@@ -10,6 +10,8 @@ import 'package:MovieWorld/utils/DateTimeUtils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 
+import '../ButtonGradientLarge.dart';
+
 class SignUpScreen extends StatefulWidget {
   @override
   _SignUpScreenState createState() => _SignUpScreenState();
@@ -29,32 +31,44 @@ class _SignUpScreenState extends State<SignUpScreen> {
     Navigator.push(context, MaterialPageRoute(builder: (context) => LoginScreen()));
   }
 
-  Widget _signUpBtn(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.symmetric(vertical: 25),
-      child: RaisedButton(
-        elevation: 5.0,
-        onPressed: () {
+  Widget _signUpBtn(BuildContext context){
+    return ButtonGradientLarge(
+        StringConstant.SIGN_UP,
+            () {
           if (_formKey.currentState.validate()) {
             Scaffold.of(context)
                 .showSnackBar(SnackBar(content: Text('Processing Data')));
           }
-          Modal.showSimpleCustomDialog(context, "Sign up success!", onPressed);
-        },
-        padding: EdgeInsets.all(10.0),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        color: ColorConstant.RED,
-        child:
-            Text(StringConstant.SIGN_UP, style: StyleConstant.buttonTextStyle),
-      ),
-    );
+        });
   }
+
+//  Widget _signUpBtn(BuildContext context) {
+//    return Container(
+//      padding: EdgeInsets.symmetric(vertical: 25),
+//      child: RaisedButton(
+//        elevation: 5.0,
+//        onPressed: () {
+//          if (_formKey.currentState.validate()) {
+//            Scaffold.of(context)
+//                .showSnackBar(SnackBar(content: Text('Processing Data')));
+//          }
+//          Modal.showSimpleCustomDialog(context, "Sign up success!", onPressed);
+//        },
+//        padding: EdgeInsets.all(10.0),
+//        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+//        color: ColorConstant.RED,
+//        child:
+//            Text(StringConstant.SIGN_UP, style: StyleConstant.buttonTextStyle),
+//      ),
+//    );
+//  }
 
   @override
   Widget build(BuildContext context) {
     return MainLayOut.getMailLayout(
         context,
         Container(
+          color: ColorConstant.VIOLET,
           height: double.infinity,
           width: double.infinity,
           child: SingleChildScrollView(
