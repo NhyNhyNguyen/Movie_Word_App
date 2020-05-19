@@ -151,6 +151,6 @@ class MainLayOut {
               )
             ],
           ),
-        ));
+        ),);
   }
 }

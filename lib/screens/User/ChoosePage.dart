@@ -8,6 +8,7 @@ import 'package:MovieWorld/screens/User/DetailScreen.dart';
 import 'package:MovieWorld/screens/User/LoginScreen.dart';
 import 'package:MovieWorld/screens/User/SignUpScreen.dart';
 import 'package:MovieWorld/screens/User/TextfieldWidget.dart';
+import 'package:MovieWorld/services/dynamic_link_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -71,6 +72,7 @@ Widget _signUpBtn(){
 
   @override
   Widget build(BuildContext context) {
+    DynamicLinkService().handleDynamicLinks();
     return MainLayOut.getMailLayout(
         context,
         Container(
