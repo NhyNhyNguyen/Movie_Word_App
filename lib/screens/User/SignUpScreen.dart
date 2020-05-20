@@ -1,9 +1,13 @@
+import 'dart:convert';
+
 import 'package:MovieWorld/constant/ColorConstant.dart';
 import 'package:MovieWorld/constant/ImageConstant.dart';
 import 'package:MovieWorld/constant/StringConstant.dart';
 import 'package:MovieWorld/constant/StyleConstant.dart';
+import 'package:MovieWorld/constant/UrlConstant.dart';
 import 'package:MovieWorld/layout/mainLayout.dart';
 import 'package:MovieWorld/modal.dart';
+import 'package:MovieWorld/model/UserDetail.dart';
 import 'package:MovieWorld/screens/User/LoginScreen.dart';
 import 'package:MovieWorld/screens/User/TextfieldWidget.dart';
 import 'package:MovieWorld/utils/DateTimeUtils.dart';
@@ -11,6 +15,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 
 import '../ButtonGradientLarge.dart';
+import 'package:http/http.dart' as http;
 
 class SignUpScreen extends StatefulWidget {
   @override
@@ -27,19 +32,55 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   DateTime selectedDate = DateTime.now();
   final _formKey = GlobalKey<FormState>();
-  void onPressed(BuildContext context){
-    Navigator.push(context, MaterialPageRoute(builder: (context) => LoginScreen()));
+  void onPressed(BuildContext context) {
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => LoginScreen()));
   }
 
-  Widget _signUpBtn(BuildContext context){
-    return ButtonGradientLarge(
-        StringConstant.SIGN_UP,
-            () {
-          if (_formKey.currentState.validate()) {
-            Scaffold.of(context)
-                .showSnackBar(SnackBar(content: Text('Processing Data')));
-          }
-        });
+  Future<http.Response> postUserDetail(UserDetail userDetail) async {
+    final http.Response response = await http.post(
+      UrlConstant.REGISTER,
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(<String, String>{
+        /* 'username': userDetail.username,
+        'password': userDetail.password,
+        'email': userDetail.email,
+        'fullName': userDetail.fullName,
+        'phone': userDetail.phone,
+        'address': userDetail.address,*/
+        "username": "trangwsdsdfsds",
+        "fullName": "trang nguyễn",
+        "password": "123123",
+        "email": "dddnhi@gmail.com",
+        "phone": "0898811122",
+        "address": "Hue"
+      }),
+    );
+    if (response.statusCode == 200) {
+      //show pop up xac minh mail
+       // print(json.decode(response.body)['mess']);
+    } else {
+      // show popup theo message
+    }
+    return response;
+  }
+
+  Widget _signUpBtn(BuildContext context) {
+    return ButtonGradientLarge(StringConstant.SIGN_UP, () {
+      if (_formKey.currentState.validate()) {
+        print("sign_up success");
+        UserDetail userDetail = UserDetail(
+            usernameController.text,
+            passwordController.text,
+            fullNameController.text,
+            addressController.text,
+            phoneController.text,
+            emailController.text);
+        postUserDetail(userDetail);
+      }
+    });
   }
 
 //  Widget _signUpBtn(BuildContext context) {
@@ -65,6 +106,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   @override
   Widget build(BuildContext context) {
+    UserDetail userDetail = UserDetail(
+        usernameController.text,
+        passwordController.text,
+        fullNameController.text,
+        addressController.text,
+        phoneController.text,
+        emailController.text);
+    postUserDetail(userDetail);
     return MainLayOut.getMailLayout(
         context,
         Container(
