@@ -1,10 +1,11 @@
 class UserDetail {
-  final int id   ;
-  final String username;
-  final String fullName;
-  final String email;
-  final String address;
-  final String phone;
+  int id   ;
+  String username;
+  String fullName;
+  String password;
+  String email;
+  String address;
+  String phone;
 
-  UserDetail(this.id,this.username, this.fullName, this.address, this.phone, this.email);
+  UserDetail(this.username,this.password, this.fullName, this.address, this.phone, this.email);
 }

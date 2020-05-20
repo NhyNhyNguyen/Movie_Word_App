@@ -15,7 +15,7 @@ class DetailScreen extends StatefulWidget {
 }
 
 class _DetailScreenState extends State<DetailScreen> {
-  UserDetail userDetail = UserDetail(1, "nhinhi", "nhinguyen", "nhinhi@gmail.com", "1323322", "08 Ha Van Tinh");
+  UserDetail userDetail = UserDetail("nhinhi","123", "nhinguyen", "nhinhi@gmail.com", "1323322", "08 Ha Van Tinh");
 
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
