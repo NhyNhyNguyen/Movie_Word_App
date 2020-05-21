@@ -17,6 +17,7 @@ class MainLayOut {
           primarySwatch: Colors.grey,
           focusColor: Colors.blueAccent,
           hoverColor: Colors.yellow,
+          fontFamily: "Open Sans"
         ),
         home: Scaffold(
           appBar: PreferredSize(

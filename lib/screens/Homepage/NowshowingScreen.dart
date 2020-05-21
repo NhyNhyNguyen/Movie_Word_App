@@ -46,6 +46,7 @@ class _NowshowingScreen extends State<NowshowingScreen>  {
                       OptionTab('nowshowing'),
                       Container(
                          // height: 435,
+                        margin: EdgeInsets.symmetric(horizontal: 10),
                           height: MediaQuery.of(context).size.height * 0.6,
                           child: CategoryMovie('nowshowing')),
                     ],

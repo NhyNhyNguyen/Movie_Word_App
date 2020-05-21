@@ -20,20 +20,17 @@ class MovieItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: (){},
-      child: Card(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-        elevation: 4,
-        //margin: EdgeInsets.all(10.0),
-        margin: EdgeInsets.only(bottom: 10, left: 10, right: 10),
+      child: Container(
+        margin: EdgeInsets.only(bottom: 20, left: 12, right: 12),
         child:
             Stack(
               children: <Widget>[
                 ClipRRect(
                   borderRadius: BorderRadius.all(Radius.circular(10)),
                 child: Container(
-                  height: 170,
+                  height: 220,
                   width: double.infinity,
-                  child: Image.asset(imageUrl, fit: BoxFit.cover, )),),
+                  child: Image.asset(imageUrl, fit: BoxFit.fitHeight, )),),
                 Positioned(
                   bottom: 0,
 
@@ -43,8 +40,8 @@ class MovieItem extends StatelessWidget {
                     height: 50,
                     decoration: new BoxDecoration(
                       borderRadius: BorderRadius.only(
-                        bottomRight: Radius.circular(10),
-                        bottomLeft: Radius.circular(10),
+                        bottomRight: Radius.circular(50),
+                        bottomLeft: Radius.circular(50),
                       ),
 //                      gradient: LinearGradient(
 //                        colors: [

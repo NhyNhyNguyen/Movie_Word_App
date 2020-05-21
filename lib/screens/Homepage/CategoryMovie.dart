@@ -24,16 +24,13 @@ class CategoryMovie extends StatelessWidget {
 //      return Text(categoryMovie[index].imageUrl);
 //    }, itemCount: categoryMovie.length,);
 
-    return ListView.builder(itemBuilder: (context, index) {
-      return Column(
-        children: <Widget>[
-          MovieItem( categoryMovie[index].id,categoryMovie[index].name,
-              categoryMovie[index].imageUrl, categoryMovie[index].rate),
-        ],
-      );
-    }, itemCount: categoryMovie.length,);
-
-
+    return GridView.count(
+        crossAxisCount: 2,
+    children:
+        categoryMovie.map(
+        (item) =>MovieItem(item.id,item.name, item.imageUrl, item.rate)
+        ).toList()
+    );
 
   }
 }

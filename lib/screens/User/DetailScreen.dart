@@ -1,13 +1,14 @@
+import 'dart:convert';
+
 import 'package:MovieWorld/constant/ColorConstant.dart';
-import 'package:MovieWorld/constant/ImageConstant.dart';
 import 'package:MovieWorld/constant/StringConstant.dart';
 import 'package:MovieWorld/constant/StyleConstant.dart';
 import 'package:MovieWorld/layout/mainLayout.dart';
 import 'package:MovieWorld/model/UserDetail.dart';
 import 'package:MovieWorld/screens/User/TextfieldWidget.dart';
-import 'package:MovieWorld/utils/DateTimeUtils.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:http/http.dart' as http;
+
 
 class DetailScreen extends StatefulWidget {
   @override
@@ -15,8 +16,8 @@ class DetailScreen extends StatefulWidget {
 }
 
 class _DetailScreenState extends State<DetailScreen> {
-  UserDetail userDetail = UserDetail("nhinhi","123", "nhinguyen", "nhinhi@gmail.com", "1323322", "08 Ha Van Tinh");
 
+  UserDetail userDetail;
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController fullNameController = TextEditingController();
@@ -26,6 +27,21 @@ class _DetailScreenState extends State<DetailScreen> {
 
   DateTime selectedDate = DateTime.now();
   final _formKey = GlobalKey<FormState>();
+
+
+  Future<UserDetail> fetchUserDetail() async {
+    final response = await http.get('https://jsonplaceholder.typicode.com/albums/1');
+
+    if (response.statusCode == 200) {
+      // If the server did return a 200 OK response,
+      // then parse the JSON.
+      return UserDetail.fromJson(json.decode(response.body));
+    } else {
+      // If the server did not return a 200 OK response,
+      // then throw an exception.
+      throw Exception('Failed to load userDetail');
+    }
+  }
 
   Widget _SaveBtn() {
     return Container(
@@ -66,6 +82,7 @@ class _DetailScreenState extends State<DetailScreen> {
 
   @override
   Widget build(BuildContext context) {
+    //userDetail =
     return MainLayOut.getMailLayout(
         context,
         Container(

@@ -60,7 +60,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     );
     if (response.statusCode == 200) {
       //show pop up xac minh mail
-       // print(json.decode(response.body)['mess']);
+      // print(json.decode(response.body)['mess']);
     } else {
       // show popup theo message
     }
@@ -72,48 +72,27 @@ class _SignUpScreenState extends State<SignUpScreen> {
       if (_formKey.currentState.validate()) {
         print("sign_up success");
         UserDetail userDetail = UserDetail(
-            usernameController.text,
-            passwordController.text,
-            fullNameController.text,
-            addressController.text,
-            phoneController.text,
-            emailController.text);
+            username: usernameController.text,
+            password: passwordController.text,
+            fullName: fullNameController.text,
+            address: addressController.text,
+            phone: phoneController.text,
+            email: emailController.text);
         postUserDetail(userDetail);
       }
     });
   }
 
-//  Widget _signUpBtn(BuildContext context) {
-//    return Container(
-//      padding: EdgeInsets.symmetric(vertical: 25),
-//      child: RaisedButton(
-//        elevation: 5.0,
-//        onPressed: () {
-//          if (_formKey.currentState.validate()) {
-//            Scaffold.of(context)
-//                .showSnackBar(SnackBar(content: Text('Processing Data')));
-//          }
-//          Modal.showSimpleCustomDialog(context, "Sign up success!", onPressed);
-//        },
-//        padding: EdgeInsets.all(10.0),
-//        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-//        color: ColorConstant.RED,
-//        child:
-//            Text(StringConstant.SIGN_UP, style: StyleConstant.buttonTextStyle),
-//      ),
-//    );
-//  }
-
   @override
   Widget build(BuildContext context) {
-    UserDetail userDetail = UserDetail(
-        usernameController.text,
-        passwordController.text,
-        fullNameController.text,
-        addressController.text,
-        phoneController.text,
-        emailController.text);
-    postUserDetail(userDetail);
+//    UserDetail userDetail = UserDetail(
+//        usernameController.text,
+//        passwordController.text,
+//        fullNameController.text,
+//        addressController.text,
+//        phoneController.text,
+//        emailController.text);
+//    postUserDetail(userDetail);
     return MainLayOut.getMailLayout(
         context,
         Container(
