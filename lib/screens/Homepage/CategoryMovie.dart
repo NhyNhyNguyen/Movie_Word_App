@@ -21,14 +21,8 @@ class CategoryMovie extends StatelessWidget {
     }).toList();
 
 
-
-//    return ListView.builder(itemBuilder: (context, index) {
-//      return Column(
-//        children: <Widget>[
-//            MovieItem( categoryMovie[index].id,categoryMovie[index].name,
-//                categoryMovie[index].imageUrl, categoryMovie[index].rate),
-//        ],
-//      );
+//    return ListView.builder(itemBuilder: (context, index){
+//      return Text(categoryMovie[index].imageUrl);
 //    }, itemCount: categoryMovie.length,);
 
     return GridView.count(
