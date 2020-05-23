@@ -24,7 +24,7 @@ class ColorConstant{
 
   static  LinearGradient RAINBOW_BUTTON =  LinearGradient(
                                               colors: [
-                                                Color(0xFFfc5b47).withOpacity(0.8),
+                                                Color(0xFFfc5b47).withOpacity(1),
                                                 Color(0xFFcb4a9c).withOpacity(0.8),
                                                 Color(0xFFa039de).withOpacity(0.8)
 //                                                Color(0xFFf66f5e).withOpacity(0.8),

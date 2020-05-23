@@ -1,12 +1,6 @@
-import 'package:MovieWorld/constant/ImageConstant.dart';
-import 'package:MovieWorld/constant/StringConstant.dart';
 import 'package:MovieWorld/screens/Homepage/FakeData.dart';
 import 'package:MovieWorld/screens/Homepage/MovieItem.dart';
 import 'package:flutter/material.dart';
-
-import 'BannerImage.dart';
-import 'OptionTab.dart';
-
 
 class CategoryMovie extends StatelessWidget {
   final String status;

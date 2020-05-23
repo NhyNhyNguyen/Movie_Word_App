@@ -1,13 +1,12 @@
 import 'dart:convert';
 
 import 'package:MovieWorld/constant/ColorConstant.dart';
-import 'package:MovieWorld/constant/ImageConstant.dart';
 import 'package:MovieWorld/constant/StringConstant.dart';
 import 'package:MovieWorld/constant/StyleConstant.dart';
+import 'package:MovieWorld/constant/UrlConstant.dart';
 import 'package:MovieWorld/layout/mainLayout.dart';
 import 'package:MovieWorld/screens/User/TextfieldWidget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:http/http.dart' as http;
 
 import '../ButtonGradientLarge.dart';
@@ -24,9 +23,9 @@ class _LoginScreenState extends State<LoginScreen> {
   TextEditingController usernameController = TextEditingController();
   TextEditingController passController = TextEditingController();
 
-  Future<http.Response> login(String username, String password) {
-    return http.post(
-      'http://',
+  Future<String> login(String username, String password) async {
+    http.Response response = await http.post(
+      UrlConstant.LOGIN,
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
@@ -35,6 +34,13 @@ class _LoginScreenState extends State<LoginScreen> {
         'password': password,
       }),
     );
+
+    if (response.statusCode == 200) {
+      print(json.decode(response.body)['token']);
+      return response.body;
+    } else {
+      return null;
+    }
   }
 
   Widget _forgetPassAndRememberMe() {
@@ -110,8 +116,7 @@ class _LoginScreenState extends State<LoginScreen> {
         StringConstant.SIGN_IN,
             () {
             if (_formKey.currentState.validate()) {
-                  Scaffold.of(context)
-                  .showSnackBar(SnackBar(content: Text('Processing Data')));
+                 login(usernameController.text, passController.text);
             }
         });
   }

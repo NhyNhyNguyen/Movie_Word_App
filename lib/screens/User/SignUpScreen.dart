@@ -8,6 +8,7 @@ import 'package:MovieWorld/constant/UrlConstant.dart';
 import 'package:MovieWorld/layout/mainLayout.dart';
 import 'package:MovieWorld/modal.dart';
 import 'package:MovieWorld/model/UserDetail.dart';
+import 'package:MovieWorld/screens/User/DetailScreen.dart';
 import 'package:MovieWorld/screens/User/LoginScreen.dart';
 import 'package:MovieWorld/screens/User/TextfieldWidget.dart';
 import 'package:MovieWorld/utils/DateTimeUtils.dart';
@@ -50,7 +51,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         'fullName': userDetail.fullName,
         'phone': userDetail.phone,
         'address': userDetail.address,*/
-        "username": "trangwsdsdfsds",
+        "username": "trang",
         "fullName": "trang nguyễn",
         "password": "123123",
         "email": "dddnhi@gmail.com",
@@ -68,8 +69,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
   }
 
   Widget _signUpBtn(BuildContext context) {
-    return ButtonGradientLarge(StringConstant.SIGN_UP, () {
-      if (_formKey.currentState.validate()) {
+     return ButtonGradientLarge(StringConstant.SIGN_UP, () {
+       Navigator.push(context, MaterialPageRoute(builder: (context) => DetailScreen()));
+
+       if (_formKey.currentState.validate()) {
         print("sign_up success");
         UserDetail userDetail = UserDetail(
             username: usernameController.text,

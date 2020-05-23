@@ -1,8 +1,10 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:MovieWorld/constant/ColorConstant.dart';
 import 'package:MovieWorld/constant/StringConstant.dart';
 import 'package:MovieWorld/constant/StyleConstant.dart';
+import 'package:MovieWorld/constant/UrlConstant.dart';
 import 'package:MovieWorld/layout/mainLayout.dart';
 import 'package:MovieWorld/model/UserDetail.dart';
 import 'package:MovieWorld/screens/User/TextfieldWidget.dart';
@@ -17,7 +19,7 @@ class DetailScreen extends StatefulWidget {
 
 class _DetailScreenState extends State<DetailScreen> {
 
-  UserDetail userDetail;
+  Future<UserDetail> userDetail;
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController fullNameController = TextEditingController();
@@ -29,18 +31,24 @@ class _DetailScreenState extends State<DetailScreen> {
   final _formKey = GlobalKey<FormState>();
 
 
-  Future<UserDetail> fetchUserDetail() async {
-    final response = await http.get('https://jsonplaceholder.typicode.com/albums/1');
+   fetchUserDetail() async {
+    final http.Response response = await http.get(
+      UrlConstant.PROFILE,
+      headers: {  HttpHeaders.contentTypeHeader: "application/json",
+        HttpHeaders.authorizationHeader: "Basic eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0cmFuZyIsInNjb3BlcyI6IiIsImlhdCI6MTU5MDA3NTQwNiwiZXhwIjoxNTkwMDkzNDA2fQ.jtXFWPUOxdrKnwRCTu8db-SJJdrmCvfKSO7jwz7Kdmo"},
+    );
+    print(json.decode(response.body));
 
-    if (response.statusCode == 200) {
+   /* if (response.statusCode == 200) {
       // If the server did return a 200 OK response,
       // then parse the JSON.
-      return UserDetail.fromJson(json.decode(response.body));
+      print(json.decode(response.body));
+      return  UserDetail.fromJson(json.decode(response.body));
     } else {
       // If the server did not return a 200 OK response,
       // then throw an exception.
       throw Exception('Failed to load userDetail');
-    }
+    }*/
   }
 
   Widget _SaveBtn() {
@@ -82,7 +90,7 @@ class _DetailScreenState extends State<DetailScreen> {
 
   @override
   Widget build(BuildContext context) {
-    //userDetail =
+   fetchUserDetail();
     return MainLayOut.getMailLayout(
         context,
         Container(
@@ -119,36 +127,36 @@ class _DetailScreenState extends State<DetailScreen> {
                     key: _formKey,
                     child: Column(
                       children: <Widget>[
-                        TextFieldWidget.buildTextField(
-                            StringConstant.USERNAME,
-                            userDetail.username,
-                            Icon(Icons.account_circle),
-                            TextInputType.text,
-                            usernameController),
-                        TextFieldWidget.buildTextField(
-                            StringConstant.FULL_NAME,
-                            userDetail.fullName,
-                            Icon(Icons.edit),
-                            TextInputType.text,
-                            fullNameController),
-                        TextFieldWidget.buildTextField(
-                            StringConstant.EMAIL,
-                            userDetail.email,
-                            Icon(Icons.email),
-                            TextInputType.visiblePassword,
-                            emailController),
-                        TextFieldWidget.buildTextField(
-                            StringConstant.PHONE,
-                            userDetail.phone,
-                            Icon(Icons.phone_in_talk),
-                            TextInputType.visiblePassword,
-                            phoneController),
-                        TextFieldWidget.buildTextField(
-                            StringConstant.ADDRESS,
-                            userDetail.address,
-                            Icon(Icons.add_to_photos),
-                            TextInputType.visiblePassword,
-                            addressController),
+//                        TextFieldWidget.buildTextField(
+//                            StringConstant.USERNAME,
+//                            userDetail.then((value) => value.username).toString(),
+//                            Icon(Icons.account_circle),
+//                            TextInputType.text,
+//                            usernameController),
+//                        TextFieldWidget.buildTextField(
+//                            StringConstant.FULL_NAME,
+//                            userDetail.then((value) => value.fullName).toString(),
+//                            Icon(Icons.edit),
+//                            TextInputType.text,
+//                            fullNameController),
+//                        TextFieldWidget.buildTextField(
+//                            StringConstant.EMAIL,
+//                            userDetail.then((value) => value.email).toString(),
+//                            Icon(Icons.email),
+//                            TextInputType.visiblePassword,
+//                            emailController),
+//                        TextFieldWidget.buildTextField(
+//                            StringConstant.PHONE,
+//                            userDetail.then((value) => value.phone).toString(),
+//                            Icon(Icons.phone_in_talk),
+//                            TextInputType.visiblePassword,
+//                            phoneController),
+//                        TextFieldWidget.buildTextField(
+//                            StringConstant.ADDRESS,
+//                            userDetail.then((value) => value.address).toString(),
+//                            Icon(Icons.add_to_photos),
+//                            TextInputType.visiblePassword,
+//                            addressController),
                       ],
                     ),
                   ),
