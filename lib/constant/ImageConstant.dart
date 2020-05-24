@@ -20,6 +20,7 @@ class ImageConstant{
   static const SEARCH_ICON = "assets/search.PNG";
   static const RATE_ICON = "assets/rate.png";
 
+  static const POSTER = "assets/poster.jpg";
   static const POSTER1 = "assets/theshack.jpg";
   static const POSTER2 = "assets/avenger.jpg";
   static const POSTER3 = "assets/chieclacuonbay.jpg";
