@@ -10,7 +10,7 @@ class TextFieldWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         SizedBox(height:3),
-        Text(name, style: StyleConstant.normalTextStyle),
+        Text(name + "*", style: StyleConstant.normalTextStyle),
         Container(
           alignment: Alignment.centerLeft,
           height: 45 ,

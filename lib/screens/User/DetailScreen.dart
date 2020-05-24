@@ -19,7 +19,7 @@ class DetailScreen extends StatefulWidget {
 
 class _DetailScreenState extends State<DetailScreen> {
 
-  Future<UserDetail> userDetail;
+  UserDetail userDetail;
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController fullNameController = TextEditingController();
@@ -31,15 +31,15 @@ class _DetailScreenState extends State<DetailScreen> {
   final _formKey = GlobalKey<FormState>();
 
 
-   fetchUserDetail() async {
-    final http.Response response = await http.get(
-      UrlConstant.PROFILE,
-      headers: {  HttpHeaders.contentTypeHeader: "application/json",
-        HttpHeaders.authorizationHeader: "Basic eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0cmFuZyIsInNjb3BlcyI6IiIsImlhdCI6MTU5MDA3NTQwNiwiZXhwIjoxNTkwMDkzNDA2fQ.jtXFWPUOxdrKnwRCTu8db-SJJdrmCvfKSO7jwz7Kdmo"},
-    );
+   Future<UserDetail> fetchUserDetail() async {
+    final response = await http.get(UrlConstant.PROFILE, headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZW90ZW8iLCJzY29wZXMiOiJST0xFX0NVU1RPTUVSIiwiaWF0IjoxNTkwMjUxODU3LCJleHAiOjE1OTAyNjk4NTd9.3DLNmZPJ1X1pLd7XOA_ucQKuTz5SUYFY0mOSsyA_DBc',
+    });
     print(json.decode(response.body));
 
-   /* if (response.statusCode == 200) {
+    if (response.statusCode == 200) {
       // If the server did return a 200 OK response,
       // then parse the JSON.
       print(json.decode(response.body));
@@ -48,7 +48,7 @@ class _DetailScreenState extends State<DetailScreen> {
       // If the server did not return a 200 OK response,
       // then throw an exception.
       throw Exception('Failed to load userDetail');
-    }*/
+    }
   }
 
   Widget _SaveBtn() {
@@ -90,88 +90,85 @@ class _DetailScreenState extends State<DetailScreen> {
 
   @override
   Widget build(BuildContext context) {
-   fetchUserDetail();
-    return MainLayOut.getMailLayout(
-        context,
-        Container(
-          height: double.infinity,
-          width: double.infinity,
-          child: SingleChildScrollView(
-            physics: AlwaysScrollableScrollPhysics(),
-            padding: EdgeInsets.symmetric(horizontal: 25, vertical: 50.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Text(StringConstant.SIGN_UP,
-                    style: StyleConstant.headerTextStyle),
-                SizedBox(
-                  height: 13,
-                ),
-                Container(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
-                  decoration: BoxDecoration(
-                      color: ColorConstant.WHITE,
-                      borderRadius: BorderRadius.circular(8.0),
-                      boxShadow: [
-                        BoxShadow(
-                            color: Colors.black12,
-                            offset: Offset(0, 15),
-                            blurRadius: 15),
-                        BoxShadow(
-                            color: Colors.black12,
-                            offset: Offset(0, -10),
-                            blurRadius: 10)
-                      ]),
-                  child: Form(
-                    key: _formKey,
-                    child: Column(
-                      children: <Widget>[
-//                        TextFieldWidget.buildTextField(
-//                            StringConstant.USERNAME,
-//                            userDetail.then((value) => value.username).toString(),
-//                            Icon(Icons.account_circle),
-//                            TextInputType.text,
-//                            usernameController),
-//                        TextFieldWidget.buildTextField(
-//                            StringConstant.FULL_NAME,
-//                            userDetail.then((value) => value.fullName).toString(),
-//                            Icon(Icons.edit),
-//                            TextInputType.text,
-//                            fullNameController),
-//                        TextFieldWidget.buildTextField(
-//                            StringConstant.EMAIL,
-//                            userDetail.then((value) => value.email).toString(),
-//                            Icon(Icons.email),
-//                            TextInputType.visiblePassword,
-//                            emailController),
-//                        TextFieldWidget.buildTextField(
-//                            StringConstant.PHONE,
-//                            userDetail.then((value) => value.phone).toString(),
-//                            Icon(Icons.phone_in_talk),
-//                            TextInputType.visiblePassword,
-//                            phoneController),
-//                        TextFieldWidget.buildTextField(
-//                            StringConstant.ADDRESS,
-//                            userDetail.then((value) => value.address).toString(),
-//                            Icon(Icons.add_to_photos),
-//                            TextInputType.visiblePassword,
-//                            addressController),
-                      ],
+   fetchUserDetail().then((value) => userDetail = UserDetail(username: value.username, address: value.address, phone: value.phone, email: value.email, fullName: value.fullName));
+      return MainLayOut.getMailLayout(
+          context,
+          Container(
+            height: double.infinity,
+            width: double.infinity,
+            child: SingleChildScrollView(
+              physics: AlwaysScrollableScrollPhysics(),
+              padding: EdgeInsets.symmetric(horizontal: 25, vertical: 50.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text(StringConstant.PROFILE,
+                      style: StyleConstant.headerTextStyle),
+                  SizedBox(
+                    height: 13,
+                  ),
+                  Container(
+                    padding:
+                    EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
+                    decoration: BoxDecoration(
+                        color: ColorConstant.LIGHT_VIOLET,
+                        borderRadius: BorderRadius.circular(8.0),
+                        boxShadow: [
+                          BoxShadow(
+                              color: Colors.black12,
+                              offset: Offset(0, 15),
+                              blurRadius: 15),
+                          BoxShadow(
+                              color: Colors.black12,
+                              offset: Offset(0, -10),
+                              blurRadius: 10)
+                        ]),
+                    child: Form(
+                      key: _formKey,
+                      child: Column(
+                          children: <Widget>[
+                            TextFieldWidget.buildTextField(
+                                StringConstant.USERNAME,
+                                userDetail.username,
+                                Icon(Icons.account_circle, color: Colors.white),
+                                TextInputType.text, usernameController),
+                            TextFieldWidget.buildTextField(
+                                StringConstant.EMAIL,
+                                userDetail.email,
+                                Icon(Icons.account_circle, color: Colors.white),
+                                TextInputType.text, usernameController),
+                            TextFieldWidget.buildTextField(
+                                StringConstant.FULL_NAME,
+                                userDetail.fullName,
+                                Icon(Icons.account_circle, color: Colors.white),
+                                TextInputType.text, usernameController),
+                            TextFieldWidget.buildTextField(
+                                StringConstant.PHONE,
+                                userDetail.phone,
+                                Icon(Icons.account_circle, color: Colors.white),
+                                TextInputType.text, usernameController),
+                            TextFieldWidget.buildTextField(
+                                StringConstant.ADDRESS,
+                                userDetail.address,
+                                Icon(Icons.account_circle, color: Colors.white),
+                                TextInputType.text, usernameController),
+                          ]
+                      ),
                     ),
                   ),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[
-                    _SaveBtn(),
-                    _Cancel(),
-                  ],
-                )
-              ],
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      _SaveBtn(),
+                      _Cancel(),
+                    ],
+                  )
+                ],
+              ),
             ),
           ),
-        ),
-        "USER");
+          "USER");
+
   }
+
 }

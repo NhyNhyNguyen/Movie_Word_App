@@ -28,14 +28,6 @@ class MainLayOut {
                 title: Stack(
                   children: <Widget>[
                     Container(
-                      child: IconButton(
-                        icon: Icon(Icons.arrow_back_ios,color: ColorConstant.WHITE,),
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                      ),
-                    ),
-                    Container(
                       padding: EdgeInsets.only(bottom: 6),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -61,6 +53,7 @@ class MainLayOut {
                 child: Align(
                   alignment: Alignment.bottomCenter,
                   child: Container(
+                    color: ColorConstant.VIOLET,
                     height: MediaQuery.of(context).size.height * 0.1,
                     child: Stack(
                       children: <Widget>[

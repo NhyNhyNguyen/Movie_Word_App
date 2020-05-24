@@ -18,7 +18,7 @@ class ButtonGradientLarge extends StatelessWidget {
         margin: EdgeInsets.all(5),
         padding: EdgeInsets.only(left: 10, right: 10),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(20)),
+          borderRadius: BorderRadius.all(Radius.circular(25)),
           gradient: ColorConstant.RAINBOW_BUTTON,
         ),
         child: FlatButton(
