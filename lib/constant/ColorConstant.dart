@@ -26,7 +26,7 @@ class ColorConstant{
                                               colors: [
                                                 Color(0xFFfc5b47).withOpacity(1),
                                                 Color(0xFFcb4a9c).withOpacity(0.8),
-                                                Color(0xFFa039de).withOpacity(0.8)
+                                                Color(0xFFa039d0).withOpacity(0.6)
 //                                                Color(0xFFf66f5e).withOpacity(0.8),
 //                                                Color(0xFFb743bc).withOpacity(0.8),
 //                                                Color(0xFF26238a).withOpacity(0.8)

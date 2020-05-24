@@ -4,24 +4,24 @@ import 'ColorConstant.dart';
 
 class StyleConstant {
   static const TextStyle normalTextStyle = TextStyle(
-      color: ColorConstant.GRAY_TEXT,
+      color: ColorConstant.WHITE,
       fontFamily: "Open Sans",
       fontSize: 20,
       fontWeight: FontWeight.normal);
   static const TextStyle hintTextStyle = TextStyle(
-    color: Colors.grey,
+    color: Colors.white,
     fontSize: 16,
     fontWeight: FontWeight.w400,
     fontFamily: "Open Sans",
   );
 
   static const TextStyle smallTextStyle = TextStyle(
-      color: ColorConstant.GRAY_TEXT,
+      color: ColorConstant.WHITE,
       fontFamily: "Open Sans",
       fontSize: 15,
       fontWeight: FontWeight.normal);
   static const TextStyle headerTextStyle = TextStyle(
-      color: ColorConstant.GRAY_TEXT,
+      color: ColorConstant.WHITE,
       fontFamily: "Open Sans",
       fontSize: 30,
       fontWeight: FontWeight.bold
@@ -75,11 +75,10 @@ class StyleConstant {
   );
 
 
-
   static const UnderlineInputBorder enabledBorder =
       UnderlineInputBorder(borderSide: BorderSide(color: Colors.grey));
   static const focusedBorder = UnderlineInputBorder(
-    borderSide: BorderSide(color: ColorConstant.RED),
+    borderSide: BorderSide(color: ColorConstant.VIOLET),
   );
 
 

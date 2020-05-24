@@ -8,6 +8,7 @@ import 'package:MovieWorld/constant/UrlConstant.dart';
 import 'package:MovieWorld/layout/mainLayout.dart';
 import 'package:MovieWorld/modal.dart';
 import 'package:MovieWorld/model/UserDetail.dart';
+import 'package:MovieWorld/screens/User/ChooseProfile.dart';
 import 'package:MovieWorld/screens/User/DetailScreen.dart';
 import 'package:MovieWorld/screens/User/LoginScreen.dart';
 import 'package:MovieWorld/screens/User/TextfieldWidget.dart';
@@ -69,8 +70,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
   }
 
   Widget _signUpBtn(BuildContext context) {
-     return ButtonGradientLarge(StringConstant.SIGN_UP, () {
-       Navigator.push(context, MaterialPageRoute(builder: (context) => DetailScreen()));
+     return ButtonGradientLarge(StringConstant.REGISTER_NOW, () {
+       Navigator.push(context, MaterialPageRoute(builder: (context) => ChooseProfile()));
 
        if (_formKey.currentState.validate()) {
         print("sign_up success");
@@ -108,7 +109,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Text(StringConstant.SIGN_UP,
+                Text("Create your account",
                     style: StyleConstant.headerTextStyle),
                 SizedBox(
                   height: 13,
@@ -117,7 +118,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   padding:
                       EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
                   decoration: BoxDecoration(
-                      color: ColorConstant.WHITE,
+                      color: ColorConstant.LIGHT_VIOLET,
                       borderRadius: BorderRadius.circular(8.0),
                       boxShadow: [
                         BoxShadow(
@@ -136,37 +137,37 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         TextFieldWidget.buildTextField(
                             StringConstant.USERNAME,
                             StringConstant.USERNAME_HINT,
-                            Icon(Icons.account_circle),
+                            Icon(Icons.account_circle, color: Colors.white,),
                             TextInputType.text,
                             usernameController),
                         TextFieldWidget.buildTextField(
                             StringConstant.PASSWORD,
                             StringConstant.PASSWORD_HINT,
-                            Icon(Icons.vpn_key),
+                            Icon(Icons.vpn_key, color: Colors.white,),
                             TextInputType.visiblePassword,
                             passwordController),
                         TextFieldWidget.buildTextField(
                             StringConstant.FULL_NAME,
                             StringConstant.FULL_NAME_HINT,
-                            Icon(Icons.edit),
+                            Icon(Icons.edit, color: Colors.white),
                             TextInputType.text,
                             fullNameController),
                         TextFieldWidget.buildTextField(
                             StringConstant.EMAIL,
                             StringConstant.EMAIL_HINT,
-                            Icon(Icons.email),
+                            Icon(Icons.email, color: Colors.white),
                             TextInputType.visiblePassword,
                             emailController),
                         TextFieldWidget.buildTextField(
                             StringConstant.PHONE,
                             StringConstant.PHONE_HINT,
-                            Icon(Icons.phone_in_talk),
+                            Icon(Icons.phone_in_talk, color: Colors.white,),
                             TextInputType.visiblePassword,
                             phoneController),
                         TextFieldWidget.buildTextField(
                             StringConstant.ADDRESS,
                             StringConstant.ADDRESS_HINT,
-                            Icon(Icons.add_to_photos),
+                            Icon(Icons.add_to_photos, color: Colors.white),
                             TextInputType.visiblePassword,
                             addressController),
                       ],

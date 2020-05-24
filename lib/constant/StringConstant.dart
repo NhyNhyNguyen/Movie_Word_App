@@ -8,10 +8,11 @@ class StringConstant{
   static const PASSWORD_HINT = 'Enter your password';
   static const FORGOT_PASS = 'Forgot password';
   static const REMEMBER_ME = 'Remember me';
-  static const SIGN_UP = 'SIGN UP';
-  static const LOGIN = 'LOGIN';
-  static const SIGN_IN = 'SIGN IN';
+  static const SIGN_UP = 'Sign up';
+  static const LOGIN = 'Login';
+  static const SIGN_IN = 'Sign in';
   static const HAVE_ACCOUNT = 'Don\'s have account? ';
+  static const REGISTER_NOW = ' Register Now';
 
   //sign up
   static const FULL_NAME = 'Fullname';
@@ -59,8 +60,12 @@ Không áp dụng cho các ngày Lễ, Tết, suất chiếu đặc biệt, ho�
   static const BOOK_TICKET = 'Book Ticket';
 
   //Edit
-  static const SAVE = "SAVE";
-  static const CANCEL = "CANCEL";
+  static const SAVE = "Save";
+  static const CANCEL = "Cancel";
+  static const PROFILE = "Profile";
+  static const HISTORY = "History";
+  static const EDIT = "Edit";
+  static const LOGOUT = "Logout";
 
   //Home page
   static const NOW_SHOWING = "Now Showing";

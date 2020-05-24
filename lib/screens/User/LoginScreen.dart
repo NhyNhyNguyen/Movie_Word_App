@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 import '../ButtonGradientLarge.dart';
+import 'DetailScreen.dart';
 import 'SignUpScreen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -59,7 +60,7 @@ class _LoginScreenState extends State<LoginScreen> {
         child: Text(
           StringConstant.FORGOT_PASS,
           style: TextStyle(
-              color: ColorConstant.BLUE_TEXT, decoration: TextDecoration.underline),
+              color: ColorConstant.BLUE_TEXT, decoration: TextDecoration.underline, fontWeight: FontWeight.w600),
         ),
       ),
     );
@@ -73,8 +74,8 @@ class _LoginScreenState extends State<LoginScreen> {
           data: ThemeData(unselectedWidgetColor: Colors.black),
           child: Checkbox(
             value: _rememberMe,
-            checkColor: ColorConstant.BLACK,
-            activeColor: ColorConstant.RED,
+            checkColor: ColorConstant.WHITE,
+            activeColor: ColorConstant.BLUE_TEXT,
             onChanged: (value) {
               setState(() {
                 _rememberMe = value;
@@ -124,7 +125,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget _signInBtn() {
     return GestureDetector(
       onTap: () => {
-        Navigator.push(context, MaterialPageRoute(builder: (context) => SignUpScreen()))
+        Navigator.push(context, MaterialPageRoute(builder: (context) => DetailScreen()))
       },
       child: RichText(
         text: TextSpan(children: [
@@ -132,10 +133,9 @@ class _LoginScreenState extends State<LoginScreen> {
               text: StringConstant.HAVE_ACCOUNT,
               style: StyleConstant.smallTextStyle),
           TextSpan(
-              text: StringConstant.SIGN_UP,
+              text: StringConstant.REGISTER_NOW,
               style: TextStyle(
                   color: ColorConstant.BLUE_TEXT,
-                  decoration: TextDecoration.underline,
                   fontWeight: FontWeight.bold,
                   fontSize: 18))
         ]),
@@ -149,7 +149,7 @@ class _LoginScreenState extends State<LoginScreen> {
       context,
       Container(
         color: ColorConstant.VIOLET,
-        margin: EdgeInsets.only(bottom:  MediaQuery.of(context).size.height*0.1),
+       // margin: EdgeInsets.only(bottom:  MediaQuery.of(context).size.height*0.1),
         width: double.infinity,
         child: SingleChildScrollView(
           physics: AlwaysScrollableScrollPhysics(),
@@ -157,7 +157,7 @@ class _LoginScreenState extends State<LoginScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Text(StringConstant.SIGN_IN,
+              Text("Sign into your account",
                   style: StyleConstant.headerTextStyle),
               SizedBox(
                 height: 13,
@@ -166,8 +166,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   padding:
                       EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
                   decoration: BoxDecoration(
-                      color: ColorConstant.WHITE,
-                      borderRadius: BorderRadius.circular(8.0),
+                      color: ColorConstant.LIGHT_VIOLET,
+                      borderRadius: BorderRadius.circular(20),
                       boxShadow: [
                         BoxShadow(
                             color: Colors.black12,
@@ -185,7 +185,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         TextFieldWidget.buildTextField(
                             StringConstant.USERNAME,
                             StringConstant.USERNAME_HINT,
-                            Icon(Icons.mail),
+                            Icon(Icons.mail, color: Colors.white),
                             TextInputType.emailAddress,
                             usernameController),
                         SizedBox(
@@ -194,16 +194,19 @@ class _LoginScreenState extends State<LoginScreen> {
                         TextFieldWidget.buildTextField(
                             StringConstant.PASSWORD,
                             StringConstant.PASSWORD_HINT,
-                            Icon(Icons.lock),
+                            Icon(Icons.lock, color: Colors.white),
                             TextInputType.visiblePassword,
                             passController),
-                        _forgetPassAndRememberMe()
+                        _forgetPassAndRememberMe(),
+                        SizedBox(
+                          height: 15,
+                        ),
+                        _loginBtn(),
                       ],
                     ),
                   )),
-              _loginBtn(),
               SizedBox(
-                height: 10,
+                height: 15,
               ),
               _signInBtn(),
             ],

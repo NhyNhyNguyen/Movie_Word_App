@@ -42,6 +42,8 @@ dependencies:
   provider_architecture: ^1.0.3
   youtube_player: ^0.6.0
 
+  #flutter_secure_storage: ^3.3.1+1
+
 
 dev_dependencies:
   flutter_test:
