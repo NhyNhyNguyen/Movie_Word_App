@@ -19,7 +19,9 @@ class DetailScreen extends StatefulWidget {
 
 class _DetailScreenState extends State<DetailScreen> {
 
+
   UserDetail userDetail;
+  bool isLoading = true;
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController fullNameController = TextEditingController();
@@ -35,7 +37,7 @@ class _DetailScreenState extends State<DetailScreen> {
     final response = await http.get(UrlConstant.PROFILE, headers: {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
-      'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZW90ZW8iLCJzY29wZXMiOiJST0xFX0NVU1RPTUVSIiwiaWF0IjoxNTkwMjUxODU3LCJleHAiOjE1OTAyNjk4NTd9.3DLNmZPJ1X1pLd7XOA_ucQKuTz5SUYFY0mOSsyA_DBc',
+      'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZW90ZW8iLCJzY29wZXMiOiJST0xFX0NVU1RPTUVSIiwiaWF0IjoxNTkwMzM0NjU1LCJleHAiOjE1OTAzNTI2NTV9.XxA_qisK-7Z8oyaNXCW5pij9FaM_ZHxGKEI3YFxzWhc',
     });
     print(json.decode(response.body));
 
@@ -43,6 +45,9 @@ class _DetailScreenState extends State<DetailScreen> {
       // If the server did return a 200 OK response,
       // then parse the JSON.
       print(json.decode(response.body));
+      setState(() {
+        isLoading = false;
+      });
       return  UserDetail.fromJson(json.decode(response.body));
     } else {
       // If the server did not return a 200 OK response,
@@ -91,9 +96,10 @@ class _DetailScreenState extends State<DetailScreen> {
   @override
   Widget build(BuildContext context) {
    fetchUserDetail().then((value) => userDetail = UserDetail(username: value.username, address: value.address, phone: value.phone, email: value.email, fullName: value.fullName));
-      return MainLayOut.getMailLayout(
+      if(!isLoading) return MainLayOut.getMailLayout(
           context,
           Container(
+            color: ColorConstant.VIOLET,
             height: double.infinity,
             width: double.infinity,
             child: SingleChildScrollView(
@@ -112,7 +118,7 @@ class _DetailScreenState extends State<DetailScreen> {
                     EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
                     decoration: BoxDecoration(
                         color: ColorConstant.LIGHT_VIOLET,
-                        borderRadius: BorderRadius.circular(8.0),
+                        borderRadius: BorderRadius.circular(20.0),
                         boxShadow: [
                           BoxShadow(
                               color: Colors.black12,
@@ -168,6 +174,9 @@ class _DetailScreenState extends State<DetailScreen> {
             ),
           ),
           "USER");
+      else{
+        return MainLayOut.getMailLayout(context, Container(color: ColorConstant.LIGHT_VIOLET,), "USER");
+      }
 
   }
 
