@@ -85,10 +85,9 @@ class _ChooseProfile extends State<ChooseProfile> {
                 type == "profile"? Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Image.asset(ImageConstant.LOGO1, height: 270),
 
                     SizedBox(
-                      height: 20,
+                      height: 10,
                     ),
                     _editBtn(),
                     _logoutBtn(),
