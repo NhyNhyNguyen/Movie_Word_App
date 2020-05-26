@@ -46,7 +46,11 @@ class StyleConstant {
   static const btnLargeStyle = TextStyle(
     color: ColorConstant.WHITE,
     fontSize: 30,
+  );
 
+  static const appBarText = TextStyle(
+    color: ColorConstant.WHITE,
+    fontSize: 25,
   );
 
 

@@ -34,19 +34,19 @@ class _NowshowingScreen extends State<NowshowingScreen>  {
           color: ColorConstant.VIOLET,
           child: Column(
             children: <Widget>[
-              Container(
-                //color: ColorConstant.YELLOW,
-                  child: Search()),
+//              Container(
+//                //color: ColorConstant.YELLOW,
+//                  child: Search()),
               Container(
                 //height: 500,
-                height: MediaQuery.of(context).size.height * 0.695,
+                height: MediaQuery.of(context).size.height * 0.77,
                   child: ListView(
                     children: <Widget>[
                       BannerImage(),
                       OptionTab('nowshowing'),
                       Container(
                          // height: 435,
-                          height: MediaQuery.of(context).size.height * 0.6,
+                          height: MediaQuery.of(context).size.height * 0.675,
                           child: CategoryMovie('nowshowing')),
                     ],
                   ),

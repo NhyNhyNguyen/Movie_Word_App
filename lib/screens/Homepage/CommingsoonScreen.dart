@@ -34,18 +34,18 @@ class _CommingsoonScreen extends State<CommingsoonScreen>  {
           color: ColorConstant.VIOLET,
           child: Column(
             children: <Widget>[
-              Container(
-                  child: Search()),
+//              Container(
+//                  child: Search()),
               Container(
                 //height: 500,
-                height: MediaQuery.of(context).size.height * 0.695,
+                height: MediaQuery.of(context).size.height * 0.77,
                 child: ListView(
                   children: <Widget>[
                     BannerImage(),
                     OptionTab('comingsoon'),
                     Container(
                         //height: 435,
-                        height: MediaQuery.of(context).size.height * 0.6,
+                        height: MediaQuery.of(context).size.height * 0.675,
                         child: CategoryMovie('comingsoon')),
                   ],
                 ),

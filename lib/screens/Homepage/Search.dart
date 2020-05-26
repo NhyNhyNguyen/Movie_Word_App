@@ -24,12 +24,12 @@ class Search extends StatelessWidget  {
   @override
   Widget build(BuildContext context) {
     return Container(
+      color: ColorConstant.LIGHT_VIOLET,
       padding: EdgeInsets.only(left: 15, right: 15),
       margin: EdgeInsets.only(bottom:5),
       child: TextFormField(
         style: StyleConstant.normalTextStyle,
         decoration: InputDecoration(
-
             enabledBorder: StyleConstant.enabledBorder,
             focusedBorder: StyleConstant.focusedBorder,
             contentPadding: EdgeInsets.only(top: 14),

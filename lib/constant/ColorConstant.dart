@@ -35,4 +35,24 @@ class ColorConstant{
                                               begin: Alignment.centerLeft,
                                             );
 
+  static  LinearGradient RAINBOW_BUTTON_BOOK =  LinearGradient(
+    colors: [
+      Color(0xFFfc5b47).withOpacity(0.8),
+      Color(0xFFcb4a9c).withOpacity(0.8),
+      Color(0xFFa039de).withOpacity(0.8)
+    ],
+    end: Alignment.bottomCenter,
+    begin: Alignment.topCenter,
+  );
+
+  static  LinearGradient RAINBOW_NAME =  LinearGradient(
+    colors: [
+      Color(0xFFfc5b47).withOpacity(0),
+      Color(0xFFcb4a9c).withOpacity(0.5),
+      Color(0xFFa039de).withOpacity(0.8)
+    ],
+    end: Alignment.bottomCenter,
+    begin: Alignment.topCenter,
+  );
+
 }

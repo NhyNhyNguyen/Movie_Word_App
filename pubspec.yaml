@@ -31,6 +31,7 @@ dependencies:
   intl: ^0.15.8
   google_fonts: ^0.6.2
   carousel_slider: ^2.0.0
+  youtube_player: ^0.6.0
 
 
 dev_dependencies:

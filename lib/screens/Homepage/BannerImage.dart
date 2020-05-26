@@ -8,14 +8,14 @@ final List<String> imgList = [
 ImageConstant.POSTER2,
 ImageConstant.POSTER1,
 ImageConstant.POSTER8,
-ImageConstant.POSTER9,
+ImageConstant.POSTER5,
 ];
 
 final List<Widget> imageSliders = imgList.map((item) => Container(
   child: Container(
     margin: EdgeInsets.all(5.0),
     child: ClipRRect(
-      borderRadius: BorderRadius.all(Radius.circular(5.0)),
+      borderRadius: BorderRadius.all(Radius.circular(30)),
       child:
       Image.asset(item, fit: BoxFit.cover,),
     ),
@@ -27,19 +27,48 @@ final List<Widget> imageSliders = imgList.map((item) => Container(
 class BannerImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      //height: 200,
-      height: MediaQuery.of(context).size.height * 0.27,
-       //color: ColorConstant.YELLOW,
-       child:
-       CarouselSlider(
-         options: CarouselOptions(
-           autoPlay: true,
-           enlargeCenterPage: true,
-         ),
+//    return Container(
+//      //height: 200,
+//      height: MediaQuery.of(context).size.height * 0.27,
+//       //color: ColorConstant.YELLOW,
+//       child:
+//       CarouselSlider(
+//         options: CarouselOptions(
+//           autoPlay: true,
+//           enlargeCenterPage: true,
+//         ),
+//         items: imageSliders,
+//       ),
+//
+//    );
+  return Container(
+    child: Stack(
+      children: <Widget>[
+        Container(
+          height: 100,
+          decoration: BoxDecoration(
+              color: ColorConstant.LIGHT_VIOLET,
+              borderRadius: BorderRadius.only(bottomRight: Radius.circular(30), bottomLeft: Radius.circular(30))
+          ),
+        ),
+        Positioned(
+          child: Container(
+            width: MediaQuery.of(context).size.width * 0.88,
+            margin:  EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.06),
+            child: CarouselSlider(
+              options: CarouselOptions(
+                height: 200,
+                autoPlay: true,
+                viewportFraction: 1.0,
+                enlargeCenterPage: true,
+              ),
          items: imageSliders,
        ),
+          ),
+        )
+      ],
 
-    );
+    ),
+  );
   }
 }

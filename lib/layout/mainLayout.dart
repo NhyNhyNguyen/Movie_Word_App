@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:MovieWorld/constant/ColorConstant.dart';
 import 'package:MovieWorld/constant/ImageConstant.dart';
 import 'package:MovieWorld/constant/StringConstant.dart';
+import 'package:MovieWorld/constant/StyleConstant.dart';
 import 'package:MovieWorld/screens/Homepage/NowshowingScreen.dart';
 import 'package:MovieWorld/screens/News/TicketPrice.dart';
 import 'package:MovieWorld/screens/User/ChoosePage.dart';
@@ -23,35 +24,16 @@ class MainLayOut {
               preferredSize:
                   Size.fromHeight(MediaQuery.of(context).size.height * 0.08),
               child: AppBar(
+                elevation: 0,
                 backgroundColor: ColorConstant.LIGHT_VIOLET,
-                title: Stack(
-                  children: <Widget>[
-                    Container(
-                      child: IconButton(
-                        icon: Icon(Icons.arrow_back_ios,color: ColorConstant.WHITE,),
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                      ),
-                    ),
-                    Container(
-                      padding: EdgeInsets.only(bottom: 6),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Image.asset(ImageConstant.LOGO1, height: 60),
-                          Text(
-                            StringConstant.APP_NAME,
-                            style: TextStyle(
-                              color: ColorConstant.YELLOW,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          )
-                        ],
-                      ),
-                    )
-                  ],
-                ),
+              title: Text((() {
+                if(type == "HOME") return "Homepage";
+                if(type == "CAL") return "Showtime";
+                if(type == "FILM") return "News";
+                if(type == "USER") return "Profile";
+                if(type == "DETAIL") return "Detail Movie";
+              })(), style: StyleConstant.appBarText,),
+
               )),
           body: Stack(
             children: <Widget>[
