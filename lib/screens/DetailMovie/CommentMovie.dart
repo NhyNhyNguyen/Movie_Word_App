@@ -1,4 +1,5 @@
 import 'package:MovieWorld/constant/ColorConstant.dart';
+import 'package:MovieWorld/constant/StyleConstant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
@@ -18,7 +19,7 @@ class CommentMovie extends StatelessWidget {
       children: <Widget>[
         Container(
           padding: EdgeInsets.all(20),
-          child: Text("Comments", style: TextStyle(color: Colors.white, fontSize: 20,) ,),
+          child: Text("Comments", style: StyleConstant.bigTxtStyle ,),
         ),
         Container(
           margin: EdgeInsets.symmetric(horizontal: 20),

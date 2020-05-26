@@ -1,5 +1,6 @@
 import 'package:MovieWorld/constant/ColorConstant.dart';
 import 'package:MovieWorld/constant/ImageConstant.dart';
+import 'package:MovieWorld/constant/StyleConstant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -95,21 +96,15 @@ class Poster extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(name,
-                    style: TextStyle(
-                      fontSize: 24,
-                      color: ColorConstant.WHITE,
-                    ),
+                    style: StyleConstant.bigTxtStyle,
                   ),
                       Text(genre,
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: ColorConstant.GRAY_TEXT,
-                        ),
+                        style: StyleConstant.smallTxtStyle,
                       )
                     ],
                   ),
                     Container(
-                      padding: EdgeInsets.all(5),
+                      padding: EdgeInsets.all(3),
                       decoration: BoxDecoration(
                         border: Border.all(
                           color: ColorConstant.WHITE,
@@ -122,7 +117,7 @@ class Poster extends StatelessWidget {
                         onTap: (){print("taped!");},
                         child: Row(
                           children: <Widget>[
-                            Text(rate.toString(),style: TextStyle(fontSize: 20, color: ColorConstant.WHITE),),
+                            Text(rate.toString(),style: StyleConstant.mediumTxtStyle,),
                             Image.asset(ImageConstant.RATE_ICON, fit: BoxFit.cover, height: 25,)
                           ],
                         ),

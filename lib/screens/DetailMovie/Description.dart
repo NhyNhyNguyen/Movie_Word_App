@@ -1,5 +1,6 @@
 import 'package:MovieWorld/constant/ColorConstant.dart';
 import 'package:MovieWorld/constant/StringConstant.dart';
+import 'package:MovieWorld/constant/StyleConstant.dart';
 import 'package:flutter/material.dart';
 import 'ButtonBookTicket.dart';
 
@@ -32,11 +33,36 @@ class Description extends StatelessWidget {
               mainAxisAlignment:  MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Text("Premiere: " + premiere, style: TextStyle(color: ColorConstant.GRAY_TEXT), ),
-                Text("Duration: " + timeLimit.toString() + " mins",  style: TextStyle(color: ColorConstant.GRAY_TEXT),),
-                Text("Cast: " + cast, style: TextStyle(color: ColorConstant.GRAY_TEXT),),
-                Text("Director: " + director, style: TextStyle(color: ColorConstant.GRAY_TEXT),),
-                Text("Nation: " + nation, style: TextStyle(color: ColorConstant.GRAY_TEXT),),
+                Row(
+                  children: <Widget>[
+                    Text("Premiere: ", style: StyleConstant.mediumTxtStyle,),
+                    Text(premiere, style: StyleConstant.smallTxtStyle,)
+                  ],
+                ),
+                Row(
+                  children: <Widget>[
+                    Text("Duration: ", style: StyleConstant.mediumTxtStyle,),
+                    Text(timeLimit.toString() + " mins", style: StyleConstant.smallTxtStyle,)
+                  ],
+                ),
+                Row(
+                  children: <Widget>[
+                    Text("Cast: ", style: StyleConstant.mediumTxtStyle,),
+                    Text(cast, style: StyleConstant.smallTxtStyle,)
+                  ],
+                ),
+                Row(
+                  children: <Widget>[
+                    Text("Director: ", style: StyleConstant.mediumTxtStyle,),
+                    Text(director, style: StyleConstant.smallTxtStyle,)
+                  ],
+                ),
+
+//                Text("Premiere: " + premiere, style: TextStyle(color: ColorConstant.GRAY_TEXT), ),
+//                Text("Duration: " + timeLimit.toString() + " mins",  style: TextStyle(color: ColorConstant.GRAY_TEXT),),
+//                Text("Cast: " + cast, style: TextStyle(color: ColorConstant.GRAY_TEXT),),
+//                Text("Director: " + director, style: TextStyle(color: ColorConstant.GRAY_TEXT),),
+//                Text("Nation: " + nation, style: TextStyle(color: ColorConstant.GRAY_TEXT),),
               ],
             ),
           ),

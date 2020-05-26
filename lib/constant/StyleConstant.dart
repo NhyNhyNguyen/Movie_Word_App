@@ -53,6 +53,23 @@ class StyleConstant {
     fontSize: 25,
   );
 
+  // style for detail page
+  static const bigTxtStyle = TextStyle(
+    fontSize: 24,
+    color: ColorConstant.WHITE,
+  );
+
+  static const mediumTxtStyle = TextStyle(
+    fontSize: 16,
+    color: ColorConstant.WHITE,
+  );
+
+  static const smallTxtStyle = TextStyle(
+    fontSize: 14,
+    color: ColorConstant.GRAY_TEXT,
+  );
+
+
 
   static const UnderlineInputBorder enabledBorder =
       UnderlineInputBorder(borderSide: BorderSide(color: Colors.grey));

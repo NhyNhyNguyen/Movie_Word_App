@@ -24,7 +24,7 @@ class ButtonBookTicket extends StatelessWidget {
           child: Column(
             children: <Widget>[
               Image.asset(ImageConstant.TICKET, fit: BoxFit.cover,height: 50,),
-              Text(text, style:TextStyle(fontSize: 16, color: Colors.white) ),
+              Text(text, style:StyleConstant.mediumTxtStyle ),
             ],
           ),
           onPressed: selectHandler,

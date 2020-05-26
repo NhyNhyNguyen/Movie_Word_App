@@ -1,4 +1,5 @@
 import 'package:MovieWorld/constant/ColorConstant.dart';
+import 'package:MovieWorld/constant/StyleConstant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -13,7 +14,7 @@ class MovieContent extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text("Synopsis", style: TextStyle(color: Colors.white, fontSize: 20),),
+          Text("Synopsis", style: StyleConstant.bigTxtStyle,),
           Text(content, style: TextStyle(fontSize: 14, color: ColorConstant.GRAY_TEXT, height: 2),)
         ],
       ),

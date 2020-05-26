@@ -1,3 +1,4 @@
+import 'package:MovieWorld/constant/StyleConstant.dart';
 import 'package:flutter/material.dart';
 import 'package:youtube_player/youtube_player.dart';
 
@@ -13,8 +14,8 @@ class _Trailer extends State<Trailer> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Container(
-          padding: EdgeInsets.only(left: 10),
-          child: Text("Trailer", style: TextStyle(color: Colors.white, fontSize: 20,) ,),
+          padding: EdgeInsets.only(left: 15),
+          child: Text("Trailer", style:StyleConstant.bigTxtStyle ,),
         ),
         YoutubePlayer(
           source: "7QUtEmBT_-w",

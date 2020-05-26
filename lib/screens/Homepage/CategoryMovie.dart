@@ -21,9 +21,6 @@ class CategoryMovie extends StatelessWidget {
     }).toList();
 
 
-//    return ListView.builder(itemBuilder: (context, index){
-//      return Text(categoryMovie[index].imageUrl);
-//    }, itemCount: categoryMovie.length,);
 
 //    return ListView.builder(itemBuilder: (context, index) {
 //      return Column(
