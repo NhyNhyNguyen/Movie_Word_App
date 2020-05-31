@@ -8,6 +8,12 @@ class StyleConstant {
       fontFamily: "Open Sans",
       fontSize: 20,
       fontWeight: FontWeight.normal);
+  static const TextStyle formTextStyle = TextStyle(
+      color: Colors.white70,
+      fontFamily: "Open Sans",
+      fontSize: 20,
+      fontWeight: FontWeight.w600);
+
   static const TextStyle hintTextStyle = TextStyle(
     color: Colors.white,
     fontSize: 16,
@@ -78,7 +84,7 @@ class StyleConstant {
   static const UnderlineInputBorder enabledBorder =
       UnderlineInputBorder(borderSide: BorderSide(color: Colors.grey));
   static const focusedBorder = UnderlineInputBorder(
-    borderSide: BorderSide(color: ColorConstant.VIOLET),
+    borderSide: BorderSide(color: ColorConstant.LIGHT_VIOLET),
   );
 
 

@@ -10,7 +10,7 @@ class TextFieldWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         SizedBox(height:3),
-        Text(name + "*", style: StyleConstant.normalTextStyle),
+        Text(name + "*", style: StyleConstant.formTextStyle),
         Container(
           alignment: Alignment.centerLeft,
           height: 45 ,
@@ -21,8 +21,9 @@ class TextFieldWidget {
                 enabledBorder: StyleConstant.enabledBorder,
                 focusedBorder: StyleConstant.focusedBorder,
                 contentPadding: EdgeInsets.only(top: 14),
-                prefixIcon: icon,
+                //prefixIcon: icon,
                 hintText: hint,
+                labelStyle: StyleConstant.formTextStyle,
                 hintStyle: StyleConstant.hintTextStyle),
             controller: controller,
             validator: (value) {

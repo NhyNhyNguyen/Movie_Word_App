@@ -2,6 +2,7 @@
 import 'package:MovieWorld/screens/Homepage/BannerImage.dart';
 import 'package:MovieWorld/screens/Homepage/CategoryMovie.dart';
 import 'package:MovieWorld/screens/Homepage/Search.dart';
+import 'package:MovieWorld/services/dynamic_link_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -25,6 +26,10 @@ class NowshowingScreen extends StatefulWidget {
 
 class _NowshowingScreen extends State<NowshowingScreen>  {
 
+  @override
+  void initState(){
+    DynamicLinkService().handleDynamicLinks();
+  }
 
   @override
   Widget build(BuildContext context) {

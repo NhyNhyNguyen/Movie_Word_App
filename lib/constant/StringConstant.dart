@@ -64,8 +64,16 @@ Không áp dụng cho các ngày Lễ, Tết, suất chiếu đặc biệt, ho�
   static const CANCEL = "Cancel";
   static const PROFILE = "Profile";
   static const HISTORY = "History";
-  static const EDIT = "Edit";
+  static const EDIT = "Edit Profile";
   static const LOGOUT = "Logout";
+  static const SAVE_CHANGES = "Save Changes";
+  static const CHANGE_PICTURE = "Changes Profile Picture";
+  static const NEW_PASSWORD = "New Password";
+  static const NEW_PASSWORD_HINT = "Enter your new password";
+  static const CONFIRM_PASSWORD = "Confirm password";
+  static const CONFIRM_PASSWORD_HINT = "Enter your confirm password";
+  static const RESET_PASS = "Reset password";
+  static const CHANGE_PASS = "Change password";
 
   //Home page
   static const NOW_SHOWING = "Now Showing";

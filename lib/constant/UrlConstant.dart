@@ -5,4 +5,5 @@ class UrlConstant{
   static const String REGISTER = HOST + "/api/register";
   static const String LOGIN = HOST + "/api/auth";
   static const String PROFILE = HOST + "/api/profile";
+  static const String EDIT = HOST + "/api/edit-profile";
 }

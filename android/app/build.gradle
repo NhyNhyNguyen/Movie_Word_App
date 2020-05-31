@@ -53,6 +53,10 @@ android {
             signingConfig signingConfigs.debug
         }
     }
+
+    defaultConfig {
+        minSdkVersion 18
+    }
 }
 
 flutter {
@@ -64,3 +68,4 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics:17.2.2'
 
 }
+
