@@ -1,8 +1,10 @@
 import 'package:MovieWorld/constant/ColorConstant.dart';
+import 'package:MovieWorld/constant/ConstantVar.dart';
 import 'package:MovieWorld/constant/ImageConstant.dart';
 import 'package:MovieWorld/constant/StringConstant.dart';
 import 'package:MovieWorld/constant/StyleConstant.dart';
 import 'package:MovieWorld/layout/mainLayout.dart';
+import 'package:MovieWorld/model/UserDetail.dart';
 import 'package:MovieWorld/screens/ButtonGradientLarge.dart';
 import 'package:MovieWorld/screens/User/DetailScreen.dart';
 import 'package:MovieWorld/screens/User/LoginScreen.dart';
@@ -60,8 +62,16 @@ class _ChooseProfile extends State<ChooseProfile> {
   }
 
   @override
+  void initState(){
+      if(ConstantVar.userDetail == null){
+        UserDetail.fetchUserDetail(ConstantVar.jwt).then((value) => setState((){
+        }));
+      }
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return MainLayOut.getMailLayout(
+    return ConstantVar.userDetail != null ?  MainLayOut.getMailLayout(
         context,
         Container(
             color: ColorConstant.VIOLET,
@@ -72,101 +82,101 @@ class _ChooseProfile extends State<ChooseProfile> {
               children: <Widget>[
                 Container(
                   padding:
-                      EdgeInsets.symmetric(horizontal: 0.0, vertical: 10.0),
+                  EdgeInsets.symmetric(horizontal: 0.0, vertical: 10.0),
                   width: double.infinity,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
                       ButtonGradient(type, "profile", StringConstant.PROFILE,
-                          () => choseOption("profile")),
+                              () => choseOption("profile")),
                       ButtonGradient(type, "history", StringConstant.HISTORY,
-                          () => choseOption("history")),
+                              () => choseOption("history")),
                     ],
                   ),
                 ),
                 type == "profile"
                     ? SingleChildScrollView(
-                        physics: AlwaysScrollableScrollPhysics(),
-                        padding: EdgeInsets.only(bottom: 50.0),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: <Widget>[
-                            Container(
-                              margin: EdgeInsets.only(right: 20),
-                              width: 130,
-                              height: 130,
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                image: DecorationImage(
-                                    image: AssetImage("assets/profile.jpg"),
-                                    fit: BoxFit.cover),
-                              ),
-                            ),
-                            Text(
-                              "NhiNhiNguyen",
-                              style: StyleConstant.btnSelectedStyle,
-                            ),
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                Icon(Icons.email,
-                                    color: ColorConstant.WHITE, size: 20),
-                                SizedBox(
-                                  width: 3,
-                                ),
-                                Text(
-                                  "dddnhi@gmail.com",
-                                  style: StyleConstant.smallTextStyle,
-                                ),
-                                SizedBox(
-                                  height: 4,
-                                ),
-                              ],
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: <Widget>[
-                                Icon(Icons.location_on,
-                                    color: ColorConstant.WHITE, size: 20),
-                                SizedBox(
-                                  width: 4,
-                                ),
-                                Text(
-                                  "08 Hà Văn Tinh",
-                                  style: StyleConstant.smallTextStyle,
-                                )
-                              ],
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: <Widget>[
-                                Icon(Icons.phone,
-                                    color: ColorConstant.WHITE, size: 20),
-                                SizedBox(
-                                  width: 4,
-                                ),
-                                Text(
-                                  "0323424245",
-                                  style: StyleConstant.smallTextStyle,
-                                )
-                              ],
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            _editBtn(),
-                            _resetPass(),
-                            _logoutBtn(),
-                          ],
+                  physics: AlwaysScrollableScrollPhysics(),
+                  padding: EdgeInsets.only(bottom: 50.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Container(
+                        margin: EdgeInsets.only(right: 20),
+                        width: 130,
+                        height: 130,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          image: DecorationImage(
+                              image: AssetImage("assets/profile.jpg"),
+                              fit: BoxFit.cover),
                         ),
-                      )
+                      ),
+                      Text(
+                        ConstantVar.userDetail.username,
+                        style: StyleConstant.btnSelectedStyle,
+                      ),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Icon(Icons.email,
+                              color: ColorConstant.WHITE, size: 20),
+                          SizedBox(
+                            width: 3,
+                          ),
+                          Text(
+                            ConstantVar.userDetail.fullName,
+                            style: StyleConstant.smallTextStyle,
+                          ),
+                          SizedBox(
+                            height: 4,
+                          ),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+                          Icon(Icons.location_on,
+                              color: ColorConstant.WHITE, size: 20),
+                          SizedBox(
+                            width: 4,
+                          ),
+                          Text(
+                            ConstantVar.userDetail.address,
+                            style: StyleConstant.smallTextStyle,
+                          )
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+                          Icon(Icons.phone,
+                              color: ColorConstant.WHITE, size: 20),
+                          SizedBox(
+                            width: 4,
+                          ),
+                          Text(
+                            ConstantVar.userDetail.phone,
+                            style: StyleConstant.smallTextStyle,
+                          )
+                        ],
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      _editBtn(),
+                      _resetPass(),
+                      _logoutBtn(),
+                    ],
+                  ),
+                )
                     : Column()
               ],
             )),
-        "USER");
+        "USER"): LoginScreen();
   }
 }

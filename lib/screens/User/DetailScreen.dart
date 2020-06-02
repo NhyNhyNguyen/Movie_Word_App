@@ -34,30 +34,6 @@ class _DetailScreenState extends State<DetailScreen> {
   DateTime selectedDate = DateTime.now();
   final _formKey = GlobalKey<FormState>();
 
-  Future<UserDetail> fetchUserDetail() async {
-    final response = await http.get(UrlConstant.PROFILE, headers: {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json',
-      'Authorization':
-          'Bearer ' + ConstantVar.jwt,
-    });
-    print(json.decode(response.body));
-
-    if (response.statusCode == 200) {
-      // If the server did return a 200 OK response,
-      // then parse the JSON.
-      print(json.decode(response.body));
-      setState(() {
-        ConstantVar.isLogin = true;
-      });
-      return UserDetail.fromJson(json.decode(response.body));
-    } else {
-      // If the server did not return a 200 OK response,
-      // then throw an exception.
-      ConstantVar.isLogin = false;
-    }
-  }
-
   Widget _SaveBtn() {
     return ButtonGradientLarge(
         StringConstant.SAVE_CHANGES,
@@ -98,24 +74,21 @@ class _DetailScreenState extends State<DetailScreen> {
   initState() {
     super.initState();
     ConstantVar.isLogin = false;
-    if(ConstantVar.jwt != ""){
-      fetchUserDetail().then((value) => userDetail = UserDetail(
-          username: value.username,
-          address: value.address,
-          phone: value.phone,
-          email: value.email,
-          fullName: value.fullName));
-    }
+    if (ConstantVar.userDetail != null){
+      usernameController.text = ConstantVar.userDetail.username;
+      fullNameController.text = ConstantVar.userDetail.fullName;
+      addressController.text = ConstantVar.userDetail.address;
+      phoneController.text = ConstantVar.userDetail.phone;
+      emailController.text = ConstantVar.userDetail.email;}
+    else{
+      UserDetail.fetchUserDetail(ConstantVar.jwt).then((value) => setState((){
+      }));    }
+
   }
 
   @override
   Widget build(BuildContext context) {
-    if (ConstantVar.isLogin){
-      usernameController.text = userDetail.username;
-      fullNameController.text = userDetail.fullName;
-      addressController.text = userDetail.address;
-      phoneController.text = userDetail.phone;
-      emailController.text = userDetail.email;
+    if (ConstantVar.userDetail != null){
       return MainLayOut.getMailLayout(
           context,
           Container(

@@ -48,42 +48,17 @@ class _ChoosePageScreen extends State<ChoosePageScreen> {
             });
   }
 
-  Future<bool> fetchUserDetail(String jwt) async {
-    final response = await http.get(UrlConstant.PROFILE, headers: {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json',
-      'Authorization':
-      'Bearer $jwt',
-    });
-    print(json.decode(response.body));
-
-    if (response.statusCode == 200) {
-      // If the server did return a 200 OK response,
-      // then parse the JSON.
-      ConstantVar.isLogin = true;
-      return true;
-    } else {
-      // If the server did not return a 200 OK response,
-      // then throw an exception.
-      ConstantVar.isLogin = false;
-      return false;
-    }
-  }
-
   @override
   void initState(){
-    fetchUserDetail(ConstantVar.jwt).then((value) => setState((){
-      ConstantVar.isLogin = value;
+    UserDetail.fetchUserDetail(ConstantVar.jwt).then((value) => setState((){
     }));
   }
-
-
 
   @override
   Widget build(BuildContext context) {
     return MainLayOut.getMailLayout(
         context,
-        !ConstantVar.isLogin ? Container(
+        ConstantVar.userDetail != null ? Container(
             color: ColorConstant.VIOLET,
             padding: EdgeInsets.symmetric(horizontal: 50.0, vertical: 20.0),
             child: Column(

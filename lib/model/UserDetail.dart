@@ -40,11 +40,13 @@ class UserDetail {
       // If the server did return a 200 OK response,
       // then parse the JSON.
       ConstantVar.isLogin = true;
+      ConstantVar.userDetail = UserDetail.fromJson(json.decode(response.body));
       return true;
     } else {
       // If the server did not return a 200 OK response,
       // then throw an exception.
       ConstantVar.isLogin = false;
+      ConstantVar.userDetail = null;
       return false;
     }
   }

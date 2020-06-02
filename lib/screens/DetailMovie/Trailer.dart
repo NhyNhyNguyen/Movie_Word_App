@@ -1,6 +1,6 @@
 import 'package:MovieWorld/constant/StyleConstant.dart';
 import 'package:flutter/material.dart';
-import 'package:youtube_player/youtube_player.dart';
+//import 'package:youtube_player/youtube_player.dart';
 
 class Trailer extends StatefulWidget {
   @override
@@ -13,7 +13,7 @@ class _Trailer extends State<Trailer> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Container(
+       /* Container(
           padding: EdgeInsets.only(left: 15),
           child: Text("Trailer", style:StyleConstant.bigTxtStyle ,),
         ),
@@ -22,7 +22,7 @@ class _Trailer extends State<Trailer> {
           //source: "https://www.youtube.com/watch?v=NyTOHJW1PIE",
           quality: YoutubeQuality.HD,
           aspectRatio: 16 / 9,
-        ),
+        ),*/
       ],
     );
   }
