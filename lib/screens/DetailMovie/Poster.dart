@@ -1,13 +1,14 @@
 import 'package:MovieWorld/constant/ColorConstant.dart';
 import 'package:MovieWorld/constant/ImageConstant.dart';
 import 'package:MovieWorld/constant/StyleConstant.dart';
+import 'package:MovieWorld/constant/UrlConstant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Poster extends StatelessWidget {
   final String imageUrl;
   final String name;
-  final String genre;
+  final List genre;
   final double rate;
 
   const Poster(this.imageUrl, this.name, this.genre, this.rate);
@@ -80,7 +81,7 @@ class Poster extends StatelessWidget {
                 width: double.infinity,
                 child: ClipRRect(
                   borderRadius: BorderRadius.all(Radius.circular(20)),
-                  child: Image.asset(imageUrl, fit: BoxFit.cover, ),
+                  child: Image.network(UrlConstant.URL_IMAGE + imageUrl, fit: BoxFit.cover, ),
                 )
               ),
               Container(
@@ -98,7 +99,7 @@ class Poster extends StatelessWidget {
                   Text(name,
                     style: StyleConstant.bigTxtStyle,
                   ),
-                      Text(genre,
+                      Text(genre[0]["name"],
                         style: StyleConstant.smallTxtStyle,
                       )
                     ],

@@ -42,11 +42,11 @@ class _CommingsoonScreen extends State<CommingsoonScreen>  {
                 child: ListView(
                   children: <Widget>[
                     BannerImage(),
-                    OptionTab('comingsoon'),
+                    OptionTab('coming-soon'),
                     Container(
                         //height: 435,
                         height: MediaQuery.of(context).size.height * 0.675,
-                        child: CategoryMovie('comingsoon')),
+                        child: CategoryMovie('coming-soon')),
                   ],
                 ),
               )

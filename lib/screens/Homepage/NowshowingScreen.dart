@@ -43,11 +43,11 @@ class _NowshowingScreen extends State<NowshowingScreen>  {
                   child: ListView(
                     children: <Widget>[
                       BannerImage(),
-                      OptionTab('nowshowing'),
+                      OptionTab('now-showing'),
                       Container(
                          // height: 435,
                           height: MediaQuery.of(context).size.height * 0.675,
-                          child: CategoryMovie('nowshowing')),
+                          child: CategoryMovie('now-showing')),
                     ],
                   ),
               )

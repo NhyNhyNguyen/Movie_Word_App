@@ -3,11 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:youtube_player/youtube_player.dart';
 
 class Trailer extends StatefulWidget {
+  String trailer;
+  Trailer(this.trailer);
   @override
-  _Trailer createState() => _Trailer();
+  _Trailer createState() => _Trailer(trailer);
 }
 
 class _Trailer extends State<Trailer> {
+  String trailer;
+  _Trailer(this.trailer);
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -18,7 +23,7 @@ class _Trailer extends State<Trailer> {
           child: Text("Trailer", style:StyleConstant.bigTxtStyle ,),
         ),
         YoutubePlayer(
-          source: "7QUtEmBT_-w",
+          source: trailer,
           //source: "https://www.youtube.com/watch?v=NyTOHJW1PIE",
           quality: YoutubeQuality.HD,
           aspectRatio: 16 / 9,

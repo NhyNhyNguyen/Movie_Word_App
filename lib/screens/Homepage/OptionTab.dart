@@ -29,13 +29,13 @@ class OptionTab extends StatelessWidget  {
   Widget build(BuildContext context) {
 
     void choseOption(type){
-      if(type == "nowshowing"){
+      if(type == "now-showing"){
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => NowshowingScreen()),
         );
       };
-      if(type == "comingsoon"){
+      if(type == "coming-soon"){
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => CommingsoonScreen()),
@@ -50,8 +50,8 @@ class OptionTab extends StatelessWidget  {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
-          ButtonGradient(type, "nowshowing", StringConstant.NOW_SHOWING, () => choseOption("nowshowing")),
-          ButtonGradient(type, "comingsoon", StringConstant.COMMING_SOON, () => choseOption("comingsoon")),
+          ButtonGradient(type, "now-showing", StringConstant.NOW_SHOWING, () => choseOption("now-showing")),
+          ButtonGradient(type, "coming-soon", StringConstant.COMMING_SOON, () => choseOption("coming-soon")),
 
 
         ],
