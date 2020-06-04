@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:ui';
 
 import 'package:MovieWorld/constant/ColorConstant.dart';
 import 'package:MovieWorld/constant/ConstantVar.dart';
@@ -9,8 +10,9 @@ import 'package:MovieWorld/constant/UrlConstant.dart';
 import 'package:MovieWorld/layout/mainLayout.dart';
 import 'package:MovieWorld/screens/User/ChooseProfile.dart';
 import 'package:MovieWorld/screens/User/LoginScreen.dart';
-import 'package:MovieWorld/screens/User/ResetPass.dart';
+import 'package:MovieWorld/screens/User/ResetPassword.dart';
 import 'package:MovieWorld/screens/User/TextfieldWidget.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -19,22 +21,20 @@ import '../ButtonGradientLarge.dart';
 import 'DetailScreen.dart';
 import 'SignUpScreen.dart';
 
-class ResetPasswordScreen extends StatefulWidget {
+class ResetPassScreen extends StatefulWidget {
   @override
-  _ResetPasswordScreenState createState() => _ResetPasswordScreenState();
+  _ResetPassScreenState createState() => _ResetPassScreenState();
 }
 
-class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
+class _ResetPassScreenState extends State<ResetPassScreen> {
   final _formKey = GlobalKey<FormState>();
-  TextEditingController passController = TextEditingController();
-  TextEditingController passConfirmController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
 
   Future<String> resetPass() async {
     var queryParameters = {
-      "token" : "f04cd29c-cfee-47b5-943d-0b382d6b77f2",
-      'newPassword': passController.text,
+      'email': emailController.text,
     };
-    var uri = Uri.http(UrlConstant.HOST_1, '/api/save-password', queryParameters);
+    var uri = Uri.http(UrlConstant.HOST_1, '/api/reset-password', queryParameters);
     http.Response response = await http.post(
       uri,
       headers: <String, String>{
@@ -44,19 +44,18 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
     );
 
     if (response.statusCode == 200) {
-      ConstantVar.jwt = "";
-      ConstantVar.userDetail = null;
       Modal.showSimpleCustomDialog(
-          context, "Reset pass successfull", onPressedResetPassSuccess);
+          context, "Please enter mail\nto determine reset pass", onPressedResetPassSuccess);
     } else {
-      Modal.showSimpleCustomDialog(
-          context, "Please enter your mail", onPressedResetPassFail);
+        Modal.showSimpleCustomDialog(
+            context, "Please enter corrert mail", onPressedResetPassFail);
+
     }
   }
 
   void onPressedResetPassSuccess(BuildContext context) {
     Navigator.push(
-        context, MaterialPageRoute(builder: (context) => LoginScreen()));
+        context, MaterialPageRoute(builder: (context) => ResetPassScreen()));
   }
 
   void onPressedResetPassFail(BuildContext context) {
@@ -68,13 +67,19 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
 
   Widget _resetPassBtn() {
     return ButtonGradientLarge(StringConstant.RESET_PASS, () {
-      if (_formKey.currentState.validate()) {}
-      resetPass();
+      if (_formKey.currentState.validate()) {
+          resetPass();
+      }
+     ;
     });
   }
 
   @override
-  void initState() {}
+  void initState() {
+    if (ConstantVar.userDetail != null) {
+      emailController.text = ConstantVar.userDetail.email;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -92,12 +97,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: <Widget>[
-                    Image.asset(
-                      ImageConstant.LOGO,
-                      height: 200,
-                      width: 240,
-                      fit: BoxFit.fitWidth,
-                    ),
+                    Image.asset(ImageConstant.LOGO, height: 200, width: 240,fit: BoxFit.fitWidth, ),
                     Text("Reset your password",
                         style: StyleConstant.headerTextStyle),
                     SizedBox(
@@ -124,17 +124,11 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                           child: Column(
                             children: <Widget>[
                               TextFieldWidget.buildTextField(
-                                  StringConstant.PASSWORD,
-                                  StringConstant.PASSWORD_HINT,
-                                  Icon(Icons.lock, color: Colors.white),
-                                  TextInputType.visiblePassword,
-                                  passController),
-                              TextFieldWidget.buildTextField(
-                                  StringConstant.CONFIRM_PASSWORD,
-                                  StringConstant.CONFIRM_PASSWORD_HINT,
-                                  Icon(Icons.lock_open, color: Colors.white),
+                                  StringConstant.EMAIL,
+                                  StringConstant.EMAIL_HINT,
+                                  Icon(Icons.mail, color: Colors.white),
                                   TextInputType.emailAddress,
-                                  passConfirmController),
+                                  emailController),
                               SizedBox(
                                 height: 15,
                               ),

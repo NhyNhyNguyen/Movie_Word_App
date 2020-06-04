@@ -38,6 +38,10 @@ class MainLayOut {
               )),
           body: Stack(
             children: <Widget>[
+              Container(
+                width: double.infinity,
+                height: double.infinity,
+              ),
               widget,
               Container(
                 child: Align(

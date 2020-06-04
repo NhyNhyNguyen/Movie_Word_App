@@ -34,69 +34,52 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   DateTime selectedDate = DateTime.now();
   final _formKey = GlobalKey<FormState>();
-  void onPressed(BuildContext context) {
+  void onPressedRegisterSuccress(BuildContext context) {
     Navigator.push(
         context, MaterialPageRoute(builder: (context) => LoginScreen()));
   }
 
-  Future<http.Response> postUserDetail(UserDetail userDetail) async {
+  void onPressedRegisterFail(BuildContext context) {
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => SignUpScreen()));
+  }
+
+  Future<http.Response> postUserDetail(BuildContext context) async {
     final http.Response response = await http.post(
       UrlConstant.REGISTER,
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
       body: jsonEncode(<String, String>{
-        /* 'username': userDetail.username,
-        'password': userDetail.password,
-        'email': userDetail.email,
-        'fullName': userDetail.fullName,
-        'phone': userDetail.phone,
-        'address': userDetail.address,*/
-        "username": "trang",
-        "fullName": "trang nguyễn",
-        "password": "123123",
-        "email": "dddnhi@gmail.com",
-        "phone": "0898811122",
-        "address": "Hue"
+        "username": usernameController.text,
+        "fullName": passwordController.text,
+        "password": fullNameController.text,
+        "address": addressController.text,
+        "phone": phoneController.text,
+        "email": emailController.text
       }),
     );
     if (response.statusCode == 200) {
-      //show pop up xac minh mail
-      // print(json.decode(response.body)['mess']);
+      print("sign_up success");
+      Modal.showSimpleCustomDialog(
+          context, "Please enter mail to determine", onPressedRegisterSuccress);
     } else {
-      // show popup theo message
+      Modal.showSimpleCustomDialog(
+          context, "Sign up fail", onPressedRegisterFail);
     }
     return response;
   }
 
   Widget _signUpBtn(BuildContext context) {
-     return ButtonGradientLarge(StringConstant.REGISTER_NOW, () {
-       Navigator.push(context, MaterialPageRoute(builder: (context) => ChooseProfile()));
-
-       if (_formKey.currentState.validate()) {
-        print("sign_up success");
-        UserDetail userDetail = UserDetail(
-            username: usernameController.text,
-            password: passwordController.text,
-            fullName: fullNameController.text,
-            address: addressController.text,
-            phone: phoneController.text,
-            email: emailController.text);
-        postUserDetail(userDetail);
+    return ButtonGradientLarge(StringConstant.REGISTER_NOW, () {
+      if (_formKey.currentState.validate()) {
+        postUserDetail(context);
       }
     });
   }
 
   @override
   Widget build(BuildContext context) {
-//    UserDetail userDetail = UserDetail(
-//        usernameController.text,
-//        passwordController.text,
-//        fullNameController.text,
-//        addressController.text,
-//        phoneController.text,
-//        emailController.text);
-//    postUserDetail(userDetail);
     return MainLayOut.getMailLayout(
         context,
         Container(
@@ -105,7 +88,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
           width: double.infinity,
           child: SingleChildScrollView(
             physics: AlwaysScrollableScrollPhysics(),
-            padding: EdgeInsets.symmetric(horizontal: 25, vertical: 50.0),
+            padding: EdgeInsets.symmetric(horizontal: 25, vertical: 20.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
@@ -137,13 +120,19 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         TextFieldWidget.buildTextField(
                             StringConstant.USERNAME,
                             StringConstant.USERNAME_HINT,
-                            Icon(Icons.account_circle, color: Colors.white,),
+                            Icon(
+                              Icons.account_circle,
+                              color: Colors.white,
+                            ),
                             TextInputType.text,
                             usernameController),
                         TextFieldWidget.buildTextField(
                             StringConstant.PASSWORD,
                             StringConstant.PASSWORD_HINT,
-                            Icon(Icons.vpn_key, color: Colors.white,),
+                            Icon(
+                              Icons.vpn_key,
+                              color: Colors.white,
+                            ),
                             TextInputType.visiblePassword,
                             passwordController),
                         TextFieldWidget.buildTextField(
@@ -161,7 +150,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         TextFieldWidget.buildTextField(
                             StringConstant.PHONE,
                             StringConstant.PHONE_HINT,
-                            Icon(Icons.phone_in_talk, color: Colors.white,),
+                            Icon(
+                              Icons.phone_in_talk,
+                              color: Colors.white,
+                            ),
                             TextInputType.visiblePassword,
                             phoneController),
                         TextFieldWidget.buildTextField(
@@ -175,6 +167,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ),
                 ),
                 _signUpBtn(context),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.1,
+                )
               ],
             ),
           ),

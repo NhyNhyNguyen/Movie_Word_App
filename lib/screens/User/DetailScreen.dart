@@ -15,6 +15,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 import '../ButtonGradientLarge.dart';
+import 'UploadImage.dart';
 
 class DetailScreen extends StatefulWidget {
   @override
@@ -65,6 +66,7 @@ class _DetailScreenState extends State<DetailScreen> {
     if (response.statusCode == 200) {
       Navigator.push(context,
           MaterialPageRoute(builder: (context) => ChooseProfile()));
+      UserDetail.fetchUserDetail(ConstantVar.jwt);
     } else {
     }
     return response;
@@ -97,7 +99,7 @@ class _DetailScreenState extends State<DetailScreen> {
             width: double.infinity,
             child: SingleChildScrollView(
               physics: AlwaysScrollableScrollPhysics(),
-              padding: EdgeInsets.symmetric(horizontal: 25, vertical: 50.0),
+              padding: EdgeInsets.symmetric(horizontal: 25, vertical: 20.0),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -124,7 +126,10 @@ class _DetailScreenState extends State<DetailScreen> {
                       fontFamily: "Open Sans",
                       decoration: TextDecoration.underline
                     ) ),
-                    onPressed: ()=>{},
+                    onPressed: ()=>{
+                    Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => UploadImageDemo()))
+                    },
                   ),
 
                   Container(
@@ -167,6 +172,9 @@ class _DetailScreenState extends State<DetailScreen> {
                     ),
                   ),
                   _SaveBtn(),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.1,
+                  )
                 ],
               ),
             ),

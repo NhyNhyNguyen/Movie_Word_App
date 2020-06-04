@@ -26,6 +26,13 @@ class StyleConstant {
       fontFamily: "Open Sans",
       fontSize: 15,
       fontWeight: FontWeight.normal);
+
+  static const TextStyle largerHeaderTextStyle = TextStyle(
+      color: ColorConstant.WHITE,
+      fontFamily: "Open Sans",
+      fontSize: 35,
+      fontWeight: FontWeight.bold
+  );
   static const TextStyle headerTextStyle = TextStyle(
       color: ColorConstant.WHITE,
       fontFamily: "Open Sans",
@@ -56,7 +63,8 @@ class StyleConstant {
 
   static const btnLargeStyle = TextStyle(
     color: ColorConstant.WHITE,
-    fontSize: 30,
+    fontWeight: FontWeight.w600,
+    fontSize: 28,
   );
 
   static const appBarText = TextStyle(
@@ -82,7 +90,7 @@ class StyleConstant {
 
 
   static const UnderlineInputBorder enabledBorder =
-      UnderlineInputBorder(borderSide: BorderSide(color: Colors.grey));
+      UnderlineInputBorder(borderSide: BorderSide(color: Colors.white));
   static const focusedBorder = UnderlineInputBorder(
     borderSide: BorderSide(color: ColorConstant.LIGHT_VIOLET),
   );

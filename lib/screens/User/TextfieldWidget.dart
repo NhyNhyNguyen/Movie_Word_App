@@ -35,7 +35,7 @@ class TextFieldWidget {
           ),
         ),
         SizedBox(
-          height:7,
+          height:15,
         ),
       ],
     );

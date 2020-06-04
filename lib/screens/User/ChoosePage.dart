@@ -57,9 +57,9 @@ class _ChoosePageScreen extends State<ChoosePageScreen> {
   @override
   Widget build(BuildContext context) {
     DynamicLinkService().handleDynamicLinks();
-    return MainLayOut.getMailLayout(
+    return ConstantVar.userDetail == null ?MainLayOut.getMailLayout(
         context,
-        ConstantVar.userDetail != null ? Container(
+         Container(
             color: ColorConstant.VIOLET,
             padding: EdgeInsets.symmetric(horizontal: 50.0, vertical: 20.0),
             child: Column(
@@ -78,7 +78,8 @@ class _ChoosePageScreen extends State<ChoosePageScreen> {
                 _signInBtn(),
                 _signUpBtn(),
               ],
-            )) : ChooseProfile(),
-        "USER");
+            )
+         ),
+        "USER"): ChooseProfile();
   }
 }
