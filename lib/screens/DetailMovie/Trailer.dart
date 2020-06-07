@@ -23,6 +23,7 @@ class _Trailer extends State<Trailer> {
           child: Text("Trailer", style:StyleConstant.bigTxtStyle ,),
         ),
         YoutubePlayer(
+
           source: trailer,
           //source: "https://www.youtube.com/watch?v=NyTOHJW1PIE",
           quality: YoutubeQuality.HD,

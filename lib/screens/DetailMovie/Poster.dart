@@ -4,6 +4,7 @@ import 'package:MovieWorld/constant/StyleConstant.dart';
 import 'package:MovieWorld/constant/UrlConstant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:rating_dialog/rating_dialog.dart';
 
 class Poster extends StatelessWidget {
   final String imageUrl;
@@ -16,53 +17,31 @@ class Poster extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-//    return Stack(
-//      children: <Widget>[
-//        ClipRRect(
-//          borderRadius: BorderRadius.all(Radius.circular(30)),
-//          child: Container(
-//              height: MediaQuery.of(context).size.height*0.3,
-//              width: double.infinity,
-//              child: Image.asset(imageUrl, fit: BoxFit.cover, )),),
-//        Positioned(
-//          bottom: 0,
-//          child: Container(
-//            padding: EdgeInsets.all(15),
-//            width: MediaQuery.of(context).size.width * 0.89,
-//            height: 70,
-//            decoration: new BoxDecoration(
-//              borderRadius: BorderRadius.only(
-//                bottomRight: Radius.circular(30),
-//                bottomLeft: Radius.circular(30),
-//              ),
-//              gradient: ColorConstant.RAINBOW_NAME,
-//            ),
-//            child:  Column(
-//              mainAxisAlignment: MainAxisAlignment.end,
-//              crossAxisAlignment: CrossAxisAlignment.start,
-//              children: <Widget>[
-//                Text(
-//                  name,
-//                  style: TextStyle(
-//                    fontSize: 20,
-//                    color: ColorConstant.WHITE,
-//                  ),
-//                ),
-//                Text(
-//                  genre,
-//                  style: TextStyle(
-//                    fontSize: 14,
-//                    color: ColorConstant.GRAY_TEXT,
-//                  ),
-//                )
-//              ],
-//            ),
-//          ),
-//        )
-//      ],
-//    );
-  
-  return Stack(
+
+    void _showRatingDialog() {
+      showDialog(
+          context: context,
+          barrierDismissible: false, // set to false if you want to force a rating
+          builder: (context) {
+            return RatingDialog(
+              icon: Icon(Icons.movie, color: ColorConstant.VIOLET, size: 50,), // set your own image/icon widget
+              title: "The Rating Dialog",
+              description:
+              "Tap a star to set your rating.",
+              submitButton: "SUBMIT",
+              positiveComment: "We are so happy to hear :)", // optional
+              negativeComment: "We're sad to hear :(", // optional
+              accentColor: Colors.yellow, // optional
+              onSubmitPressed: (int rating) {
+                print("onSubmitPressed: rating = $rating");
+                // TODO: open the app's page on Google Play / Apple App Store
+              },
+            );
+          });
+    }
+
+
+    return Stack(
     children: <Widget>[
       Container(
         height: 120,
@@ -92,20 +71,22 @@ class Poster extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                  Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(name,
-                    style: StyleConstant.bigTxtStyle,
-                  ),
-                      Text(genre[0]["name"],
-                        style: StyleConstant.smallTxtStyle,
-                      )
-                    ],
+                  Container(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(name ,
+                          style: StyleConstant.bigTxtStyle,
+                        ),
+                        Text(genre[0]["name"],
+                          style: StyleConstant.smallTxtStyle,
+                        )
+                      ],
+                    ),
                   ),
                     Container(
-                      padding: EdgeInsets.all(3),
+                      padding: EdgeInsets.all(5),
                       decoration: BoxDecoration(
                         border: Border.all(
                           color: ColorConstant.WHITE,
@@ -115,11 +96,12 @@ class Poster extends StatelessWidget {
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: InkWell(
-                        onTap: (){print("taped!");},
+                        onTap: _showRatingDialog,
                         child: Row(
                           children: <Widget>[
                             Text(rate.toString(),style: StyleConstant.mediumTxtStyle,),
-                            Image.asset(ImageConstant.RATE_ICON, fit: BoxFit.cover, height: 25,)
+                            //Image.asset(ImageConstant.RATE_ICON, fit: BoxFit.cover, height: 25,)
+                            Icon(Icons.star, color: ColorConstant.YELLOW, size: 20,),
                           ],
                         ),
                       ),
