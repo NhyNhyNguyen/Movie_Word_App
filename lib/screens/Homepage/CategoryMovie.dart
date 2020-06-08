@@ -1,6 +1,7 @@
 
 import 'package:MovieWorld/constant/ColorConstant.dart';
 import 'package:MovieWorld/constant/UrlConstant.dart';
+import 'package:MovieWorld/model/Movie.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -23,14 +24,19 @@ class CategoryMovieState extends State<CategoryMovie> {
   CategoryMovieState(this.status);
 
   String url;
-  List<dynamic> data;
+  List<Movie> data;
 
   @override
   Widget build(BuildContext context) {
     url  = UrlConstant.URL_FILM + status;
     if (data == null) {
       http.get(url).then((http.Response response) {
-        setState(() => data = json.decode(response.body) );
+        setState((){
+          data = new List<Movie>();
+          json.decode(response.body).forEach((json) {
+            data.add(Movie.fromJson(json));
+          });
+        });
       });
     };
     if (data == null) return Container(
@@ -42,7 +48,8 @@ class CategoryMovieState extends State<CategoryMovie> {
         childAspectRatio: 0.75,
         children:
         data.map(
-                (item) =>MovieItem(item["id"].toString(), item["name"], item["poster"], item["genres"])
+                //(item) =>MovieItem(item["id"].toString(), item["name"], item["poster"], item["genres"])
+               (item) =>MovieItem(item.id.toString(), item.name, item.poster, item.genres)
         ).toList()
     );
 //    return new ListView.builder(

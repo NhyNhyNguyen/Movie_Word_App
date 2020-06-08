@@ -3,6 +3,7 @@ import 'package:MovieWorld/constant/ColorConstant.dart';
 import 'package:MovieWorld/constant/ImageConstant.dart';
 import 'package:MovieWorld/constant/UrlConstant.dart';
 import 'package:MovieWorld/layout/mainLayout.dart';
+import 'package:MovieWorld/model/Movie.dart';
 import 'package:MovieWorld/screens/DetailMovie/Description.dart';
 import 'package:MovieWorld/screens/DetailMovie/DuarationRate.dart';
 import 'package:MovieWorld/screens/DetailMovie/MovieContent.dart';
@@ -35,7 +36,9 @@ class _DetailMovieScreenState extends State<DetailMovieScreen> {
     url  = UrlConstant.URL_FILM + id;
     if (data == null) {
       http.get(url).then((http.Response response) {
-        setState(() => data = json.decode(response.body) );
+       setState(() => data = json.decode(response.body) );
+
+
       });
     };
     if (data == null) return Container(
@@ -55,6 +58,11 @@ class _DetailMovieScreenState extends State<DetailMovieScreen> {
                 MovieContent(data["filmDescription"]["content"]),
                 Trailer(data["trailer"]),
                 CommentMovie(),
+//                Poster(data.poster, data.name, data.genres, data.ratePoint),
+//                Description(data.premiere, data.timeLimit, data.artist, data.director, data.nation),
+//                MovieContent(data.content),
+//                Trailer(data.trailer),
+//                CommentMovie(),
 
 
               ],

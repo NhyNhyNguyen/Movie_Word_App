@@ -3,6 +3,7 @@ import 'package:MovieWorld/constant/ImageConstant.dart';
 import 'package:MovieWorld/constant/UrlConstant.dart';
 import 'package:flutter/material.dart';
 import 'package:MovieWorld/constant/ImageConstant.dart';
+import 'package:MovieWorld/model/Movie.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import "dart:math";
 import 'package:http/http.dart' as http;
@@ -10,7 +11,7 @@ import 'dart:convert';
 
 
 List<String> listImageRandomed=[];
-List<dynamic> data;
+List<Movie> data;
 
 List getRandomSubList(List list){
   listImageRandomed.clear();
@@ -35,7 +36,12 @@ class _BannerImageState extends State<BannerImage> {
     String url = UrlConstant.URL_FILM + "now-showing";
     if (data == null) {
       http.get(url).then((http.Response response) {
-        setState(() => data = json.decode(response.body));
+        setState(() {
+          data = new List<Movie>();
+          json.decode(response.body).forEach((json) {
+            data.add(Movie.fromJson(json));
+          });
+        });
       });
     };
     if (data == null) return Container(
@@ -43,7 +49,7 @@ class _BannerImageState extends State<BannerImage> {
     );
 
     List<dynamic> listImage = data.map(
-        (item) => item["poster"]
+        (item) => item.poster,
     ).toList();
 
     getRandomSubList(listImage);

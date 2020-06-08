@@ -2,6 +2,7 @@ import 'package:MovieWorld/constant/ColorConstant.dart';
 import 'package:MovieWorld/constant/ImageConstant.dart';
 import 'package:MovieWorld/constant/StyleConstant.dart';
 import 'package:MovieWorld/constant/UrlConstant.dart';
+import 'package:MovieWorld/screens/RateMovie/RatingDialog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:rating_dialog/rating_dialog.dart';
@@ -14,33 +15,8 @@ class Poster extends StatelessWidget {
 
   const Poster(this.imageUrl, this.name, this.genre, this.rate);
 
-
   @override
   Widget build(BuildContext context) {
-
-    void _showRatingDialog() {
-      showDialog(
-          context: context,
-          barrierDismissible: false, // set to false if you want to force a rating
-          builder: (context) {
-            return RatingDialog(
-              icon: Icon(Icons.movie, color: ColorConstant.VIOLET, size: 50,), // set your own image/icon widget
-              title: "The Rating Dialog",
-              description:
-              "Tap a star to set your rating.",
-              submitButton: "SUBMIT",
-              positiveComment: "We are so happy to hear :)", // optional
-              negativeComment: "We're sad to hear :(", // optional
-              accentColor: Colors.yellow, // optional
-              onSubmitPressed: (int rating) {
-                print("onSubmitPressed: rating = $rating");
-                // TODO: open the app's page on Google Play / Apple App Store
-              },
-            );
-          });
-    }
-
-
     return Stack(
     children: <Widget>[
       Container(
@@ -96,7 +72,14 @@ class Poster extends StatelessWidget {
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: InkWell(
-                        onTap: _showRatingDialog,
+                        onTap: () async {
+                          int stars = await showDialog(
+                              context: context,
+                              builder: (_) => RatingMovieDialog()
+                          );
+                          if(stars == null) return;
+                          print('Selected rate stars: $stars');
+                        },
                         child: Row(
                           children: <Widget>[
                             Text(rate.toString(),style: StyleConstant.mediumTxtStyle,),
