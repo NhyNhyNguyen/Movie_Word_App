@@ -24,7 +24,13 @@ class StyleConstant {
   static const TextStyle smallTextStyle = TextStyle(
       color: ColorConstant.WHITE,
       fontFamily: "Open Sans",
-      fontSize: 15,
+      fontSize: 12,
+      fontWeight: FontWeight.normal);
+
+  static const TextStyle moreSmallTextStyle = TextStyle(
+      color: ColorConstant.WHITE,
+      fontFamily: "Open Sans",
+      fontSize: 14,
       fontWeight: FontWeight.normal);
 
   static const TextStyle largerHeaderTextStyle = TextStyle(

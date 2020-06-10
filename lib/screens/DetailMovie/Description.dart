@@ -1,6 +1,7 @@
 import 'package:MovieWorld/constant/ColorConstant.dart';
 import 'package:MovieWorld/constant/StringConstant.dart';
 import 'package:MovieWorld/constant/StyleConstant.dart';
+import 'package:MovieWorld/screens/Booking/TicketBooking.dart';
 import 'package:flutter/material.dart';
 import 'ButtonBookTicket.dart';
 
@@ -13,14 +14,15 @@ class Description extends StatelessWidget {
 
   const Description(this.premiere, this.timeLimit,this.cast, this.director, this.nation);
 
+  void choseBtn(type, context){
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => BookingTicket()),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    void choseBtn(type){
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => null),
-      );
-    }
 
     return Container(
       height: 150,
@@ -67,7 +69,7 @@ class Description extends StatelessWidget {
             ),
           ),
           Container(
-            child: ButtonBookTicket(StringConstant.BOOK_TICKET,() => choseBtn ),
+            child: ButtonBookTicket(StringConstant.BOOK_TICKET),
           )
         ],
       ),

@@ -3,13 +3,13 @@ import 'package:MovieWorld/constant/ColorConstant.dart';
 import 'package:MovieWorld/constant/ImageConstant.dart';
 import 'package:MovieWorld/constant/StringConstant.dart';
 import 'package:MovieWorld/constant/StyleConstant.dart';
+import 'package:MovieWorld/screens/Booking/TicketBooking.dart';
 import 'package:flutter/material.dart';
 
 class ButtonBookTicket extends StatelessWidget {
   final String text;
-  final Function selectHandler;
 
-  ButtonBookTicket( this.text, this.selectHandler);
+  ButtonBookTicket( this.text);
   @override
   Widget build(BuildContext context) {
     return
@@ -27,7 +27,12 @@ class ButtonBookTicket extends StatelessWidget {
               Text(text, style:StyleConstant.mediumTxtStyle ),
             ],
           ),
-          onPressed: selectHandler,
+          onPressed: ()=>{
+          Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => BookingTicket()),
+          )
+          },
         ),
       );
   }
