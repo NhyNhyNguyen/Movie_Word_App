@@ -74,8 +74,8 @@ class _BannerImageState extends State<BannerImage> {
             decoration: BoxDecoration(
                 color: ColorConstant.LIGHT_VIOLET,
                 borderRadius: BorderRadius.only(
-                    bottomRight: Radius.circular(30),
-                    bottomLeft: Radius.circular(30))
+                bottomRight: Radius.circular(30),
+                bottomLeft: Radius.circular(30))
             ),
           ),
           Positioned(

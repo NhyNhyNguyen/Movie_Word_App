@@ -37,8 +37,6 @@ class _DetailMovieScreenState extends State<DetailMovieScreen> {
     if (data == null) {
       http.get(url).then((http.Response response) {
        setState(() => data = json.decode(response.body) );
-
-
       });
     };
     if (data == null) return Container(
@@ -53,11 +51,13 @@ class _DetailMovieScreenState extends State<DetailMovieScreen> {
             physics: AlwaysScrollableScrollPhysics(),
             child: Column(
               children: <Widget>[
-                Poster(data["poster"], data["name"], data["genres"], data["ratePoint"]),
+                Poster(data["poster"], data["name"], data["genres"], data["ratePoint"], data["id"].toString()),
                 Description(data["filmDescription"]["premiere"], data["filmDescription"]["timeLimit"], data["filmDescription"]["artist"], data["filmDescription"]["director"], data["filmDescription"]["nation"]),
                 MovieContent(data["filmDescription"]["content"]),
                 Trailer(data["trailer"]),
-                CommentMovie(),
+                Container(
+                  height: MediaQuery.of(context).size.height * 0.7,
+                  child: CommentMovie(data["id"].toString())),
 //                Poster(data.poster, data.name, data.genres, data.ratePoint),
 //                Description(data.premiere, data.timeLimit, data.artist, data.director, data.nation),
 //                MovieContent(data.content),

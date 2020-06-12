@@ -62,9 +62,20 @@ class StyleConstant {
   static const mediumTxtStyle = TextStyle(
     fontSize: 16,
     color: ColorConstant.WHITE,
+    fontWeight: FontWeight.w500,
   );
 
   static const smallTxtStyle = TextStyle(
+    fontSize: 14,
+    color: ColorConstant.GRAY_TEXT,
+  );
+
+  static const smallTxtStyleWhite = TextStyle(
+    fontSize: 14,
+    color: ColorConstant.WHITE,
+  );
+
+  static const txtStyleTime = TextStyle(
     fontSize: 14,
     color: ColorConstant.GRAY_TEXT,
   );

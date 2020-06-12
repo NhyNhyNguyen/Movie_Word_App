@@ -8,12 +8,13 @@ import 'package:flutter/material.dart';
 import 'package:rating_dialog/rating_dialog.dart';
 
 class Poster extends StatelessWidget {
+  final String id;
   final String imageUrl;
   final String name;
   final List genre;
   final double rate;
 
-  const Poster(this.imageUrl, this.name, this.genre, this.rate);
+  const Poster(this.imageUrl, this.name, this.genre, this.rate, this.id);
 
   @override
   Widget build(BuildContext context) {
@@ -75,7 +76,7 @@ class Poster extends StatelessWidget {
                         onTap: () async {
                           int stars = await showDialog(
                               context: context,
-                              builder: (_) => RatingMovieDialog()
+                              builder: (_) => RatingMovieDialog(id)
                           );
                           if(stars == null) return;
                           print('Selected rate stars: $stars');

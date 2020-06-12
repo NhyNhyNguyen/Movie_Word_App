@@ -6,6 +6,7 @@ import 'package:MovieWorld/constant/StringConstant.dart';
 import 'package:MovieWorld/constant/StyleConstant.dart';
 import 'package:MovieWorld/screens/Homepage/NowshowingScreen.dart';
 import 'package:MovieWorld/screens/News/TicketPrice.dart';
+import 'package:MovieWorld/screens/Showtime/ShowtimeByDate.dart';
 import 'package:MovieWorld/screens/User/ChoosePage.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -76,7 +77,13 @@ class MainLayOut {
                                             height: MediaQuery.of(context).size.height * 0.05),
                                   ),
                                   InkWell(
-                                    onTap: () {},
+                                    onTap: ()  {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  ShowtimeByDate()));
+                                    },
                                     child: type == 'CAL'
                                         ? Image.asset(
                                             ImageConstant.CALENDAR_YELLOW,
