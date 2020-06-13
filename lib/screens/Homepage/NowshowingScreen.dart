@@ -1,4 +1,6 @@
 
+import 'package:MovieWorld/constant/UrlConstant.dart';
+import 'package:MovieWorld/model/Movie.dart';
 import 'package:MovieWorld/screens/Homepage/BannerImage.dart';
 import 'package:MovieWorld/screens/Homepage/CategoryMovie.dart';
 import 'package:MovieWorld/screens/Homepage/Search.dart';
@@ -17,6 +19,8 @@ import '../../constant/ColorConstant.dart';
 import '../../constant/StringConstant.dart';
 import '../../constant/StyleConstant.dart';
 import 'OptionTab.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class NowshowingScreen extends StatefulWidget {
   @override
@@ -25,9 +29,24 @@ class NowshowingScreen extends StatefulWidget {
 
 class _NowshowingScreen extends State<NowshowingScreen>  {
 
+  String url;
+  List<Movie> data;
 
   @override
   Widget build(BuildContext context) {
+
+    url  = UrlConstant.URL_FILM + 'now-showing';
+    if (data == null) {
+      http.get(url).then((http.Response response) {
+        setState((){
+          data = new List<Movie>();
+          json.decode(response.body).forEach((json) {
+            data.add(Movie.fromJson(json));
+          });
+        });
+      });
+    };
+
     return MainLayOut.getMailLayout(
         context,
         Container(
@@ -47,7 +66,7 @@ class _NowshowingScreen extends State<NowshowingScreen>  {
                       Container(
                          // height: 435,
                           height: MediaQuery.of(context).size.height * 0.675,
-                          child: CategoryMovie('now-showing')),
+                          child: CategoryMovie(data)),
                     ],
                   ),
               )
