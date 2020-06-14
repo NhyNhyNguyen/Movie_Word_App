@@ -9,22 +9,22 @@ class RoomType extends StatefulWidget {
   RoomType({this.type, this.selected});
 
   @override
-  _RoomTypeState createState() =>
-      _RoomTypeState(type: this.type);
+  _RoomTypeState createState() => _RoomTypeState(type: this.type, selected: this.selected);
 }
 
 class _RoomTypeState extends State<RoomType> {
   final String type;
   final bool selected;
 
-
   _RoomTypeState({this.type, this.selected});
 
   @override
   Widget build(BuildContext context) {
-    return selected
+    return selected == true
         ? Container(
-        margin: EdgeInsets.only(left: 3,right: 3),
+            width: MediaQuery.of(context).size.width*0.2,
+            height: MediaQuery.of(context).size.width*0.15,
+            margin: EdgeInsets.only(left: 5, right: 5),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.all(Radius.circular(25)),
               gradient: ColorConstant.RAINBOW_BUTTON,
@@ -45,12 +45,12 @@ class _RoomTypeState extends State<RoomType> {
               ),
             ))
         : Container(
-            width: MediaQuery.of(context).size.width * 0.3,
-            height: MediaQuery.of(context).size.width * 0.15,
-            margin: EdgeInsets.only(left: 3,right: 3),
+        width: MediaQuery.of(context).size.width*0.23,
+        height: MediaQuery.of(context).size.width*0.15,
+            margin: EdgeInsets.only(left: 5, right: 5),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.all(Radius.circular(25)),
-              color: ColorConstant.VIOLET
+              color: ColorConstant.VIOLET,
             ),
             child: FlatButton(
               onPressed: () => {},

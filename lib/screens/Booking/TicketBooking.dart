@@ -2,8 +2,10 @@ import 'package:MovieWorld/constant/ColorConstant.dart';
 import 'package:MovieWorld/constant/StyleConstant.dart';
 import 'package:MovieWorld/layout/mainLayout.dart';
 import 'package:MovieWorld/screens/Booking/Date.dart';
+import 'package:MovieWorld/screens/Booking/OrderTicket.dart';
 import 'package:MovieWorld/screens/Booking/RoomType.dart';
 import 'package:MovieWorld/screens/Booking/SeatStatus.dart';
+import 'package:MovieWorld/screens/ButtonGradientLarge.dart';
 import 'package:flutter/material.dart';
 
 import 'Seat.dart';
@@ -73,8 +75,6 @@ class _BookingTicketState extends State<BookingTicket> {
                   height: 13,
                 ),
                 Container(
-                    height: MediaQuery.of(context).size.height * 0.3,
-                    width: MediaQuery.of(context).size.height * 0.9,
                     padding:
                         EdgeInsets.symmetric(horizontal: 4.0, vertical: 10.0),
                     decoration: BoxDecoration(
@@ -102,6 +102,7 @@ class _BookingTicketState extends State<BookingTicket> {
                             Time(time: "1:00", hour: "AM", selected: false),
                           ],
                         ),
+                        SizedBox(height: 10),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
@@ -116,12 +117,10 @@ class _BookingTicketState extends State<BookingTicket> {
                         ),
                       ],
                     )),
-                SizedBox(
-                  height: 13,
-                ),
                 Container(
-                  height: 80,
+                  height: 90,
                   child: GridView.count(
+                    physics: NeverScrollableScrollPhysics(),
                     crossAxisCount: 3,
                     children: <Widget>[
                       Row(
@@ -161,11 +160,11 @@ class _BookingTicketState extends State<BookingTicket> {
                   ),
                 ),
                 Container(
-                    height: MediaQuery.of(context).size.height * 0.17,
-                    width: MediaQuery.of(context).size.height * 0.9,
                     padding:
                         EdgeInsets.symmetric(horizontal: 4.0, vertical: 10.0),
                     child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -193,8 +192,88 @@ class _BookingTicketState extends State<BookingTicket> {
                             Seat(status: SeatStatus.AVAILABLE),
                           ],
                         ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: <Widget>[
+                            Seat(status: SeatStatus.SELECTED),
+                            Seat(status: SeatStatus.AVAILABLE),
+                            Seat(status: SeatStatus.RESERVED),
+                            Seat(status: SeatStatus.AVAILABLE),
+                            Seat(status: SeatStatus.AVAILABLE),
+                            Seat(status: SeatStatus.RESERVED),
+                            Seat(status: SeatStatus.SELECTED),
+                            Seat(status: SeatStatus.RESERVED),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: <Widget>[
+                            Seat(status: SeatStatus.AVAILABLE),
+                            Seat(status: SeatStatus.SELECTED),
+                            Seat(status: SeatStatus.SELECTED),
+                            Seat(status: SeatStatus.AVAILABLE),
+                            Seat(status: SeatStatus.RESERVED),
+                            Seat(status: SeatStatus.AVAILABLE),
+                            Seat(status: SeatStatus.AVAILABLE),
+                            Seat(status: SeatStatus.AVAILABLE),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: <Widget>[
+                            Seat(status: SeatStatus.SELECTED),
+                            Seat(status: SeatStatus.AVAILABLE),
+                            Seat(status: SeatStatus.RESERVED),
+                            Seat(status: SeatStatus.AVAILABLE),
+                            Seat(status: SeatStatus.AVAILABLE),
+                            Seat(status: SeatStatus.RESERVED),
+                            Seat(status: SeatStatus.SELECTED),
+                            Seat(status: SeatStatus.RESERVED),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: <Widget>[
+                            Seat(status: SeatStatus.AVAILABLE),
+                            Seat(status: SeatStatus.SELECTED),
+                            Seat(status: SeatStatus.SELECTED),
+                            Seat(status: SeatStatus.AVAILABLE),
+                            Seat(status: SeatStatus.RESERVED),
+                            Seat(status: SeatStatus.AVAILABLE),
+                            Seat(status: SeatStatus.AVAILABLE),
+                            Seat(status: SeatStatus.AVAILABLE),
+                          ],
+                        ),
                       ],
-                    ))
+                    )),
+                SizedBox(
+                  height: 10,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text("Seat No: F1, F2, F3",
+                        style: StyleConstant.normalTextStyle),
+                  ],
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    ButtonGradientLarge("Choose your seat", ()=>{
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => OrderTicket()))
+                    }),
+                  ],
+                ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.1,
+                )
               ],
             ),
           ),
