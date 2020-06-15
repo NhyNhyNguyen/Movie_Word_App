@@ -1,14 +1,11 @@
-import 'dart:convert';
-
 import 'package:MovieWorld/constant/ColorConstant.dart';
 import 'package:MovieWorld/constant/ImageConstant.dart';
-import 'package:MovieWorld/constant/StringConstant.dart';
 import 'package:MovieWorld/constant/StyleConstant.dart';
+import 'package:MovieWorld/screens/Homepage/Homepage.dart';
 import 'package:MovieWorld/screens/Homepage/NowshowingScreen.dart';
 import 'package:MovieWorld/screens/News/TicketPrice.dart';
 import 'package:MovieWorld/screens/User/ChoosePage.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class MainLayOut {
   static Widget getMailLayout(
@@ -82,11 +79,11 @@ class MainLayOut {
                                   ),
                                   InkWell(
                                     onTap: ()  {
-//                                      Navigator.push(
-//                                          context,
-//                                          MaterialPageRoute(
-//                                              builder: (context) =>
-//                                                  ShowtimeByDate()));
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                 null));
                                     },
                                     child: type == 'CAL'
                                         ? Image.asset(

@@ -33,6 +33,7 @@ class _BannerImageState extends State<BannerImage> {
   @override
   Widget build(BuildContext context) {
 
+
     String url = UrlConstant.URL_FILM + "now-showing";
     if (data == null) {
       http.get(url).then((http.Response response) {
