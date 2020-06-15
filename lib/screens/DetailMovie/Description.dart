@@ -1,28 +1,30 @@
 import 'package:MovieWorld/constant/ColorConstant.dart';
 import 'package:MovieWorld/constant/StringConstant.dart';
 import 'package:MovieWorld/constant/StyleConstant.dart';
-import 'package:MovieWorld/screens/Booking/TicketBooking.dart';
+import 'package:MovieWorld/screens/News/News.dart';
 import 'package:flutter/material.dart';
 import 'ButtonBookTicket.dart';
+import 'Test.dart';
+
 
 class Description extends StatelessWidget {
   final String premiere;
-  final int timeLimit;
+  final String timeLimit;
   final String cast;
   final String director;
   final String nation;
 
   const Description(this.premiere, this.timeLimit,this.cast, this.director, this.nation);
 
-  void choseBtn(type, context){
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => BookingTicket()),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
+    void choseBtn(type){
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => null),
+      );
+    }
+
 
     return Container(
       height: 150,
@@ -44,7 +46,7 @@ class Description extends StatelessWidget {
                 Row(
                   children: <Widget>[
                     Text("Duration: ", style: StyleConstant.mediumTxtStyle,),
-                    Text(timeLimit.toString() + " mins", style: StyleConstant.smallTxtStyle,)
+                    Text(timeLimit+ " mins", style: StyleConstant.smallTxtStyle,)
                   ],
                 ),
                 Row(
@@ -59,17 +61,11 @@ class Description extends StatelessWidget {
                     Text(director, style: StyleConstant.smallTxtStyle,)
                   ],
                 ),
-
-//                Text("Premiere: " + premiere, style: TextStyle(color: ColorConstant.GRAY_TEXT), ),
-//                Text("Duration: " + timeLimit.toString() + " mins",  style: TextStyle(color: ColorConstant.GRAY_TEXT),),
-//                Text("Cast: " + cast, style: TextStyle(color: ColorConstant.GRAY_TEXT),),
-//                Text("Director: " + director, style: TextStyle(color: ColorConstant.GRAY_TEXT),),
-//                Text("Nation: " + nation, style: TextStyle(color: ColorConstant.GRAY_TEXT),),
               ],
             ),
           ),
           Container(
-            child: ButtonBookTicket(StringConstant.BOOK_TICKET),
+            child: ButtonBookTicket(StringConstant.BOOK_TICKET,() => choseBtn ),
           )
         ],
       ),

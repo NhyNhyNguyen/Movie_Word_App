@@ -1,10 +1,24 @@
 import 'package:MovieWorld/constant/ColorConstant.dart';
 import 'package:MovieWorld/constant/ImageConstant.dart';
 import 'package:MovieWorld/constant/StyleConstant.dart';
+import 'package:MovieWorld/constant/UrlConstant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class CommentItem extends StatelessWidget {
+
+  final String avatarUser;
+  final String fullNameUser;
+  final String content;
+  final String timeCreate;
+
+  CommentItem(
+      this.avatarUser,
+      this.fullNameUser,
+      this.content,
+      this.timeCreate
+      ) ;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -17,7 +31,7 @@ class CommentItem extends StatelessWidget {
               margin: EdgeInsets.only(left: 10),
               child: ClipRRect(
                 borderRadius: BorderRadius.all(Radius.circular(30)),
-                child: Image.asset(ImageConstant.POSTER2, fit: BoxFit.cover, height: 50, width: 50, ),
+                child: Image.network(UrlConstant.URL_IMAGE + avatarUser, fit: BoxFit.cover, height: 50, width: 50, ),
               )
           ),
           Expanded(
@@ -28,8 +42,15 @@ class CommentItem extends StatelessWidget {
                 mainAxisAlignment:  MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text("Lam Thi Bong" , style: StyleConstant.mediumTxtStyle,),
-                  Text("Phim hay thiet nheeee", style: StyleConstant.smallTxtStyle,)
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Text(fullNameUser, style: StyleConstant.mediumTxtStyle,),
+                      Text(timeCreate, style: StyleConstant.txtStyleTime, ),
+                    ],
+                  ),
+
+                  Text(content, style: StyleConstant.smallTxtStyleWhite,)
                 ],
               )
             ),

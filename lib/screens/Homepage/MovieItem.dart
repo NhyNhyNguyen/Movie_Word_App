@@ -1,5 +1,7 @@
 import 'package:MovieWorld/constant/ColorConstant.dart';
+import 'package:MovieWorld/constant/UrlConstant.dart';
 import 'package:MovieWorld/screens/DetailMovie/DetailMovieScreen.dart';
+import 'package:MovieWorld/screens/DetailMovie/Test.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:MovieWorld/constant/ImageConstant.dart';
@@ -8,13 +10,13 @@ class MovieItem extends StatelessWidget {
   final String id;
   final String name;
   final String imageUrl;
-  final double rate;
+  final List genres;
 
   MovieItem(
       @required this.id,
       @required this.name,
       @required this.imageUrl,
-      @required this.rate
+      @required this.genres
       ) ;
 
   @override
@@ -32,14 +34,14 @@ class MovieItem extends StatelessWidget {
               child: Container(
                 height: 190,
                 width: double.infinity,
-                child: Image.asset(imageUrl, fit: BoxFit.cover, )),),
+                child: Image.network(UrlConstant.URL_IMAGE+ imageUrl, fit: BoxFit.cover, )),),
             Text(
               name,
               style: TextStyle(
                               fontSize: 16,
                               color: ColorConstant.WHITE,
                             ),),
-            Text("Action, Adventure", style: TextStyle(fontSize: 12, color: ColorConstant.GRAY_TEXT),)
+            Text(genres[0]["name"], style: TextStyle(fontSize: 12, color: ColorConstant.GRAY_TEXT),)
 
           ],
         ),

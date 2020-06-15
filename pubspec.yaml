@@ -14,7 +14,7 @@ description: A new Flutter project.
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.2.0 <3.0.0"
+  sdk: ">=2.2.2 <3.0.0"
 
 dependencies:
   flutter:
@@ -46,6 +46,8 @@ dependencies:
   flutter_secure_storage: ^3.3.1+1
   image_picker: ^0.6.7
   dio: 3.0.9 #latest version
+  youtube_player: ^0.6.0
+  rating_dialog: ^1.0.0
 
 
 dev_dependencies:
