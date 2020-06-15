@@ -18,6 +18,7 @@ class CategoryMovie extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
+    //print(data[1].id);
 
     if (data == null) return Container(
       child: Icon(Icons.cached, color: ColorConstant.GRAY_TEXT, size: 50,),
