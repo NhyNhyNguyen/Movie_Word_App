@@ -18,10 +18,11 @@ class _PosterState extends State<Poster> {
   Widget build(BuildContext context) {
    return Container(
       margin: EdgeInsets.only(right: 20),
-      width: 140,
-      height: 200,
+      width: 110,
+      height: 130,
       decoration: BoxDecoration(
         shape: BoxShape.rectangle,
+        borderRadius:BorderRadius.all(Radius.circular(15)),
         image:  DecorationImage(
           image: NetworkImage(imageUrl),
           fit: BoxFit.cover,),

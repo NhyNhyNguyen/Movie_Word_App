@@ -21,6 +21,14 @@ class StyleConstant {
     fontFamily: "Open Sans",
   );
 
+  static const TextStyle boldHintTextStyle = TextStyle(
+    color: Colors.white,
+    fontSize: 14,
+    fontWeight: FontWeight.w600,
+    fontFamily: "Open Sans",
+  );
+
+
   static const TextStyle smallTextStyle = TextStyle(
       color: ColorConstant.WHITE,
       fontFamily: "Open Sans",
@@ -71,6 +79,12 @@ class StyleConstant {
     color: ColorConstant.WHITE,
     fontWeight: FontWeight.w600,
     fontSize: 28,
+  );
+
+  static const priceTextStyle = TextStyle(
+    color: ColorConstant.WHITE,
+    fontWeight: FontWeight.w500,
+    fontSize: 20,
   );
 
   static const appBarText = TextStyle(
