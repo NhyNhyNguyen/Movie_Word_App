@@ -1,0 +1,32 @@
+import 'package:MovieWorld/constant/ColorConstant.dart';
+import 'package:flutter/material.dart';
+
+class HistoryItem extends StatefulWidget {
+  final String imageUrl;
+
+  const Poster({Key key, this.imageUrl}) : super(key: key);
+
+  @override
+  _PosterState createState() => _PosterState(this.imageUrl);
+}
+
+class _PosterState extends State<Poster> {
+  final String imageUrl;
+
+  _PosterState(this.imageUrl);
+  @override
+  Widget build(BuildContext context) {
+   return Container(
+      margin: EdgeInsets.only(right: 20),
+      width: 110,
+      height: 130,
+      decoration: BoxDecoration(
+        shape: BoxShape.rectangle,
+        borderRadius:BorderRadius.all(Radius.circular(15)),
+        image:  DecorationImage(
+          image: NetworkImage(imageUrl),
+          fit: BoxFit.cover,),
+      ),
+    );
+     }
+}

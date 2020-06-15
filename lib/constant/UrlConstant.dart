@@ -20,6 +20,4 @@ class UrlConstant{
   static const String URL_IMAGE = HOST_MOBILE + "api/image/";
   static const String URL_COMMENT = HOST_MOBILE+ "api/comments/film/";
   static const String URL_GET_RATE = HOST_MOBILE + "api/film/get-rate?";
-
->>>>>>> MW-DetailMovie
 }

@@ -65,7 +65,7 @@ class Description extends StatelessWidget {
             ),
           ),
           Container(
-            child: ButtonBookTicket(StringConstant.BOOK_TICKET,() => choseBtn ),
+            child: ButtonBookTicket(StringConstant.BOOK_TICKET),
           )
         ],
       ),
