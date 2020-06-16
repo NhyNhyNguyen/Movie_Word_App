@@ -154,8 +154,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    usernameController.text = "nhi";
-    passController.text = "123123";
+    usernameController.text = "teo1";
+    passController.text = "fun123";
     return MainLayOut.getMailLayout(
         context,
         Container(

@@ -43,10 +43,12 @@ class _ChooseProfile extends State<ChooseProfile> {
     return ButtonGradientLarge(
         StringConstant.CHANGE_PASS,
         () => {
+              ConstantVar.userDetail = null,
+              ConstantVar.jwt = "",
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => ResetPasswordScreen()))
+                      builder: (context) => LoginScreen()))
             });
   }
 
@@ -120,7 +122,7 @@ class _ChooseProfile extends State<ChooseProfile> {
                                   shape: BoxShape.circle,
                                   image: DecorationImage(
                                     image: /*ConstantVar.userDetail.avt == null ? AssetImage(ImageConstant.LOGO):*/ NetworkImage(
-                                        "http://10.0.2.2:9000/api/image/${ConstantVar.userDetail.avt}"),
+                                        UrlConstant.IMAGE + ConstantVar.userDetail.avt),
                                     fit: BoxFit.cover,
                                   ),
                                 ),
