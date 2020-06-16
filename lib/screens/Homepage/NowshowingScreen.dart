@@ -68,6 +68,6 @@ class _NowshowingScreen extends State<NowshowingScreen>  {
 
         )
         ,
-        "HOME");
+        "HOME", "Home");
   }
 }

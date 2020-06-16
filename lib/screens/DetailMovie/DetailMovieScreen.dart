@@ -70,7 +70,7 @@ class _DetailMovieScreenState extends State<DetailMovieScreen> {
           ),
         )
         ,
-        "DETAIL");
+        "DETAIL", "Detail");
   }
 }
 

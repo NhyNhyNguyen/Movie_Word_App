@@ -48,6 +48,6 @@ class _TicketPriceScreen extends State<TicketPriceScreen>  {
 
         )
         ,
-        "FILM");
+        "FILM", "Ticket price");
   }
 }

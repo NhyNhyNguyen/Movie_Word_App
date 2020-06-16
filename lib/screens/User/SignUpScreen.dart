@@ -174,6 +174,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
             ),
           ),
         ),
-        "USER");
+        "USER", "Sign up");
   }
 }

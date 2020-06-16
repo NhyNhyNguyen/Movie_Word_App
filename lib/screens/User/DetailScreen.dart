@@ -179,7 +179,7 @@ class _DetailScreenState extends State<DetailScreen> {
               ),
             ),
           ),
-          "USER");}
+          "USER", "User Detail");}
     else {
       return LoginScreen();
     }

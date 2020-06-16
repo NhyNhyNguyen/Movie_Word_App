@@ -11,16 +11,18 @@ class  Booking{
   final String showTime;
   final String date;
   final List<String> seats;
+  final String status;
 
 
-  Booking({this.name, this.showTime, this.date, this.seats});
+  Booking({this.name, this.showTime, this.date, this.seats, this.status});
 
   factory Booking.fromJson(Map<String, dynamic> json) {
     return Booking(
       name: json['name'],
       showTime: json['showTime'],
       date: json['date'],
-      seats: json['']
+      seats: json['seats'],
+      status: "Booking"
     );
   }
 

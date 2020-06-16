@@ -149,7 +149,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                 ),
               ),
             ),
-            "USER")
+            "USER", "Change Password")
         : LoginScreen();
   }
 }

@@ -9,6 +9,7 @@ import 'package:MovieWorld/model/UserDetail.dart';
 import 'package:MovieWorld/screens/ButtonGradientLarge.dart';
 import 'package:MovieWorld/screens/User/ChooseProfile.dart';
 import 'package:MovieWorld/screens/User/DetailScreen.dart';
+import 'package:MovieWorld/screens/User/HistoryItem.dart';
 import 'package:MovieWorld/screens/User/LoginScreen.dart';
 import 'package:MovieWorld/screens/User/ResetPassword.dart';
 import 'package:MovieWorld/screens/User/SignUpScreen.dart';
@@ -74,49 +75,54 @@ class _History extends State<History> {
   @override
   Widget build(BuildContext context) {
     return ConstantVar.userDetail != null
-        ?
-    (type == 'history' ?
-    MainLayOut.getMailLayout(
-            context,
-            Container(
-                color: ColorConstant.VIOLET,
-                padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Container(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 0.0, vertical: 10.0),
-                      width: double.infinity,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: <Widget>[
-                          ButtonGradient(
-                              type,
-                              "profile",
-                              StringConstant.PROFILE,
-                              () => choseOption("profile")),
-                          ButtonGradient(
-                              type,
-                              "history",
-                              StringConstant.HISTORY,
-                              () => choseOption("history")),
-                        ],
-                      ),
-                    ),
-                        SingleChildScrollView(
+        ? (type == 'history'
+            ? MainLayOut.getMailLayout(
+                context,
+                Container(
+                    color: ColorConstant.VIOLET,
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Container(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 0.0, vertical: 10.0),
+                          width: double.infinity,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: <Widget>[
+                              ButtonGradient(
+                                  type,
+                                  "profile",
+                                  StringConstant.PROFILE,
+                                  () => choseOption("profile")),
+                              ButtonGradient(
+                                  type,
+                                  "history",
+                                  StringConstant.HISTORY,
+                                  () => choseOption("history")),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          height: MediaQuery.of(context).size.height * 0.7,
+                          child: SingleChildScrollView(
                             physics: AlwaysScrollableScrollPhysics(),
                             padding: EdgeInsets.only(bottom: 50.0),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.center,
-                              children: <Widget>[],
+                              children: List.generate(4, (index) => HistoryItem())
+                                  .toList(),
                             ),
-                          )
-                  ],
-                )),
-            "USER"): ChooseProfile())
+                          ),
+                        ),
+                      ],
+                    )),
+                "USER", "History")
+            : ChooseProfile())
         : LoginScreen();
   }
 }

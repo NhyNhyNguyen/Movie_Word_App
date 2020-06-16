@@ -188,7 +188,7 @@ class _ChooseProfile extends State<ChooseProfile> {
                         )
                       ],
                     )),
-                "USER")
+                "USER", "Profile")
             : History())
         : LoginScreen();
   }

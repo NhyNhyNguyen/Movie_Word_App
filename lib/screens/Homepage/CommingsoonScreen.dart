@@ -64,6 +64,6 @@ class _CommingsoonScreen extends State<CommingsoonScreen>  {
 
         )
         ,
-        "HOME");
+        "HOME", "Home");
   }
 }

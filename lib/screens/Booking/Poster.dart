@@ -17,7 +17,7 @@ class _PosterState extends State<Poster> {
   @override
   Widget build(BuildContext context) {
    return Container(
-      margin: EdgeInsets.only(right: 20),
+      margin: EdgeInsets.only(right: 10),
       width: 110,
       height: 130,
       decoration: BoxDecoration(

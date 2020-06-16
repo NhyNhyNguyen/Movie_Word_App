@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 
 class MainLayOut {
   static Widget getMailLayout(
-      BuildContext context, Widget widget, String type) {
+      BuildContext context, Widget widget, String type, String title) {
     return MaterialApp(
         theme: ThemeData(
           primarySwatch: Colors.grey,
@@ -24,13 +24,7 @@ class MainLayOut {
               child: AppBar(
                 elevation: 0,
                 backgroundColor: ColorConstant.LIGHT_VIOLET,
-              title: Text((() {
-                if(type == "HOME") return "Homepage";
-                if(type == "CAL") return "Showtime";
-                if(type == "FILM") return "News";
-                if(type == "USER") return "Profile";
-                if(type == "DETAIL") return "Detail Movie";
-              })(), style: StyleConstant.appBarText,),
+              title: Text( title, style: StyleConstant.appBarText,),
 
               )),
           body: Stack(
