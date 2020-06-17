@@ -32,7 +32,7 @@ class MovieItem extends StatelessWidget {
             ClipRRect(
                 borderRadius: BorderRadius.all(Radius.circular(30)),
               child: Container(
-                height: 190,
+                height: 180,
                 width: double.infinity,
                 child: Image.network(UrlConstant.URL_IMAGE+ imageUrl, fit: BoxFit.cover, )),),
             Text(

@@ -4,6 +4,7 @@ import 'package:MovieWorld/constant/StyleConstant.dart';
 import 'package:MovieWorld/screens/Homepage/Homepage.dart';
 import 'package:MovieWorld/screens/Homepage/NowshowingScreen.dart';
 import 'package:MovieWorld/screens/News/TicketPrice.dart';
+import 'package:MovieWorld/screens/Showtime/Showtime.dart';
 import 'package:MovieWorld/screens/User/ChoosePage.dart';
 import 'package:flutter/material.dart';
 
@@ -70,6 +71,7 @@ class MainLayOut {
                                           MaterialPageRoute(
                                               builder: (context) =>
                                                   NowshowingScreen()));
+
                                     },
                                     child: type == 'HOME'
                                         ? Image.asset(ImageConstant.HOME_YELLOW,
@@ -83,7 +85,7 @@ class MainLayOut {
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) =>
-                                                 null));
+                                                Showtime()));
                                     },
                                     child: type == 'CAL'
                                         ? Image.asset(
