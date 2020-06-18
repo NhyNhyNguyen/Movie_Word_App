@@ -12,6 +12,8 @@ import 'package:MovieWorld/model/Movie.dart';
 import 'package:flutter/widgets.dart';
 import 'package:MovieWorld/constant/ColorConstant.dart';
 import 'package:MovieWorld/layout/mainLayout.dart';
+import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 import '../../constant/ColorConstant.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -32,6 +34,8 @@ class Showtime extends StatefulWidget {
 }
 
 class _ShowtimeState extends State<Showtime>  {
+  DateTime date = DateTime.now();
+  List<int> listDuration = [0,1,2,3,4,5,6];
   @override
   Widget build(BuildContext context) {
     return MainLayOut.getMailLayout(
@@ -48,19 +52,23 @@ class _ShowtimeState extends State<Showtime>  {
                     color: ColorConstant.LIGHT_VIOLET,
                     borderRadius: BorderRadius.all(Radius.circular(20))
                 ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    DateItem('MON', 18, false),
-                    DateItem('MON', 18, true),
-                    DateItem('MON', 18, false),
-                    DateItem('MON', 18, false),
-                    DateItem('MON', 18, false),
-                    DateItem('MON', 18, false),
-                    DateItem('MON', 18, false),
-                  ],
+                child: GridView.count(
+                crossAxisCount: 7,
+                    childAspectRatio: 0.75,
+                    children:
+                    listDuration.map(
+                            (item) => InkWell(
+                              onTap: () => {print("taped!")},
+                                  child: DateItem(date, false, item)),
+                    ).toList()
                 ),
+//                    DateItem(date, true, 0),
+//                    DateItem(date, false, 1),
+//                    DateItem(date, false, 2),
+//                    DateItem(date, false, 3),
+//                    DateItem(date, false, 4),
+//                    DateItem(date, false, 5),
+//                    DateItem(date, false, 6),
               ),
               Container(
                 height: 500,

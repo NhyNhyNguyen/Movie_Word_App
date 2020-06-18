@@ -23,13 +23,13 @@ class CategoryMovie extends StatelessWidget{
     if (data == null) return Container(
       child: Icon(Icons.cached, color: ColorConstant.GRAY_TEXT, size: 50,),
     );
-        return GridView.count(
-        crossAxisCount: 2,
-        childAspectRatio: 0.75,
-        children:
-        data.map(
-               (item) =>MovieItem(item.id.toString(), item.name, item.poster, item.genres)
-        ).toList()
+    return GridView.count(
+    crossAxisCount: 2,
+    childAspectRatio: 0.75,
+    children:
+    data.map(
+           (item) =>MovieItem(item.id.toString(), item.name, item.poster, item.genres)
+    ).toList()
     );
 
   }
