@@ -59,7 +59,7 @@ class CommentMovieState extends State<CommentMovie> {
                 child: Container(
                     child: Column(
                       children: <Widget>[
-                        CommentInput(),
+                        CommentInput(idMovie),
                         Container(
                           height: MediaQuery.of(context).size.height * 0.3,
                           child: GridView.count(

@@ -7,8 +7,8 @@ class DateItem extends StatelessWidget {
   final DateTime date;
   final int duration;
   final String index;
-  DateItem( this.date, this.duration, this.index);
 
+  DateItem(this.date, this.duration, this.index);
   @override
   Widget build(BuildContext context) {
     DateTime newDate = date.add(Duration(days: duration));
@@ -30,8 +30,8 @@ class DateItem extends StatelessWidget {
                   style:TextStyle(fontSize: 22, color: ColorConstant.WHITE, fontWeight:FontWeight.w600),
                 ),
                 Text(
-                  DateFormat('EEEE').format(newDate),
-                  style:TextStyle(fontSize: 14, color: ColorConstant.WHITE),
+                  DateFormat('EEEE').format(newDate).toUpperCase(),
+                  style:TextStyle(fontSize: 18, color: ColorConstant.WHITE),
                   maxLines: 1,
                 ),
               ],
@@ -51,8 +51,8 @@ class DateItem extends StatelessWidget {
                   style:TextStyle(fontSize: 20, color: ColorConstant.GRAY_TEXT, fontWeight:FontWeight.w400),
                 ),
                 Text(
-                  DateFormat('EEEE').format(newDate),
-                  style:TextStyle(fontSize: 14, color: ColorConstant.GRAY_TEXT),
+                  DateFormat('EEEE').format(newDate).toUpperCase(),
+                  style:TextStyle(fontSize: 18, color: ColorConstant.WHITE),
                   maxLines: 1,
                 ),
               ],

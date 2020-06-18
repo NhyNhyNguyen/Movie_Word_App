@@ -14,6 +14,7 @@ import 'package:MovieWorld/constant/ColorConstant.dart';
 import 'package:MovieWorld/layout/mainLayout.dart';
 import '../../constant/ColorConstant.dart';
 import 'package:http/http.dart' as http;
+import 'dart:convert' show utf8;
 import 'dart:convert';
 
 class MyHomepage extends StatelessWidget {

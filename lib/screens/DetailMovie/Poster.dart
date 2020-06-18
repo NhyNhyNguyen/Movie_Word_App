@@ -32,11 +32,12 @@ class _PosterState extends State<Poster>{
 
   _PosterState(this.imageUrl, this.name, this.genre, this.rate, this.id);
 
-  static dynamic data;
+  dynamic data;
   int lastRate;
   get_rate(){
+    print("hello");
     String url = UrlConstant.URL_GET_RATE +"userId=1" + "&filmId=" + id;
-    if (data == null) {
+    {
       http.get(url).then((http.Response response) {
         setState(() => data = json.decode(response.body) );
       });
@@ -46,8 +47,9 @@ class _PosterState extends State<Poster>{
 
   @override
   Widget build(BuildContext context) {
-    get_rate();
-    bool islogined = true;
+
+
+    bool isLogined = true;
 
     return Stack(
     children: <Widget>[
@@ -113,10 +115,12 @@ class _PosterState extends State<Poster>{
 //                          print('Selected rate stars: $stars');
 //                        },
                         onTap: () {
-                          if (islogined) {
+                          if (isLogined) {
+                            get_rate();
                             showDialog(
                                 context: context,
-                                builder: (_) => RatingMovieDialog(lastRate)
+                                builder: (_) => (lastRate == null) ? RatingMovieDialog(0) : RatingMovieDialog(lastRate)
+
                             );
                           }
                           else {

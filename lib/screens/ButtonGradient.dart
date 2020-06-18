@@ -14,7 +14,7 @@ class ButtonGradient extends StatelessWidget {
   Widget build(BuildContext context) {
     return
       Container(
-      margin: EdgeInsets.all(5),
+      margin: EdgeInsets.all(3),
       padding: EdgeInsets.only(left: 10, right: 10),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(20)),
@@ -22,8 +22,8 @@ class ButtonGradient extends StatelessWidget {
       ),
       child: FlatButton(
         child: type == typeoption
-            ? Text(text, style: StyleConstant.btnSelectedStyle)
-            : Text(text, style:StyleConstant.btnNormalStyle ),
+            ? Text(text, style: TextStyle(fontSize: 18, color: ColorConstant.WHITE, fontWeight: FontWeight.w600))
+            : Text(text, style: TextStyle(fontSize: 18, color: ColorConstant.VIOLET, fontWeight: FontWeight.w600) ),
         onPressed: selectHandler,
       ),
     );

@@ -1,9 +1,56 @@
+import 'dart:convert';
+
 import 'package:MovieWorld/constant/ColorConstant.dart';
+import 'package:MovieWorld/constant/ConstantVar.dart';
 import 'package:MovieWorld/constant/ImageConstant.dart';
+import 'package:MovieWorld/constant/UrlConstant.dart';
+import 'package:MovieWorld/screens/DetailMovie/DetailMovieScreen.dart';
+import 'package:MovieWorld/screens/User/ChoosePage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
-class CommentInput extends StatelessWidget {
+class CommentInput extends StatefulWidget {
+  String idMovie;
+  CommentInput(this.idMovie);
+  @override
+  _CommentInputState createState() => _CommentInputState(idMovie);
+}
+
+class _CommentInputState extends State<CommentInput> {
+  String idMovie;
+  _CommentInputState(this.idMovie);
+
+  TextEditingController inputController = TextEditingController();
+
+  Future<http.Response> postComment() async {
+    print("hello");
+    final http.Response response = await http.put(
+      UrlConstant.URL_POST_COMMENT,
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Accept': 'application/json',
+        'Authorization':
+        'Bearer ' + ConstantVar.jwt,
+      },
+      body: jsonEncode(<String, String>{
+        "content": inputController.text,
+        "filmId": idMovie
+      }),
+    );
+    print(idMovie);
+    print(inputController.text + "hhhh");
+    print(response.statusCode);
+    if (response.statusCode == 200) {
+      Navigator.push(context,
+          MaterialPageRoute(builder: (context) => DetailMovieScreen(idMovie)));
+    } else {
+      Navigator.push(context,
+          MaterialPageRoute(builder: (context) => ChoosePageScreen()));
+    }
+    return response;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -36,9 +83,20 @@ class CommentInput extends StatelessWidget {
                   contentPadding: EdgeInsets.symmetric(horizontal: 10),
                   border: InputBorder.none,
                 ),
+                controller: inputController,
               ),
             ),
           ),
+          IconButton(
+            icon: Icon(Icons.send),
+            onPressed: () => {
+              (ConstantVar.jwt != " ")
+              ? postComment()
+              : Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => ChoosePageScreen()),
+              ) },
+          )
         ],
       ),
     );

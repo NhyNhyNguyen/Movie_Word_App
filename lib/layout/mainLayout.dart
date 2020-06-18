@@ -5,6 +5,7 @@ import 'package:MovieWorld/screens/Homepage/Homepage.dart';
 import 'package:MovieWorld/screens/Homepage/NowshowingScreen.dart';
 import 'package:MovieWorld/screens/News/TicketPrice.dart';
 import 'package:MovieWorld/screens/Showtime/Showtime.dart';
+import 'package:MovieWorld/screens/Showtime/ShowtimeScreen.dart';
 import 'package:MovieWorld/screens/User/ChoosePage.dart';
 import 'package:flutter/material.dart';
 
@@ -85,7 +86,7 @@ class MainLayOut {
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) =>
-                                                Showtime()));
+                                                ShowtimeScreen()));
                                     },
                                     child: type == 'CAL'
                                         ? Image.asset(

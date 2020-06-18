@@ -28,17 +28,14 @@ import 'ShowtimeMovieItem.dart';
 class MyShowtime extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MainLayOut.getMailLayout(
-        context,
-        MultiBlocProvider(
+    return MultiBlocProvider(
             providers: [
               BlocProvider<ShowtimeBloc> (
                 builder: (context) => ShowtimeBloc(),
               )
             ],
             child: Showtime()
-        ),
-        'CAL') ;
+        );
   }
 }
 
@@ -82,7 +79,7 @@ class _ShowtimeState extends State<Showtime> {
               return Column(
                   children: <Widget>[
                     Container(
-                      height: 70,
+                      height: 65,
                       margin: EdgeInsets.all(10),
                       //padding: EdgeInsets.only(top: 8, left: 20),
                       decoration: BoxDecoration(
@@ -103,13 +100,13 @@ class _ShowtimeState extends State<Showtime> {
                     ),
                     Text('${state.firstDate}', style: StyleConstant.bigTxtStyle,),
                     Container(
-                      height: 500,
+                      height: 420,
                       child: Column(
                         children: <Widget>[
                           ShowtimeMovieItem(
                               '1', 'Avenger', 'avenger.jpg', 'Action', '120'),
                           ShowtimeMovieItem(
-                              '1', 'Avenger', 'kingdom.jpg', 'Action', '120'),
+                              '1', 'Kingdom', 'kingdom.jpg', 'Action', '120'),
                         ],
                       ),
                     )
