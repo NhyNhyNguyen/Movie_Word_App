@@ -7,27 +7,27 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class RatingMovieDialog extends StatefulWidget {
-  String id;
-  RatingMovieDialog (this.id);
+  int lastRate;
+  RatingMovieDialog (this.lastRate);
   @override
-  _RatingMovieDialogState createState() => _RatingMovieDialogState(id);
+  _RatingMovieDialogState createState() => _RatingMovieDialogState(lastRate);
 }
 
 class _RatingMovieDialogState extends State<RatingMovieDialog> {
-  String id;
-  _RatingMovieDialogState (this.id);
+  int lastRate;
+  _RatingMovieDialogState (this.lastRate);
   static dynamic data;
-  int lastRate = 0;
+  //int lastRate = id;
 
-  get_rate(){
-    String url = UrlConstant.URL_GET_RATE +"userId=1" + "&filmId=" + id;
-    if (data == null) {
-      http.get(url).then((http.Response response) {
-        setState(() => data = json.decode(response.body) );
-      });
-    };
-    lastRate = data["point"];
-  }
+//  get_rate(){
+//    String url = UrlConstant.URL_GET_RATE +"userId=1" + "&filmId=" + id;
+//    if (data == null) {
+//      http.get(url).then((http.Response response) {
+//        setState(() => data = json.decode(response.body) );
+//      });
+//    };
+//    lastRate = data["point"];
+//  }
 
 
   Widget _buildStar(int starCount) {
@@ -47,7 +47,7 @@ class _RatingMovieDialogState extends State<RatingMovieDialog> {
 
   @override
   Widget build(BuildContext context) {
-    get_rate();
+    //get_rate();
     return AlertDialog(
       title: Center(child: Text('Rate this movie', style: TextStyle(fontSize: 25),),),
       content: Row(
@@ -68,8 +68,7 @@ class _RatingMovieDialogState extends State<RatingMovieDialog> {
         FlatButton(
           child: Text('OK'),
           onPressed: () {
-            Navigator.of(context).pop(lastRate);
-            print(lastRate);
+            //post new rate point
           },
         )
       ],

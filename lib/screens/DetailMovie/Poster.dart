@@ -3,21 +3,52 @@ import 'package:MovieWorld/constant/ImageConstant.dart';
 import 'package:MovieWorld/constant/StyleConstant.dart';
 import 'package:MovieWorld/constant/UrlConstant.dart';
 import 'package:MovieWorld/screens/RateMovie/RatingDialog.dart';
+import 'package:MovieWorld/screens/User/ChoosePage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:rating_dialog/rating_dialog.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
-class Poster extends StatelessWidget {
+class Poster extends StatefulWidget {
   final String id;
   final String imageUrl;
   final String name;
   final List genre;
   final double rate;
 
-  const Poster(this.imageUrl, this.name, this.genre, this.rate, this.id);
+  Poster(this.imageUrl, this.name, this.genre, this.rate, this.id);
+
+  @override
+  _PosterState createState() => _PosterState(imageUrl, name, genre, rate, id);
+}
+
+class _PosterState extends State<Poster>{
+  final String id;
+  final String imageUrl;
+  final String name;
+  final List genre;
+  final double rate;
+
+  _PosterState(this.imageUrl, this.name, this.genre, this.rate, this.id);
+
+  static dynamic data;
+  int lastRate;
+  get_rate(){
+    String url = UrlConstant.URL_GET_RATE +"userId=1" + "&filmId=" + id;
+    if (data == null) {
+      http.get(url).then((http.Response response) {
+        setState(() => data = json.decode(response.body) );
+      });
+    };
+    lastRate = data["point"];
+  }
 
   @override
   Widget build(BuildContext context) {
+    get_rate();
+    bool islogined = true;
+
     return Stack(
     children: <Widget>[
       Container(
@@ -73,13 +104,25 @@ class Poster extends StatelessWidget {
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: InkWell(
-                        onTap: () async {
-                          int stars = await showDialog(
-                              context: context,
-                              builder: (_) => RatingMovieDialog(id)
-                          );
-                          if(stars == null) return;
-                          print('Selected rate stars: $stars');
+//                        onTap: () async {
+//                          int stars = await showDialog(
+//                              context: context,
+//                              builder: (_) => RatingMovieDialog(id)
+//                          );
+//                          if(stars == null) return;
+//                          print('Selected rate stars: $stars');
+//                        },
+                        onTap: () {
+                          if (islogined) {
+                            showDialog(
+                                context: context,
+                                builder: (_) => RatingMovieDialog(lastRate)
+                            );
+                          }
+                          else {
+                            Navigator.push(context, MaterialPageRoute(
+                                builder: (context) => ChoosePageScreen()));
+                          }
                         },
                         child: Row(
                           children: <Widget>[
