@@ -3,23 +3,16 @@ import 'package:MovieWorld/constant/StyleConstant.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-class DateItem extends StatefulWidget {
+class DateItem extends StatelessWidget {
   final DateTime date;
-  final bool isSelected;
   final int duration;
-  DateItem( this.date,  this.isSelected, this.duration);
-  @override
-  _DateItemState createState() => _DateItemState( date, isSelected, duration);
-}
-class _DateItemState extends State<DateItem> {
-  final DateTime date;
-  final bool isSelected;
-  final int duration;
-  _DateItemState( this.date,  this.isSelected, this.duration);
+  final String index;
+  DateItem( this.date, this.duration, this.index);
+
   @override
   Widget build(BuildContext context) {
     DateTime newDate = date.add(Duration(days: duration));
-    return isSelected
+    return (index == duration.toString())
         ? Container(
         width: 45,
         padding: EdgeInsets.all(1),

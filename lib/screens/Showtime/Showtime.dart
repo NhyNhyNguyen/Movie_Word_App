@@ -62,6 +62,7 @@ class _ShowtimeState extends State<Showtime> {
         child: BlocBuilder<ShowtimeBloc, ShowtimeState>(
             bloc: showtimeBloc,
             builder: (context, state) {
+               bool isSelected;
 
               List<Movie> _getData(String id) {
                 url = UrlConstant.URL_FILM + id;
@@ -96,7 +97,7 @@ class _ShowtimeState extends State<Showtime> {
                                 (item) =>
                                 InkWell(
                                     onTap: () =>showtimeBloc.dispatch(ChangeDate(item)),
-                                    child: DateItem(date, false, item)),
+                                    child: DateItem(date, item, '${state.firstDate}')),
                           ).toList()
                       ),
                     ),
