@@ -8,7 +8,7 @@ void main() {
   runApp(MaterialApp(
       debugShowCheckedModeBanner: false,
     home: Scaffold(
-      body: Showtime(),
+      body: MyShowtime(),
     ),
   ));
 }
