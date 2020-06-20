@@ -52,10 +52,10 @@ class Avatar extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Text(username ,
-                          style: StyleConstant.bigTxtStyle,
+                          style: StyleConstant.btnSelectedStyle,
                         ),
                         Text(email,
-                          style: StyleConstant.smallTxtStyle,
+                          style: StyleConstant.priceTextStyle,
                         )
                       ],
                     ),

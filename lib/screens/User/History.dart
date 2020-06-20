@@ -7,6 +7,7 @@ import 'package:MovieWorld/constant/UrlConstant.dart';
 import 'package:MovieWorld/layout/mainLayout.dart';
 import 'package:MovieWorld/model/UserDetail.dart';
 import 'package:MovieWorld/screens/ButtonGradientLarge.dart';
+import 'package:MovieWorld/screens/User/Avatar.dart';
 import 'package:MovieWorld/screens/User/ChooseProfile.dart';
 import 'package:MovieWorld/screens/User/DetailScreen.dart';
 import 'package:MovieWorld/screens/User/HistoryItem.dart';
@@ -31,40 +32,7 @@ class _History extends State<History> {
   String type = "history";
   String imageUrl = UrlConstant.IMAGE +
       "98307201_314497226215952_6080107368102756352_n-30987288442578.jpg";
-  Widget _editBtn() {
-    return ButtonGradientLarge(
-        StringConstant.EDIT,
-        () => {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => DetailScreen()))
-            });
-  }
 
-  Widget _resetPass() {
-    return ButtonGradientLarge(
-        StringConstant.CHANGE_PASS,
-        () => {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => ResetPasswordScreen()))
-            });
-  }
-
-  Widget _logoutBtn() {
-    return ButtonGradientLarge(
-        StringConstant.LOGOUT,
-        () => {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => SignUpScreen()))
-            });
-  }
-
-  void choseOption(type) {
-    setState(() {
-      this.type = type;
-    });
-  }
 
   @override
   void initState() {
@@ -86,26 +54,7 @@ class _History extends State<History> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        Container(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 0.0, vertical: 10.0),
-                          width: double.infinity,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: <Widget>[
-                              ButtonGradient(
-                                  type,
-                                  "profile",
-                                  StringConstant.PROFILE,
-                                  () => choseOption("profile")),
-                              ButtonGradient(
-                                  type,
-                                  "history",
-                                  StringConstant.HISTORY,
-                                  () => choseOption("history")),
-                            ],
-                          ),
-                        ),
+                        Avatar(UrlConstant.IMAGE + ConstantVar.userDetail.avt, ConstantVar.userDetail.username, ConstantVar.userDetail.email),
                         Container(
                           height: MediaQuery.of(context).size.height * 0.7,
                           child: SingleChildScrollView(
