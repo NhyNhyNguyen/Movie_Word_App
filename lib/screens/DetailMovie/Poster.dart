@@ -16,23 +16,23 @@ class Poster extends StatefulWidget {
   final String id;
   final String imageUrl;
   final String name;
-  final List genre;
+  final List genres;
   final double rate;
 
-  Poster(this.imageUrl, this.name, this.genre, this.rate, this.id);
+  Poster(this.imageUrl, this.name, this.genres, this.rate, this.id);
 
   @override
-  _PosterState createState() => _PosterState(imageUrl, name, genre, rate, id);
+  _PosterState createState() => _PosterState(imageUrl, name, genres, rate, id);
 }
 
 class _PosterState extends State<Poster>{
   final String id;
   final String imageUrl;
   final String name;
-  final List genre;
+  final List genres;
   final double rate;
 
-  _PosterState(this.imageUrl, this.name, this.genre, this.rate, this.id);
+  _PosterState(this.imageUrl, this.name, this.genres, this.rate, this.id);
 
   dynamic data;
   int lastRate;
@@ -47,8 +47,14 @@ class _PosterState extends State<Poster>{
     lastRate = data["point"];
   }
 
+  String listGenres="";
   @override
   Widget build(BuildContext context) {
+    for(var item in genres){
+      listGenres = listGenres + ", " + item['name'];
+    }
+    listGenres = listGenres.substring(2);
+
     bool isLogined = (ConstantVar.jwt != "");
 
     return Stack(
@@ -89,7 +95,7 @@ class _PosterState extends State<Poster>{
                         Text(name ,
                           style: StyleConstant.bigTxtStyle,
                         ),
-                        Text(genre[0]["name"],
+                        Text(listGenres,
                           style: StyleConstant.smallTxtStyle,
                         )
                       ],

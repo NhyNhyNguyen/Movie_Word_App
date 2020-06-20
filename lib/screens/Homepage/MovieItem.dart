@@ -19,8 +19,14 @@ class MovieItem extends StatelessWidget {
       @required this.genres
       ) ;
 
+  String listGenres="";
   @override
   Widget build(BuildContext context) {
+    for(var item in genres){
+      listGenres = listGenres + ", " + item['name'];
+    }
+    listGenres = listGenres.substring(2);
+
     return InkWell(
       onTap: (){
         Navigator.push(context, MaterialPageRoute(builder: (context) => DetailMovieScreen(id)));
@@ -43,7 +49,7 @@ class MovieItem extends StatelessWidget {
                             ),
               overflow: TextOverflow.ellipsis,
               maxLines: 1,),
-            Text(genres[0]["name"], style: TextStyle(fontSize: 12, color: ColorConstant.GRAY_TEXT),overflow: TextOverflow.ellipsis,
+            Text(listGenres, style: TextStyle(fontSize: 12, color: ColorConstant.GRAY_TEXT),overflow: TextOverflow.ellipsis,
               maxLines: 1,)
 
           ],

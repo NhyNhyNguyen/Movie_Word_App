@@ -38,8 +38,15 @@ class ShowtimeMovieItem extends StatelessWidget {
     );
   }
 
+  String listGenres="";
   @override
   Widget build(BuildContext context) {
+
+    for(var item in genres){
+      listGenres = listGenres + ", " + item['name'];
+    }
+    listGenres = listGenres.substring(2);
+
     return InkWell(
       onTap: null,
       child: Container(
@@ -75,7 +82,7 @@ class ShowtimeMovieItem extends StatelessWidget {
                         ),
                         overflow: TextOverflow.ellipsis,
                         maxLines: 2,),
-                      Text(genres[0]["name"], style: StyleConstant.mediumTxtStyle,),
+                      Text(listGenres, style: StyleConstant.mediumTxtStyle,),
                       Text(timeLimit + ' mins', style: StyleConstant.mediumTxtStyle,),
                     ],
                   ),
@@ -85,10 +92,11 @@ class ShowtimeMovieItem extends StatelessWidget {
             Container(
               padding: EdgeInsets.only( top: 10),
               child: Row(
-              children: <Widget>[
-                TimeItem(showtime[0]),
-                TimeItem(showtime[0]),
-              ],),
+              children:
+              showtime.map(
+                  (item) => TimeItem(item)
+              ).toList()
+              ),
             ),
           ],
           )
