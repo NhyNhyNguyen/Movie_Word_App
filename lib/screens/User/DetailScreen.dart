@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:MovieWorld/constant/ColorConstant.dart';
 import 'package:MovieWorld/constant/ConstantVar.dart';
+import 'package:MovieWorld/constant/ImageConstant.dart';
 import 'package:MovieWorld/constant/StringConstant.dart';
 import 'package:MovieWorld/constant/StyleConstant.dart';
 import 'package:MovieWorld/constant/UrlConstant.dart';
@@ -11,10 +12,14 @@ import 'package:MovieWorld/model/UserDetail.dart';
 import 'package:MovieWorld/screens/User/ChooseProfile.dart';
 import 'package:MovieWorld/screens/User/LoginScreen.dart';
 import 'package:MovieWorld/screens/User/TextfieldWidget.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:http_parser/http_parser.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../ButtonGradientLarge.dart';
+import 'UploadAvartar.dart';
 import 'UploadImage.dart';
 
 class DetailScreen extends StatefulWidget {
@@ -32,15 +37,209 @@ class _DetailScreenState extends State<DetailScreen> {
   TextEditingController phoneController = TextEditingController();
   TextEditingController addressController = TextEditingController();
 
+  Future<File> file;
+  String status = '';
+  String base64Image;
+  File tmpFile;
+  String errMessage = 'Error Uploading Image';
+
+  chooseImage() {
+    setState(() {
+      file = ImagePicker.pickImage(source: ImageSource.gallery);
+    });
+    setStatus('');
+  }
+
+  setStatus(String message) {
+    setState(() {
+      status = message;
+    });
+  }
+
+  startUpload() {
+    setStatus('Uploading Image...');
+    if (null == tmpFile) {
+      setStatus(errMessage);
+      return;
+    }
+    String fileName = tmpFile.path.split('/').last;
+    print(tmpFile.path + fileName);
+    _uploadFileAsFormData(tmpFile.path, fileName);
+  }
+
+
+  Future<void> _uploadFileAsFormData(String path, String fileName) async {
+    try {
+      final dio = Dio();
+
+      dio.options.headers = {
+        'Content-Type': 'multilpart/form-data',
+        'Authorization': 'Bearer ${ConstantVar.jwt}',
+      };
+
+      final file = await MultipartFile.fromFile(path,
+          filename: fileName, contentType: MediaType('image', 'png'));
+
+      final formData = FormData.fromMap(
+        {
+          'file': file,
+          'type': "image/png",
+        },
+      ); //
+
+      final response = await dio.post(
+        // or dio.post
+        UrlConstant.POST_IMAGE,
+        data: formData,
+      );
+    } catch (err) {
+      print('uploading error: $err');
+    }
+  }
+
+  Widget showImage() {
+    return FutureBuilder<File>(
+      future: file,
+      builder: (BuildContext context, AsyncSnapshot<File> snapshot) {
+        if (snapshot.connectionState == ConnectionState.done &&
+            null != snapshot.data) {
+          tmpFile = snapshot.data;
+          base64Image = base64Encode(snapshot.data.readAsBytesSync());
+          return
+            Stack(
+                alignment: Alignment.bottomRight,
+                children: <Widget>[
+                  Container(
+                    margin: EdgeInsets.only(right: 20),
+                    width: 180,
+                    height: 180,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      border: Border.all(color: Colors.grey, width: 6),
+                    ),
+                    child: Image.file(
+                      snapshot.data,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  Container(
+                    child: IconButton(
+                      icon: Icon(Icons.camera_alt,
+                        size: 30,
+                        color: Colors.black,),
+                      onPressed: chooseImage,
+                    )
+                    , width: 45,
+                    height: 45,
+                    decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Colors.grey
+                    ),
+                  ),
+                ]
+            );
+        } else if (null != snapshot.error) {
+          return const Text(
+            'Error Picking Image',
+            textAlign: TextAlign.center,
+          );
+        } else {
+          return
+
+            Stack(
+                alignment: Alignment.bottomCenter,
+                children: <Widget>[
+                  Column(
+                    children: <Widget>[
+                      Container(
+                        height: MediaQuery.of(context).size.height*0.3,
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.rectangle,
+                          image: DecorationImage(
+                            image: NetworkImage(
+                                UrlConstant.IMAGE + "photo1528790532372-1528790532372684051980-15889023877795083171.jpg"),
+                            fit: BoxFit.cover,
+                          ),
+                          borderRadius: BorderRadius.only(topLeft: Radius.circular(10), topRight: Radius.circular(10))
+                        ),
+                      ),
+                      SizedBox(
+                        height: 70,
+                      )
+                    ],
+                  ),
+
+                  Stack(
+                    alignment: Alignment.bottomRight,
+                    children: <Widget>[
+                      Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+                          Container(
+                            width: 180,
+                            height: 180,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              image: DecorationImage(
+                                image: ConstantVar.userDetail.avt == null
+                                    ? AssetImage(ImageConstant.LOGO)
+                                    : NetworkImage(
+                                    UrlConstant.IMAGE + ConstantVar.userDetail.avt),
+                                fit: BoxFit.cover,
+                              ),
+                             // border: Border.all(color: Colors.white70, width: 4),
+                            ),
+                          ),
+                        ],
+                      ),
+                    Container(
+                        child: IconButton(
+                          icon: Icon(Icons.camera_alt,
+                            size: 30,
+                            color: Colors.black,),
+                          onPressed: chooseImage,
+                        )
+                        , width: 45,
+                        height: 45,
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Colors.grey
+                        ),
+                      ),
+                    ],
+                  ),
+                ]
+            );
+//            UploadAvatar(image: Container(
+//              width: 180,
+//              height: 180,
+//              decoration: BoxDecoration(
+//                shape: BoxShape.circle,
+//                image: DecorationImage(
+//                  image: ConstantVar.userDetail.avt == null
+//                      ? AssetImage(ImageConstant.LOGO)
+//                      : NetworkImage(
+//                      UrlConstant.IMAGE + ConstantVar.userDetail.avt),
+//                  fit: BoxFit.cover,
+//                ),
+//              ),
+//            ), selected: chooseImage,);
+        }
+      },
+    );
+  }
+
+
   DateTime selectedDate = DateTime.now();
   final _formKey = GlobalKey<FormState>();
 
   Widget _SaveBtn() {
     return ButtonGradientLarge(
         StringConstant.SAVE_CHANGES,
-        () => {
+            () => {
           postUserDetail()
-            });
+        });
   }
 
 
@@ -99,42 +298,27 @@ class _DetailScreenState extends State<DetailScreen> {
             width: double.infinity,
             child: SingleChildScrollView(
               physics: AlwaysScrollableScrollPhysics(),
-              padding: EdgeInsets.symmetric(horizontal: 25, vertical: 20.0),
+              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10.0),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
 //                  Text(StringConstant.EDIT,
 //                      style: StyleConstant.headerTextStyle),
-                  Container(
-                    margin: EdgeInsets.only(right: 20),
-                 width: 160,
-                    height: 160,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      image: DecorationImage(
-                          image:
-                          AssetImage("assets/profile.jpg"),
-                          fit: BoxFit.cover),
-                    ),
-                  ),
+                  showImage(),
                   FlatButton(
                     child: Text(StringConstant.CHANGE_PICTURE, style:TextStyle(
-                      color: ColorConstant.BLUE_TEXT,
-                      fontSize: 20,
-                      fontWeight: FontWeight.w600,
-                      fontFamily: "Open Sans",
-                      decoration: TextDecoration.underline
+                        color: ColorConstant.BLUE_TEXT,
+                        fontSize: 20,
+                        fontWeight: FontWeight.w600,
+                        fontFamily: "Open Sans",
+                        decoration: TextDecoration.underline
                     ) ),
-                    onPressed: ()=>{
-                    Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => UploadImageDemo()))
-                    },
+                    onPressed: startUpload,
                   ),
-
                   Container(
                     padding:
-                        EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
+                    EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
                     child: Form(
                       key: _formKey,
                       child: Column(children: <Widget>[

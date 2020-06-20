@@ -34,7 +34,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
       "token" : "f04cd29c-cfee-47b5-943d-0b382d6b77f2",
       'newPassword': passController.text,
     };
-    var uri = Uri.http(UrlConstant.HOST_1, '/api/save-password', queryParameters);
+    var uri = Uri.http(UrlConstant.HOST, '/api/save-password', queryParameters);
     http.Response response = await http.post(
       uri,
       headers: <String, String>{

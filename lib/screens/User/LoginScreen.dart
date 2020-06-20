@@ -81,8 +81,6 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget _loginBtn(BuildContext context) {
     return ButtonGradientLarge(StringConstant.SIGN_IN, () {
       if (_formKey.currentState.validate()) {
-        Modal.showSimpleCustomDialog(context, "Login successfull", () => {});
-
         login(context, usernameController.text, passController.text);
       }
     });

@@ -70,18 +70,22 @@ Không áp dụng cho các ngày Lễ, Tết, suất chiếu đặc biệt, ho�
   static const CHANGE_PICTURE = "Changes Profile Picture";
   static const NEW_PASSWORD = "New Password";
   static const NEW_PASSWORD_HINT = "Enter your new password";
-  static const CONFIRM_PASSWORD = "Confirm password";
+  static const CONFIRM_PASSWORD = "Confirm Password";
   static const CONFIRM_PASSWORD_HINT = "Enter your confirm password";
-  static const RESET_PASS = "Reset password";
-  static const CHANGE_PASS = "Change password";
+  static const RESET_PASS = "Reset Password";
+  static const CHANGE_PASS = "Change Password";
+  static const UPLOAD = "UPLOAD IMAGE";
 
   //Home page
   static const NOW_SHOWING = "Now Showing";
-  static const COMMING_SOON = "Coming soon";
+  static const COMMING_SOON = "Coming Soon";
   static const SEARCH = "search";
 
   //homepage_movie
 static const NAME1= "Spdierman";
 static const NAME2 = "High Kick";
 static const NAME3 =" Frozen";
+
+//side bar
+static const NOT_LOGIN = "Not login";
 }

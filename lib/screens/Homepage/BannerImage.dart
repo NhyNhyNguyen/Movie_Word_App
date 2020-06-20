@@ -17,6 +17,7 @@ List getRandomSubList(List list){
   listImageRandomed.clear();
   final _random = new Random();
   for( var i =0; i< 3 ; i++){
+
     var element = list[_random.nextInt(list.length)];
     print("chose" + element);
     listImageRandomed.add(element);
