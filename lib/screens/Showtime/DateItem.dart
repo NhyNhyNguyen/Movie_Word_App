@@ -31,12 +31,11 @@ class DateItem extends StatelessWidget {
               children: <Widget>[
                 Text(
                   DateFormat('d').format(newDate),
-                  style:TextStyle(fontSize: 22, color: ColorConstant.WHITE, fontWeight:FontWeight.w600),
+                  style: StyleConstant.formTextStyle,
                 ),
                 Text(
-                  //DateFormat('EEEE').format(newDate).toUpperCase(),
                   listDayOfWeek[newDate.weekday].toUpperCase(),
-                  style:TextStyle(fontSize: 18, color: ColorConstant.WHITE),
+                  style: StyleConstant.moreSmallTextStyle,
                   maxLines: 1,
                 ),
               ],
@@ -53,12 +52,11 @@ class DateItem extends StatelessWidget {
               children: <Widget>[
                 Text(
                   DateFormat('d').format(newDate),
-                  style:TextStyle(fontSize: 20, color: ColorConstant.GRAY_TEXT, fontWeight:FontWeight.w400),
+                  style: StyleConstant.formTextStyle,
                 ),
                 Text(
-                  //DateFormat('EEEE').format(newDate).toUpperCase(),
                   listDayOfWeek[newDate.weekday].toUpperCase(),
-                  style:TextStyle(fontSize: 18, color: ColorConstant.WHITE),
+                  style: StyleConstant.moreSmallTextStyle,
                   maxLines: 1,
                 ),
               ],

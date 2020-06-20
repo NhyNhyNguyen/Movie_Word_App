@@ -22,6 +22,7 @@ import '../../constant/ColorConstant.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import 'CategoryShowtimeMovie.dart';
 import 'DateItem.dart';
 import 'ShowtimeMovieItem.dart';
 
@@ -49,7 +50,7 @@ class _ShowtimeState extends State<Showtime> {
   List<int> listDuration = [0, 1, 2, 3, 4, 5, 6];
 
   String url;
-  List<Movie> data;
+  List<dynamic> data;
 
   @override
   Widget build(BuildContext context) {
@@ -59,23 +60,24 @@ class _ShowtimeState extends State<Showtime> {
         child: BlocBuilder<ShowtimeBloc, ShowtimeState>(
             bloc: showtimeBloc,
             builder: (context, state) {
-               bool isSelected;
 
-              List<Movie> _getData(String id) {
-                url = UrlConstant.URL_FILM + id;
+              List<dynamic> _getData(String duration) {
+                DateTime newDate = date.add(Duration(days: int.parse(duration)));
+                String dd = DateFormat('dd').format(newDate).toString();
+                String mm = DateFormat('MM').format(newDate).toString();
+                String yyyy = DateFormat('yyyy').format(newDate).toString();
+                String dateShowime = dd + "/" + mm + "/" + yyyy;
+                print(dateShowime);
+                url = UrlConstant.URL_GET_SHOWTIME + dateShowime;
                 {
                   http.get(url).then((http.Response response) {
-                    setState(() {
-                      data = new List<Movie>();
-                      json.decode(response.body).forEach((json) {
-                        data.add(Movie.fromJson(json));
-                      });
-                    });
+                    setState(() => data = json.decode(response.body) );
                   });
                 };
                 return data;
               }
 
+               _getData('${state.firstDate}');
               return Column(
                   children: <Widget>[
                     Container(
@@ -98,18 +100,10 @@ class _ShowtimeState extends State<Showtime> {
                           ).toList()
                       ),
                     ),
-                    Text('${state.firstDate}', style: StyleConstant.bigTxtStyle,),
                     Container(
-                      height: 420,
-                      child: Column(
-                        children: <Widget>[
-                          ShowtimeMovieItem(
-                              '1', 'Avenger', 'avenger.jpg', 'Action', '120'),
-                          ShowtimeMovieItem(
-                              '1', 'Kingdom', 'kingdom.jpg', 'Action', '120'),
-                        ],
-                      ),
-                    )
+                      height: MediaQuery.of(context).size.height * 0.65,
+                      child: CategoryShowtimeMovie(_getData('${state.firstDate}')),
+                    ),
                   ]);
             }
         )

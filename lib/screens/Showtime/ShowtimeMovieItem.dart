@@ -8,19 +8,18 @@ import 'package:flutter/material.dart';
 import 'package:MovieWorld/constant/ImageConstant.dart';
 
 class ShowtimeMovieItem extends StatelessWidget {
-  final String id;
   final String name;
   final String imageUrl;
-  //final List genres;
-  final String genres;
+  final List genres;
   final String timeLimit;
+  final List showtime;
 
   ShowtimeMovieItem(
-      @required this.id,
       @required this.name,
       @required this.imageUrl,
       @required this.genres,
-      @required this.timeLimit
+      @required this.timeLimit,
+      @required this.showtime
       ) ;
 
   Widget TimeItem(String time){
@@ -62,15 +61,24 @@ class ShowtimeMovieItem extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.all(10),
                 ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(
-                      name,
-                      style:StyleConstant.bigTxtStyle),
-                    Text(genres, style: StyleConstant.mediumTxtStyle,),
-                    Text(timeLimit + ' mins', style: StyleConstant.mediumTxtStyle,),
-                  ],
+                Container(
+                  width: MediaQuery.of(context).size.width * 0.45,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        name,
+                        style:TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.w500,
+                          color: ColorConstant.WHITE,
+                        ),
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 2,),
+                      Text(genres[0]["name"], style: StyleConstant.mediumTxtStyle,),
+                      Text(timeLimit + ' mins', style: StyleConstant.mediumTxtStyle,),
+                    ],
+                  ),
                 )
               ],
             ),
@@ -78,10 +86,8 @@ class ShowtimeMovieItem extends StatelessWidget {
               padding: EdgeInsets.only( top: 10),
               child: Row(
               children: <Widget>[
-                TimeItem('10:45'),
-                TimeItem('10:45'),
-                TimeItem('10:45'),
-                TimeItem('10:45'),
+                TimeItem(showtime[0]),
+                TimeItem(showtime[0]),
               ],),
             ),
           ],

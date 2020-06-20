@@ -56,6 +56,7 @@ class _HomepageState extends State<Homepage>  {
                     BlocBuilder<HomepageBloc, HomepageState>(
                       bloc: homepageBloc,
                       builder: (context, state) {
+
                         List<Movie> _getData(String type) {
                           url = UrlConstant.URL_FILM + type;
                           {

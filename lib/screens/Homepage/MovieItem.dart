@@ -40,8 +40,11 @@ class MovieItem extends StatelessWidget {
               style: TextStyle(
                               fontSize: 16,
                               color: ColorConstant.WHITE,
-                            ),),
-            Text(genres[0]["name"], style: TextStyle(fontSize: 12, color: ColorConstant.GRAY_TEXT),)
+                            ),
+              overflow: TextOverflow.ellipsis,
+              maxLines: 1,),
+            Text(genres[0]["name"], style: TextStyle(fontSize: 12, color: ColorConstant.GRAY_TEXT),overflow: TextOverflow.ellipsis,
+              maxLines: 1,)
 
           ],
         ),

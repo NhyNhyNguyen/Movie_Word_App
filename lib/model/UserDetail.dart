@@ -31,6 +31,7 @@ class UserDetail {
       username: json['username'],
       fullName: json['fullName'],
       email: json['email'],
+
       address: json['address'],
       phone: json['phone'],
       avt: json['avatar'],

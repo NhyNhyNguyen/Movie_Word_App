@@ -21,7 +21,8 @@ class CategoryMovie extends StatelessWidget{
     //print(data[1].id);
 
     if (data == null) return Container(
-      child: Icon(Icons.cached, color: ColorConstant.GRAY_TEXT, size: 50,),
+//      child: Icon(Icons.cached, color: ColorConstant.GRAY_TEXT, size: 50,),
+    child: Text("")
     );
     return GridView.count(
     crossAxisCount: 2,

@@ -94,7 +94,7 @@ class StyleConstant {
 
   // style for detail page
   static const bigTxtStyle = TextStyle(
-    fontSize: 24,
+    fontSize: 22,
     color: ColorConstant.WHITE,
   );
 
