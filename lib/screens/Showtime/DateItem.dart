@@ -12,6 +12,10 @@ class DateItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     DateTime newDate = date.add(Duration(days: duration));
+
+    List<String> listDayOfWeek = ['','mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
+
+
     return (index == duration.toString())
         ? Container(
         width: 45,
@@ -30,7 +34,8 @@ class DateItem extends StatelessWidget {
                   style:TextStyle(fontSize: 22, color: ColorConstant.WHITE, fontWeight:FontWeight.w600),
                 ),
                 Text(
-                  DateFormat('EEEE').format(newDate).toUpperCase(),
+                  //DateFormat('EEEE').format(newDate).toUpperCase(),
+                  listDayOfWeek[newDate.weekday].toUpperCase(),
                   style:TextStyle(fontSize: 18, color: ColorConstant.WHITE),
                   maxLines: 1,
                 ),
@@ -51,7 +56,8 @@ class DateItem extends StatelessWidget {
                   style:TextStyle(fontSize: 20, color: ColorConstant.GRAY_TEXT, fontWeight:FontWeight.w400),
                 ),
                 Text(
-                  DateFormat('EEEE').format(newDate).toUpperCase(),
+                  //DateFormat('EEEE').format(newDate).toUpperCase(),
+                  listDayOfWeek[newDate.weekday].toUpperCase(),
                   style:TextStyle(fontSize: 18, color: ColorConstant.WHITE),
                   maxLines: 1,
                 ),

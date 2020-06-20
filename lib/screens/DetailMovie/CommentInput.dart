@@ -25,7 +25,7 @@ class _CommentInputState extends State<CommentInput> {
 
   Future<http.Response> postComment() async {
     print("hello");
-    final http.Response response = await http.put(
+    final http.Response response = await http.post(
       UrlConstant.URL_POST_COMMENT,
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
@@ -62,13 +62,13 @@ class _CommentInputState extends State<CommentInput> {
       height: MediaQuery.of(context).size.height * 0.13,
       child: Row(
         children: <Widget>[
-          Container(
-            margin: EdgeInsets.only(left: 10),
-              child: ClipRRect(
-                borderRadius: BorderRadius.all(Radius.circular(30)),
-                child: Image.asset(ImageConstant.POSTER, fit: BoxFit.cover, height: 50, width: 50, ),
-              )
-          ),
+//          Container(
+//            margin: EdgeInsets.only(left: 10),
+//              child: ClipRRect(
+//                borderRadius: BorderRadius.all(Radius.circular(30)),
+//                child: Image.asset(ImageConstant.POSTER, fit: BoxFit.cover, height: 50, width: 50, ),
+//              )
+//          ),
           Expanded(
             child: Container(
               margin: EdgeInsets.all(10),
@@ -88,9 +88,9 @@ class _CommentInputState extends State<CommentInput> {
             ),
           ),
           IconButton(
-            icon: Icon(Icons.send),
+            icon: Icon(Icons.send, color: ColorConstant.WHITE),
             onPressed: () => {
-              (ConstantVar.jwt != " ")
+              (ConstantVar.jwt != "")
               ? postComment()
               : Navigator.push(
               context,

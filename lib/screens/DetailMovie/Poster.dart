@@ -1,7 +1,9 @@
 import 'package:MovieWorld/constant/ColorConstant.dart';
+import 'package:MovieWorld/constant/ConstantVar.dart';
 import 'package:MovieWorld/constant/ImageConstant.dart';
 import 'package:MovieWorld/constant/StyleConstant.dart';
 import 'package:MovieWorld/constant/UrlConstant.dart';
+import 'package:MovieWorld/model/UserDetail.dart';
 import 'package:MovieWorld/screens/RateMovie/RatingDialog.dart';
 import 'package:MovieWorld/screens/User/ChoosePage.dart';
 import 'package:flutter/cupertino.dart';
@@ -36,7 +38,7 @@ class _PosterState extends State<Poster>{
   int lastRate;
   get_rate(){
     print("hello");
-    String url = UrlConstant.URL_GET_RATE +"userId=1" + "&filmId=" + id;
+    String url = UrlConstant.URL_GET_RATE + "userId=" + ConstantVar.userDetail.id.toString() + "&filmId=" + id;
     {
       http.get(url).then((http.Response response) {
         setState(() => data = json.decode(response.body) );
@@ -47,9 +49,7 @@ class _PosterState extends State<Poster>{
 
   @override
   Widget build(BuildContext context) {
-
-
-    bool isLogined = true;
+    bool isLogined = (ConstantVar.jwt != "");
 
     return Stack(
     children: <Widget>[
@@ -119,7 +119,7 @@ class _PosterState extends State<Poster>{
                             get_rate();
                             showDialog(
                                 context: context,
-                                builder: (_) => (lastRate == null) ? RatingMovieDialog(0) : RatingMovieDialog(lastRate)
+                                builder: (_) => (lastRate == null) ? RatingMovieDialog(0, id) : RatingMovieDialog(lastRate, id)
 
                             );
                           }

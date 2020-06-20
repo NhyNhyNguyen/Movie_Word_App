@@ -15,7 +15,9 @@ class UserDetail {
   String avt;
 
   UserDetail(
-      {this.username,
+      {
+      this.id,
+      this.username,
       this.password,
       this.fullName,
       this.address,
@@ -25,6 +27,7 @@ class UserDetail {
 
   factory UserDetail.fromJson(Map<String, dynamic> json) {
     return UserDetail(
+      id: json['id'],
       username: json['username'],
       fullName: json['fullName'],
       email: json['email'],

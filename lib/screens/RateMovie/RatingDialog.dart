@@ -1,33 +1,55 @@
 import 'package:MovieWorld/constant/ColorConstant.dart';
+import 'package:MovieWorld/constant/ConstantVar.dart';
 import 'package:MovieWorld/constant/StyleConstant.dart';
 import 'package:MovieWorld/constant/UrlConstant.dart';
+import 'package:MovieWorld/screens/DetailMovie/DetailMovieScreen.dart';
+import 'package:MovieWorld/screens/User/ChoosePage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class RatingMovieDialog extends StatefulWidget {
+  String idMovie;
   int lastRate;
-  RatingMovieDialog (this.lastRate);
+  RatingMovieDialog (this.lastRate, this.idMovie);
   @override
-  _RatingMovieDialogState createState() => _RatingMovieDialogState(lastRate);
+  _RatingMovieDialogState createState() => _RatingMovieDialogState(lastRate, idMovie);
 }
 
 class _RatingMovieDialogState extends State<RatingMovieDialog> {
+  String idMovie;
   int lastRate;
-  _RatingMovieDialogState (this.lastRate);
+  _RatingMovieDialogState (this.lastRate, this.idMovie);
   static dynamic data;
   //int lastRate = id;
 
-//  get_rate(){
-//    String url = UrlConstant.URL_GET_RATE +"userId=1" + "&filmId=" + id;
-//    if (data == null) {
-//      http.get(url).then((http.Response response) {
-//        setState(() => data = json.decode(response.body) );
-//      });
-//    };
-//    lastRate = data["point"];
-//  }
+  Future<http.Response> putRate(int rate) async {
+    print("hello rate");
+    final http.Response response = await http.put(
+      UrlConstant.URL_PUT_RATE + idMovie + "/rate",
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Accept': 'application/json',
+        'Authorization':
+        'Bearer ' + ConstantVar.jwt,
+      },
+      body: jsonEncode(<String, int>{
+        "point": rate,
+      }),
+    );
+    print(idMovie);
+    print(rate);
+    print(response.statusCode);
+    if (response.statusCode == 200) {
+      Navigator.push(context,
+          MaterialPageRoute(builder: (context) => DetailMovieScreen(idMovie)));
+    } else {
+      Navigator.push(context,
+          MaterialPageRoute(builder: (context) => ChoosePageScreen()));
+    }
+    return response;
+  }
 
 
   Widget _buildStar(int starCount) {
@@ -68,7 +90,7 @@ class _RatingMovieDialogState extends State<RatingMovieDialog> {
         FlatButton(
           child: Text('OK'),
           onPressed: () {
-            //post new rate point
+            putRate(lastRate);
           },
         )
       ],
