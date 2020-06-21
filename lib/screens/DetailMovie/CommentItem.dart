@@ -37,7 +37,7 @@ class CommentItem extends StatelessWidget {
           Expanded(
             child: Container(
               margin: EdgeInsets.symmetric(horizontal: 10,),
-              height:  MediaQuery.of(context).size.height * 0.1,
+              height:  MediaQuery.of(context).size.height * 0.15,
               child: Column(
                 mainAxisAlignment:  MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -46,7 +46,7 @@ class CommentItem extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
                       Text(fullNameUser, style: StyleConstant.mediumTxtStyle,),
-                      Text(timeCreate, style: StyleConstant.txtStyleTime, ),
+                      Text(timeCreate.substring(0,10), style: StyleConstant.txtStyleTime, ),
                     ],
                   ),
 

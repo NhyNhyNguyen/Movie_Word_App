@@ -89,14 +89,25 @@ class ShowtimeMovieItem extends StatelessWidget {
                 )
               ],
             ),
+//            Container(
+//              padding: EdgeInsets.only( top: 10),
+//              child: Row(
+//              children:
+//              showtime.map(
+//                  (item) => TimeItem(item)
+//              ).toList()
+//              ),
+//            ),
             Container(
+              height: 50,
               padding: EdgeInsets.only( top: 10),
-              child: Row(
-              children:
-              showtime.map(
-                  (item) => TimeItem(item)
-              ).toList()
-              ),
+              child: ListView.builder(
+                itemCount: showtime.length,
+                scrollDirection: Axis.horizontal,
+                  itemBuilder: (context, index){
+                    return TimeItem(showtime[index]);
+                  }
+              )
             ),
           ],
           )

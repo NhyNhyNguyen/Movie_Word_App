@@ -115,7 +115,7 @@ class StyleConstant {
   );
 
   static const txtStyleTime = TextStyle(
-    fontSize: 14,
+    fontSize: 12,
     color: ColorConstant.GRAY_TEXT,
   );
 

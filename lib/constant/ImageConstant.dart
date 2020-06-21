@@ -32,5 +32,6 @@ class ImageConstant{
   static const POSTER9 = "assets/nguoiphanxu.jpg";
 
   static const AVATAR = "assets/avater.jpg";
+  static const CAMERA ="assets/camera_gray.png";
 
 }

@@ -36,7 +36,10 @@ class _CommingsoonScreen extends State<CommingsoonScreen>  {
   void initState() {
     String url  = UrlConstant.URL_FILM + 'coming-soon';
     {
-      http.get(url).then((http.Response response) {
+      http.get(url, headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json; charset=utf-8',
+      }).then((http.Response response) {
         setState((){
           data = new List<Movie>();
           json.decode(response.body).forEach((json) {

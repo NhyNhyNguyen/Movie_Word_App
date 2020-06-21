@@ -28,7 +28,10 @@ class _CategoryMovieState extends State<CategoryMovie>  {
   Widget build(BuildContext context) {
     String url  = UrlConstant.URL_FILM + type;
     if(data == null){
-      http.get(url).then((http.Response response) {
+      http.get(url, headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json; charset=utf-8',
+      }).then((http.Response response) {
         setState((){
           data = new List<Movie>();
           json.decode(response.body).forEach((json) {
@@ -40,8 +43,7 @@ class _CategoryMovieState extends State<CategoryMovie>  {
     };
 
     if (data == null) return Container(
-//      child: Icon(Icons.cached, color: ColorConstant.GRAY_TEXT, size: 50,),
-        child: Text("")
+      child: Icon(Icons.cached, color: ColorConstant.GRAY_TEXT, size: 50,),
     );
     return GridView.count(
         crossAxisCount: 2,
