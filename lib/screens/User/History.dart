@@ -25,9 +25,6 @@ class History extends StatefulWidget {
 }
 
 class _History extends State<History> {
-  String type = "history";
-  String imageUrl = UrlConstant.IMAGE +
-      "98307201_314497226215952_6080107368102756352_n-30987288442578.jpg";
   List<Booking> data;
 
   @override
@@ -52,14 +49,19 @@ class _History extends State<History> {
         setState(() {
           data = new List<Booking>();
           json.decode(response.body).forEach((json) {
-            data.add(Booking.fromJson(json));
+            if(json["seat"] != null){
+              data.add(Booking.fromJson(json));
+            }
           });
         });
         return true;
       } else {
         // If the server did not return a 200 OK response,
         // then throw an exception.
-
+        if(response.statusCode == 403){
+          ConstantVar.jwt = "";
+          ConstantVar.userDetail = null;
+        }
         return false;
       }
     }else{
@@ -90,7 +92,7 @@ class _History extends State<History> {
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.center,
-                              children: List.generate(4, (index) => HistoryItem())
+                              children: List.generate(data.length, (index) => HistoryItem(booking: data[index]))
                                  .toList(),
                             ),
                           ),

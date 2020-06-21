@@ -1,3 +1,4 @@
+import 'package:MovieWorld/constant/ConstantVar.dart';
 import 'package:MovieWorld/layout/mainLayout.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
@@ -26,9 +27,9 @@ class SeatMap extends StatefulWidget {
 }
 
 class _SeatMapState extends State<SeatMap> {
-  final int filmId;
-  final String dateTime;
-  final String filmName;
+  int filmId;
+  String dateTime;
+  String filmName;
   _SeatMapState(this.filmId, this.dateTime, this.filmName);
 
   List<String> data;
@@ -42,12 +43,17 @@ class _SeatMapState extends State<SeatMap> {
 
   var seats;
 
-  void createData() {
+  void createData(list) {
     seats = List.generate(row, (i) => List(col), growable: false);
     for (int i = 0; i < row; i++) {
       for (int j = 0; j < col; j++) {
         String id = seatRow[i] + j.toString();
-        int status = (Random()).nextInt(2);
+        int status = 0;
+        try {
+          status = list[i][j];
+        } on Exception catch (_) {
+          throw Exception("Error on server");
+        }
         seats[i][j] = Seat(id, status);
       }
     }
@@ -136,32 +142,37 @@ class _SeatMapState extends State<SeatMap> {
   void initState() {
     print("film id" + filmId.toString());
     fetchListSeat().then((value) => setState(() {}));
-    createData();
   }
 
   Future<bool> fetchListSeat() async {
-    final response =
-        await http.get(UrlConstant.GET_LIST_SEAT + "?filmId=$filmId", headers: {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json',
-    });
+    filmId = 1;
+    dateTime = "30-06-2020 05:20 AM";
+    //String time = dateTime.substring(5);
+    final response = await http.get(
+        UrlConstant.HOST + "/api/seats/showTime?filmId=$filmId&dateTime=$dateTime",
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': 'Bearer ' + ConstantVar.jwt,
+        });
     print(json.decode(response.body));
 
     if (response.statusCode == 200) {
       // If the server did return a 200 OK response,
       // then parse the JSON
       setState(() {
-        data = new List<String>();
-        json.decode(response.body).forEach((json) {
-          data.add(json);
-          print(json);
-        });
+        int i = 0;
+        int j = 0;
+        var list = json.decode(response.body);
+        createData(list);
+        print(seats);
       });
       return true;
     } else {
       // If the server did not return a 200 K response,
       // then throw an exception.
-
+      ConstantVar.jwt = "";
+      ConstantVar.userDetail = null;
       return false;
     }
   }
@@ -184,24 +195,28 @@ class _SeatMapState extends State<SeatMap> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text(
+                        filmName,
+                        style: StyleConstant.headerTextStyle,
+                        textAlign: TextAlign.center,
+                      ),
+                    ]),
+                Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                   Text(
-                  filmName,
-                  style: StyleConstant.headerTextStyle,
-                  textAlign: TextAlign.center,
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text(dateTime, style: StyleConstant.formTextStyle),
+                  ],
                 ),
-              ]
-                ),
-                SizedBox(
-                  height: 30,
-                ),
-                Text(dateTime, style: StyleConstant.formTextStyle),
                 Container(
                   child: Column(
                     children: <Widget>[
                       Container(
-                          height: seatHeight * 18 + 60,
+                          height: seatHeight * 18 + 20,
                           padding: EdgeInsets.symmetric(
                               horizontal: 4.0, vertical: 10.0),
                           child: new GridView.count(
@@ -235,7 +250,7 @@ class _SeatMapState extends State<SeatMap> {
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) =>
-                                                OrderTicket()))
+                                                OrderTicket(filmId: filmId,filmName: filmName, showTime: dateTime, seats: seatSelected,)))
                                   }),
                         ],
                       ),

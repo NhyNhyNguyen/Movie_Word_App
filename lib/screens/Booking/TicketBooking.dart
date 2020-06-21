@@ -233,7 +233,7 @@ class _BookingTicketState extends State<BookingTicket> {
                                           Text(
                                             data[selected]
                                                 .time[index]
-                                                .substring(8),
+                                                .substring(6),
                                             style:
                                                 StyleConstant.normalTextStyle,
                                             maxLines: 1,

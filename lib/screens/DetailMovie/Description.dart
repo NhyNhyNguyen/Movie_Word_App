@@ -20,6 +20,7 @@ class Description extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(filmName + filmId.toString());
     void choseBtn(type){
       Navigator.push(
         context,

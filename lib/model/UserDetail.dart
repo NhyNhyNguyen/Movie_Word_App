@@ -40,21 +40,17 @@ class UserDetail {
     if (jwt != "" || jwt != null) {
       final response = await http.get(UrlConstant.PROFILE, headers: {
         'Content-Type': 'application/json',
-        'Accept': 'application/json',
+        'Accept': 'application/json; charset=utf-8',
         'Authorization': 'Bearer $jwt',
       });
       print(json.decode(response.body));
 
       if (response.statusCode == 200) {
-        // If the server did return a 200 OK response,
-        // then parse the JSON.
         ConstantVar.isLogin = true;
         ConstantVar.userDetail =
             UserDetail.fromJson(json.decode(response.body));
         return true;
       } else {
-        // If the server did not return a 200 OK response,
-        // then throw an exception.
         ConstantVar.isLogin = false;
         ConstantVar.userDetail = null;
         return false;

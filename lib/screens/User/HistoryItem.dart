@@ -7,16 +7,19 @@ import 'package:MovieWorld/screens/Booking/Poster.dart';
 import 'package:flutter/material.dart';
 
 class HistoryItem extends StatefulWidget {
-  /* final Booking booking;
+   final Booking booking;
 
-  const HistoryItem({Key key, this.booking}) : super(key: key);*/
+   HistoryItem({Key key, this.booking}) : super(key: key);
 
   @override
-  _HistoryItemState createState() => _HistoryItemState(Booking());
+  _HistoryItemState createState() => _HistoryItemState(this.booking);
 }
 
 class _HistoryItemState extends State<HistoryItem> {
   final Booking booking;
+
+  _HistoryItemState(this.booking);
+
 
   List<String> title = [
     "THEATRE",
@@ -32,7 +35,6 @@ class _HistoryItemState extends State<HistoryItem> {
     "MAX4D F1, F2 & F3"
   ];
 
-  _HistoryItemState(this.booking);
   @override
   Widget build(BuildContext context) {
     return Container(
