@@ -105,7 +105,7 @@ class MainLayOut {
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (context) => null));
+                                            builder: (context) => ShowtimeScreen()));
                                   },
                                   child: type == 'CAL'
                                       ? Image.asset(

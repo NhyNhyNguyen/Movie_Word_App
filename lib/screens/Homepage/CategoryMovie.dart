@@ -40,8 +40,7 @@ class _CategoryMovieState extends State<CategoryMovie>  {
     };
 
     if (data == null) return Container(
-//      child: Icon(Icons.cached, color: ColorConstant.GRAY_TEXT, size: 50,),
-        child: Text("")
+      child: Icon(Icons.cached, color: ColorConstant.GRAY_TEXT, size: 50,),
     );
     return GridView.count(
         crossAxisCount: 2,

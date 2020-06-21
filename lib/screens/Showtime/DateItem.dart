@@ -4,11 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class DateItem extends StatelessWidget {
-  final DateTime date;
   final int duration;
-  final String index;
+  final int index;
 
-  DateItem(this.date, this.duration, this.index);
+  DateItem( this.duration, this.index);
+  DateTime date = DateTime.now();
   @override
   Widget build(BuildContext context) {
     DateTime newDate = date.add(Duration(days: duration));
@@ -16,7 +16,7 @@ class DateItem extends StatelessWidget {
     List<String> listDayOfWeek = ['','mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
 
 
-    return (index == duration.toString())
+    return (index == duration)
         ? Container(
         width: 45,
         padding: EdgeInsets.all(1),
