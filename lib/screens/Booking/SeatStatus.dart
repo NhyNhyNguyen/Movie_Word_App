@@ -1,1 +1,3 @@
-enum SeatStatus { RESERVED, SELECTED, AVAILABLE }
+enum SeatStatus { AVAILABLE, RESERVED, SELECTED
+
+}

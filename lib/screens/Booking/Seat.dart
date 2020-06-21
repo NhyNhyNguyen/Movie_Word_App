@@ -3,16 +3,16 @@ import 'package:MovieWorld/constant/StyleConstant.dart';
 import 'package:MovieWorld/screens/Booking/SeatStatus.dart';
 import 'package:flutter/material.dart';
 
-class Seat extends StatefulWidget {
+class SeatScreen extends StatefulWidget {
   final SeatStatus status;
 
-  Seat({this.status});
+  SeatScreen({this.status});
 
   @override
   _SeatState createState() => _SeatState(status: this.status);
 }
 
-class _SeatState extends State<Seat> {
+class _SeatState extends State<SeatScreen> {
   final SeatStatus status;
    double seatHeight = 40;
 
@@ -20,7 +20,7 @@ class _SeatState extends State<Seat> {
 
   @override
   Widget build(BuildContext context) {
-    seatHeight = MediaQuery.of(context).size.width*0.09;
+    seatHeight = MediaQuery.of(context).size.width*0.08;
     return status == SeatStatus.AVAILABLE
         ? Container(
             width: seatHeight,

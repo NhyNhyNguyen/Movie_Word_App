@@ -8,8 +8,9 @@ import 'package:flutter/material.dart';
 
 class ButtonBookTicket extends StatelessWidget {
   final String text;
+  final int filmId;
 
-  ButtonBookTicket( this.text);
+  ButtonBookTicket( this.text, this.filmId);
   @override
   Widget build(BuildContext context) {
     return
@@ -30,7 +31,7 @@ class ButtonBookTicket extends StatelessWidget {
           onPressed: ()=>{
           Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => BookingTicket()),
+          MaterialPageRoute(builder: (context) => BookingTicket(filmId: filmId,)),
           )
           },
         ),
