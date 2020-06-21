@@ -95,6 +95,6 @@ class _ShowtimeScreenState extends State<ShowtimeScreen>  {
 
         )
         ,
-        "CAL", "Calander");
+        "CAL", "Calender");
   }
 }

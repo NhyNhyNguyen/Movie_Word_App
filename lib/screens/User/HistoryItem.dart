@@ -20,20 +20,17 @@ class _HistoryItemState extends State<HistoryItem> {
 
   _HistoryItemState(this.booking);
 
-
-  List<String> title = [
-    "THEATRE",
-    "SHOW TIME",
-    "DATE",
-    "AVALEBLE IN",
-    "SEATS",
-    ""
-  ];
   List<String> content = [
-    "Chiec la cuon bay",
-    "9:00 PM Tue 22/2/2020",
-    "MAX4D F1, F2 & F3"
+
   ];
+
+  @override
+  void initState() {
+      content.add(booking.name);
+      content.add(booking.showTime);
+      content.add(booking.room);
+      content.add(booking.seats.join(", "));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,8 +53,31 @@ class _HistoryItemState extends State<HistoryItem> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                Poster(imageUrl: UrlConstant.IMAGE + "iu2.jpg"),
-                Container(
+                Column(
+                  children: <Widget>[
+                    Poster(imageUrl: UrlConstant.IMAGE + "conmuatinhdau.jpg"),
+                    booking.status == 0?
+                    RaisedButton(
+                      padding: EdgeInsets.symmetric(vertical: 3),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                          side: BorderSide(color: Colors.white, width: 1.5)),
+                      color: ColorConstant.LIGHT_VIOLET,
+                      child: Text(
+                        StringConstant.CANCEL,
+                        style: StyleConstant.priceTextStyle,
+                      ),
+                    ) : booking.status == 2 ? Container(
+                      child: Text(
+                        "CANCELED",
+                        style: StyleConstant.priceTextStyle,
+                      ),
+                    ) : Container(
+
+                    )
+                  ],
+                )
+                ,Container(
                   padding: EdgeInsets.only(right: 5, bottom: 10, top: 10),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -72,21 +92,14 @@ class _HistoryItemState extends State<HistoryItem> {
                               fontSize: 15,
                               fontWeight: FontWeight.w600,
                               fontFamily: "Open Sans",
-                            )),
+
+                            ),maxLines: 2,
+                          overflow: TextOverflow.clip,
+                        ),
                       ))
                           .toList(),
-                      RaisedButton(
-                        padding: EdgeInsets.symmetric(vertical: 3),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10.0),
-                            side: BorderSide(color: Colors.white, width: 1.5)),
-                        color: ColorConstant.LIGHT_VIOLET,
-                        child: Text(
-                          StringConstant.CANCEL,
-                          style: StyleConstant.priceTextStyle,
-                        ),
-                      )
                     ],
+
                   ),
                 ),
               ],

@@ -3,6 +3,7 @@ import 'dart:math';
 
 import 'package:MovieWorld/constant/ColorConstant.dart';
 import 'package:MovieWorld/constant/ConstantVar.dart';
+import 'package:MovieWorld/constant/ImageConstant.dart';
 import 'package:MovieWorld/constant/StringConstant.dart';
 import 'package:MovieWorld/constant/StyleConstant.dart';
 import 'package:MovieWorld/constant/UrlConstant.dart';
@@ -64,6 +65,14 @@ class _BookingTicketState extends State<BookingTicket> {
           data.add(DateTimeShowFilm(json['date'], time));
           print("show time film $filmId" + data.toString());
         });
+        while (data.length < 7) {
+          data.add(DateTimeShowFilm(
+              "Sun, " +
+                  (int.parse(data[data.length - 1].date.substring(5, 7)) + 1)
+                      .toString() +
+                  data[data.length - 1].date.substring(7),
+              []));
+        }
       });
       return true;
     } else {
@@ -96,9 +105,9 @@ class _BookingTicketState extends State<BookingTicket> {
                         name,
                         style: StyleConstant.headerTextStyle,
                         textAlign: TextAlign.center,
+                        overflow: TextOverflow.clip,
                       ),
-                    ]
-                ),
+                    ]),
                 SizedBox(
                   height: 30,
                 ),
@@ -164,139 +173,172 @@ class _BookingTicketState extends State<BookingTicket> {
                             ));
                       },
                     )),
-                SizedBox(
-                  height: 13,
-                ),
-                Text("Vanue", style: StyleConstant.formTextStyle),
-                SizedBox(
-                  height: 13,
-                ),
-                Container(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 4.0, vertical: 10.0),
-                    decoration: BoxDecoration(
-                        color: ColorConstant.LIGHT_VIOLET,
-                        borderRadius: BorderRadius.circular(20),
-                        boxShadow: [
-                          BoxShadow(
-                              color: Colors.black12,
-                              offset: Offset(0, 15),
-                              blurRadius: 15),
-                          BoxShadow(
-                              color: Colors.black12,
-                              offset: Offset(0, -10),
-                              blurRadius: 10)
-                        ]),
-                    child: Column(
-                      children: <Widget>[
-                        Container(
-                          width: double.infinity,
-                          height: MediaQuery.of(context).size.width * 0.23,
-                          child: ListView.builder(
-                            itemCount: data[selected].time.length,
-                            scrollDirection: Axis.horizontal,
-                            itemBuilder: (context, index) {
-                              return Container(
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.22,
-                                  height:
-                                      MediaQuery.of(context).size.width * 0.21,
-                                  margin: EdgeInsets.only(left: 3, right: 3),
-                                  decoration: timeSelected == index
-                                      ? BoxDecoration(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(25)),
-                                          gradient:
-                                              ColorConstant.RAINBOW_BUTTON,
-                                        )
-                                      : BoxDecoration(),
-                                  child: FlatButton(
-                                    onPressed: () => {
-                                      setState(() {
-                                        timeSelected = index;
-                                      })
-                                    },
-                                    child: Container(
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: <Widget>[
-                                          Text(
-                                            data[selected]
-                                                .time[index]
-                                                .substring(0, 5),
-                                            style:
-                                                StyleConstant.btnSelectedStyle,
-                                          ),
-                                          Text(
-                                            data[selected]
-                                                .time[index]
-                                                .substring(6),
-                                            style:
-                                                StyleConstant.normalTextStyle,
-                                            maxLines: 1,
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ));
-                            },
+                data[selected].time.length != 0
+                    ? Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          SizedBox(
+                            height: 13,
                           ),
-                        ),
-                        SizedBox(height: 10),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                          Text("Vanue", style: StyleConstant.formTextStyle),
+                          SizedBox(
+                            height: 13,
+                          ),
+                          Container(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 4.0, vertical: 10.0),
+                              decoration: BoxDecoration(
+                                  color: ColorConstant.LIGHT_VIOLET,
+                                  borderRadius: BorderRadius.circular(20),
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: Colors.black12,
+                                        offset: Offset(0, 15),
+                                        blurRadius: 15),
+                                    BoxShadow(
+                                        color: Colors.black12,
+                                        offset: Offset(0, -10),
+                                        blurRadius: 10)
+                                  ]),
+                              child: Column(
+                                children: <Widget>[
+                                  Container(
+                                    width: double.infinity,
+                                    height: MediaQuery.of(context).size.width *
+                                        0.23,
+                                    child: ListView.builder(
+                                      itemCount: data[selected].time.length,
+                                      scrollDirection: Axis.horizontal,
+                                      itemBuilder: (context, index) {
+                                        return Container(
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                0.22,
+                                            height: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                0.21,
+                                            margin: EdgeInsets.only(
+                                                left: 3, right: 3),
+                                            decoration: timeSelected == index
+                                                ? BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.all(
+                                                            Radius.circular(
+                                                                25)),
+                                                    gradient: ColorConstant
+                                                        .RAINBOW_BUTTON,
+                                                  )
+                                                : BoxDecoration(),
+                                            child: FlatButton(
+                                              onPressed: () => {
+                                                setState(() {
+                                                  timeSelected = index;
+                                                })
+                                              },
+                                              child: Container(
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.center,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: <Widget>[
+                                                    Text(
+                                                      data[selected]
+                                                          .time[index]
+                                                          .substring(0, 5),
+                                                      style: StyleConstant
+                                                          .btnSelectedStyle,
+                                                    ),
+                                                    Text(
+                                                      data[selected]
+                                                          .time[index]
+                                                          .substring(6),
+                                                      style: StyleConstant
+                                                          .normalTextStyle,
+                                                      maxLines: 1,
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ));
+                                      },
+                                    ),
+                                  ),
+                                  SizedBox(height: 10),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: <Widget>[
+                                      RoomType(type: "2D", selected: true),
+                                      RoomType(
+                                        type: "MX3D",
+                                        selected: false,
+                                      ),
+                                      RoomType(type: "MAX4D", selected: false),
+                                    ],
+                                  ),
+                                ],
+                              )),
+                          SizedBox(
+                            height: 30,
+                          ),
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              ButtonGradientLarge(
+                                  StringConstant.CHOOSE_YOUR_SEAT,
+                                  () => {
+                                        if (ConstantVar.jwt == "")
+                                          {
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        ChoosePageScreen()))
+                                          }
+                                        else
+                                          {
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) => SeatMap(
+                                                        filmId: filmId,
+                                                        dateTime: data[selected]
+                                                                .date
+                                                                .substring(5)
+                                                                .toString() +
+                                                            " " +
+                                                            data[selected]
+                                                                .time[
+                                                                    timeSelected]
+                                                                .toString(),
+                                                        filmName: name)))
+                                          }
+                                      }),
+                            ],
+                          ),
+                        ],
+                      )
+                    : Container(
+                        width: double.infinity,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: <Widget>[
-                            RoomType(type: "2D", selected: true),
-                            RoomType(
-                              type: "MX3D",
-                              selected: false,
+                            Image.asset(ImageConstant.CAMERA, height: 270),
+                            Text(
+                              'Showtimes aren\'t available!',
+                              style: TextStyle(
+                                  color: ColorConstant.GRAY_TEXT, fontSize: 20),
                             ),
-                            RoomType(type: "MAX4D", selected: false),
                           ],
                         ),
-                      ],
-                    )),
-                SizedBox(
-                  height: 30,
-                ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    ButtonGradientLarge(
-                        StringConstant.CHOOSE_YOUR_SEAT,
-                        () => {
-                              if (ConstantVar.jwt == "")
-                                {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              ChoosePageScreen()))
-                                }
-                              else
-                                {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => SeatMap(
-                                                filmId: filmId,
-                                                dateTime: data[selected]
-                                                        .date
-                                                        .toString() +
-                                                    " " +
-                                                    data[selected]
-                                                        .time[timeSelected]
-                                                        .toString(), filmName: name
-                                              )))
-                                }
-                            }),
-                  ],
-                ),
+                      ),
                 SizedBox(
                   height: MediaQuery.of(context).size.height * 0.1,
                 )

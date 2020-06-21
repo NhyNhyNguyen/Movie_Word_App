@@ -6,6 +6,7 @@ import 'package:MovieWorld/constant/StyleConstant.dart';
 import 'package:MovieWorld/constant/UrlConstant.dart';
 import 'package:MovieWorld/screens/User/ChoosePage.dart';
 import 'package:MovieWorld/screens/User/ChooseProfile.dart';
+import 'package:MovieWorld/screens/User/DetailScreen.dart';
 import 'package:MovieWorld/screens/User/History.dart';
 import 'package:MovieWorld/screens/User/LoginScreen.dart';
 import 'package:MovieWorld/screens/User/ResetPass.dart';
@@ -122,7 +123,7 @@ class _MenuState extends State<Menu> {
                     icon: Icons.edit,
                     selectHandle: () => {
                       Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => History()))
+                          MaterialPageRoute(builder: (context) => DetailScreen()))
                     },
                   ),
                   MenuItem(

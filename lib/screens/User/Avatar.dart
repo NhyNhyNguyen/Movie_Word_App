@@ -55,7 +55,7 @@ class Avatar extends StatelessWidget {
                           style: StyleConstant.btnSelectedStyle,
                         ),
                         Text(email,
-                          style: StyleConstant.priceTextStyle,
+                          style: StyleConstant.hintTextStyle,
                         )
                       ],
                     ),

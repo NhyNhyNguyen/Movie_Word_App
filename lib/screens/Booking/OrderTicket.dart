@@ -166,6 +166,7 @@ class _OrderTicketState extends State<OrderTicket> {
                               Text(
                                 filmDetail['name'],
                                 style: StyleConstant.headerTextStyle,
+                                overflow: TextOverflow.clip,
                               ),
                             ],
                           ),

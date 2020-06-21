@@ -102,18 +102,20 @@ class _LoginScreenState extends State<LoginScreen> {
     if (response.statusCode == 200) {
       ConstantVar.jwt = json.decode(response.body)["token"];
       print(response.body);
-      Modal.showSimpleCustomDialog(
-          context,
-          "Login successfull!",
-          onPressedLoginSuccess);
+//      Modal.showSimpleCustomDialog(
+//          context,
+//          "Login successfull!",
+//          onPressedLoginSuccess);
+      onPressedLoginSuccess(context);
       return User.fromJson(json.decode(response.body));
     } else {
       //show popup
       print("show popup");
-      Modal.showSimpleCustomDialog(
-          context,
-          "Login fail",
-          onPressedLoginFail);
+//      Modal.showSimpleCustomDialog(
+//          context,
+//          "Login fail",
+//          onPressedLoginFail);
+      onPressedLoginFail(context);
       return null;
     }
   }
@@ -166,7 +168,7 @@ class _LoginScreenState extends State<LoginScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
-                Text("Sign into your account",
+                Text("Sign your account",
                     style: StyleConstant.headerTextStyle),
                 SizedBox(
                   height: 13,

@@ -38,7 +38,7 @@ class _History extends State<History> {
     if (jwt != "" && jwt != null) {
       final response = await http.get(UrlConstant.HISTORY, headers: {
         'Content-Type': 'application/json',
-        'Accept': 'application/json',
+        'Accept': 'application/json; charset=utf-8',
         'Authorization': 'Bearer $jwt',
       });
       print(json.decode(response.body));

@@ -145,8 +145,6 @@ class _SeatMapState extends State<SeatMap> {
   }
 
   Future<bool> fetchListSeat() async {
-    filmId = 1;
-    dateTime = "30-06-2020 05:20 AM";
     //String time = dateTime.substring(5);
     final response = await http.get(
         UrlConstant.HOST + "/api/seats/showTime?filmId=$filmId&dateTime=$dateTime",
@@ -207,7 +205,7 @@ class _SeatMapState extends State<SeatMap> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     SizedBox(
-                      height: 10,
+                      height: 30,
                     ),
                     Text(dateTime, style: StyleConstant.formTextStyle),
                   ],

@@ -44,13 +44,13 @@ class StyleConstant {
   static const TextStyle largerHeaderTextStyle = TextStyle(
       color: ColorConstant.WHITE,
       fontFamily: "Open Sans",
-      fontSize: 35,
+      fontSize: 30,
       fontWeight: FontWeight.bold
   );
   static const TextStyle headerTextStyle = TextStyle(
       color: ColorConstant.WHITE,
       fontFamily: "Open Sans",
-      fontSize: 30,
+      fontSize: 27,
       fontWeight: FontWeight.bold
   );
 
