@@ -114,9 +114,8 @@ class _NowshowingScreen extends State<NowshowingScreen>  {
             ],
           ),
 
-        )
-        ,
-        "HOME", "Home");
+        ),
+        "HOME", "Home")
         : CommingsoonScreen();
   }
 }
