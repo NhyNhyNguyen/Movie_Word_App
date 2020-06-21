@@ -54,7 +54,7 @@ class _DetailMovieScreenState extends State<DetailMovieScreen> {
                 Poster(data["poster"], data["name"], data["genres"], data["ratePoint"], data["id"].toString()),
                 Description(data["filmDescription"]["premiere"], data["filmDescription"]["timeLimit"], data["filmDescription"]["artist"], data["filmDescription"]["director"], data["filmDescription"]["nation"],int.parse(id)),
                 MovieContent(data["filmDescription"]["content"]),
-                Trailer(data["trailer"]),
+//                Trailer(data["trailer"]),
                 Container(
                   height: MediaQuery.of(context).size.height * 0.7,
                   child: CommentMovie(data["id"].toString())),
