@@ -15,7 +15,7 @@ class UrlConstant{
   static const String IMAGE = HOST + "/api/image/";
   static const String POST_IMAGE = HOST + "/api/users/upload-avatar";
   static const String HISTORY = HOST + "/api/reservations/history";
-  static const String SHOW_TIME_FILM = HOST + "/api/showtimefilms";
+  static const String SHOW_TIME_FILM = HOST + "/api/showtimefilms/dateTime";
 
 
   static const String HOST_MOBILE= "http://10.0.2.2:9000/";

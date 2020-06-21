@@ -2,22 +2,16 @@ import 'dart:convert';
 import 'dart:math';
 
 import 'package:MovieWorld/constant/ColorConstant.dart';
-import 'package:MovieWorld/constant/ConstantVar.dart';
 import 'package:MovieWorld/constant/StyleConstant.dart';
 import 'package:MovieWorld/constant/UrlConstant.dart';
 import 'package:MovieWorld/layout/mainLayout.dart';
 import 'package:MovieWorld/model/Seat.dart';
-import 'package:MovieWorld/screens/Booking/Date.dart';
-import 'package:MovieWorld/screens/Booking/OrderTicket.dart';
 import 'package:MovieWorld/screens/Booking/RoomType.dart';
 import 'package:MovieWorld/screens/Booking/Seat.dart';
 import 'package:MovieWorld/screens/Booking/SeatMap.dart';
 import 'package:MovieWorld/screens/Booking/SeatStatus.dart';
-import 'package:MovieWorld/screens/ButtonGradientLarge.dart';
 import 'package:flutter/material.dart';
-import 'Time.dart';
 import 'package:http/http.dart' as http;
-import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class BookingTicket extends StatefulWidget {
@@ -32,6 +26,7 @@ class BookingTicket extends StatefulWidget {
 
 class _BookingTicketState extends State<BookingTicket> {
   List<String> data;
+  List<String> time;
   final int filmId;
   int selected = 0;
   int timeSelected = 0;
@@ -116,8 +111,8 @@ class _BookingTicketState extends State<BookingTicket> {
       setState(() {
         data = new List<String>();
         json.decode(response.body).forEach((json) {
-          data.add(json);
-          print(json);
+          data.add(json['date']);
+          print(json['timeList']);
         });
       });
       return true;
