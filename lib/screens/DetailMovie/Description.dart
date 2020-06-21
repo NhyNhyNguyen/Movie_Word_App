@@ -34,6 +34,7 @@ class Description extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           Container(
+            width: MediaQuery.of(context).size.width * 0.55,
             child: Column(
               mainAxisAlignment:  MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -53,13 +54,15 @@ class Description extends StatelessWidget {
                 Row(
                   children: <Widget>[
                     Text("Cast: ", style: StyleConstant.mediumTxtStyle,),
-                    Text(cast, style: StyleConstant.smallTxtStyle,)
+                    Text(cast, style: StyleConstant.smallTxtStyle,overflow: TextOverflow.ellipsis,
+                      maxLines: 1,)
                   ],
                 ),
                 Row(
                   children: <Widget>[
                     Text("Director: ", style: StyleConstant.mediumTxtStyle,),
-                    Text(director, style: StyleConstant.smallTxtStyle,)
+                    Text(director, style: StyleConstant.smallTxtStyle,overflow: TextOverflow.ellipsis,
+                      maxLines: 1,)
                   ],
                 ),
               ],

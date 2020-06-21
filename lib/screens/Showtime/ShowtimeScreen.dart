@@ -38,7 +38,10 @@ class _ShowtimeScreenState extends State<ShowtimeScreen>  {
     print(dateShowime);
     url = UrlConstant.URL_GET_SHOWTIME + dateShowime;
     {
-      http.get(url).then((http.Response response) {
+      http.get(url, headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json; charset=utf-8',
+      }).then((http.Response response) {
         setState(() => data = json.decode(response.body) );
       });
     };

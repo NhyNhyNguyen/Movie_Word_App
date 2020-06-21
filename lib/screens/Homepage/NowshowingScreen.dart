@@ -37,7 +37,10 @@ class _NowshowingScreen extends State<NowshowingScreen>  {
   void initState() {
     String url  = UrlConstant.URL_FILM + 'now-showing';
     {
-      http.get(url).then((http.Response response) {
+      http.get(url, headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json; charset=utf-8',
+      }).then((http.Response response) {
         setState((){
           data = new List<Movie>();
           json.decode(response.body).forEach((json) {

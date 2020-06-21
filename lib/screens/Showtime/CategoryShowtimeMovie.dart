@@ -37,7 +37,10 @@ class _CategoryShowtimeMovieState extends State<CategoryShowtimeMovie>  {
     print(dateShowtime);
     url = UrlConstant.URL_GET_SHOWTIME + dateShowtime;
     if(data==null){
-      http.get(url).then((http.Response response) {
+      http.get(url, headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json; charset=utf-8',
+      }).then((http.Response response) {
         setState(() => data = json.decode(response.body) );
       });
     };

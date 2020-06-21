@@ -1,4 +1,6 @@
+import 'dart:convert' ;
 import 'dart:convert';
+import 'dart:io';
 import 'package:MovieWorld/constant/ConstantVar.dart';
 import 'package:MovieWorld/constant/UrlConstant.dart';
 import 'package:http/http.dart' as http;
@@ -40,7 +42,7 @@ class UserDetail {
     if (jwt != "" || jwt != null) {
       final response = await http.get(UrlConstant.PROFILE, headers: {
         'Content-Type': 'application/json',
-        'Accept': 'application/json',
+        'Accept': 'application/json; charset=utf-8',
         'Authorization': 'Bearer $jwt',
       });
       print(json.decode(response.body));

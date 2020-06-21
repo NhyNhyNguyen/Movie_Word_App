@@ -35,7 +35,10 @@ class _BannerImageState extends State<BannerImage> {
   Widget build(BuildContext context) {
     String url = UrlConstant.URL_FILM + "now-showing";
     if (data == null) {
-      http.get(url).then((http.Response response) {
+      http.get(url, headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json; charset=utf-8',
+      }).then((http.Response response) {
         setState(() {
           data = new List<Movie>();
           json.decode(response.body).forEach((json) {

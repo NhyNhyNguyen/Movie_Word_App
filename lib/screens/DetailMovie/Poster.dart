@@ -40,7 +40,10 @@ class _PosterState extends State<Poster>{
     print("hello");
     String url = UrlConstant.URL_GET_RATE + "userId=" + ConstantVar.userDetail.id.toString() + "&filmId=" + id;
     {
-      http.get(url).then((http.Response response) {
+      http.get(url, headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json; charset=utf-8',
+      }).then((http.Response response) {
         setState(() => data = json.decode(response.body) );
       });
     };
@@ -89,15 +92,20 @@ class _PosterState extends State<Poster>{
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                   Container(
+                    width: MediaQuery.of(context).size.width*0.68,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.end,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Text(name ,
                           style: StyleConstant.bigTxtStyle,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 2,
                         ),
                         Text(listGenres,
                           style: StyleConstant.smallTxtStyle,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 1,
                         )
                       ],
                     ),

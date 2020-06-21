@@ -35,7 +35,10 @@ class _DetailMovieScreenState extends State<DetailMovieScreen> {
   Widget build(BuildContext context) {
     url  = UrlConstant.URL_FILM + id;
     if (data == null) {
-      http.get(url).then((http.Response response) {
+      http.get(url, headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json; charset=utf-8',
+      }).then((http.Response response) {
        setState(() => data = json.decode(response.body) );
       });
     };

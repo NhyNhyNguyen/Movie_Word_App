@@ -29,7 +29,10 @@ class CommentMovieState extends State<CommentMovie> {
 
     url  = UrlConstant.URL_COMMENT + idMovie;
     if (data == null) {
-      http.get(url).then((http.Response response) {
+      http.get(url, headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json; charset=utf-8',
+      }).then((http.Response response) {
         setState(() => data = json.decode(response.body) );
       });
     };
