@@ -88,4 +88,5 @@ static const NAME3 =" Frozen";
 
 //side bar
 static const NOT_LOGIN = "Not login";
+static const CHOOSE_YOUR_SEAT = "Choose your seat";
 }

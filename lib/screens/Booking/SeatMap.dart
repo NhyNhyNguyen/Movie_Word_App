@@ -1,3 +1,4 @@
+import 'package:MovieWorld/layout/mainLayout.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'dart:math';
@@ -13,17 +14,22 @@ import 'package:flutter/widgets.dart';
 
 class SeatMap extends StatefulWidget {
   final int filmId;
+  final String dateTime;
+  final String filmName;
 
-  const SeatMap({Key key, this.filmId}) : super(key: key);
+  const SeatMap({Key key, this.filmId, this.dateTime, this.filmName})
+      : super(key: key);
 
   @override
-  _SeatMapState createState() => _SeatMapState( this.filmId);
+  _SeatMapState createState() =>
+      _SeatMapState(this.filmId, this.dateTime, this.filmName);
 }
 
 class _SeatMapState extends State<SeatMap> {
-
   final int filmId;
-   _SeatMapState(this.filmId);
+  final String dateTime;
+  final String filmName;
+  _SeatMapState(this.filmId, this.dateTime, this.filmName);
 
   List<String> data;
   int selected = 0;
@@ -52,35 +58,40 @@ class _SeatMapState extends State<SeatMap> {
     final List<Widget> seatItems = <Widget>[];
     for (int i = 0; i <= col; i++) {
       for (int j = 0; j <= col; j++) {
-        if( i == 0 && j == 0) {
+        if (i == 0 && j == 0) {
+          seatItems.add(Container(
+            width: seatHeight,
+            height: 15,
+            margin: EdgeInsets.all(1),
+          ));
+        } else if (i == 0 && j > 0) {
           seatItems.add(Container(
               width: seatHeight,
               height: 15,
               margin: EdgeInsets.all(1),
-          ));
-        }else
-        if(i == 0 && j > 0){
-          seatItems.add(Container(
-              width: seatHeight,
-              height: 15,
-              margin: EdgeInsets.all(1),
-              child: Text((j).toString(), style: StyleConstant.normalTextStyle, textAlign: TextAlign.center,)
-          ));
-          if(j == 4){
-            seatItems.add(SizedBox(height: seatHeight,width: 0,))
-            ;
+              child: Text(
+                (j).toString(),
+                style: StyleConstant.normalTextStyle,
+                textAlign: TextAlign.center,
+              )));
+          if (j == 4) {
+            seatItems.add(SizedBox(
+              height: seatHeight,
+              width: 0,
+            ));
           }
-        } else
-        if(j == 0 && i > 0){
+        } else if (j == 0 && i > 0) {
           seatItems.add(Container(
               width: 15,
               height: seatHeight,
               margin: EdgeInsets.all(1),
-              child: Text(seatRow[i - 1], style: StyleConstant.normalTextStyle, textAlign: TextAlign.center,)
-          ));
-        }else
-        {
-          int status = (seats[i-1][j-1]).status;
+              child: Text(
+                seatRow[i - 1],
+                style: StyleConstant.normalTextStyle,
+                textAlign: TextAlign.center,
+              )));
+        } else {
+          int status = (seats[i - 1][j - 1]).status;
 
           seatItems.add(Container(
               width: seatHeight,
@@ -88,33 +99,34 @@ class _SeatMapState extends State<SeatMap> {
               margin: EdgeInsets.all(1),
               decoration: status == 0
                   ? BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(10)),
-                  border:
-                  Border.all(color: ColorConstant.LIGHT_VIOLET, width: 3))
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                      border: Border.all(
+                          color: ColorConstant.LIGHT_VIOLET, width: 3))
                   : status == 1
-                  ? BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(10)),
-                  color: ColorConstant.WHITE)
-                  : BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(10)),
-                gradient: ColorConstant.RAINBOW_BUTTON,
-              ),
+                      ? BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                          color: ColorConstant.WHITE)
+                      : BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                          gradient: ColorConstant.RAINBOW_BUTTON,
+                        ),
               child: FlatButton(
                 onPressed: () => {
                   setState(() {
-                    if (seats[i-1][j-1].status == 0) {
-                      seats[i-1][j-1].status = 2;
+                    if (seats[i - 1][j - 1].status == 0) {
+                      seats[i - 1][j - 1].status = 2;
                       seatSelected.add(seatRow[i - 1] + (j - 1).toString());
                     }
                   })
                 },
               )));
-          if(j == 4){
-            seatItems.add(SizedBox(height: seatHeight,width: 0,))
-            ;
+          if (j == 4) {
+            seatItems.add(SizedBox(
+              height: seatHeight,
+              width: 0,
+            ));
           }
         }
-
       }
     }
     return seatItems;
@@ -128,8 +140,8 @@ class _SeatMapState extends State<SeatMap> {
   }
 
   Future<bool> fetchListSeat() async {
-    final response = await http
-        .get(UrlConstant.SHOW_TIME_FILM + "?filmId=$filmId", headers: {
+    final response =
+        await http.get(UrlConstant.GET_LIST_SEAT + "?filmId=$filmId", headers: {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
     });
@@ -156,52 +168,88 @@ class _SeatMapState extends State<SeatMap> {
 
   double seatHeight = 20;
 
-
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        children: <Widget>[
-          Container(
-              height: seatHeight*18 + 60,
-              padding:
-              EdgeInsets.symmetric(horizontal: 4.0, vertical: 10.0),
-              child: new GridView.count(
-                  crossAxisCount: 10,
-                  childAspectRatio: 1.0,
-                  padding: const EdgeInsets.all(4.0),
-                  mainAxisSpacing: 4.0,
-                  crossAxisSpacing: 4.0,
-                  physics: NeverScrollableScrollPhysics(),
-                  children: _getSeats())),
-          SizedBox(
-            height: 10,
+    return MainLayOut.getMailLayout(
+        context,
+        Container(
+          color: ColorConstant.VIOLET,
+          width: double.infinity,
+          height: double.infinity,
+          child: SingleChildScrollView(
+            physics: AlwaysScrollableScrollPhysics(),
+            padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                   Text(
+                  filmName,
+                  style: StyleConstant.headerTextStyle,
+                  textAlign: TextAlign.center,
+                ),
+              ]
+                ),
+                SizedBox(
+                  height: 30,
+                ),
+                Text(dateTime, style: StyleConstant.formTextStyle),
+                Container(
+                  child: Column(
+                    children: <Widget>[
+                      Container(
+                          height: seatHeight * 18 + 60,
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 4.0, vertical: 10.0),
+                          child: new GridView.count(
+                              crossAxisCount: 10,
+                              childAspectRatio: 1.0,
+                              padding: const EdgeInsets.all(4.0),
+                              mainAxisSpacing: 4.0,
+                              crossAxisSpacing: 4.0,
+                              physics: NeverScrollableScrollPhysics(),
+                              children: _getSeats())),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text("Seat No: " + seatSelected.join(", "),
+                              style: StyleConstant.normalTextStyle),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          ButtonGradientLarge(
+                              "Booking",
+                              () => {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                OrderTicket()))
+                                  }),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.1,
+                )
+              ],
+            ),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Text("Seat No: " + seatSelected.join(", "),
-                  style: StyleConstant.normalTextStyle),
-            ],
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              ButtonGradientLarge(
-                  "Choose your seat",
-                      () => {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => OrderTicket()))
-                  }),
-            ],
-          ),
-        ],
-      ),
-    );
+        ),
+        "USER",
+        "Choose Seat");
   }
 }

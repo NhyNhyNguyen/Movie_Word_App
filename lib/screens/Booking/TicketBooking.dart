@@ -2,99 +2,45 @@ import 'dart:convert';
 import 'dart:math';
 
 import 'package:MovieWorld/constant/ColorConstant.dart';
+import 'package:MovieWorld/constant/ConstantVar.dart';
+import 'package:MovieWorld/constant/StringConstant.dart';
 import 'package:MovieWorld/constant/StyleConstant.dart';
 import 'package:MovieWorld/constant/UrlConstant.dart';
 import 'package:MovieWorld/layout/mainLayout.dart';
+import 'package:MovieWorld/model/DateTimeShowFilm.dart';
 import 'package:MovieWorld/model/Seat.dart';
 import 'package:MovieWorld/screens/Booking/RoomType.dart';
-import 'package:MovieWorld/screens/Booking/Seat.dart';
 import 'package:MovieWorld/screens/Booking/SeatMap.dart';
-import 'package:MovieWorld/screens/Booking/SeatStatus.dart';
+import 'package:MovieWorld/screens/ButtonGradientLarge.dart';
+import 'package:MovieWorld/screens/User/ChoosePage.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/widgets.dart';
 
 class BookingTicket extends StatefulWidget {
   final int filmId;
-  List<String> selectedSeat;
+  final String name;
 
-  BookingTicket({Key key, this.filmId}) : super(key: key);
+  BookingTicket({Key key, this.filmId, this.name}) : super(key: key);
 
   @override
-  _BookingTicketState createState() => _BookingTicketState(this.filmId);
+  _BookingTicketState createState() =>
+      _BookingTicketState(this.filmId, this.name);
 }
 
 class _BookingTicketState extends State<BookingTicket> {
-  List<String> data;
-  List<String> time;
+  List<DateTimeShowFilm> data = [];
   final int filmId;
+  final String name;
   int selected = 0;
   int timeSelected = 0;
-  List<String> seatSelected = [];
 
-  int row = 8;
-  int col = 8;
-  List<String> seatRow = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
-
-  var seats;
-
-  void createData() {
-    seats = List.generate(row, (i) => List(col), growable: false);
-    for (int i = 0; i < row; i++) {
-      for (int j = 0; j < col; j++) {
-        String id = seatRow[i] + j.toString();
-        int status = (Random()).nextInt(2);
-        seats[i][j] = Seat(id, status);
-      }
-    }
-    print(seats);
-  }
-
-  _BookingTicketState(this.filmId);
-
-  List<Widget> _getSeats() {
-    final List<Widget> seatItems = <Widget>[];
-    for (int i = 0; i < col; i++) {
-      for (int j = 0; j < col; j++) {
-        int status = (seats[i][j]).status;
-        seatItems.add(Container(
-            width: seatHeight,
-            height: seatHeight,
-            margin: EdgeInsets.all(4),
-            decoration: status == 0
-                ? BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
-                    border:
-                        Border.all(color: ColorConstant.LIGHT_VIOLET, width: 3))
-                : status == 1
-                    ? BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(10)),
-                        color: ColorConstant.WHITE)
-                    : BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(10)),
-                        gradient: ColorConstant.RAINBOW_BUTTON,
-                      ),
-            child: FlatButton(
-              onPressed: () => {
-                setState(() {
-                  if (seats[i][j].status == 0) {
-                    seats[i][j].status = 2;
-                    seatSelected.add(seatRow[i] + j.toString());
-                    print(seatRow[i] + j.toString());
-                  }
-                })
-              },
-            )));
-      }
-    }
-    return seatItems;
-  }
+  _BookingTicketState(this.filmId, this.name);
 
   @override
   void initState() {
     print("film id" + filmId.toString());
     fetchShowTimeFilm().then((value) => setState(() {}));
-    createData();
   }
 
   Future<bool> fetchShowTimeFilm() async {
@@ -109,10 +55,14 @@ class _BookingTicketState extends State<BookingTicket> {
       // If the server did return a 200 OK response,
       // then parse the JSON
       setState(() {
-        data = new List<String>();
+        data = new List<DateTimeShowFilm>();
         json.decode(response.body).forEach((json) {
-          data.add(json['date']);
-          print(json['timeList']);
+          List<String> time = [];
+          json['timeList'].forEach((e) {
+            time.add(e);
+          });
+          data.add(DateTimeShowFilm(json['date'], time));
+          print("show time film $filmId" + data.toString());
         });
       });
       return true;
@@ -124,11 +74,8 @@ class _BookingTicketState extends State<BookingTicket> {
     }
   }
 
-  double seatHeight = 30;
-
   @override
   Widget build(BuildContext context) {
-    seatHeight = MediaQuery.of(context).size.width * 0.08;
     return MainLayOut.getMailLayout(
         context,
         Container(
@@ -142,7 +89,20 @@ class _BookingTicketState extends State<BookingTicket> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Text(data[selected], style: StyleConstant.formTextStyle),
+                Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text(
+                        name,
+                        style: StyleConstant.headerTextStyle,
+                        textAlign: TextAlign.center,
+                      ),
+                    ]
+                ),
+                SizedBox(
+                  height: 30,
+                ),
+                Text(data[selected].date, style: StyleConstant.formTextStyle),
                 SizedBox(
                   height: 13,
                 ),
@@ -190,11 +150,11 @@ class _BookingTicketState extends State<BookingTicket> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: <Widget>[
                                     Text(
-                                      data[index].substring(5, 7),
+                                      data[index].date.substring(5, 7),
                                       style: StyleConstant.formTextStyle,
                                     ),
                                     Text(
-                                      data[index].substring(0, 3),
+                                      data[index].date.substring(0, 3),
                                       style: StyleConstant.moreSmallTextStyle,
                                       maxLines: 1,
                                     ),
@@ -233,7 +193,7 @@ class _BookingTicketState extends State<BookingTicket> {
                           width: double.infinity,
                           height: MediaQuery.of(context).size.width * 0.23,
                           child: ListView.builder(
-                            itemCount: data.length,
+                            itemCount: data[selected].time.length,
                             scrollDirection: Axis.horizontal,
                             itemBuilder: (context, index) {
                               return Container(
@@ -264,12 +224,16 @@ class _BookingTicketState extends State<BookingTicket> {
                                             MainAxisAlignment.center,
                                         children: <Widget>[
                                           Text(
-                                            "2:00",
+                                            data[selected]
+                                                .time[index]
+                                                .substring(0, 5),
                                             style:
                                                 StyleConstant.btnSelectedStyle,
                                           ),
                                           Text(
-                                            "AM",
+                                            data[selected]
+                                                .time[index]
+                                                .substring(8),
                                             style:
                                                 StyleConstant.normalTextStyle,
                                             maxLines: 1,
@@ -296,49 +260,43 @@ class _BookingTicketState extends State<BookingTicket> {
                         ),
                       ],
                     )),
-                Container(
-                  height: 90,
-                  child: GridView.count(
-                    physics: NeverScrollableScrollPhysics(),
-                    crossAxisCount: 3,
-                    children: <Widget>[
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          SeatScreen(status: SeatStatus.AVAILABLE),
-                          Text(
-                            "AVAILABLE",
-                            style: StyleConstant.smallTextStyle,
-                          ),
-                        ],
-                      ),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          SeatScreen(status: SeatStatus.RESERVED),
-                          Text(
-                            "RESERVED",
-                            style: StyleConstant.smallTextStyle,
-                          ),
-                        ],
-                      ),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          SeatScreen(status: SeatStatus.SELECTED),
-                          Text(
-                            "SELECTED",
-                            style: StyleConstant.smallTextStyle,
-                          ),
-                        ],
-                      )
-                    ],
-                  ),
+                SizedBox(
+                  height: 30,
                 ),
-                SeatMap(filmId: filmId,),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    ButtonGradientLarge(
+                        StringConstant.CHOOSE_YOUR_SEAT,
+                        () => {
+                              if (ConstantVar.jwt == "")
+                                {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              ChoosePageScreen()))
+                                }
+                              else
+                                {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => SeatMap(
+                                                filmId: filmId,
+                                                dateTime: data[selected]
+                                                        .date
+                                                        .toString() +
+                                                    " " +
+                                                    data[selected]
+                                                        .time[timeSelected]
+                                                        .toString(), filmName: name
+                                              )))
+                                }
+                            }),
+                  ],
+                ),
                 SizedBox(
                   height: MediaQuery.of(context).size.height * 0.1,
                 )
@@ -347,7 +305,6 @@ class _BookingTicketState extends State<BookingTicket> {
           ),
         ),
         "USER",
-        "Ticket booking");
-    ;
+        "Choose Time");
   }
 }

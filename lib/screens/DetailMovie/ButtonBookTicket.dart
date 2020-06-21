@@ -9,8 +9,9 @@ import 'package:flutter/material.dart';
 class ButtonBookTicket extends StatelessWidget {
   final String text;
   final int filmId;
+  final String filmName;
 
-  ButtonBookTicket( this.text, this.filmId);
+  ButtonBookTicket( this.text, this.filmId, this.filmName);
   @override
   Widget build(BuildContext context) {
     return
@@ -31,7 +32,7 @@ class ButtonBookTicket extends StatelessWidget {
           onPressed: ()=>{
           Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => BookingTicket(filmId: filmId,)),
+          MaterialPageRoute(builder: (context) => BookingTicket(filmId: filmId, name: filmName)),
           )
           },
         ),
