@@ -32,8 +32,6 @@ class BannerImage extends StatefulWidget {
 class _BannerImageState extends State<BannerImage> {
   @override
   Widget build(BuildContext context) {
-
-
     String url = UrlConstant.URL_FILM + "now-showing";
     if (data == null) {
       http.get(url).then((http.Response response) {
@@ -50,7 +48,7 @@ class _BannerImageState extends State<BannerImage> {
     );
 
     List<dynamic> listImage = data.map(
-        (item) => item.poster,
+          (item) => item.poster,
     ).toList();
 
     getRandomSubList(listImage);
@@ -75,8 +73,8 @@ class _BannerImageState extends State<BannerImage> {
             decoration: BoxDecoration(
                 color: ColorConstant.LIGHT_VIOLET,
                 borderRadius: BorderRadius.only(
-                bottomRight: Radius.circular(30),
-                bottomLeft: Radius.circular(30))
+                    bottomRight: Radius.circular(30),
+                    bottomLeft: Radius.circular(30))
             ),
           ),
           Positioned(

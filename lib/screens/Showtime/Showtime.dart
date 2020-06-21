@@ -69,7 +69,7 @@ class _ShowtimeState extends State<Showtime> {
                 String dateShowime = dd + "/" + mm + "/" + yyyy;
                 print(dateShowime);
                 url = UrlConstant.URL_GET_SHOWTIME + dateShowime;
-                {
+                    if(data == null){
                   http.get(url).then((http.Response response) {
                     setState(() => data = json.decode(response.body) );
                   });

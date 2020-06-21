@@ -47,9 +47,10 @@ class _PosterState extends State<Poster>{
     lastRate = data["point"];
   }
 
-  String listGenres="";
+
   @override
   Widget build(BuildContext context) {
+    String listGenres="";
     for(var item in genres){
       listGenres = listGenres + ", " + item['name'];
     }

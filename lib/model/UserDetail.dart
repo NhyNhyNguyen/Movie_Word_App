@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:MovieWorld/constant/ConstantVar.dart';
 import 'package:MovieWorld/constant/UrlConstant.dart';
 import 'package:http/http.dart' as http;
@@ -31,7 +30,6 @@ class UserDetail {
       username: json['username'],
       fullName: json['fullName'],
       email: json['email'],
-
       address: json['address'],
       phone: json['phone'],
       avt: json['avatar'],

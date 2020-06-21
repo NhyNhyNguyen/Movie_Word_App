@@ -1,3 +1,8 @@
+import 'dart:convert';
+import 'package:MovieWorld/constant/ConstantVar.dart';
+import 'package:MovieWorld/constant/UrlConstant.dart';
+import 'package:http/http.dart' as http;
+
 class Movie {
   final int id;
   final String name;
@@ -43,8 +48,12 @@ class Movie {
       content: json['content'],
       nation: json['nation'],
       genres: json['genres'],
-
-
     );
   }
+
+
+
+
+
+
 }

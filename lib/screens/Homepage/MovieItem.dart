@@ -19,9 +19,10 @@ class MovieItem extends StatelessWidget {
       @required this.genres
       ) ;
 
-  String listGenres="";
+
   @override
   Widget build(BuildContext context) {
+    String listGenres="";
     for(var item in genres){
       listGenres = listGenres + ", " + item['name'];
     }
