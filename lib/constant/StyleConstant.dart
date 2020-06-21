@@ -119,6 +119,21 @@ class StyleConstant {
     color: ColorConstant.GRAY_TEXT,
   );
 
+  static const TextStyle menuText = TextStyle(
+      color: Colors.black,
+      fontFamily: "Open Sans",
+      fontSize: 25,
+      fontWeight: FontWeight.bold
+  );
+
+
+  static const TextStyle menuSmallText = TextStyle(
+      color: Colors.black,
+      fontFamily: "Open Sans",
+      fontSize: 20,
+      fontWeight: FontWeight.bold
+  );
+
 
   static const UnderlineInputBorder enabledBorder =
       UnderlineInputBorder(borderSide: BorderSide(color: Colors.white));

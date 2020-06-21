@@ -8,13 +8,14 @@ import 'Test.dart';
 
 
 class Description extends StatelessWidget {
+  final int filmId;
   final String premiere;
   final String timeLimit;
   final String cast;
   final String director;
   final String nation;
 
-  const Description(this.premiere, this.timeLimit,this.cast, this.director, this.nation);
+  const Description(this.premiere, this.timeLimit,this.cast, this.director, this.nation, this.filmId);
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +66,7 @@ class Description extends StatelessWidget {
             ),
           ),
           Container(
-            child: ButtonBookTicket(StringConstant.BOOK_TICKET),
+            child: ButtonBookTicket(StringConstant.BOOK_TICKET, filmId),
           )
         ],
       ),

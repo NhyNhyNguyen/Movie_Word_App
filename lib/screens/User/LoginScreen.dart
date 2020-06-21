@@ -81,8 +81,6 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget _loginBtn(BuildContext context) {
     return ButtonGradientLarge(StringConstant.SIGN_IN, () {
       if (_formKey.currentState.validate()) {
-        Modal.showSimpleCustomDialog(context, "Login successfull", () => {});
-
         login(context, usernameController.text, passController.text);
       }
     });
@@ -154,8 +152,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    usernameController.text = "hang2k";
-    passController.text = "123123";
+    usernameController.text = "teo1";
+    passController.text = "fun123";
     return MainLayOut.getMailLayout(
         context,
         Container(
@@ -224,6 +222,6 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
           ),
         ),
-        "USER");
+        "USER", "Login");
   }
 }

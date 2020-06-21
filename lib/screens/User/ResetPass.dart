@@ -34,7 +34,7 @@ class _ResetPassScreenState extends State<ResetPassScreen> {
     var queryParameters = {
       'email': emailController.text,
     };
-    var uri = Uri.http(UrlConstant.HOST_1, '/api/reset-password', queryParameters);
+    var uri = Uri.http(UrlConstant.HOST, '/api/reset-password', queryParameters);
     http.Response response = await http.post(
       uri,
       headers: <String, String>{
@@ -143,7 +143,7 @@ class _ResetPassScreenState extends State<ResetPassScreen> {
                 ),
               ),
             ),
-            "USER")
+            "USER", "Reset password")
         : LoginScreen();
   }
 }

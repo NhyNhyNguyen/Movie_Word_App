@@ -80,6 +80,6 @@ class _ChoosePageScreen extends State<ChoosePageScreen> {
               ],
             )
          ),
-        "USER"): ChooseProfile();
+        "USER", "Choose Page"): ChooseProfile();
   }
 }

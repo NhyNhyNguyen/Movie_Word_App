@@ -40,6 +40,6 @@ class NewsDetailScreen extends StatelessWidget  {
 
         )
         ,
-        "FILM");
+        "FILM", "NewDetail");
   }
 }

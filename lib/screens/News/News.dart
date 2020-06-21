@@ -77,6 +77,6 @@ class _NewsScreen extends State<NewsScreen>  {
             ],
           ),
           ),
-        "FILM");
+        "FILM", "News");
   }
 }
