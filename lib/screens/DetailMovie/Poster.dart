@@ -6,6 +6,7 @@ import 'package:MovieWorld/constant/UrlConstant.dart';
 import 'package:MovieWorld/model/UserDetail.dart';
 import 'package:MovieWorld/screens/RateMovie/RatingDialog.dart';
 import 'package:MovieWorld/screens/User/ChoosePage.dart';
+import 'package:MovieWorld/screens/User/LoginScreen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:rating_dialog/rating_dialog.dart';
@@ -140,7 +141,7 @@ class _PosterState extends State<Poster>{
                           }
                           else {
                             Navigator.push(context, MaterialPageRoute(
-                                builder: (context) => ChoosePageScreen()));
+                                builder: (context) => LoginScreen()));
                           }
                         },
                         child: Row(

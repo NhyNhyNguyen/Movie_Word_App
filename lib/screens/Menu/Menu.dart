@@ -149,7 +149,7 @@ class _MenuState extends State<Menu> {
                         ConstantVar.userDetail = null,
                       ConstantVar.jwt = "",
                       Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => ChoosePageScreen()))
+                          MaterialPageRoute(builder: (context) => LoginScreen()))
                     },
 
                   ),

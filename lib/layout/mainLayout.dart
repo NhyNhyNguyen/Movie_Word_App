@@ -149,7 +149,7 @@ class MainLayOut {
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) =>
-                                                ChoosePageScreen()));
+                                                LoginScreen()));
                                   },
                                   child: type == 'USER'
                                       ? Image.asset(ImageConstant.PERSON_YELLOW,

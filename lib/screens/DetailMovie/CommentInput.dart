@@ -6,6 +6,7 @@ import 'package:MovieWorld/constant/ImageConstant.dart';
 import 'package:MovieWorld/constant/UrlConstant.dart';
 import 'package:MovieWorld/screens/DetailMovie/DetailMovieScreen.dart';
 import 'package:MovieWorld/screens/User/ChoosePage.dart';
+import 'package:MovieWorld/screens/User/LoginScreen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -46,7 +47,7 @@ class _CommentInputState extends State<CommentInput> {
           MaterialPageRoute(builder: (context) => DetailMovieScreen(idMovie)));
     } else {
       Navigator.push(context,
-          MaterialPageRoute(builder: (context) => ChoosePageScreen()));
+          MaterialPageRoute(builder: (context) => LoginScreen()));
     }
     return response;
   }
@@ -94,7 +95,7 @@ class _CommentInputState extends State<CommentInput> {
               ? postComment()
               : Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => ChoosePageScreen()),
+              MaterialPageRoute(builder: (context) => LoginScreen()),
               ) },
           )
         ],

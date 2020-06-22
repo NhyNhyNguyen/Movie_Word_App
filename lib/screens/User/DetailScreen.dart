@@ -18,6 +18,7 @@ import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../../modal.dart';
 import '../ButtonGradientLarge.dart';
 import 'UploadAvartar.dart';
 import 'UploadImage.dart';
@@ -47,26 +48,16 @@ class _DetailScreenState extends State<DetailScreen> {
     setState(() {
       file = ImagePicker.pickImage(source: ImageSource.gallery);
     });
-    setStatus('');
-  }
-
-  setStatus(String message) {
-    setState(() {
-      status = message;
-    });
   }
 
   startUpload() {
-    setStatus('Uploading Image...');
     if (null == tmpFile) {
-      setStatus(errMessage);
       return;
     }
     String fileName = tmpFile.path.split('/').last;
     print(tmpFile.path + fileName);
     _uploadFileAsFormData(tmpFile.path, fileName);
   }
-
 
   Future<void> _uploadFileAsFormData(String path, String fileName) async {
     try {
@@ -92,6 +83,11 @@ class _DetailScreenState extends State<DetailScreen> {
         UrlConstant.POST_IMAGE,
         data: formData,
       );
+      if (response.statusCode == 200) {
+        Modal.showSimpleCustomDialog(context, "Upload Sucessfull!", null);
+      } else {
+        Modal.showSimpleCustomDialog(context, "Upload fail!", null);
+      }
     } catch (err) {
       print('uploading error: $err');
     }
@@ -105,143 +101,148 @@ class _DetailScreenState extends State<DetailScreen> {
             null != snapshot.data) {
           tmpFile = snapshot.data;
           base64Image = base64Encode(snapshot.data.readAsBytesSync());
+          startUpload();
           return
-            Stack(
-                alignment: Alignment.bottomRight,
+            Stack(alignment: Alignment.bottomCenter, children: <Widget>[
+              Column(
                 children: <Widget>[
                   Container(
-                    margin: EdgeInsets.only(right: 20),
-                    width: 180,
-                    height: 180,
+                    height: MediaQuery.of(context).size.height * 0.3,
+                    width: double.infinity,
                     decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      border: Border.all(color: Colors.grey, width: 6),
-                    ),
-                    child: Image.file(
-                      snapshot.data,
-                      fit: BoxFit.cover,
-                    ),
+                        shape: BoxShape.rectangle,
+                        image: DecorationImage(
+                          image: NetworkImage(UrlConstant.IMAGE +
+                              "photo1528790532372-1528790532372684051980-15889023877795083171.jpg"),
+                          fit: BoxFit.cover,
+                        ),
+                        borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(10),
+                            topRight: Radius.circular(10))),
+                  ),
+                  SizedBox(
+                    height: 70,
+                  )
+                ],
+              ),
+              Stack(
+                alignment: Alignment.bottomRight,
+                children: <Widget>[
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+        Container(
+        width: 180,
+        height: 180,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            image: DecorationImage(
+              image: FileImage(snapshot.data),
+              fit: BoxFit.cover,
+            ),
+            // border: Border.all(color: Colors.white70, width: 4),
+          ),
+
+
+        )                    ],
                   ),
                   Container(
                     child: IconButton(
-                      icon: Icon(Icons.camera_alt,
+                      icon: Icon(
+                        Icons.camera_alt,
                         size: 30,
-                        color: Colors.black,),
+                        color: Colors.black,
+                      ),
                       onPressed: chooseImage,
-                    )
-                    , width: 45,
-                    height: 45,
-                    decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Colors.grey
                     ),
+                    width: 45,
+                    height: 45,
+                    decoration:
+                    BoxDecoration(shape: BoxShape.circle, color: Colors.grey),
                   ),
-                ]
-            );
+                ],
+              ),
+            ]);
         } else if (null != snapshot.error) {
           return const Text(
             'Error Picking Image',
             textAlign: TextAlign.center,
           );
         } else {
-          return
-
+          return Stack(alignment: Alignment.bottomCenter, children: <Widget>[
+            Column(
+              children: <Widget>[
+                Container(
+                  height: MediaQuery.of(context).size.height * 0.3,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                      shape: BoxShape.rectangle,
+                      image: DecorationImage(
+                        image: NetworkImage(UrlConstant.IMAGE +
+                            "photo1528790532372-1528790532372684051980-15889023877795083171.jpg"),
+                        fit: BoxFit.cover,
+                      ),
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(10),
+                          topRight: Radius.circular(10))),
+                ),
+                SizedBox(
+                  height: 70,
+                )
+              ],
+            ),
             Stack(
-                alignment: Alignment.bottomCenter,
-                children: <Widget>[
-                  Column(
-                    children: <Widget>[
-                      Container(
-                        height: MediaQuery.of(context).size.height*0.3,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.rectangle,
-                          image: DecorationImage(
-                            image: NetworkImage(
-                                UrlConstant.IMAGE + "photo1528790532372-1528790532372684051980-15889023877795083171.jpg"),
-                            fit: BoxFit.cover,
-                          ),
-                          borderRadius: BorderRadius.only(topLeft: Radius.circular(10), topRight: Radius.circular(10))
-                        ),
-                      ),
-                      SizedBox(
-                        height: 70,
-                      )
-                    ],
-                  ),
-
-                  Stack(
-                    alignment: Alignment.bottomRight,
-                    children: <Widget>[
-                      Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                        children: <Widget>[
-                          Container(
-                            width: 180,
-                            height: 180,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              image: DecorationImage(
-                                image: ConstantVar.userDetail.avt == null
-                                    ? AssetImage(ImageConstant.LOGO)
-                                    : NetworkImage(
-                                    UrlConstant.IMAGE + ConstantVar.userDetail.avt),
-                                fit: BoxFit.cover,
-                              ),
-                             // border: Border.all(color: Colors.white70, width: 4),
-                            ),
-                          ),
-                        ],
-                      ),
+              alignment: Alignment.bottomRight,
+              children: <Widget>[
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
                     Container(
-                        child: IconButton(
-                          icon: Icon(Icons.camera_alt,
-                            size: 30,
-                            color: Colors.black,),
-                          onPressed: chooseImage,
-                        )
-                        , width: 45,
-                        height: 45,
-                        decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: Colors.grey
+                      width: 180,
+                      height: 180,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        image: DecorationImage(
+                          image: ConstantVar.userDetail.avt == null
+                              ? AssetImage(ImageConstant.LOGO)
+                              : NetworkImage(UrlConstant.IMAGE +
+                                  ConstantVar.userDetail.avt),
+                          fit: BoxFit.cover,
                         ),
+                        // border: Border.all(color: Colors.white70, width: 4),
                       ),
-                    ],
+                    ),
+                  ],
+                ),
+                Container(
+                  child: IconButton(
+                    icon: Icon(
+                      Icons.camera_alt,
+                      size: 30,
+                      color: Colors.black,
+                    ),
+                    onPressed: chooseImage,
                   ),
-                ]
-            );
-//            UploadAvatar(image: Container(
-//              width: 180,
-//              height: 180,
-//              decoration: BoxDecoration(
-//                shape: BoxShape.circle,
-//                image: DecorationImage(
-//                  image: ConstantVar.userDetail.avt == null
-//                      ? AssetImage(ImageConstant.LOGO)
-//                      : NetworkImage(
-//                      UrlConstant.IMAGE + ConstantVar.userDetail.avt),
-//                  fit: BoxFit.cover,
-//                ),
-//              ),
-//            ), selected: chooseImage,);
+                  width: 45,
+                  height: 45,
+                  decoration:
+                      BoxDecoration(shape: BoxShape.circle, color: Colors.grey),
+                ),
+              ],
+            ),
+          ]);
         }
       },
     );
   }
-
 
   DateTime selectedDate = DateTime.now();
   final _formKey = GlobalKey<FormState>();
 
   Widget _SaveBtn() {
     return ButtonGradientLarge(
-        StringConstant.SAVE_CHANGES,
-            () => {
-          postUserDetail()
-        });
+        StringConstant.SAVE_CHANGES, () => {postUserDetail()});
   }
-
 
   Future<http.Response> postUserDetail() async {
     final http.Response response = await http.put(
@@ -249,8 +250,7 @@ class _DetailScreenState extends State<DetailScreen> {
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Accept': 'application/json',
-        'Authorization':
-        'Bearer ' + ConstantVar.jwt,
+        'Authorization': 'Bearer ' + ConstantVar.jwt,
       },
       body: jsonEncode(<String, String>{
         "username": usernameController.text,
@@ -259,15 +259,14 @@ class _DetailScreenState extends State<DetailScreen> {
         "email": emailController.text,
         "phone": phoneController.text,
         "address": addressController.text,
-        "password":"123"
+        "password": "123"
       }),
     );
     if (response.statusCode == 200) {
-      Navigator.push(context,
-          MaterialPageRoute(builder: (context) => ChooseProfile()));
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => ChooseProfile()));
       UserDetail.fetchUserDetail(ConstantVar.jwt);
-    } else {
-    }
+    } else {}
     return response;
   }
 
@@ -275,21 +274,21 @@ class _DetailScreenState extends State<DetailScreen> {
   initState() {
     super.initState();
     ConstantVar.isLogin = false;
-    if (ConstantVar.userDetail != null){
+    if (ConstantVar.userDetail != null) {
       usernameController.text = ConstantVar.userDetail.username;
       fullNameController.text = ConstantVar.userDetail.fullName;
       addressController.text = ConstantVar.userDetail.address;
       phoneController.text = ConstantVar.userDetail.phone;
-      emailController.text = ConstantVar.userDetail.email;}
-    else{
-      UserDetail.fetchUserDetail(ConstantVar.jwt).then((value) => setState((){
-      }));    }
-
+      emailController.text = ConstantVar.userDetail.email;
+    } else {
+      UserDetail.fetchUserDetail(ConstantVar.jwt)
+          .then((value) => setState(() {}));
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    if (ConstantVar.userDetail != null){
+    if (ConstantVar.userDetail != null) {
       return MainLayOut.getMailLayout(
           context,
           Container(
@@ -303,22 +302,10 @@ class _DetailScreenState extends State<DetailScreen> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-//                  Text(StringConstant.EDIT,
-//                      style: StyleConstant.headerTextStyle),
                   showImage(),
-                  FlatButton(
-                    child: Text(StringConstant.CHANGE_PICTURE, style:TextStyle(
-                        color: ColorConstant.BLUE_TEXT,
-                        fontSize: 20,
-                        fontWeight: FontWeight.w600,
-                        fontFamily: "Open Sans",
-                        decoration: TextDecoration.underline
-                    ) ),
-                    onPressed: startUpload,
-                  ),
                   Container(
                     padding:
-                    EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
+                        EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
                     child: Form(
                       key: _formKey,
                       child: Column(children: <Widget>[
@@ -363,8 +350,9 @@ class _DetailScreenState extends State<DetailScreen> {
               ),
             ),
           ),
-          "USER", "User Detail");}
-    else {
+          "USER",
+          "User Detail");
+    } else {
       return LoginScreen();
     }
   }
