@@ -44,11 +44,9 @@ class _ResetPassScreenState extends State<ResetPassScreen> {
     );
 
     if (response.statusCode == 200) {
-      Modal.showSimpleCustomDialog(
-          context, "Please enter mail\nto determine reset pass", onPressedResetPassSuccess);
+
     } else {
-        Modal.showSimpleCustomDialog(
-            context, "Please enter corrert mail", onPressedResetPassFail);
+
 
     }
   }

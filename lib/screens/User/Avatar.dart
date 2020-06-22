@@ -12,7 +12,7 @@ class Avatar extends StatelessWidget {
   final String username;
   final String email;
 
-  const Avatar(this.imageUrl, this.username, this.email);
+  const Avatar({this.imageUrl, this.username, this.email});
 
   @override
   Widget build(BuildContext context) {
@@ -40,9 +40,8 @@ class Avatar extends StatelessWidget {
               ),
               Container(
                 decoration: BoxDecoration(
-                  border: Border(bottom: BorderSide(width: 1.0, color: ColorConstant.LIGHT_VIOLET)),
                 ),
-                padding: EdgeInsets.only(bottom: 20,left: 30, right: 30),
+                padding: EdgeInsets.only(bottom: 20,left: 20, right: 20),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
@@ -54,9 +53,9 @@ class Avatar extends StatelessWidget {
                         Text(username ,
                           style: StyleConstant.btnSelectedStyle,
                         ),
-                        Text(email,
+                        email != null ?Text(email,
                           style: StyleConstant.hintTextStyle,
-                        )
+                        ) : Container()
                       ],
                     ),
                     )

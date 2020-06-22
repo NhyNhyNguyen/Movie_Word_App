@@ -57,7 +57,7 @@ class _ChoosePageScreen extends State<ChoosePageScreen> {
   @override
   Widget build(BuildContext context) {
     DynamicLinkService().handleDynamicLinks();
-    return ConstantVar.userDetail == null ?MainLayOut.getMailLayout(
+    return ConstantVar.jwt == "" ?MainLayOut.getMailLayout(
         context,
          Container(
             color: ColorConstant.VIOLET,

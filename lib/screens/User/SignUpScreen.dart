@@ -61,11 +61,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
     );
     if (response.statusCode == 200) {
       print("sign_up success");
-      Modal.showSimpleCustomDialog(
-          context, "Please enter mail to determine", onPressedRegisterSuccress);
+//      Modal.showSimpleCustomDialog(
+//          context, "Please enter mail to determine", onPressedRegisterSuccress);
     } else {
-      Modal.showSimpleCustomDialog(
-          context, "Sign up fail", onPressedRegisterFail);
+//      Modal.showSimpleCustomDialog(
+//          context, "Sign up fail", onPressedRegisterFail);
     }
     return response;
   }

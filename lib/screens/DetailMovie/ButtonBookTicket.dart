@@ -10,8 +10,9 @@ class ButtonBookTicket extends StatelessWidget {
   final String text;
   final int filmId;
   final String filmName;
+  final String poster;
 
-  ButtonBookTicket( this.text, this.filmId, this.filmName);
+  ButtonBookTicket( this.text, this.filmId, this.filmName, this.poster);
   @override
   Widget build(BuildContext context) {
     return
@@ -32,7 +33,7 @@ class ButtonBookTicket extends StatelessWidget {
           onPressed: ()=>{
           Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => BookingTicket(filmId: filmId, name: filmName)),
+          MaterialPageRoute(builder: (context) => BookingTicket(filmId: filmId, name: filmName, poster: this.poster,)),
           )
           },
         ),

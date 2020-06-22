@@ -8,12 +8,15 @@ import 'package:MovieWorld/constant/StringConstant.dart';
 import 'package:MovieWorld/constant/StyleConstant.dart';
 import 'package:MovieWorld/constant/UrlConstant.dart';
 import 'package:MovieWorld/layout/mainLayout.dart';
+import 'package:MovieWorld/model/Date.dart';
 import 'package:MovieWorld/model/DateTimeShowFilm.dart';
 import 'package:MovieWorld/model/Seat.dart';
 import 'package:MovieWorld/screens/Booking/RoomType.dart';
 import 'package:MovieWorld/screens/Booking/SeatMap.dart';
 import 'package:MovieWorld/screens/ButtonGradientLarge.dart';
+import 'package:MovieWorld/screens/User/Avatar.dart';
 import 'package:MovieWorld/screens/User/ChoosePage.dart';
+import 'package:MovieWorld/screens/User/LoginScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/widgets.dart';
@@ -21,22 +24,24 @@ import 'package:flutter/widgets.dart';
 class BookingTicket extends StatefulWidget {
   final int filmId;
   final String name;
+  final String poster;
 
-  BookingTicket({Key key, this.filmId, this.name}) : super(key: key);
+  BookingTicket({Key key, this.filmId, this.name, this.poster}) : super(key: key);
 
   @override
   _BookingTicketState createState() =>
-      _BookingTicketState(this.filmId, this.name);
+      _BookingTicketState(this.filmId, this.name, this.poster);
 }
 
 class _BookingTicketState extends State<BookingTicket> {
   List<DateTimeShowFilm> data = [];
   final int filmId;
   final String name;
+  final String poster;
   int selected = 0;
   int timeSelected = 0;
 
-  _BookingTicketState(this.filmId, this.name);
+  _BookingTicketState(this.filmId, this.name, this.poster);
 
   @override
   void initState() {
@@ -66,11 +71,12 @@ class _BookingTicketState extends State<BookingTicket> {
           print("show time film $filmId" + data.toString());
         });
         while (data.length < 7 && data.length != 0) {
+          String d = data[data.length - 1].date;
           data.add(DateTimeShowFilm(
               "Sun, " +
-                  (int.parse(data[data.length - 1].date.substring(5, 7)) + 1)
+                  (int.parse(d.substring(5, 7)) + 1)
                       .toString() +
-                  data[data.length - 1].date.substring(7),
+                  d.substring(7),
               []));
         }
       });
@@ -93,254 +99,227 @@ class _BookingTicketState extends State<BookingTicket> {
           height: double.infinity,
           child: SingleChildScrollView(
             physics: AlwaysScrollableScrollPhysics(),
-            padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Text(
-                        name,
-                        style: StyleConstant.headerTextStyle,
-                        textAlign: TextAlign.center,
-                        overflow: TextOverflow.clip,
-                      ),
-                    ]),
-                SizedBox(
-                  height: 30,
-                ),
-                Text(data[selected].date, style: StyleConstant.formTextStyle),
-                SizedBox(
-                  height: 13,
-                ),
+                Avatar(imageUrl: UrlConstant.IMAGE + poster, username: name,email: null),
                 Container(
-                    height: 100,
-                    width: MediaQuery.of(context).size.height * 0.9,
-                    padding:
-                    EdgeInsets.symmetric(horizontal: 4.0, vertical: 10.0),
-                    decoration: BoxDecoration(
-                        color: ColorConstant.LIGHT_VIOLET,
-                        borderRadius: BorderRadius.circular(20),
-                        boxShadow: [
-                          BoxShadow(
-                              color: Colors.black12,
-                              offset: Offset(0, 15),
-                              blurRadius: 15),
-                          BoxShadow(
-                              color: Colors.black12,
-                              offset: Offset(0, -10),
-                              blurRadius: 10)
-                        ]),
-                    child: ListView.builder(
-                      itemCount: data.length,
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) {
-                        return Container(
-                            width: 63,
-                            height: 83,
-                            decoration: selected == index
-                                ? BoxDecoration(
-                              borderRadius:
-                              BorderRadius.all(Radius.circular(22)),
-                              gradient: ColorConstant.RAINBOW_BUTTON,
-                            )
-                                : BoxDecoration(),
-                            child: FlatButton(
-                              onPressed: () {
-                                setState(() {
-                                  selected = index;
-                                });
-                              },
-                              child: Container(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: <Widget>[
-                                    Text(
-                                      data[index].date.substring(5, 7),
-                                      style: StyleConstant.formTextStyle,
-                                    ),
-                                    Text(
-                                      data[index].date.substring(0, 3),
-                                      style: StyleConstant.moreSmallTextStyle,
-                                      maxLines: 1,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ));
-                      },
-                    )),
-                data[selected].time.length != 0
-                    ? Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    SizedBox(
-                      height: 13,
-                    ),
-                    Text("Vanue", style: StyleConstant.formTextStyle),
-                    SizedBox(
-                      height: 13,
-                    ),
-                    Container(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 4.0, vertical: 10.0),
-                        decoration: BoxDecoration(
-                            color: ColorConstant.LIGHT_VIOLET,
-                            borderRadius: BorderRadius.circular(20),
-                            boxShadow: [
-                              BoxShadow(
-                                  color: Colors.black12,
-                                  offset: Offset(0, 15),
-                                  blurRadius: 15),
-                              BoxShadow(
-                                  color: Colors.black12,
-                                  offset: Offset(0, -10),
-                                  blurRadius: 10)
-                            ]),
-                        child: Column(
-                          children: <Widget>[
-                            Container(
-                              width: double.infinity,
-                              height: MediaQuery.of(context).size.width *
-                                  0.23,
-                              child: ListView.builder(
-                                itemCount: data[selected].time.length,
-                                scrollDirection: Axis.horizontal,
-                                itemBuilder: (context, index) {
-                                  return Container(
-                                      width: MediaQuery.of(context)
-                                          .size
-                                          .width *
-                                          0.22,
-                                      height: MediaQuery.of(context)
-                                          .size
-                                          .width *
-                                          0.21,
-                                      margin: EdgeInsets.only(
-                                          left: 3, right: 3),
-                                      decoration: timeSelected == index
-                                          ? BoxDecoration(
-                                        borderRadius:
-                                        BorderRadius.all(
-                                            Radius.circular(
-                                                25)),
-                                        gradient: ColorConstant
-                                            .RAINBOW_BUTTON,
-                                      )
-                                          : BoxDecoration(),
-                                      child: FlatButton(
-                                        onPressed: () => {
-                                          setState(() {
-                                            timeSelected = index;
-                                          })
-                                        },
-                                        child: Container(
-                                          child: Column(
-                                            crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                            mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                            children: <Widget>[
-                                              Text(
-                                                data[selected]
-                                                    .time[index]
-                                                    .substring(0, 5),
-                                                style: StyleConstant
-                                                    .btnSelectedStyle,
-                                              ),
-                                              Text(
-                                                data[selected]
-                                                    .time[index]
-                                                    .substring(6),
-                                                style: StyleConstant
-                                                    .normalTextStyle,
-                                                maxLines: 1,
-                                              ),
-                                            ],
+                  margin:
+                  EdgeInsets.symmetric(horizontal: 15.0, vertical: 20.0),
+                  child:
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(data[selected].date, style: StyleConstant.formTextStyle),
+                      SizedBox(
+                        height: 13,
+                      ),
+                      Container(
+                          height: 100,
+                          width: MediaQuery.of(context).size.height * 0.9,
+                          padding:
+                          EdgeInsets.symmetric(horizontal: 5.0, vertical: 10.0),
+                          decoration: BoxDecoration(
+                              color: ColorConstant.LIGHT_VIOLET,
+                              borderRadius: BorderRadius.circular(20),
+                              boxShadow: [
+                                BoxShadow(
+                                    color: Colors.black12,
+                                    offset: Offset(0, 15),
+                                    blurRadius: 15),
+                                BoxShadow(
+                                    color: Colors.black12,
+                                    offset: Offset(0, -10),
+                                    blurRadius: 10)
+                              ]),
+                          child: ListView.builder(
+                            itemCount: data.length,
+                            scrollDirection: Axis.horizontal,
+                            itemBuilder: (context, index) {
+                              return Container(
+                                  width: 63,
+                                  height: 83,
+                                  decoration: selected == index
+                                      ? BoxDecoration(
+                                    borderRadius:
+                                    BorderRadius.all(Radius.circular(22)),
+                                    gradient: ColorConstant.RAINBOW_BUTTON,
+                                  )
+                                      : BoxDecoration(),
+                                  child: FlatButton(
+                                    onPressed: () {
+                                      setState(() {
+                                        selected = index;
+                                      });
+                                    },
+                                    child: Container(
+                                      child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children: <Widget>[
+                                          Text(
+                                            data[index].date.substring(5, 7),
+                                            style: StyleConstant.formTextStyle,
                                           ),
-                                        ),
-                                      ));
-                                },
-                              ),
-                            ),
-                            SizedBox(height: 10),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment:
-                              CrossAxisAlignment.center,
-                              children: <Widget>[
-                                RoomType(type: "2D", selected: true),
-                                RoomType(
-                                  type: "MX3D",
-                                  selected: false,
-                                ),
-                                RoomType(type: "MAX4D", selected: false),
-                              ],
+                                          Text(
+                                            data[index].date.substring(0, 3),
+                                            style: StyleConstant.moreSmallTextStyle,
+                                            maxLines: 1,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ));
+                            },
+                          )),
+                      data[selected].time.length != 0
+                          ? Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          SizedBox(
+                            height: 13,
+                          ),
+                          Text("Time Showing", style: StyleConstant.formTextStyle),
+                          SizedBox(
+                            height: 13,
+                          ),
+                          Container(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 4.0, vertical: 10.0),
+                              decoration: BoxDecoration(
+                                  color: ColorConstant.LIGHT_VIOLET,
+                                  borderRadius: BorderRadius.circular(20),
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: Colors.black12,
+                                        offset: Offset(0, 15),
+                                        blurRadius: 15),
+                                    BoxShadow(
+                                        color: Colors.black12,
+                                        offset: Offset(0, -10),
+                                        blurRadius: 10)
+                                  ]),
+                              child: Column(
+                                children: <Widget>[
+                                  Container(
+                                    width: double.infinity,
+                                    height: MediaQuery.of(context).size.width *
+                                        0.23,
+                                    child: ListView.builder(
+                                      itemCount: data[selected].time.length,
+                                      scrollDirection: Axis.horizontal,
+                                      itemBuilder: (context, index) {
+                                        return Container(
+                                            width: MediaQuery.of(context)
+                                                .size
+                                                .width *
+                                                0.22,
+                                            height: MediaQuery.of(context)
+                                                .size
+                                                .width *
+                                                0.21,
+                                            margin: EdgeInsets.only(
+                                                left: 3, right: 3),
+                                            decoration: timeSelected == index
+                                                ? BoxDecoration(
+                                              borderRadius:
+                                              BorderRadius.all(
+                                                  Radius.circular(
+                                                      25)),
+                                              gradient: ColorConstant
+                                                  .RAINBOW_BUTTON,
+                                            )
+                                                : BoxDecoration(),
+                                            child: FlatButton(
+                                              onPressed: () => {
+                                                setState(() {
+                                                  timeSelected = index;
+                                                })
+                                              },
+                                              child: Container(
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                                  mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                                  children: <Widget>[
+                                                    Text(
+                                                      data[selected]
+                                                          .time[index]
+                                                          .substring(0, 5),
+                                                      style: StyleConstant
+                                                          .btnSelectedStyle,
+                                                    ),
+                                                    Text(
+                                                      data[selected]
+                                                          .time[index]
+                                                          .substring(6),
+                                                      style: StyleConstant
+                                                          .normalTextStyle,
+                                                      maxLines: 1,
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ));
+                                      },
+                                    ),
+                                  ),
+                                ],
+                              )),
+                          SizedBox(
+                            height: 30,
+                          ),
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              ButtonGradientLarge(
+                                  StringConstant.CHOOSE_YOUR_SEAT,
+                                      () => {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) => SeatMap(
+                                                    filmId: filmId,
+                                                    dateTime: data[selected]
+                                                        .date
+                                                        .substring(5)
+                                                        .toString() +
+                                                        " " +
+                                                        data[selected]
+                                                            .time[
+                                                        timeSelected]
+                                                            .toString(),
+                                                    filmName: name)))
+                                  }),
+                            ],
+                          ),
+                        ],
+                      )
+                          : Container(
+                        width: double.infinity,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: <Widget>[
+                            Image.asset(ImageConstant.CAMERA, height: 270),
+                            Text(
+                              'Showtimes aren\'t available!',
+                              style: TextStyle(
+                                  color: ColorConstant.GRAY_TEXT, fontSize: 20),
                             ),
                           ],
-                        )),
-                    SizedBox(
-                      height: 30,
-                    ),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        ButtonGradientLarge(
-                            StringConstant.CHOOSE_YOUR_SEAT,
-                                () => {
-                              if (ConstantVar.jwt == "")
-                                {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              ChoosePageScreen()))
-                                }
-                              else
-                                {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => SeatMap(
-                                              filmId: filmId,
-                                              dateTime: data[selected]
-                                                  .date
-                                                  .substring(5)
-                                                  .toString() +
-                                                  " " +
-                                                  data[selected]
-                                                      .time[
-                                                  timeSelected]
-                                                      .toString(),
-                                              filmName: name)))
-                                }
-                            }),
-                      ],
-                    ),
-                  ],
-                )
-                    : Container(
-                  width: double.infinity,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      Image.asset(ImageConstant.CAMERA, height: 270),
-                      Text(
-                        'Showtimes aren\'t available!',
-                        style: TextStyle(
-                            color: ColorConstant.GRAY_TEXT, fontSize: 20),
+                        ),
                       ),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.1,
+                      )
                     ],
-                  ),
-                ),
-                SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.1,
+                  )
+                  ,
                 )
               ],
             ),

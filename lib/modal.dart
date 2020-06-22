@@ -32,7 +32,9 @@ class Modal{
                   RaisedButton(
                     color: Colors.blue,
                     onPressed: () {
-                      onPressed(context);
+                      onPressed != null ?
+                      onPressed(context) : Navigator.of(context, rootNavigator: true).pop('dialog')
+                      ;
                     },
                     child: Text(
                       'OK',

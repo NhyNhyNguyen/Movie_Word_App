@@ -46,11 +46,11 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
     if (response.statusCode == 200) {
       ConstantVar.jwt = "";
       ConstantVar.userDetail = null;
-      Modal.showSimpleCustomDialog(
-          context, "Reset pass successfull", onPressedResetPassSuccess);
+     /* Modal.showSimpleCustomDialog(
+          context, "Reset pass successfull", onPressedResetPassSuccess);*/
     } else {
-      Modal.showSimpleCustomDialog(
-          context, "Please enter your mail", onPressedResetPassFail);
+    /*  Modal.showSimpleCustomDialog(
+          context, "Please enter your mail", onPressedResetPassFail);*/
     }
   }
 

@@ -50,7 +50,7 @@ class StyleConstant {
   static const TextStyle headerTextStyle = TextStyle(
       color: ColorConstant.WHITE,
       fontFamily: "Open Sans",
-      fontSize: 27,
+      fontSize: 25,
       fontWeight: FontWeight.bold
   );
 
@@ -78,7 +78,7 @@ class StyleConstant {
   static const btnLargeStyle = TextStyle(
     color: ColorConstant.WHITE,
     fontWeight: FontWeight.w600,
-    fontSize: 28,
+    fontSize: 25,
   );
 
   static const priceTextStyle = TextStyle(

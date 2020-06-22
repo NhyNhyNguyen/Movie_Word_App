@@ -99,6 +99,8 @@ class _OrderTicketState extends State<OrderTicket> {
     }
     return false;
   }
+  String listGenres="";
+
 
   @override
   void initState() {
@@ -107,6 +109,13 @@ class _OrderTicketState extends State<OrderTicket> {
           content.add(filmDetail['name']);
           content.add(showTime);
           content.add(seats.join(", "));
+
+          listGenres="";
+          for(var item in filmDetail['genres']){
+            listGenres = listGenres + ", " + item['name'];
+            print(item['name']);
+          }
+          listGenres = listGenres.substring(2);
         }));
   }
 
@@ -177,13 +186,13 @@ class _OrderTicketState extends State<OrderTicket> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
                               Text(
-                                "Hành động, ",
+                                listGenres,
                                 style: StyleConstant.normalTextStyle,
                               ),
                             ],
                           ),
                           SizedBox(
-                            height: 10,
+                            height: 20,
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -191,7 +200,7 @@ class _OrderTicketState extends State<OrderTicket> {
                             children: <Widget>[
                               Container(
                                 padding: EdgeInsets.symmetric(
-                                    horizontal: 10, vertical: 10),
+                                    horizontal: 5, vertical: 10),
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -251,7 +260,7 @@ class _OrderTicketState extends State<OrderTicket> {
                                         topRight: Radius.circular(25))),
                               ),
                               Container(
-                                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
                                   margin: EdgeInsets.symmetric(vertical: 20),
                                   child: Column(
                                     crossAxisAlignment:

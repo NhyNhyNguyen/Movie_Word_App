@@ -55,7 +55,7 @@ class _DetailMovieScreenState extends State<DetailMovieScreen> {
             child: Column(
               children: <Widget>[
                 Poster(data["poster"], data["name"], data["genres"], data["ratePoint"], data["id"].toString()),
-                Description(data["filmDescription"]["premiere"], data["filmDescription"]["timeLimit"], data["filmDescription"]["artist"], data["filmDescription"]["director"], data["filmDescription"]["nation"],int.parse(id), data['name']),
+                Description(data["filmDescription"]["premiere"], data["filmDescription"]["timeLimit"], data["filmDescription"]["artist"], data["filmDescription"]["director"], data["filmDescription"]["nation"],int.parse(id), data['name'], data['poster']),
                 MovieContent(data["filmDescription"]["content"]),
 //                Trailer(data["trailer"]),
                 Container(

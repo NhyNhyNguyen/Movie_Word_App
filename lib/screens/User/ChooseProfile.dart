@@ -95,8 +95,8 @@ class _ChooseProfile extends State<ChooseProfile> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
-                      Avatar(UrlConstant.IMAGE + ConstantVar.userDetail.avt,
-                          usernameController.text, emailController.text),
+                      Avatar(imageUrl: UrlConstant.IMAGE + ConstantVar.userDetail.avt,
+                         username:  usernameController.text,email: emailController.text),
                       Container(
                         padding: EdgeInsets.symmetric(
                             horizontal: 30.0, vertical: 20.0),

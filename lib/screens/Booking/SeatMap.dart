@@ -1,5 +1,7 @@
 import 'package:MovieWorld/constant/ConstantVar.dart';
 import 'package:MovieWorld/layout/mainLayout.dart';
+import 'package:MovieWorld/modal.dart';
+import 'package:MovieWorld/screens/User/LoginScreen.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'dart:math';
@@ -140,14 +142,19 @@ class _SeatMapState extends State<SeatMap> {
 
   @override
   void initState() {
+    print(filmId.toString() + filmName + dateTime);
     print("film id" + filmId.toString());
-    fetchListSeat().then((value) => setState(() {}));
+    if(ConstantVar.jwt != ""){
+      fetchListSeat().then((value) => setState(() {}));
+
+    }
   }
 
   Future<bool> fetchListSeat() async {
     //String time = dateTime.substring(5);
     final response = await http.get(
-        UrlConstant.HOST + "/api/seats/showTime?filmId=$filmId&dateTime=$dateTime",
+        UrlConstant.HOST +
+            "/api/seats/showTime?filmId=$filmId&dateTime=$dateTime",
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
@@ -179,7 +186,7 @@ class _SeatMapState extends State<SeatMap> {
 
   @override
   Widget build(BuildContext context) {
-    return MainLayOut.getMailLayout(
+    return  ConstantVar.jwt != "" ? MainLayOut.getMailLayout(
         context,
         Container(
           color: ColorConstant.VIOLET,
@@ -204,11 +211,11 @@ class _SeatMapState extends State<SeatMap> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    SizedBox(
-                      height: 30,
-                    ),
                     Text(dateTime, style: StyleConstant.formTextStyle),
                   ],
+                ),
+                SizedBox(
+                  height: 30,
                 ),
                 Container(
                   child: Column(
@@ -231,8 +238,9 @@ class _SeatMapState extends State<SeatMap> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          Text("Seat No: " + seatSelected.join(", "),
-                              style: StyleConstant.normalTextStyle),
+                          seatSelected.length != 0
+                          ?Text("Seat No: " + seatSelected.join(", "),
+                              style: StyleConstant.normalTextStyle): Container(),
                         ],
                       ),
                       SizedBox(
@@ -244,11 +252,36 @@ class _SeatMapState extends State<SeatMap> {
                           ButtonGradientLarge(
                               "Booking",
                               () => {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                OrderTicket(filmId: filmId,filmName: filmName, showTime: dateTime, seats: seatSelected,)))
+                                    if (seatSelected.length != 0)
+                                      {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    OrderTicket(
+                                                      filmId: filmId,
+                                                      filmName: filmName,
+                                                      showTime: dateTime,
+                                                      seats: seatSelected,
+                                                    )))
+                                      }
+                                    else
+                                      {Modal.showSimpleCustomDialog(context, "Please choose seat!", null)
+//                                        showDialog(
+//                                            context: context,
+//                                            builder: (BuildContext context){
+//                                              return AlertDialog(
+//                                                content: Text("Please choose your seat!"),
+//                                                 actions: <Widget>[
+//                                                   FlatButton(
+//                                                     child: Text("OK"),
+//                                                     onPressed: (){Navigator.pop(context);},
+//                                                   )
+//                                                 ],
+//                                              );
+//                                            }
+//                                        )
+                                      }
                                   }),
                         ],
                       ),
@@ -263,6 +296,6 @@ class _SeatMapState extends State<SeatMap> {
           ),
         ),
         "USER",
-        "Choose Seat");
+        "Choose Seat") : LoginScreen();
   }
 }

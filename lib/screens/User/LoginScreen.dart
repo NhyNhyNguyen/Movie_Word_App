@@ -7,6 +7,7 @@ import 'package:MovieWorld/constant/StyleConstant.dart';
 import 'package:MovieWorld/constant/UrlConstant.dart';
 import 'package:MovieWorld/layout/mainLayout.dart';
 import 'package:MovieWorld/model/User.dart';
+import 'package:MovieWorld/model/UserDetail.dart';
 import 'package:MovieWorld/screens/User/ChooseProfile.dart';
 import 'package:MovieWorld/screens/User/TextfieldWidget.dart';
 import 'package:flutter/material.dart';
@@ -121,13 +122,16 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void onPressedLoginSuccess(BuildContext context) {
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => ChooseProfile()));
+    UserDetail.fetchUserDetail(ConstantVar.jwt).then((value) => setState((){
+    }));
+    Modal.showSimpleCustomDialog(context, "Login successfull!", (c) =>{
+      Navigator.of(c, rootNavigator: true).pop('dialog'),
+      Navigator.of(context).pop()
+    });
   }
 
   void onPressedLoginFail(BuildContext context) {
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => LoginScreen()));
+    Modal.showSimpleCustomDialog(context, "Login fail!", null);
   }
 
   Widget _signInBtn() {

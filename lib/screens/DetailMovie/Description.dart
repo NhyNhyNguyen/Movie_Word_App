@@ -15,8 +15,9 @@ class Description extends StatelessWidget {
   final String cast;
   final String director;
   final String nation;
+  final String poster;
 
-  const Description(this.premiere, this.timeLimit,this.cast, this.director, this.nation, this.filmId, this.filmName);
+  const Description(this.premiere, this.timeLimit,this.cast, this.director, this.nation, this.filmId, this.filmName, this.poster);
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +72,7 @@ class Description extends StatelessWidget {
             ),
           ),
           Container(
-            child: ButtonBookTicket(StringConstant.BOOK_TICKET, filmId, filmName),
+            child: ButtonBookTicket(StringConstant.BOOK_TICKET, filmId, filmName, this.poster),
           )
         ],
       ),
