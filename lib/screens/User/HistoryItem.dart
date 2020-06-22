@@ -54,6 +54,8 @@ class _HistoryItemState extends State<HistoryItem> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Poster(imageUrl: UrlConstant.IMAGE + "conmuatinhdau.jpg"),
                     booking.status == 0?
@@ -86,6 +88,7 @@ class _HistoryItemState extends State<HistoryItem> {
                       ...content
                           .map((e) => Container(
                         height: 35,
+                        width: MediaQuery.of(context).size.width * 0.35,
                         child: Text(e,
                             style: TextStyle(
                               color: Colors.white,
