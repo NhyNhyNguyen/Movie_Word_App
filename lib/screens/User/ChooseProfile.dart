@@ -135,7 +135,7 @@ class _ChooseProfile extends State<ChooseProfile> {
               "USER",
               "User Detail");
     } else {
-      return ChoosePageScreen();
+      return LoginScreen();
     }
   }
 }
