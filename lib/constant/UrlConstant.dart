@@ -6,7 +6,7 @@ import 'package:flutter/foundation.dart';
 class UrlConstant{
   //
   //static const String HOST = "http://10.0.2.2:9000";
-  static const String HOST = "http://192.168.137.254:9000";
+  static const String HOST = "http://192.168.10.168:9000";
   static const String REGISTER = HOST + "/api/register";
   static const String LOGIN = HOST + "/api/auth";
   static const String PROFILE =  HOST + "/api/profile";
@@ -18,10 +18,11 @@ class UrlConstant{
   static const String SHOW_TIME_FILM = HOST + "/api/showtimefilms/dateTime";
   static const String GET_LIST_SEAT = HOST + "/api/seats/showTime";
   static const String POST_BOOK = HOST + "/api/reservations";
+  static const String PUT_CANCEL = HOST + "/api/reservations/cancel/";
 
 
   //static const String HOST_MOBILE= "http://10.0.2.2:9000/";
- static const String HOST_MOBILE= "http://192.168.137.254:9000/";
+ static const String HOST_MOBILE= "http://192.168.10.168:9000/";
   static const String URL_FILM = HOST_MOBILE + "api/films/";
   static const String URL_IMAGE = HOST_MOBILE + "api/images/";
   static const String URL_COMMENT = HOST_MOBILE+ "api/comments/film/";

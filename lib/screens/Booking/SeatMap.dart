@@ -202,10 +202,15 @@ class _SeatMapState extends State<SeatMap> {
                 Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      Text(
-                        filmName,
-                        style: StyleConstant.headerTextStyle,
-                        textAlign: TextAlign.center,
+                      Container(
+                        width: MediaQuery.of(context).size.width * 0.9,
+                        child: Text(
+                          filmName,
+                          style: StyleConstant.headerTextStyle,
+                          textAlign: TextAlign.center,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 2,
+                        ),
                       ),
                     ]),
                 Row(
@@ -215,15 +220,15 @@ class _SeatMapState extends State<SeatMap> {
                   ],
                 ),
                 SizedBox(
-                  height: 30,
+                  height: 20,
                 ),
                 Container(
                   child: Column(
                     children: <Widget>[
                       Container(
-                          height: seatHeight * 18 + 20,
+                          height: seatHeight * 17 ,
                           padding: EdgeInsets.symmetric(
-                              horizontal: 4.0, vertical: 10.0),
+                              horizontal: 4.0, vertical: 5.0),
                           child: new GridView.count(
                               crossAxisCount: 10,
                               childAspectRatio: 1.0,
@@ -232,9 +237,7 @@ class _SeatMapState extends State<SeatMap> {
                               crossAxisSpacing: 4.0,
                               physics: NeverScrollableScrollPhysics(),
                               children: _getSeats())),
-                      SizedBox(
-                        height: 10,
-                      ),
+//
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[

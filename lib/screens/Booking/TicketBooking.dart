@@ -17,6 +17,7 @@ import 'package:MovieWorld/screens/ButtonGradientLarge.dart';
 import 'package:MovieWorld/screens/User/Avatar.dart';
 import 'package:MovieWorld/screens/User/ChoosePage.dart';
 import 'package:MovieWorld/screens/User/LoginScreen.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/widgets.dart';
@@ -106,7 +107,7 @@ class _BookingTicketState extends State<BookingTicket> {
                 Avatar(imageUrl: UrlConstant.IMAGE + poster, username: name,email: null),
                 Container(
                   margin:
-                  EdgeInsets.symmetric(horizontal: 15.0, vertical: 20.0),
+                  EdgeInsets.symmetric(horizontal: 15.0, vertical: 12.0),
                   child:
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -116,10 +117,10 @@ class _BookingTicketState extends State<BookingTicket> {
                         height: 13,
                       ),
                       Container(
-                          height: 100,
+                          height: 85,
                           width: MediaQuery.of(context).size.height * 0.9,
                           padding:
-                          EdgeInsets.symmetric(horizontal: 5.0, vertical: 10.0),
+                          EdgeInsets.symmetric(horizontal: 5.0, vertical: 5.0),
                           decoration: BoxDecoration(
                               color: ColorConstant.LIGHT_VIOLET,
                               borderRadius: BorderRadius.circular(20),
@@ -138,12 +139,12 @@ class _BookingTicketState extends State<BookingTicket> {
                             scrollDirection: Axis.horizontal,
                             itemBuilder: (context, index) {
                               return Container(
-                                  width: 63,
-                                  height: 83,
+                                  width: 62,
+                                  height: 60,
                                   decoration: selected == index
                                       ? BoxDecoration(
                                     borderRadius:
-                                    BorderRadius.all(Radius.circular(22)),
+                                    BorderRadius.all(Radius.circular(25)),
                                     gradient: ColorConstant.RAINBOW_BUTTON,
                                   )
                                       : BoxDecoration(),
@@ -187,7 +188,7 @@ class _BookingTicketState extends State<BookingTicket> {
                           ),
                           Container(
                               padding: EdgeInsets.symmetric(
-                                  horizontal: 4.0, vertical: 10.0),
+                                  horizontal: 4.0, vertical: 5.0),
                               decoration: BoxDecoration(
                                   color: ColorConstant.LIGHT_VIOLET,
                                   borderRadius: BorderRadius.circular(20),
