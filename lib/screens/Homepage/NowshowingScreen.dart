@@ -51,7 +51,6 @@ class _NowshowingScreen extends State<NowshowingScreen>  {
       print('222');
     };
   }
-
   @override
   Widget build(BuildContext context) {
 

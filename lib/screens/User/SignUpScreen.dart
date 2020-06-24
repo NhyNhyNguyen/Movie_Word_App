@@ -31,9 +31,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
   TextEditingController emailController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
   TextEditingController addressController = TextEditingController();
+  TextEditingController ctl = TextEditingController();
 
   DateTime selectedDate = DateTime.now();
   final _formKey = GlobalKey<FormState>();
+  final _form = GlobalKey<FormState>();
   void onPressedRegisterSuccress(BuildContext context) {
     Navigator.push(
         context, MaterialPageRoute(builder: (context) => LoginScreen()));
