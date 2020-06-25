@@ -63,77 +63,71 @@ class _ChooseProfile extends State<ChooseProfile> {
   initState() {
     super.initState();
     ConstantVar.isLogin = false;
-    if (ConstantVar.userDetail != null) {
-      usernameController.text = ConstantVar.userDetail.username;
-      fullNameController.text = ConstantVar.userDetail.fullName;
-      addressController.text = ConstantVar.userDetail.address;
-      phoneController.text = ConstantVar.userDetail.phone;
-      emailController.text = ConstantVar.userDetail.email;
-    } else {
-      UserDetail.fetchUserDetail(ConstantVar.jwt).then((value) => setState(() {
-            usernameController.text = ConstantVar.userDetail.username;
-            fullNameController.text = ConstantVar.userDetail.fullName;
-            addressController.text = ConstantVar.userDetail.address;
-            phoneController.text = ConstantVar.userDetail.phone;
-            emailController.text = ConstantVar.userDetail.email;
-          }));
-    }
+    UserDetail.fetchUserDetail(ConstantVar.jwt).then((value) => setState(() {
+          usernameController.text = ConstantVar.userDetail.username;
+          fullNameController.text = ConstantVar.userDetail.fullName;
+          addressController.text = ConstantVar.userDetail.address;
+          phoneController.text = ConstantVar.userDetail.phone;
+          emailController.text = ConstantVar.userDetail.email;
+        }));
   }
 
   @override
   Widget build(BuildContext context) {
-    if (ConstantVar.userDetail != null) {
-      return  MainLayOut.getMailLayout(
-              context,
-              Container(
-                color: ColorConstant.VIOLET,
-                height: double.infinity,
-                width: double.infinity,
-                child: SingleChildScrollView(
-                  physics: AlwaysScrollableScrollPhysics(),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      Avatar(imageUrl: UrlConstant.IMAGE + ConstantVar.userDetail.avt,
-                         username:  usernameController.text,email: emailController.text),
-                      Container(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 30.0, vertical: 20.0),
-                        child: Form(
-                          key: _formKey,
-                          child: Column(children: <Widget>[
-                            TextFieldWidget.buildTextField(
-                                StringConstant.FULL_NAME,
-                                StringConstant.FULL_NAME_HINT,
-                                Icon(Icons.assessment, color: Colors.white),
-                                TextInputType.text,
-                                fullNameController),
-                            TextFieldWidget.buildTextField(
-                                StringConstant.PHONE,
-                                StringConstant.PHONE_HINT,
-                                Icon(Icons.phone, color: Colors.white),
-                                TextInputType.text,
-                                phoneController),
-                            TextFieldWidget.buildTextField(
-                                StringConstant.ADDRESS,
-                                StringConstant.ADDRESS_HINT,
-                                Icon(Icons.assignment, color: Colors.white),
-                                TextInputType.text,
-                                addressController),
-                          ]),
-                        ),
-                      ),
-                      _SaveBtn(),
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.1,
-                      )
-                    ],
+    if (ConstantVar.jwt != null) {
+      return ConstantVar.userDetail != null?  MainLayOut.getMailLayout(
+          context,
+          Container(
+            color: ColorConstant.VIOLET,
+            height: double.infinity,
+            width: double.infinity,
+            child: SingleChildScrollView(
+              physics: AlwaysScrollableScrollPhysics(),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Avatar(
+                      imageUrl: UrlConstant.IMAGE + ConstantVar.userDetail.avt,
+                      username: usernameController.text,
+                      email: emailController.text),
+                  Container(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 30.0, vertical: 20.0),
+                    child: Form(
+                      key: _formKey,
+                      child: Column(children: <Widget>[
+                        TextFieldWidget.buildTextField(
+                            StringConstant.FULL_NAME,
+                            StringConstant.FULL_NAME_HINT,
+                            Icon(Icons.assessment, color: Colors.white),
+                            TextInputType.text,
+                            fullNameController),
+                        TextFieldWidget.buildTextField(
+                            StringConstant.PHONE,
+                            StringConstant.PHONE_HINT,
+                            Icon(Icons.phone, color: Colors.white),
+                            TextInputType.text,
+                            phoneController),
+                        TextFieldWidget.buildTextField(
+                            StringConstant.ADDRESS,
+                            StringConstant.ADDRESS_HINT,
+                            Icon(Icons.assignment, color: Colors.white),
+                            TextInputType.text,
+                            addressController),
+                      ]),
+                    ),
                   ),
-                ),
+                  _SaveBtn(),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.1,
+                  )
+                ],
               ),
-              "USER",
-              "User Detail");
+            ),
+          ),
+          "USER",
+          "User Detail") : Container();
     } else {
       return LoginScreen();
     }

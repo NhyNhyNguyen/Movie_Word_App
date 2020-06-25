@@ -20,11 +20,19 @@ import '../ButtonGradientLarge.dart';
 import 'package:http/http.dart' as http;
 
 class SignUpScreen extends StatefulWidget {
+  final String jwt;
+
+  const SignUpScreen({Key key, this.jwt}) : super(key: key);
+
   @override
-  _SignUpScreenState createState() => _SignUpScreenState();
+  _SignUpScreenState createState() => _SignUpScreenState(this.jwt);
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
+
+  final String jwt;
+
+
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController fullNameController = TextEditingController();
@@ -34,6 +42,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   DateTime selectedDate = DateTime.now();
   final _formKey = GlobalKey<FormState>();
+
+  _SignUpScreenState(this.jwt);
   void onPressedRegisterSuccress(BuildContext context) {
     Navigator.push(
         context, MaterialPageRoute(builder: (context) => LoginScreen()));
@@ -61,13 +71,38 @@ class _SignUpScreenState extends State<SignUpScreen> {
     );
     if (response.statusCode == 200) {
       print("sign_up success");
-//      Modal.showSimpleCustomDialog(
-//          context, "Please enter mail to determine", onPressedRegisterSuccress);
+      Modal.showSimpleCustomDialog(
+          context, "Please enter mail to determine", onPressedRegisterSuccress);
     } else {
-//      Modal.showSimpleCustomDialog(
-//          context, "Sign up fail", onPressedRegisterFail);
+     Modal.showSimpleCustomDialog(
+          context, "Sign up fail", onPressedRegisterFail);
     }
     return response;
+  }
+
+  Future<bool> confirmDetail(String jwt) async {
+    if (jwt != "" || jwt != null) {
+      final response = await http.get(UrlConstant.CONFIRM_ACCOUNT + "?token=" + jwt, headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json; charset=utf-8',
+        'Authorization': 'Bearer $jwt',
+      });
+      print(json.decode(response.body));
+
+      if (response.statusCode == 200) {
+      } else {
+        Modal.showSimpleCustomDialog(context, "Create account successfull!", () =>{
+        Navigator.push(
+        context, MaterialPageRoute(builder: (context) => LoginScreen()))
+        });
+      }
+    }else{
+      Modal.showSimpleCustomDialog(context, "Create account fail!", () =>{
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => SignUpScreen()))
+      });
+    }
+    return false;
   }
 
   Widget _signUpBtn(BuildContext context) {
@@ -78,6 +113,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
     });
   }
 
+  @override
+  void initState() {
+    if(jwt != null){
+      confirmDetail(jwt);
+    }
+    usernameController.text = "nhinhi";
+     passwordController.text = "123123";
+     fullNameController.text = "nhinhi";
+    addressController.text = "nghdgfhjkfgd";
+    phoneController.text= "123445";
+    emailController.text = "dddnhi@gmail.com";
+  }
   @override
   Widget build(BuildContext context) {
     return MainLayOut.getMailLayout(

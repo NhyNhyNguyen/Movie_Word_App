@@ -4,6 +4,7 @@ import 'package:MovieWorld/model/Movie.dart';
 import 'package:MovieWorld/screens/Homepage/BannerImage.dart';
 import 'package:MovieWorld/screens/Homepage/CategoryMovie.dart';
 import 'package:MovieWorld/screens/News/News.dart';
+import 'package:MovieWorld/services/dynamic_link_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:MovieWorld/constant/ColorConstant.dart';
@@ -35,6 +36,8 @@ class _NowshowingScreen extends State<NowshowingScreen>  {
 
   @override
   void initState() {
+    DynamicLinkService().handleDynamicLinks();
+
     String url  = UrlConstant.URL_FILM + 'now-showing';
     {
       http.get(url, headers: {

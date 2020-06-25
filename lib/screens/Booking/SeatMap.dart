@@ -142,6 +142,8 @@ class _SeatMapState extends State<SeatMap> {
 
   @override
   void initState() {
+    filmId = 2;
+    dateTime = "24-06-2020 02:00 PM";
     print(filmId.toString() + filmName + dateTime);
     print("film id" + filmId.toString());
     if(ConstantVar.jwt != ""){

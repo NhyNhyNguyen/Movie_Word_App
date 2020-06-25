@@ -274,16 +274,15 @@ class _DetailScreenState extends State<DetailScreen> {
   initState() {
     super.initState();
     ConstantVar.isLogin = false;
-    if (ConstantVar.userDetail != null) {
-      usernameController.text = ConstantVar.userDetail.username;
-      fullNameController.text = ConstantVar.userDetail.fullName;
-      addressController.text = ConstantVar.userDetail.address;
-      phoneController.text = ConstantVar.userDetail.phone;
-      emailController.text = ConstantVar.userDetail.email;
-    } else {
+
       UserDetail.fetchUserDetail(ConstantVar.jwt)
-          .then((value) => setState(() {}));
-    }
+          .then((value) => setState(() {
+        usernameController.text = ConstantVar.userDetail.username;
+        fullNameController.text = ConstantVar.userDetail.fullName;
+        addressController.text = ConstantVar.userDetail.address;
+        phoneController.text = ConstantVar.userDetail.phone;
+      }));
+
   }
 
   @override

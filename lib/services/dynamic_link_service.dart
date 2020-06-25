@@ -1,4 +1,5 @@
 
+import 'package:MovieWorld/screens/User/SignUpScreen.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 
 
@@ -26,14 +27,12 @@ class DynamicLinkService {
     final Uri deepLink = data?.link;
     if (deepLink != null) {
       print('_handleDeepLink | deeplink: $deepLink');
-
-      var isPost = deepLink.pathSegments.contains('post');
-      if (isPost) {
-        var token = deepLink.queryParameters['reserPassToken'];
-        if (token != null) {
-
-        }
+      if(deepLink.path.contains('token')){
+       String token =  deepLink.path.split('=')[1];
+          SignUpScreen(jwt:token ,);
       }
     }
   }
+
+
 }

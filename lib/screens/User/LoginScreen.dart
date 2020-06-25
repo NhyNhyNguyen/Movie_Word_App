@@ -122,11 +122,10 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void onPressedLoginSuccess(BuildContext context) {
-    UserDetail.fetchUserDetail(ConstantVar.jwt).then((value) => setState((){
-    }));
+    UserDetail.fetchUserDetail(ConstantVar.jwt);
     Modal.showSimpleCustomDialog(context, "Login successfull!", (c) =>{
       Navigator.of(c, rootNavigator: true).pop('dialog'),
-      Navigator.of(context).pop()
+      Navigator.of(context).pop(true)
     });
   }
 
@@ -160,7 +159,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     usernameController.text = "trangnguyen";
     passController.text = "123123";
-    return MainLayOut.getMailLayout(
+    return ConstantVar.jwt == "" ? MainLayOut.getMailLayout(
         context,
         Container(
           color: ColorConstant.VIOLET,
@@ -179,7 +178,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 Container(
                     padding:
-                        EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
+                    EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
                     decoration: BoxDecoration(
                         color: ColorConstant.LIGHT_VIOLET,
                         borderRadius: BorderRadius.circular(20),
@@ -228,6 +227,6 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
           ),
         ),
-        "USER", "Login");
+        "USER", "Login") : ChooseProfile();
   }
 }

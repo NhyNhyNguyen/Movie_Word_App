@@ -1,34 +1,34 @@
 {
   "project_info": {
-    "project_number": "18115849830",
-    "firebase_url": "https://test-ce13a.firebaseio.com",
-    "project_id": "test-ce13a",
-    "storage_bucket": "test-ce13a.appspot.com"
+    "project_number": "742765727447",
+    "firebase_url": "https://movieworld-7bfbf.firebaseio.com",
+    "project_id": "movieworld-7bfbf",
+    "storage_bucket": "movieworld-7bfbf.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:18115849830:android:279f45d6c05c55539c07a7",
+        "mobilesdk_app_id": "1:742765727447:android:f5403e69f8c3244fd7aa92",
         "android_client_info": {
           "package_name": "com.example.MovieWorld"
         }
       },
       "oauth_client": [
         {
-          "client_id": "18115849830-oqd6bc392s47lcpvshllvj0elu3frsgc.apps.googleusercontent.com",
+          "client_id": "742765727447-iht1lvcp0c9kmbp4ekkjr1t3his86jhp.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBXCFNz0UPJaOKg2pPo7PhAemwGpWTT0fI"
+          "current_key": "AIzaSyC9TjXKBgIJWNZRnGqqtaH0NAVIYLFnFUc"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "18115849830-oqd6bc392s47lcpvshllvj0elu3frsgc.apps.googleusercontent.com",
+              "client_id": "742765727447-iht1lvcp0c9kmbp4ekkjr1t3his86jhp.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
