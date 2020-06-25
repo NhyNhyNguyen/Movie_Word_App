@@ -73,7 +73,7 @@ class _OrderTicketState extends State<OrderTicket> {
     return response;
   }
 
-  var filmDetail;
+  var filmDetail = null;
   Future<bool> fetchFilmDetail(String jwt) async {
     if (jwt != "" || jwt != null) {
       final response =

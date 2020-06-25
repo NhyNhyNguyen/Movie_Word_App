@@ -35,7 +35,7 @@ class BookingTicket extends StatefulWidget {
 }
 
 class _BookingTicketState extends State<BookingTicket> {
-  List<DateTimeShowFilm> data = [];
+  List<DateTimeShowFilm> data = null;
   final int filmId;
   final String name;
   final String poster;
@@ -51,6 +51,7 @@ class _BookingTicketState extends State<BookingTicket> {
   }
 
   Future<bool> fetchShowTimeFilm() async {
+    print(UrlConstant.SHOW_TIME_FILM + "?filmId=$filmId");
     final response = await http
         .get(UrlConstant.SHOW_TIME_FILM + "?filmId=$filmId", headers: {
       'Content-Type': 'application/json',

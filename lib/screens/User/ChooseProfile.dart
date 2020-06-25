@@ -63,13 +63,16 @@ class _ChooseProfile extends State<ChooseProfile> {
   initState() {
     super.initState();
     ConstantVar.isLogin = false;
-    UserDetail.fetchUserDetail(ConstantVar.jwt).then((value) => setState(() {
-          usernameController.text = ConstantVar.userDetail.username;
-          fullNameController.text = ConstantVar.userDetail.fullName;
-          addressController.text = ConstantVar.userDetail.address;
-          phoneController.text = ConstantVar.userDetail.phone;
-          emailController.text = ConstantVar.userDetail.email;
-        }));
+    if(ConstantVar.jwt!=""){
+      UserDetail.fetchUserDetail(ConstantVar.jwt).then((value) => setState(() {
+        usernameController.text = ConstantVar.userDetail.username;
+        fullNameController.text = ConstantVar.userDetail.fullName;
+        addressController.text = ConstantVar.userDetail.address;
+        phoneController.text = ConstantVar.userDetail.phone;
+        emailController.text = ConstantVar.userDetail.email;
+      }));
+    }
+
   }
 
   @override

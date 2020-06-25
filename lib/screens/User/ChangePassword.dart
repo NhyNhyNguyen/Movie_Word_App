@@ -30,12 +30,9 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
   TextEditingController passConfirmController = TextEditingController();
 
   Future<String> resetPass() async {
-    var queryParameters = {
-      "token" : "f04cd29c-cfee-47b5-943d-0b382d6b77f2",
-      'newPassword': passController.text,
-    };
-    var uri = Uri.http(UrlConstant.HOST, '/api/save-password', queryParameters);
-    http.Response response = await http.post(
+    var uri = (UrlConstant.HOST+ '/api/change-password?oldpassword=' + passController.text + "&password=" + passConfirmController.text);
+    print(uri);
+    http.Response response = await http.put(
       uri,
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
@@ -44,25 +41,18 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
     );
 
     if (response.statusCode == 200) {
-      ConstantVar.jwt = "";
-      ConstantVar.userDetail = null;
-     /* Modal.showSimpleCustomDialog(
-          context, "Reset pass successfull", onPressedResetPassSuccess);*/
+      Modal.showSimpleCustomDialog(
+          context, "Change pass successfull", (c) => {
+        Navigator.of(c, rootNavigator: true).pop('dialog'),
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => ChooseProfile()))
+      });
     } else {
-    /*  Modal.showSimpleCustomDialog(
-          context, "Please enter your mail", onPressedResetPassFail);*/
+      Modal.showSimpleCustomDialog(
+          context, "Change pass fail!", null);
     }
   }
 
-  void onPressedResetPassSuccess(BuildContext context) {
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => LoginScreen()));
-  }
-
-  void onPressedResetPassFail(BuildContext context) {
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => ResetPassScreen()));
-  }
 
 //  }
 
