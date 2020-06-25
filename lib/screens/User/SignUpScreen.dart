@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:MovieWorld/constant/ColorConstant.dart';
+import 'package:MovieWorld/constant/ConstantVar.dart';
 import 'package:MovieWorld/constant/ImageConstant.dart';
 import 'package:MovieWorld/constant/StringConstant.dart';
 import 'package:MovieWorld/constant/StyleConstant.dart';
@@ -29,9 +30,7 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
-
   final String jwt;
-
 
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -44,14 +43,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final _formKey = GlobalKey<FormState>();
 
   _SignUpScreenState(this.jwt);
+
   void onPressedRegisterSuccress(BuildContext context) {
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => LoginScreen()));
+    Navigator.push(context, null);
   }
 
   void onPressedRegisterFail(BuildContext context) {
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => SignUpScreen()));
+    Navigator.push(context, null);
   }
 
   Future<http.Response> postUserDetail(BuildContext context) async {
@@ -72,36 +70,42 @@ class _SignUpScreenState extends State<SignUpScreen> {
     if (response.statusCode == 200) {
       print("sign_up success");
       Modal.showSimpleCustomDialog(
-          context, "Please enter mail to determine", onPressedRegisterSuccress);
+          context, "Please enter mail to determine", null);
+      ConstantVar.registerToken = "";
     } else {
-     Modal.showSimpleCustomDialog(
-          context, "Sign up fail", onPressedRegisterFail);
+      Modal.showSimpleCustomDialog(
+          context, "Sign up fail", null);
+      ConstantVar.registerToken = "";
     }
     return response;
   }
 
   Future<bool> confirmDetail(String jwt) async {
-    if (jwt != "" || jwt != null) {
-      final response = await http.get(UrlConstant.CONFIRM_ACCOUNT + "?token=" + jwt, headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json; charset=utf-8',
-        'Authorization': 'Bearer $jwt',
-      });
-      print(json.decode(response.body));
+    print(UrlConstant.CONFIRM_ACCOUNT + "?token=" + jwt);
+    final response =
+        await http.get(UrlConstant.CONFIRM_ACCOUNT + "?token=" + jwt, headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json; charset=utf-8',
+    });
+    print(json.decode(response.body));
 
-      if (response.statusCode == 200) {
-      } else {
-        Modal.showSimpleCustomDialog(context, "Create account successfull!", () =>{
-        Navigator.push(
-        context, MaterialPageRoute(builder: (context) => LoginScreen()))
-        });
-      }
-    }else{
-      Modal.showSimpleCustomDialog(context, "Create account fail!", () =>{
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => SignUpScreen()))
-      });
+    if (response.statusCode == 200) {
+      Modal.showSimpleCustomDialog(
+          context,
+          "Create account successfull!",
+          (c) => {
+            Navigator.of(c, rootNavigator: true).pop('dialog'),
+            Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => LoginScreen()))
+              });
+      ConstantVar.registerToken = "";
+    } else {
+      Modal.showSimpleCustomDialog(
+          context,
+          "Create account fail!",null);
+      ConstantVar.registerToken = "";
     }
+
     return false;
   }
 
@@ -115,16 +119,20 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   @override
   void initState() {
-    if(jwt != null){
+    if (jwt != "") {
+      print('confirm account');
       confirmDetail(jwt);
     }
+    print('confirm account' + jwt);
+
     usernameController.text = "nhinhi";
-     passwordController.text = "123123";
-     fullNameController.text = "nhinhi";
+    passwordController.text = "123123";
+    fullNameController.text = "nhinhi";
     addressController.text = "nghdgfhjkfgd";
-    phoneController.text= "123445";
+    phoneController.text = "123445";
     emailController.text = "dddnhi@gmail.com";
   }
+
   @override
   Widget build(BuildContext context) {
     return MainLayOut.getMailLayout(
@@ -221,6 +229,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             ),
           ),
         ),
-        "USER", "Sign up");
+        "USER",
+        "Sign up");
   }
 }

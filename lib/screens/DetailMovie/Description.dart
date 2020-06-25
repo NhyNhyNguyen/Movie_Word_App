@@ -57,15 +57,21 @@ class Description extends StatelessWidget {
                 Row(
                   children: <Widget>[
                     Text("Cast: ", style: StyleConstant.mediumTxtStyle,),
-                    Text(cast, style: StyleConstant.smallTxtStyle,overflow: TextOverflow.ellipsis,
-                      maxLines: 1,)
+                    Container(
+                      width: MediaQuery.of(context).size.width * 0.42,
+                      child: Text(cast, style: StyleConstant.smallTxtStyle,overflow: TextOverflow.ellipsis,
+                        maxLines: 1,),
+                    )
                   ],
                 ),
                 Row(
                   children: <Widget>[
                     Text("Director: ", style: StyleConstant.mediumTxtStyle,),
-                    Text(director, style: StyleConstant.smallTxtStyle,overflow: TextOverflow.ellipsis,
-                      maxLines: 1,)
+                    Container(
+                      width: MediaQuery.of(context).size.width * 0.35,
+                      child: Text(director, style: StyleConstant.smallTxtStyle,overflow: TextOverflow.ellipsis,
+                        maxLines: 1,),
+                    )
                   ],
                 ),
               ],

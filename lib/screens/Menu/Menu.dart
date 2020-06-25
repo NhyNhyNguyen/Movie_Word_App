@@ -104,7 +104,7 @@ class _MenuState extends State<Menu> {
                     icon: Icons.person_add,
                     selectHandle: () => {
                       Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => SignUpScreen()))
+                          MaterialPageRoute(builder: (context) => SignUpScreen(jwt: "",)))
                     },
                   ),
                 ],

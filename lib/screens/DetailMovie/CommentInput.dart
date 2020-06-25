@@ -22,6 +22,7 @@ class _CommentInputState extends State<CommentInput> {
   String idMovie;
   _CommentInputState(this.idMovie);
 
+  final _keyInput = GlobalKey<FormState>();
   TextEditingController inputController = TextEditingController();
 
   Future<http.Response> postComment() async {
@@ -78,13 +79,16 @@ class _CommentInputState extends State<CommentInput> {
                   color: ColorConstant.GRAY_TEXT,
                   borderRadius: BorderRadius.all(Radius.circular(15)),
               ),
-              child: TextField(
-                decoration: InputDecoration(
-                  hintText: "Leave your comment here...",
-                  contentPadding: EdgeInsets.symmetric(horizontal: 10),
-                  border: InputBorder.none,
+              child: Form(
+                key: _keyInput,
+                child: TextFormField(
+                  decoration: InputDecoration(
+                    hintText: "Leave your comment here...",
+                    contentPadding: EdgeInsets.symmetric(horizontal: 10),
+                    border: InputBorder.none,
+                  ),
+                  controller: inputController,
                 ),
-                controller: inputController,
               ),
             ),
           ),

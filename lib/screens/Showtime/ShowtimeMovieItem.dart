@@ -54,7 +54,7 @@ class ShowtimeMovieItem extends StatelessWidget {
           color: ColorConstant.LIGHT_VIOLET,
           borderRadius: BorderRadius.all(Radius.circular(30)),),
         margin: EdgeInsets.all(10),
-        padding: EdgeInsets.all(15),
+        padding: EdgeInsets.all(10),
         child: Column(
           children: <Widget>[
             Row(

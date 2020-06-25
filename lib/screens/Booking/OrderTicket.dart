@@ -15,6 +15,7 @@ import 'package:MovieWorld/screens/Homepage/BannerImage.dart';
 import 'package:MovieWorld/screens/User/ChooseProfile.dart';
 import 'package:MovieWorld/screens/User/History.dart';
 import 'package:MovieWorld/screens/User/LoginScreen.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
@@ -40,7 +41,7 @@ class _OrderTicketState extends State<OrderTicket> {
 
   _OrderTicketState(this.filmId, this.filmName, this.seats, this.showTime);
 
-  List<String> title = ["FILM ", "SHOW TIME", "SEATS"];
+  List<String> title = [ "SHOW TIME", "SEATS"];
   List<String> content = [
     "Chiec la cuon bay",
     "9:00 PM Tue 22/2/2020",
@@ -106,7 +107,6 @@ class _OrderTicketState extends State<OrderTicket> {
   void initState() {
     fetchFilmDetail(ConstantVar.jwt).then((value) => setState(() {
           content = [];
-          content.add(filmDetail['name']);
           content.add(showTime);
           content.add(seats.join(", "));
 
@@ -123,8 +123,8 @@ class _OrderTicketState extends State<OrderTicket> {
   double priceHeight;
   @override
   Widget build(BuildContext context) {
-    infoHeight = MediaQuery.of(context).size.height * 0.42;
-    priceHeight = MediaQuery.of(context).size.height * 0.4;
+    infoHeight = MediaQuery.of(context).size.height * 0.38;
+    priceHeight = MediaQuery.of(context).size.height * 0.373;
     return filmDetail != null
         ? MainLayOut.getMailLayout(
             context,
@@ -148,7 +148,7 @@ class _OrderTicketState extends State<OrderTicket> {
                                   bottomLeft: Radius.circular(25))),
                         ),
                         SizedBox(
-                          height: MediaQuery.of(context).size.height * 0.1,
+                          height: MediaQuery.of(context).size.height * 0.05,
                         ),
                         Container(
                           alignment: Alignment.bottomCenter,
@@ -172,10 +172,15 @@ class _OrderTicketState extends State<OrderTicket> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
-                              Text(
-                                filmDetail['name'],
-                                style: StyleConstant.headerTextStyle,
-                                overflow: TextOverflow.clip,
+                              Container(
+                                width: MediaQuery.of(context).size.width * 0.9,
+                                child: Text(
+                                  filmDetail['name'],
+                                  style: StyleConstant.headerTextStyle,
+                                  textAlign: TextAlign.center,
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 2,
+                                ),
                               ),
                             ],
                           ),
@@ -192,21 +197,21 @@ class _OrderTicketState extends State<OrderTicket> {
                             ],
                           ),
                           SizedBox(
-                            height: 20,
+                            height: 10,
                           ),
                           Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: <Widget>[
                               Container(
                                 padding: EdgeInsets.symmetric(
                                     horizontal: 5, vertical: 10),
                                 child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.center,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: title
                                       .map((e) => Container(
-                                            height: 35,
+                                            height: 50,
                                             padding: EdgeInsets.all(5),
                                             child: Text(e,
                                                 style: TextStyle(
@@ -223,18 +228,22 @@ class _OrderTicketState extends State<OrderTicket> {
                                 padding: EdgeInsets.only(
                                     right: 10, bottom: 10, top: 10),
                                 child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: content
                                       .map((e) => Container(
-                                            height: 35,
+                                            height: 60,
+                                    width: MediaQuery.of(context).size.width * 0.28,
                                             child: Text(e,
                                                 style: TextStyle(
                                                   color: Colors.white,
-                                                  fontSize: 14,
+                                                  fontSize: 16,
                                                   fontWeight: FontWeight.w600,
                                                   fontFamily: "Open Sans",
-                                                )),
+                                                ),
+                                              overflow: TextOverflow.ellipsis,
+                                              maxLines: 2,
+                                            ),
                                             padding: EdgeInsets.all(5),
                                           ))
                                       .toList(),
@@ -247,7 +256,7 @@ class _OrderTicketState extends State<OrderTicket> {
                             ],
                           ),
                           SizedBox(
-                            height: 100,
+                            height: 45,
                           ),
                           Stack(
                             children: <Widget>[

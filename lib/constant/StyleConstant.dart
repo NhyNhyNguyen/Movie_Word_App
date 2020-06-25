@@ -11,7 +11,7 @@ class StyleConstant {
   static const TextStyle formTextStyle = TextStyle(
       color: Colors.white70,
       fontFamily: "Open Sans",
-      fontSize: 20,
+      fontSize: 18,
       fontWeight: FontWeight.w600);
 
   static const TextStyle hintTextStyle = TextStyle(
@@ -65,14 +65,14 @@ class StyleConstant {
     color: ColorConstant.WHITE,
       fontFamily: "Open Sans",
       fontWeight: FontWeight.bold,
-      fontSize: 20
+      fontSize: 18
   );
 
   static const TextStyle btnNormalStyle = TextStyle(
     color: ColorConstant.BLACK,
       fontFamily: "Open Sans",
       fontWeight: FontWeight.bold,
-      fontSize: 20
+      fontSize: 18
   );
 
   static const btnLargeStyle = TextStyle(

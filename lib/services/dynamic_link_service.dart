@@ -1,4 +1,5 @@
 
+import 'package:MovieWorld/constant/ConstantVar.dart';
 import 'package:MovieWorld/screens/User/SignUpScreen.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 
@@ -29,7 +30,8 @@ class DynamicLinkService {
       print('_handleDeepLink | deeplink: $deepLink');
       if(deepLink.path.contains('token')){
        String token =  deepLink.path.split('=')[1];
-          SignUpScreen(jwt:token ,);
+       print(token + " token");
+       ConstantVar.registerToken = token;
       }
     }
   }

@@ -44,6 +44,9 @@ class Date{
         return 4;
       case DateEnum.sat:
         return 5;
+      case DateEnum.sun:
+        return 6;
+
     }
     return 6;
   }

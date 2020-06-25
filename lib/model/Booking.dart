@@ -7,7 +7,9 @@ import 'package:http/http.dart' as http;
 
 
 class  Booking{
+  final int idReservation;
   final String name;
+  final String poster;
   final String showTime;
   final String date;
   final List<String> seats;
@@ -15,7 +17,7 @@ class  Booking{
   final int status;
 
 
-  Booking({this.name, this.showTime, this.date, this.seats, this.status, this.room});
+  Booking({this.idReservation,this.name,this.poster, this.showTime, this.date, this.seats, this.status, this.room});
 
   factory Booking.fromJson(Map<String, dynamic> json) {
     List<String> list = [];
@@ -23,11 +25,13 @@ class  Booking{
       list.add(json);
     });
     return Booking(
+      idReservation: json['id'],
       name: json['filmName'],
+      poster: json['filmPoster'],
       showTime: json['showTime'],
       seats: list,
       status: json['status'],
-        room: json['room']
+      room: json['room']
     );
   }
 
