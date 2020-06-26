@@ -1,21 +1,21 @@
-import 'package:MovieWorld/constant/StyleConstant.dart';
-import 'package:flutter/material.dart';
+//import 'package:MovieWorld/constant/StyleConstant.dart';
+//import 'package:flutter/material.dart';
 //import 'package:youtube_player/youtube_player.dart';
-
-class Trailer extends StatefulWidget {
-  String trailer;
-  Trailer(this.trailer);
-  @override
-  _Trailer createState() => _Trailer(trailer);
-}
-
-class _Trailer extends State<Trailer> {
-  String trailer;
-  _Trailer(this.trailer);
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
+//
+//class Trailer extends StatefulWidget {
+//  String trailer;
+//  Trailer(this.trailer);
+//  @override
+//  _Trailer createState() => _Trailer(trailer);
+//}
+//
+//class _Trailer extends State<Trailer> {
+//  String trailer;
+//  _Trailer(this.trailer);
+//
+//  @override
+//  Widget build(BuildContext context) {
+//    return Column(
 //      crossAxisAlignment: CrossAxisAlignment.start,
 //      children: <Widget>[
 //        Container(
@@ -30,6 +30,6 @@ class _Trailer extends State<Trailer> {
 //          aspectRatio: 16 / 9,
 //        ),
 //      ],
-    );
-  }
-}
+//    );
+//  }
+//}

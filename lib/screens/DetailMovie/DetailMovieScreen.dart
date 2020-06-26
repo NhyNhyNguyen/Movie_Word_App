@@ -10,6 +10,7 @@ import 'package:MovieWorld/screens/DetailMovie/Description.dart';
 import 'package:MovieWorld/screens/DetailMovie/DuarationRate.dart';
 import 'package:MovieWorld/screens/DetailMovie/MovieContent.dart';
 import 'package:MovieWorld/screens/DetailMovie/Poster.dart';
+import 'package:MovieWorld/screens/DetailMovie/video.dart';
 import 'package:MovieWorld/screens/Homepage/FakeData.dart';
 import 'package:MovieWorld/screens/User/LoginScreen.dart';
 import 'package:flutter/cupertino.dart';
@@ -20,6 +21,7 @@ import 'dart:convert';
 import 'CommentItem.dart';
 import 'Trailer.dart';
 import 'CommentMovie.dart';
+import 'package:flutter_youtube/flutter_youtube.dart';
 
 class DetailMovieScreen extends StatefulWidget {
   String id;
@@ -66,10 +68,17 @@ class _DetailMovieScreenState extends State<DetailMovieScreen> {
     return response;
   }
 
+
+  void playYoutubeVideo() {
+    FlutterYoutube.playYoutubeVideoByUrl(
+      apiKey: "AIzaSyB12TqCJKG4T76Ec4hdlYTQIc33Assrp2A",
+      videoUrl: data["trailer"],
+      autoPlay: true,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-
-
 
     url  = UrlConstant.URL_FILM + id;
     if (data == null) {
@@ -84,6 +93,7 @@ class _DetailMovieScreenState extends State<DetailMovieScreen> {
       child: Icon(Icons.cached, color: ColorConstant.GRAY_TEXT, size: 50,),
     );
 
+
         return MainLayOut.getMailLayout(
         context,
         Container(
@@ -95,7 +105,41 @@ class _DetailMovieScreenState extends State<DetailMovieScreen> {
                 Poster(data["poster"], data["name"], data["genres"], data["ratePoint"], data["id"].toString()),
                 Description(data["filmDescription"]["premiere"], data["filmDescription"]["timeLimit"], data["filmDescription"]["artist"], data["filmDescription"]["director"], data["filmDescription"]["nation"],int.parse(id), data['name'], data['poster']),
                 MovieContent(data["filmDescription"]["content"]),
+                Container(
+                  child: Column(
+                    children: <Widget>[
+                      Container(
+                        width: MediaQuery.of(context).size.height * 0.45,
+                        padding: EdgeInsets.symmetric(vertical: 20),
+                        child: Text("Trailer", style: StyleConstant.bigTxtStyle , textAlign: TextAlign.left,),
+                      ),
+                      Container(
+                        child: InkWell(
+                          child: Stack(
+                            children: <Widget>[
+                              Image.network(UrlConstant.URL_IMAGE + data["poster"], fit: BoxFit.cover, ),
+                              Positioned(
+                                child:  Container(
+                                  padding: EdgeInsets.only(top:60, left: 130),
+                                  child: IconButton(
+                                    icon:  Icon(Icons.play_circle_outline, size: 80, color: ColorConstant.LIGHT_VIOLET,),
+                                    onPressed: playYoutubeVideo,
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
+                          onTap: playYoutubeVideo,
+                        ),
+                      )
 
+
+                    ],
+                  ) ,
+                ),
+
+
+                //Trailer(data["trailer"]),
                 // comment//
                 Container(
                   width: MediaQuery.of(context).size.height * 0.45,
@@ -167,7 +211,7 @@ class _DetailMovieScreenState extends State<DetailMovieScreen> {
                 ),
 
 
-//                Trailer(data["trailer"]),
+//
 
 //                Container(
 //                  height: MediaQuery.of(context).size.height * 0.7,

@@ -50,7 +50,8 @@ dependencies:
   #youtube_player: ^0.6.0
   rating_dialog: ^1.0.0
   bloc: ^0.14.4
-  flutter_bloc: ^0.20.0
+  #flutter_bloc: ^0.20.0
+  flutter_youtube: ^2.0.0
 
 
 dev_dependencies:
