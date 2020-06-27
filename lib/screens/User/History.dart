@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:MovieWorld/Loading.dart';
 import 'package:MovieWorld/constant/ColorConstant.dart';
 import 'package:MovieWorld/constant/ConstantVar.dart';
 import 'package:MovieWorld/constant/ImageConstant.dart';
@@ -7,6 +8,7 @@ import 'package:MovieWorld/constant/StringConstant.dart';
 import 'package:MovieWorld/constant/StyleConstant.dart';
 import 'package:MovieWorld/constant/UrlConstant.dart';
 import 'package:MovieWorld/layout/mainLayout.dart';
+import 'package:MovieWorld/modal.dart';
 import 'package:MovieWorld/model/Booking.dart';
 import 'package:MovieWorld/model/UserDetail.dart';
 import 'package:MovieWorld/screens/ButtonGradientLarge.dart';
@@ -57,6 +59,7 @@ class _History extends State<History> {
       } else {
         // If the server did not return a 200 OK response,
         // then throw an exception.
+        Modal.showSimpleCustomDialog(context, "Not found", ()=>{});
         if(response.statusCode == 403){
           ConstantVar.jwt = "";
           ConstantVar.userDetail = null;
@@ -99,6 +102,6 @@ class _History extends State<History> {
                       ],
                     )),
                 "USER", "History")
-        : Container();
+        : Loading(type: "USER",title: "History");
   }
 }

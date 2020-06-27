@@ -20,6 +20,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
+import '../../modal.dart';
+
 class OrderTicket extends StatefulWidget {
   final int filmId;
   final String filmName;
@@ -95,8 +97,7 @@ class _OrderTicketState extends State<OrderTicket> {
         return false;
       }
     } else {
-      ConstantVar.isLogin = false;
-      ConstantVar.userDetail = null;
+      Modal.showSimpleCustomDialog(context, "Not found", () => {});
     }
     return false;
   }

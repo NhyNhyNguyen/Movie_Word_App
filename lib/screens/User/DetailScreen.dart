@@ -267,7 +267,9 @@ class _DetailScreenState extends State<DetailScreen> {
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => ChooseProfile()));
       UserDetail.fetchUserDetail(ConstantVar.jwt);
-    } else {}
+    } else {
+      Modal.showSimpleCustomDialog(context, "Not found", () => {});
+    }
     return response;
   }
 
