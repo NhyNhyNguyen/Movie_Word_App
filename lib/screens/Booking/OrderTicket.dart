@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:MovieWorld/Loading.dart';
 import 'package:MovieWorld/constant/ColorConstant.dart';
 import 'package:MovieWorld/constant/ConstantVar.dart';
 import 'package:MovieWorld/constant/StringConstant.dart';
@@ -18,7 +19,6 @@ import 'package:MovieWorld/screens/User/LoginScreen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:http_parser/http_parser.dart';
 
 class OrderTicket extends StatefulWidget {
   final int filmId;
@@ -400,6 +400,8 @@ class _OrderTicketState extends State<OrderTicket> {
             ),
             "FILM",
             "Book ticket")
-        : Container();
+        : Loading(
+      type: "USER", title: "Booking ticket",
+    );
   }
 }

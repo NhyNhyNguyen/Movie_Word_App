@@ -1,3 +1,4 @@
+import 'package:MovieWorld/Loading.dart';
 import 'package:MovieWorld/constant/ColorConstant.dart';
 import 'package:MovieWorld/constant/ConstantVar.dart';
 import 'package:MovieWorld/constant/ImageConstant.dart';
@@ -70,7 +71,15 @@ class _ChooseProfile extends State<ChooseProfile> {
         addressController.text = ConstantVar.userDetail.address;
         phoneController.text = ConstantVar.userDetail.phone;
         emailController.text = ConstantVar.userDetail.email;
+        isLoading = false;
       }));
+      if(userDetail!= null){
+        usernameController.text = ConstantVar.userDetail.username;
+        fullNameController.text = ConstantVar.userDetail.fullName;
+        addressController.text = ConstantVar.userDetail.address;
+        phoneController.text = ConstantVar.userDetail.phone;
+        emailController.text = ConstantVar.userDetail.email;
+      }
     }
 
   }
@@ -78,7 +87,7 @@ class _ChooseProfile extends State<ChooseProfile> {
   @override
   Widget build(BuildContext context) {
     if (ConstantVar.jwt != null) {
-      return ConstantVar.userDetail != null?  MainLayOut.getMailLayout(
+      return ConstantVar.userDetail != null && !isLoading ? MainLayOut.getMailLayout(
           context,
           Container(
             color: ColorConstant.VIOLET,
@@ -130,7 +139,7 @@ class _ChooseProfile extends State<ChooseProfile> {
             ),
           ),
           "USER",
-          "User Detail") : Container();
+          "Profile") : Loading(type: "USER", title: "Profile");
     } else {
       return LoginScreen(handel: "");
     }

@@ -15,6 +15,8 @@ import 'package:MovieWorld/screens/ButtonGradientLarge.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/widgets.dart';
 
+import '../../Loading.dart';
+
 class SeatMap extends StatefulWidget {
   final int filmId;
   final String dateTime;
@@ -310,6 +312,6 @@ class _SeatMapState extends State<SeatMap> {
           ),
         ),
         "USER",
-        "Choose Seat") : Container()) : LoginScreen(handel: "");
+        "Choose Seat") : Loading(type: "USER", title: "Choose seat")) : LoginScreen(handel: "");
   }
 }

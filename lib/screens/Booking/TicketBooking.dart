@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:math';
 
+import 'package:MovieWorld/Loading.dart';
 import 'package:MovieWorld/constant/ColorConstant.dart';
 import 'package:MovieWorld/constant/ConstantVar.dart';
 import 'package:MovieWorld/constant/ImageConstant.dart';
@@ -36,6 +37,7 @@ class BookingTicket extends StatefulWidget {
 
 class _BookingTicketState extends State<BookingTicket> {
   List<DateTimeShowFilm> data = null;
+  bool isLoading = true;
   final int filmId;
   final String name;
   final String poster;
@@ -61,7 +63,7 @@ class _BookingTicketState extends State<BookingTicket> {
 
     if (response.statusCode == 200) {
       // If the server did return a 200 OK response,
-      // then parse the JSON
+      // then pCarse the JSON
       setState(() {
         data = new List<DateTimeShowFilm>();
         json.decode(response.body).forEach((json) {
@@ -93,7 +95,7 @@ class _BookingTicketState extends State<BookingTicket> {
 
   @override
   Widget build(BuildContext context) {
-    return data != null ? MainLayOut.getMailLayout(
+    return data != null ? data.length > 0 ? MainLayOut.getMailLayout(
         context,
         Container(
           color: ColorConstant.VIOLET,
@@ -328,6 +330,20 @@ class _BookingTicketState extends State<BookingTicket> {
           ),
         ),
         "USER",
-        "Choose Time") : Container();
+        "Choose Time") :
+    MainLayOut.getMailLayout(context, Container(
+      width: double.infinity,
+        height: double.infinity,
+        color: ColorConstant.VIOLET,
+        child: Column(
+          children: <Widget>[
+            Avatar(imageUrl: UrlConstant.IMAGE + poster, username: name,email: null),
+
+            Image.asset(ImageConstant.CAMERA, height: 270),
+            Text('Showtimes aren\'t available!', style: TextStyle(color: ColorConstant.GRAY_TEXT,  fontSize: 20),),
+          ],
+        )
+    ), "CAL", "Choose time")
+    : Loading(type: "CAL",title: "Choose time");
   }
 }

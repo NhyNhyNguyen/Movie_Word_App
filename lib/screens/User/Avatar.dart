@@ -41,7 +41,7 @@ class Avatar extends StatelessWidget {
               Container(
                 decoration: BoxDecoration(
                 ),
-                padding: EdgeInsets.only(bottom: 20,left: 20, right: 20),
+                padding: EdgeInsets.only(bottom: 20,left: 30, right: 30),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[

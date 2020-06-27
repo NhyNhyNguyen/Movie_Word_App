@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:MovieWorld/Loading.dart';
 import 'package:MovieWorld/constant/ColorConstant.dart';
 import 'package:MovieWorld/constant/ConstantVar.dart';
 import 'package:MovieWorld/constant/StringConstant.dart';
@@ -185,7 +186,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     usernameController.text = "trangnguyen";
     passController.text = "123123";
-    return ConstantVar.jwt == "" ?  MainLayOut.getMailLayout(
+    return ConstantVar.jwt == "" ? !isLoading ? MainLayOut.getMailLayout(
         context,
         Container(
           color: ColorConstant.VIOLET,
@@ -253,6 +254,6 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
           ),
         ),
-        "USER", "Login") : DetailScreen();
+        "USER", "Login") : Loading(type: "USER", title: "Login") : DetailScreen();
   }
 }

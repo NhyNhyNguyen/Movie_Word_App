@@ -18,6 +18,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import '../../Loading.dart';
 import 'CommentItem.dart';
 import 'Trailer.dart';
 import 'CommentMovie.dart';
@@ -31,6 +32,7 @@ class DetailMovieScreen extends StatefulWidget {
 }
 
 class _DetailMovieScreenState extends State<DetailMovieScreen> {
+  bool isLoading = true;
   final _key = GlobalKey<FormState>();
   TextEditingController control = TextEditingController();
 
@@ -89,9 +91,7 @@ class _DetailMovieScreenState extends State<DetailMovieScreen> {
        setState(() => data = json.decode(response.body) );
       });
     };
-    if (data == null) return Container(
-      child: Icon(Icons.cached, color: ColorConstant.GRAY_TEXT, size: 50,),
-    );
+    if (data == null) return Loading(type: "HOME", title: "Detail");
 
 
         return MainLayOut.getMailLayout(

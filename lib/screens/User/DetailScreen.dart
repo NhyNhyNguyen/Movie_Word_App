@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:MovieWorld/Loading.dart';
 import 'package:MovieWorld/constant/ColorConstant.dart';
 import 'package:MovieWorld/constant/ConstantVar.dart';
 import 'package:MovieWorld/constant/ImageConstant.dart';
@@ -29,6 +30,7 @@ class DetailScreen extends StatefulWidget {
 }
 
 class _DetailScreenState extends State<DetailScreen> {
+  bool isLoading = true;
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController fullNameController = TextEditingController();
@@ -48,7 +50,7 @@ class _DetailScreenState extends State<DetailScreen> {
     });
   }
 
-  startUpload(BuildContext  context) {
+  startUpload(BuildContext context) {
     if (null == tmpFile) {
       return;
     }
@@ -57,7 +59,8 @@ class _DetailScreenState extends State<DetailScreen> {
     _uploadFileAsFormData(context, tmpFile.path, fileName);
   }
 
-  Future<void> _uploadFileAsFormData(BuildContext context, String path, String fileName) async {
+  Future<void> _uploadFileAsFormData(
+      BuildContext context, String path, String fileName) async {
     try {
       final dio = Dio();
 
@@ -82,7 +85,7 @@ class _DetailScreenState extends State<DetailScreen> {
         data: formData,
       );
       if (response.statusCode == 200) {
-        Modal.showSimpleCustomDialog(context, "Upload Sucessfull!",null);
+        Modal.showSimpleCustomDialog(context, "Upload Sucessfull!", null);
       } else {
         Modal.showSimpleCustomDialog(context, "Upload fail!", null);
       }
@@ -90,6 +93,8 @@ class _DetailScreenState extends State<DetailScreen> {
       print('uploading error: $err');
     }
   }
+
+  bool isUploadImageLoading = false;
 
   Widget showImage(BuildContext context) {
     return FutureBuilder<File>(
@@ -100,67 +105,65 @@ class _DetailScreenState extends State<DetailScreen> {
           tmpFile = snapshot.data;
           base64Image = base64Encode(snapshot.data.readAsBytesSync());
           startUpload(context);
-          return
-            Stack(alignment: Alignment.bottomCenter, children: <Widget>[
-              Column(
-                children: <Widget>[
-                  Container(
-                    height: MediaQuery.of(context).size.height * 0.3,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                        shape: BoxShape.rectangle,
+          return Stack(alignment: Alignment.bottomCenter, children: <Widget>[
+            Column(
+              children: <Widget>[
+                Container(
+                  height: MediaQuery.of(context).size.height * 0.3,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                      shape: BoxShape.rectangle,
+                      image: DecorationImage(
+                        image: NetworkImage(UrlConstant.IMAGE +
+                            "photo1528790532372-1528790532372684051980-15889023877795083171.jpg"),
+                        fit: BoxFit.cover,
+                      ),
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(10),
+                          topRight: Radius.circular(10))),
+                ),
+                SizedBox(
+                  height: 70,
+                )
+              ],
+            ),
+            Stack(
+              alignment: Alignment.bottomRight,
+              children: <Widget>[
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Container(
+                      width: 180,
+                      height: 180,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
                         image: DecorationImage(
-                          image: NetworkImage(UrlConstant.IMAGE +
-                              "photo1528790532372-1528790532372684051980-15889023877795083171.jpg"),
+                          image: FileImage(snapshot.data),
                           fit: BoxFit.cover,
                         ),
-                        borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(10),
-                            topRight: Radius.circular(10))),
-                  ),
-                  SizedBox(
-                    height: 70,
-                  )
-                ],
-              ),
-              Stack(
-                alignment: Alignment.bottomRight,
-                children: <Widget>[
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-        Container(
-        width: 180,
-        height: 180,
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            image: DecorationImage(
-              image: FileImage(snapshot.data),
-              fit: BoxFit.cover,
-            ),
-            // border: Border.all(color: Colors.white70, width: 4),
-          ),
-
-
-        )                    ],
-                  ),
-                  Container(
-                    child: IconButton(
-                      icon: Icon(
-                        Icons.camera_alt,
-                        size: 30,
-                        color: Colors.black,
+                        // border: Border.all(color: Colors.white70, width: 4),
                       ),
-                      onPressed: chooseImage,
+                    )
+                  ],
+                ),
+                Container(
+                  child: IconButton(
+                    icon: Icon(
+                      Icons.camera_alt,
+                      size: 30,
+                      color: Colors.black,
                     ),
-                    width: 45,
-                    height: 45,
-                    decoration:
-                    BoxDecoration(shape: BoxShape.circle, color: Colors.grey),
+                    onPressed: chooseImage,
                   ),
-                ],
-              ),
-            ]);
+                  width: 45,
+                  height: 45,
+                  decoration:
+                      BoxDecoration(shape: BoxShape.circle, color: Colors.grey),
+                ),
+              ],
+            ),
+          ]);
         } else if (null != snapshot.error) {
           return const Text(
             'Error Picking Image',
@@ -264,99 +267,98 @@ class _DetailScreenState extends State<DetailScreen> {
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => ChooseProfile()));
       UserDetail.fetchUserDetail(ConstantVar.jwt);
-    } else {
-
-    }
+    } else {}
     return response;
   }
 
   @override
   initState() {
     super.initState();
-      UserDetail.fetchUserDetail(ConstantVar.jwt)
-          .then((value) => setState(() {
-        usernameController.text = ConstantVar.userDetail.username;
-        fullNameController.text = ConstantVar.userDetail.fullName;
-        addressController.text = ConstantVar.userDetail.address;
-        phoneController.text = ConstantVar.userDetail.phone;
-        emailController.text = ConstantVar.userDetail.email;
-      }));
-      if(ConstantVar.userDetail != null){
-        usernameController.text = ConstantVar.userDetail.username;
-        fullNameController.text = ConstantVar.userDetail.fullName;
-        addressController.text = ConstantVar.userDetail.address;
-        phoneController.text = ConstantVar.userDetail.phone;
-        emailController.text = ConstantVar.userDetail.email;
-      }
-
+    UserDetail.fetchUserDetail(ConstantVar.jwt).then((value) => setState(() {
+          usernameController.text = ConstantVar.userDetail.username;
+          fullNameController.text = ConstantVar.userDetail.fullName;
+          addressController.text = ConstantVar.userDetail.address;
+          phoneController.text = ConstantVar.userDetail.phone;
+          emailController.text = ConstantVar.userDetail.email;
+          isLoading = false;
+        }));
+    if (ConstantVar.userDetail != null) {
+      usernameController.text = ConstantVar.userDetail.username;
+      fullNameController.text = ConstantVar.userDetail.fullName;
+      addressController.text = ConstantVar.userDetail.address;
+      phoneController.text = ConstantVar.userDetail.phone;
+      emailController.text = ConstantVar.userDetail.email;
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     if (ConstantVar.userDetail != null) {
-      return MainLayOut.getMailLayout(
-          context,
-          Container(
-            color: ColorConstant.VIOLET,
-            height: double.infinity,
-            width: double.infinity,
-            child: SingleChildScrollView(
-              physics: AlwaysScrollableScrollPhysics(),
-              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  showImage(context),
-                  Container(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
-                    child: Form(
-                      key: _formKey,
-                      child: Column(children: <Widget>[
-                        TextFieldWidget.buildTextField(
-                            StringConstant.USERNAME,
-                            StringConstant.USERNAME_HINT,
-                            Icon(Icons.account_circle, color: Colors.white),
-                            TextInputType.text,
-                            usernameController),
-                        TextFieldWidget.buildTextField(
-                            StringConstant.EMAIL,
-                            StringConstant.EMAIL_HINT,
-                            Icon(Icons.email, color: Colors.white),
-                            TextInputType.text,
-                            emailController),
-                        TextFieldWidget.buildTextField(
-                            StringConstant.FULL_NAME,
-                            StringConstant.FULL_NAME_HINT,
-                            Icon(Icons.assessment, color: Colors.white),
-                            TextInputType.text,
-                            fullNameController),
-                        TextFieldWidget.buildTextField(
-                            StringConstant.PHONE,
-                            StringConstant.PHONE_HINT,
-                            Icon(Icons.phone, color: Colors.white),
-                            TextInputType.text,
-                            phoneController),
-                        TextFieldWidget.buildTextField(
-                            StringConstant.ADDRESS,
-                            StringConstant.ADDRESS_HINT,
-                            Icon(Icons.assignment, color: Colors.white),
-                            TextInputType.text,
-                            addressController),
-                      ]),
-                    ),
+      return !isLoading
+          ? MainLayOut.getMailLayout(
+              context,
+              Container(
+                color: ColorConstant.VIOLET,
+                height: double.infinity,
+                width: double.infinity,
+                child: SingleChildScrollView(
+                  physics: AlwaysScrollableScrollPhysics(),
+                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      showImage(context),
+                      Container(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 10.0, vertical: 20.0),
+                        child: Form(
+                          key: _formKey,
+                          child: Column(children: <Widget>[
+                            TextFieldWidget.buildTextField(
+                                StringConstant.USERNAME,
+                                StringConstant.USERNAME_HINT,
+                                Icon(Icons.account_circle, color: Colors.white),
+                                TextInputType.text,
+                                usernameController),
+                            TextFieldWidget.buildTextField(
+                                StringConstant.EMAIL,
+                                StringConstant.EMAIL_HINT,
+                                Icon(Icons.email, color: Colors.white),
+                                TextInputType.text,
+                                emailController),
+                            TextFieldWidget.buildTextField(
+                                StringConstant.FULL_NAME,
+                                StringConstant.FULL_NAME_HINT,
+                                Icon(Icons.assessment, color: Colors.white),
+                                TextInputType.text,
+                                fullNameController),
+                            TextFieldWidget.buildTextField(
+                                StringConstant.PHONE,
+                                StringConstant.PHONE_HINT,
+                                Icon(Icons.phone, color: Colors.white),
+                                TextInputType.text,
+                                phoneController),
+                            TextFieldWidget.buildTextField(
+                                StringConstant.ADDRESS,
+                                StringConstant.ADDRESS_HINT,
+                                Icon(Icons.assignment, color: Colors.white),
+                                TextInputType.text,
+                                addressController),
+                          ]),
+                        ),
+                      ),
+                      _SaveBtn(),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.1,
+                      )
+                    ],
                   ),
-                  _SaveBtn(),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.1,
-                  )
-                ],
+                ),
               ),
-            ),
-          ),
-          "USER",
-          "User Detail");
+              "USER",
+              "Edit Profile")
+          : Loading(type: "USER", title: "Edit Profile");
     } else {
       return LoginScreen(handel: "");
     }

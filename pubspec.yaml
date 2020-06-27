@@ -52,6 +52,7 @@ dependencies:
   bloc: ^0.14.4
   #flutter_bloc: ^0.20.0
   flutter_youtube: ^2.0.0
+  load: ^0.1.6
 
 
 dev_dependencies:

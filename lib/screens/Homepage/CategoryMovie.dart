@@ -43,7 +43,31 @@ class _CategoryMovieState extends State<CategoryMovie>  {
     };
 
     if (data == null) return Container(
-      child: Icon(Icons.cached, color: ColorConstant.GRAY_TEXT, size: 50,),
+      child:         Stack(
+        children: <Widget>[
+          Container(
+            color: ColorConstant.VIOLET,
+            width: double.infinity,
+            height: double.infinity,
+            child:  Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Container(
+                    width: 50, height: 50,
+                    child:  CircularProgressIndicator(
+                      strokeWidth: 4,
+                      backgroundColor: Colors.white,
+                      valueColor: new AlwaysStoppedAnimation<Color>(ColorConstant.LIGHT_VIOLET),
+                    )
+                )
+              ],
+            ),
+          )
+
+        ],
+      )
+      ,
     );
     return GridView.count(
         crossAxisCount: 2,
