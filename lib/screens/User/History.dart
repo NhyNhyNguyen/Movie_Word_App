@@ -49,9 +49,8 @@ class _History extends State<History> {
         setState(() {
           data = new List<Booking>();
           json.decode(response.body).forEach((json) {
-            if(json["seat"] != null){
               data.add(Booking.fromJson(json));
-            }
+
           });
         });
         return true;

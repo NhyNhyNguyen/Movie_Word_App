@@ -21,9 +21,11 @@ class  Booking{
 
   factory Booking.fromJson(Map<String, dynamic> json) {
     List<String> list = [];
-    json['seat'].forEach((json){
-      list.add(json);
-    });
+    if(json['seat'] != null){
+      json['seat'].forEach((json){
+        list.add(json);
+      });
+    }
     return Booking(
       idReservation: json['id'],
       name: json['filmName'],

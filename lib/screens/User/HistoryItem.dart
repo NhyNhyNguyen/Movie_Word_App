@@ -31,17 +31,15 @@ class _HistoryItemState extends State<HistoryItem> {
   ];
 
   Future<http.Response> putCancelReversation() async {
-    print("hello cancel");
+    print("hello cancel" +   UrlConstant.PUT_CANCEL + booking.idReservation.toString()
+    );
     final http.Response response = await http.put(
       UrlConstant.PUT_CANCEL + booking.idReservation.toString(),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Accept': 'application/json',
-        'Authorization':
-        'Bearer ' + ConstantVar.jwt,
+        'Authorization': 'Bearer ' + ConstantVar.jwt,
       },
-      body: jsonEncode(<String, int>{
-      }),
     );
     print(booking.idReservation.toString());
     print(booking.status);
@@ -90,23 +88,33 @@ class _HistoryItemState extends State<HistoryItem> {
                       Poster(imageUrl: UrlConstant.IMAGE + booking.poster),
                       Container(
                         child:
-                        (booking.status == 0  ) ?
-                      RaisedButton(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10.0),
-                            side: BorderSide(color: Colors.white, width: 0.5)),
-                        color: ColorConstant.LIGHT_VIOLET,
+                        (booking.status == 2 ) ?
+                      Container(
+                        margin: EdgeInsets.all(5),
+                        padding: EdgeInsets.all(5),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(color: Colors.white, width: 1.5)
+                        ),
                         child: Text(
-                          StringConstant.CANCEL,
+                          "Canceled",
                           style: StyleConstant.priceTextStyle,
                         ),
-                        onPressed: () => putCancelReversation() ,
-                      ) :
-                       Text(
-                          "CANCELED",
-                          style: StyleConstant.priceTextStyle,
-                        ),
+                      ) : Container()
                        ),
+                       booking.status == 0 ?  Container(
+                         height: 50,
+                         margin: EdgeInsets.all(5),
+                         padding: EdgeInsets.only(left: 10, right: 10),
+                         decoration: BoxDecoration(
+                           borderRadius: BorderRadius.all(Radius.circular(20)),
+                           gradient: ColorConstant.RAINBOW_BUTTON,
+                         ),
+                         child: FlatButton(
+                           child: Text("Cancel", style:StyleConstant.btnSelectedStyle ),
+                           onPressed: putCancelReversation,
+                         ),
+                       ) : Container()
                     ],
                   ),
                 ),

@@ -123,7 +123,7 @@ class _SeatMapState extends State<SeatMap> {
                   setState(() {
                     if (seats[i - 1][j - 1].status == 0) {
                       seats[i - 1][j - 1].status = 2;
-                      seatSelected.add(seatRow[i - 1] + (j - 1).toString());
+                      seatSelected.add(seatRow[i] + (j).toString());
                     }
                   })
                 },
