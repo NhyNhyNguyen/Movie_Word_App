@@ -33,5 +33,6 @@ class ImageConstant{
 
   static const AVATAR = "assets/avater.jpg";
   static const CAMERA ="assets/camera_gray.png";
+  static const NO_IMAGE ="assets/no-image.png";
 
 }

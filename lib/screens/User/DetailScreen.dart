@@ -29,8 +29,6 @@ class DetailScreen extends StatefulWidget {
 }
 
 class _DetailScreenState extends State<DetailScreen> {
-  UserDetail userDetail;
-  bool isLoading = true;
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController fullNameController = TextEditingController();
@@ -50,16 +48,16 @@ class _DetailScreenState extends State<DetailScreen> {
     });
   }
 
-  startUpload() {
+  startUpload(BuildContext  context) {
     if (null == tmpFile) {
       return;
     }
     String fileName = tmpFile.path.split('/').last;
     print(tmpFile.path + fileName);
-    _uploadFileAsFormData(tmpFile.path, fileName);
+    _uploadFileAsFormData(context, tmpFile.path, fileName);
   }
 
-  Future<void> _uploadFileAsFormData(String path, String fileName) async {
+  Future<void> _uploadFileAsFormData(BuildContext context, String path, String fileName) async {
     try {
       final dio = Dio();
 
@@ -84,7 +82,7 @@ class _DetailScreenState extends State<DetailScreen> {
         data: formData,
       );
       if (response.statusCode == 200) {
-        Modal.showSimpleCustomDialog(context, "Upload Sucessfull!", null);
+        Modal.showSimpleCustomDialog(context, "Upload Sucessfull!",null);
       } else {
         Modal.showSimpleCustomDialog(context, "Upload fail!", null);
       }
@@ -93,7 +91,7 @@ class _DetailScreenState extends State<DetailScreen> {
     }
   }
 
-  Widget showImage() {
+  Widget showImage(BuildContext context) {
     return FutureBuilder<File>(
       future: file,
       builder: (BuildContext context, AsyncSnapshot<File> snapshot) {
@@ -101,7 +99,7 @@ class _DetailScreenState extends State<DetailScreen> {
             null != snapshot.data) {
           tmpFile = snapshot.data;
           base64Image = base64Encode(snapshot.data.readAsBytesSync());
-          startUpload();
+          startUpload(context);
           return
             Stack(alignment: Alignment.bottomCenter, children: <Widget>[
               Column(
@@ -204,7 +202,7 @@ class _DetailScreenState extends State<DetailScreen> {
                         shape: BoxShape.circle,
                         image: DecorationImage(
                           image: ConstantVar.userDetail.avt == null
-                              ? AssetImage(ImageConstant.LOGO)
+                              ? AssetImage(ImageConstant.NO_IMAGE)
                               : NetworkImage(UrlConstant.IMAGE +
                                   ConstantVar.userDetail.avt),
                           fit: BoxFit.cover,
@@ -266,15 +264,15 @@ class _DetailScreenState extends State<DetailScreen> {
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => ChooseProfile()));
       UserDetail.fetchUserDetail(ConstantVar.jwt);
-    } else {}
+    } else {
+
+    }
     return response;
   }
 
   @override
   initState() {
     super.initState();
-    ConstantVar.isLogin = false;
-
       UserDetail.fetchUserDetail(ConstantVar.jwt)
           .then((value) => setState(() {
         usernameController.text = ConstantVar.userDetail.username;
@@ -301,7 +299,7 @@ class _DetailScreenState extends State<DetailScreen> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  showImage(),
+                  showImage(context),
                   Container(
                     padding:
                         EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
@@ -352,7 +350,7 @@ class _DetailScreenState extends State<DetailScreen> {
           "USER",
           "User Detail");
     } else {
-      return LoginScreen();
+      return LoginScreen(handel: "");
     }
   }
 }

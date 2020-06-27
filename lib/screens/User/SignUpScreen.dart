@@ -44,14 +44,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   _SignUpScreenState(this.jwt);
 
-  void onPressedRegisterSuccress(BuildContext context) {
-    Navigator.push(context, null);
-  }
-
-  void onPressedRegisterFail(BuildContext context) {
-    Navigator.push(context, null);
-  }
-
   Future<http.Response> postUserDetail(BuildContext context) async {
     final http.Response response = await http.post(
       UrlConstant.REGISTER,
@@ -71,11 +63,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
       print("sign_up success");
       Modal.showSimpleCustomDialog(
           context, "Please enter mail to determine", null);
-      ConstantVar.registerToken = "";
     } else {
       Modal.showSimpleCustomDialog(
           context, "Sign up fail", null);
-      ConstantVar.registerToken = "";
     }
     return response;
   }
@@ -96,7 +86,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
           (c) => {
             Navigator.of(c, rootNavigator: true).pop('dialog'),
             Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => LoginScreen()))
+                    MaterialPageRoute(builder: (context) => LoginScreen(handel: "")))
               });
       ConstantVar.registerToken = "";
     } else {

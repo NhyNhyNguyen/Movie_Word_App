@@ -143,7 +143,6 @@ class _SeatMapState extends State<SeatMap> {
   @override
   void initState() {
     filmId = 2;
-    dateTime = "24-06-2020 02:00 PM";
     print(filmId.toString() + filmName + dateTime);
     print("film id" + filmId.toString());
     if(ConstantVar.jwt != ""){
@@ -188,7 +187,8 @@ class _SeatMapState extends State<SeatMap> {
 
   @override
   Widget build(BuildContext context) {
-    return  ConstantVar.jwt != "" ? MainLayOut.getMailLayout(
+    return  ConstantVar.jwt != "" ? ( seats != null ?
+    MainLayOut.getMailLayout(
         context,
         Container(
           color: ColorConstant.VIOLET,
@@ -240,14 +240,19 @@ class _SeatMapState extends State<SeatMap> {
                               physics: NeverScrollableScrollPhysics(),
                               children: _getSeats())),
 //
+                      Container(
+                        width: MediaQuery.of(context).size.width*0.7,
+                        child:
+
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           seatSelected.length != 0
-                          ?Text("Seat No: " + seatSelected.join(", "),
-                              style: StyleConstant.normalTextStyle): Container(),
+                              ?Text("Seat No: " + seatSelected.join(", "),
+                            style: StyleConstant.normalTextStyle,
+                            overflow: TextOverflow.ellipsis,): Container(),
                         ],
-                      ),
+                      ),),
                       SizedBox(
                         height: 10,
                       ),
@@ -301,6 +306,6 @@ class _SeatMapState extends State<SeatMap> {
           ),
         ),
         "USER",
-        "Choose Seat") : LoginScreen();
+        "Choose Seat") : Container()) : LoginScreen(handel: "");
   }
 }

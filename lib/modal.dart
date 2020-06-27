@@ -1,3 +1,4 @@
+import 'package:MovieWorld/screens/Homepage/NowshowingScreen.dart';
 import 'package:MovieWorld/screens/User/LoginScreen.dart';
 import 'package:flutter/material.dart';
 
@@ -33,7 +34,9 @@ class Modal{
                     color: Colors.blue,
                     onPressed: () {
                       onPressed != null ?
-                      onPressed(context) : Navigator.of(context, rootNavigator: true).pop('dialog')
+                      Navigator.of(context, rootNavigator: true).pop('dialog')
+                          : Navigator.of(context, rootNavigator: true).pop('dialog');
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => NowshowingScreen()))
                       ;
                     },
                     child: Text(

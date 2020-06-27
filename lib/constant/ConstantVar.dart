@@ -5,4 +5,5 @@ class ConstantVar{
   static bool isLogin = false;
   static UserDetail userDetail = null;
   static String registerToken = "";
+  static String resetPassWordToken = "";
 }

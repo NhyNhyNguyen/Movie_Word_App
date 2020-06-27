@@ -97,7 +97,7 @@ class _MenuState extends State<Menu> {
                     icon: Icons.person,
                     selectHandle: () => {
                       Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => LoginScreen()))
+                          MaterialPageRoute(builder: (context) => LoginScreen(handel: "")))
                     },
                   ),
                   MenuItem(
@@ -150,7 +150,7 @@ class _MenuState extends State<Menu> {
                         ConstantVar.userDetail = null,
                       ConstantVar.jwt = "",
                       Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => LoginScreen()))
+                          MaterialPageRoute(builder: (context) => LoginScreen(handel: "")))
                     },
 
                   ),

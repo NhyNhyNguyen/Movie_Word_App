@@ -5,6 +5,7 @@ import 'package:MovieWorld/model/Movie.dart';
 import 'package:MovieWorld/screens/Homepage/BannerImage.dart';
 import 'package:MovieWorld/screens/Homepage/CategoryMovie.dart';
 import 'package:MovieWorld/screens/News/News.dart';
+import 'package:MovieWorld/screens/User/ResetPassword.dart';
 import 'package:MovieWorld/screens/User/SignUpScreen.dart';
 import 'package:MovieWorld/services/dynamic_link_service.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
@@ -43,7 +44,7 @@ class _NowshowingScreen extends State<NowshowingScreen> {
         await FirebaseDynamicLinks.instance.getInitialLink();
 
     // handle link that has been retrieved
-     _handleDeepLink(data);
+    _handleDeepLink(data);
 
     // Register a link callback to fire if the app is opened up from the background
     // using a dynamic link.
@@ -63,10 +64,15 @@ class _NowshowingScreen extends State<NowshowingScreen> {
       print(deepLink.queryParameters);
       String token = deepLink.queryParameters.values.toList()[0];
       print(token + " token");
-      ConstantVar.registerToken = token;
-      setState(() {
+      if (deepLink.path.contains('register')) {
+        print(token + " token");
+        ConstantVar.registerToken = token;
+      } else {
+        print(token + " reset token");
 
-      });
+        ConstantVar.resetPassWordToken = token;
+      }
+      setState(() {});
     }
   }
 
@@ -107,61 +113,65 @@ class _NowshowingScreen extends State<NowshowingScreen> {
 //    };
 
     return ConstantVar.registerToken == ""
-        ? ((type == 'now-showing')
-            ? MainLayOut.getMailLayout(
-                context,
-                Container(
-                  color: ColorConstant.VIOLET,
-                  child: Column(
-                    children: <Widget>[
-                      Container(
-                        //height: 500,
-                        height: MediaQuery.of(context).size.height * 0.77,
-                        child: ListView(
-                          children: <Widget>[
-                            BannerImage(),
-                            Container(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 0.0, vertical: 10.0),
-                              width: double.infinity,
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: <Widget>[
-                                  ButtonGradient(
-                                      type,
-                                      "now-showing",
-                                      StringConstant.NOW_SHOWING,
-                                      () => choseOption("now-showing")),
-                                  ButtonGradient(
-                                      type,
-                                      "coming-soon",
-                                      StringConstant.COMMING_SOON,
-                                      () => choseOption("coming-soon")),
-                                ],
-                              ),
-                            ),
-                            //OptionTab('now-showing'),
-                            Container(
-                                // height: 435,
-                                height:
-                                    MediaQuery.of(context).size.height * 0.675,
-                                child: CategoryMovie(type)),
+        ? (ConstantVar.resetPassWordToken == ""
+            ? ((type == 'now-showing')
+                ? MainLayOut.getMailLayout(
+                    context,
+                    Container(
+                      color: ColorConstant.VIOLET,
+                      child: Column(
+                        children: <Widget>[
+                          Container(
+                            //height: 500,
+                            height: MediaQuery.of(context).size.height * 0.77,
+                            child: ListView(
+                              children: <Widget>[
+                                BannerImage(),
+                                Container(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 0.0, vertical: 10.0),
+                                  width: double.infinity,
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: <Widget>[
+                                      ButtonGradient(
+                                          type,
+                                          "now-showing",
+                                          StringConstant.NOW_SHOWING,
+                                          () => choseOption("now-showing")),
+                                      ButtonGradient(
+                                          type,
+                                          "coming-soon",
+                                          StringConstant.COMMING_SOON,
+                                          () => choseOption("coming-soon")),
+                                    ],
+                                  ),
+                                ),
+                                //OptionTab('now-showing'),
+                                Container(
+                                    // height: 435,
+                                    height: MediaQuery.of(context).size.height *
+                                        0.675,
+                                    child: CategoryMovie(type)),
 
 //                      Container(
 //                         // height: 435,
 //                          height: MediaQuery.of(context).size.height * 0.675,
 //                          child: MyHomepage()),
-                            //MyHomepage(),
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-                "HOME",
-                "Home")
-            : CommingsoonScreen())
+                                //MyHomepage(),
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    "HOME",
+                    "Home")
+                : CommingsoonScreen())
+            : ResetPasswordScreen(
+                jwt: ConstantVar.resetPassWordToken,
+              ))
         : SignUpScreen(
             jwt: ConstantVar.registerToken,
           );

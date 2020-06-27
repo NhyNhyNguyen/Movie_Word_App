@@ -140,6 +140,6 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
               ),
             ),
             "USER", "Change Password")
-        : LoginScreen();
+        : LoginScreen(handel: "");
   }
 }

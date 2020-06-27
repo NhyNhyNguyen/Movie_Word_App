@@ -48,7 +48,7 @@ class _CommentInputState extends State<CommentInput> {
           MaterialPageRoute(builder: (context) => DetailMovieScreen(idMovie)));
     } else {
       Navigator.push(context,
-          MaterialPageRoute(builder: (context) => LoginScreen()));
+          MaterialPageRoute(builder: (context) => LoginScreen(handel: "")));
     }
     return response;
   }
@@ -99,7 +99,7 @@ class _CommentInputState extends State<CommentInput> {
               ? postComment()
               : Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => LoginScreen()),
+              MaterialPageRoute(builder: (context) => LoginScreen(handel: "")),
               ) },
           )
         ],

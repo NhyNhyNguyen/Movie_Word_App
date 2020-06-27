@@ -132,7 +132,7 @@ class _ChooseProfile extends State<ChooseProfile> {
           "USER",
           "User Detail") : Container();
     } else {
-      return LoginScreen();
+      return LoginScreen(handel: "");
     }
   }
 }

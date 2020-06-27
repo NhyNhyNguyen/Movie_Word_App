@@ -7,6 +7,7 @@ import 'package:MovieWorld/constant/StringConstant.dart';
 import 'package:MovieWorld/constant/StyleConstant.dart';
 import 'package:MovieWorld/constant/UrlConstant.dart';
 import 'package:MovieWorld/layout/mainLayout.dart';
+import 'package:MovieWorld/screens/Homepage/NowshowingScreen.dart';
 import 'package:MovieWorld/screens/User/ChooseProfile.dart';
 import 'package:MovieWorld/screens/User/LoginScreen.dart';
 import 'package:MovieWorld/screens/User/ResetPass.dart';
@@ -16,70 +17,72 @@ import 'package:http/http.dart' as http;
 
 import '../../modal.dart';
 import '../ButtonGradientLarge.dart';
-import 'DetailScreen.dart';
-import 'SignUpScreen.dart';
+
 
 class ResetPasswordScreen extends StatefulWidget {
+  final String jwt;
+
+  const ResetPasswordScreen({Key key, this.jwt}) : super(key: key);
+
   @override
-  _ResetPasswordScreenState createState() => _ResetPasswordScreenState();
+  _ResetPasswordScreenState createState() =>
+      _ResetPasswordScreenState(this.jwt);
 }
 
 class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
+  final String jwt;
+
   final _formKey = GlobalKey<FormState>();
   TextEditingController passController = TextEditingController();
   TextEditingController passConfirmController = TextEditingController();
 
-  Future<String> resetPass() async {
-    var queryParameters = {
-      "token" : "f04cd29c-cfee-47b5-943d-0b382d6b77f2",
-      'newPassword': passController.text,
-    };
-    var uri = Uri.http(UrlConstant.HOST, '/api/save-password', queryParameters);
+  _ResetPasswordScreenState(this.jwt);
+
+  Future<String> resetPass(BuildContext context) async {
+    var uri = UrlConstant.HOST + '/api/save-password?token=' + jwt + '&newPassword=' + passConfirmController.text ;
     http.Response response = await http.post(
       uri,
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
-        'Authorization': 'Bearer ' + ConstantVar.jwt,
       },
     );
 
     if (response.statusCode == 200) {
-      ConstantVar.jwt = "";
+      Modal.showSimpleCustomDialog(
+          context,
+          "Change pass successfull!",
+          (c) => {
+                Navigator.of(c, rootNavigator: true).pop('dialog'),
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => LoginScreen(handel: "now"
+                    ))),
+              });
+      ConstantVar.resetPassWordToken = "";
       ConstantVar.userDetail = null;
-     /* Modal.showSimpleCustomDialog(
-          context, "Reset pass successfull", onPressedResetPassSuccess);*/
+      ConstantVar.jwt = "";
     } else {
-    /*  Modal.showSimpleCustomDialog(
-          context, "Please enter your mail", onPressedResetPassFail);*/
+      Modal.showSimpleCustomDialog(context, " Change pass  fail!", null);
+      ConstantVar.resetPassWordToken = "";
     }
   }
 
-  void onPressedResetPassSuccess(BuildContext context) {
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => LoginScreen()));
-  }
-
-  void onPressedResetPassFail(BuildContext context) {
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => ResetPassScreen()));
-  }
 
 //  }
 
-  Widget _resetPassBtn() {
+  Widget _resetPassBtn(BuildContext context) {
     return ButtonGradientLarge(StringConstant.RESET_PASS, () {
       if (_formKey.currentState.validate()) {}
-      resetPass();
+      resetPass(context);
     });
   }
 
   @override
-  void initState() {}
+  void initState() {
+  }
 
   @override
   Widget build(BuildContext context) {
-    return ConstantVar.userDetail != null
-        ? MainLayOut.getMailLayout(
+    return ConstantVar.jwt == "" ? MainLayOut.getMailLayout(
             context,
             Container(
               color: ColorConstant.VIOLET,
@@ -138,7 +141,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                               SizedBox(
                                 height: 15,
                               ),
-                              _resetPassBtn(),
+                              _resetPassBtn(context),
                             ],
                           ),
                         )),
@@ -149,7 +152,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                 ),
               ),
             ),
-            "USER", "Change Password")
-        : LoginScreen();
+            "USER",
+            "Change Password") : NowshowingScreen();
   }
 }
