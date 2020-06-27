@@ -25,7 +25,7 @@ class History extends StatefulWidget {
 }
 
 class _History extends State<History> {
-  List<Booking> data;
+  List<Booking> data = null;
 
   @override
   void initState() {

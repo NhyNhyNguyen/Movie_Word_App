@@ -90,6 +90,7 @@ class _HistoryItemState extends State<HistoryItem> {
                         child:
                         (booking.status == 2 ) ?
                       Container(
+                        height: 40,
                         margin: EdgeInsets.all(5),
                         padding: EdgeInsets.all(5),
                         decoration: BoxDecoration(
@@ -103,15 +104,15 @@ class _HistoryItemState extends State<HistoryItem> {
                       ) : Container()
                        ),
                        booking.status == 0 ?  Container(
-                         height: 50,
+                         height: 40,
                          margin: EdgeInsets.all(5),
-                         padding: EdgeInsets.only(left: 10, right: 10),
+                         padding: EdgeInsets.all(5),
                          decoration: BoxDecoration(
-                           borderRadius: BorderRadius.all(Radius.circular(20)),
-                           gradient: ColorConstant.RAINBOW_BUTTON,
+                             borderRadius: BorderRadius.circular(10),
+                           gradient: ColorConstant.RAINBOW_BUTTON
                          ),
                          child: FlatButton(
-                           child: Text("Cancel", style:StyleConstant.btnSelectedStyle ),
+                           child: Text(" Cancel ", style:StyleConstant.btnSelectedStyle ),
                            onPressed: putCancelReversation,
                          ),
                        ) : Container()
