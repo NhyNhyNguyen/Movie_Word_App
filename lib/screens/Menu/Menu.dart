@@ -4,6 +4,7 @@ import 'package:MovieWorld/constant/ImageConstant.dart';
 import 'package:MovieWorld/constant/StringConstant.dart';
 import 'package:MovieWorld/constant/StyleConstant.dart';
 import 'package:MovieWorld/constant/UrlConstant.dart';
+import 'package:MovieWorld/screens/User/ChangePassword.dart';
 import 'package:MovieWorld/screens/User/ChoosePage.dart';
 import 'package:MovieWorld/screens/User/ChooseProfile.dart';
 import 'package:MovieWorld/screens/User/DetailScreen.dart';
@@ -96,7 +97,7 @@ class _MenuState extends State<Menu> {
                     icon: Icons.person,
                     selectHandle: () => {
                       Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => LoginScreen()))
+                          MaterialPageRoute(builder: (context) => LoginScreen(handel: "")))
                     },
                   ),
                   MenuItem(
@@ -104,7 +105,7 @@ class _MenuState extends State<Menu> {
                     icon: Icons.person_add,
                     selectHandle: () => {
                       Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => SignUpScreen()))
+                          MaterialPageRoute(builder: (context) => SignUpScreen(jwt: "",)))
                     },
                   ),
                 ],
@@ -139,7 +140,7 @@ class _MenuState extends State<Menu> {
                     icon: Icons.lock_open,
                     selectHandle: () => {
                       Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => ResetPassScreen()))
+                          MaterialPageRoute(builder: (context) => ChangePasswordScreen()))
                     },
                   ),
                   MenuItem(
@@ -149,7 +150,7 @@ class _MenuState extends State<Menu> {
                         ConstantVar.userDetail = null,
                       ConstantVar.jwt = "",
                       Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => LoginScreen()))
+                          MaterialPageRoute(builder: (context) => LoginScreen(handel: "")))
                     },
 
                   ),

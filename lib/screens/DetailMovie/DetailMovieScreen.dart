@@ -63,7 +63,7 @@ class _DetailMovieScreenState extends State<DetailMovieScreen> {
           MaterialPageRoute(builder: (context) => DetailMovieScreen(id)));
     } else {
       Navigator.push(context,
-          MaterialPageRoute(builder: (context) => LoginScreen()));
+          MaterialPageRoute(builder: (context) => LoginScreen(handel: "")));
     }
     return response;
   }
@@ -189,7 +189,7 @@ class _DetailMovieScreenState extends State<DetailMovieScreen> {
                                               ? postComment()
                                               : Navigator.push(
                                             context,
-                                            MaterialPageRoute(builder: (context) => LoginScreen()),
+                                            MaterialPageRoute(builder: (context) => LoginScreen(handel: "")),
                                           ) },
                                       ),
                                     )

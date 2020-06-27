@@ -141,7 +141,7 @@ class _PosterState extends State<Poster>{
                           }
                           else {
                             Navigator.push(context, MaterialPageRoute(
-                                builder: (context) => LoginScreen()));
+                                builder: (context) => LoginScreen(handel: "")));
                           }
                         },
                         child: Row(

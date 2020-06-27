@@ -20,7 +20,7 @@ import 'package:flutter/material.dart';
 class MainLayOut {
   void loginHandle(BuildContext context) {
     Navigator.push(
-        context, MaterialPageRoute(builder: (context) => LoginScreen()));
+        context, MaterialPageRoute(builder: (context) => LoginScreen(handel: "")));
   }
 
   static Widget getMailLayout(
@@ -37,7 +37,7 @@ class MainLayOut {
         key: _scaffoldKey,
         appBar: PreferredSize(
           preferredSize:
-              Size.fromHeight(MediaQuery.of(context).size.height * 0.08),
+              Size.fromHeight(MediaQuery.of(context).size.height * 0.07),
           child: AppBar(
               elevation: 0,
               backgroundColor: ColorConstant.LIGHT_VIOLET,
@@ -45,6 +45,11 @@ class MainLayOut {
                 title,
                 style: StyleConstant.appBarText,
               ),
+              actions: <Widget>[
+                type == 'HOME' ? IconButton(
+                  icon: Icon(Icons.search, color: Colors.white), onPressed: () {},) : Container(),
+              ]
+              ,
               leading: new IconButton(
                   icon: new Icon(Icons.storage, color: ColorConstant.WHITE),
                   onPressed: () => _scaffoldKey.currentState.openDrawer())),
@@ -150,7 +155,7 @@ class MainLayOut {
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) =>
-                                                LoginScreen()));
+                                                LoginScreen(handel: "login",)));
                                   },
                                   child: type == 'USER'
                                       ? Image.asset(ImageConstant.PERSON_YELLOW,

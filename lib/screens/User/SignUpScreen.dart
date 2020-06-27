@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:MovieWorld/constant/ColorConstant.dart';
+import 'package:MovieWorld/constant/ConstantVar.dart';
 import 'package:MovieWorld/constant/ImageConstant.dart';
 import 'package:MovieWorld/constant/StringConstant.dart';
 import 'package:MovieWorld/constant/StyleConstant.dart';
@@ -20,31 +21,28 @@ import '../ButtonGradientLarge.dart';
 import 'package:http/http.dart' as http;
 
 class SignUpScreen extends StatefulWidget {
+  final String jwt;
+
+  const SignUpScreen({Key key, this.jwt}) : super(key: key);
+
   @override
-  _SignUpScreenState createState() => _SignUpScreenState();
+  _SignUpScreenState createState() => _SignUpScreenState(this.jwt);
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
+  final String jwt;
+
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController fullNameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
   TextEditingController addressController = TextEditingController();
-  TextEditingController ctl = TextEditingController();
 
   DateTime selectedDate = DateTime.now();
   final _formKey = GlobalKey<FormState>();
-  final _form = GlobalKey<FormState>();
-  void onPressedRegisterSuccress(BuildContext context) {
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => LoginScreen()));
-  }
 
-  void onPressedRegisterFail(BuildContext context) {
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => SignUpScreen()));
-  }
+  _SignUpScreenState(this.jwt);
 
   Future<http.Response> postUserDetail(BuildContext context) async {
     final http.Response response = await http.post(
@@ -63,13 +61,42 @@ class _SignUpScreenState extends State<SignUpScreen> {
     );
     if (response.statusCode == 200) {
       print("sign_up success");
-//      Modal.showSimpleCustomDialog(
-//          context, "Please enter mail to determine", onPressedRegisterSuccress);
+      Modal.showSimpleCustomDialog(
+          context, "Please enter mail to determine", null);
     } else {
-//      Modal.showSimpleCustomDialog(
-//          context, "Sign up fail", onPressedRegisterFail);
+      Modal.showSimpleCustomDialog(
+          context, "Sign up fail", null);
     }
     return response;
+  }
+
+  Future<bool> confirmDetail(String jwt) async {
+    print(UrlConstant.CONFIRM_ACCOUNT + "?token=" + jwt);
+    final response =
+        await http.get(UrlConstant.CONFIRM_ACCOUNT + "?token=" + jwt, headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json; charset=utf-8',
+    });
+    print(json.decode(response.body));
+
+    if (response.statusCode == 200) {
+      Modal.showSimpleCustomDialog(
+          context,
+          "Create account successfull!",
+          (c) => {
+            Navigator.of(c, rootNavigator: true).pop('dialog'),
+            Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => LoginScreen(handel: "")))
+              });
+      ConstantVar.registerToken = "";
+    } else {
+      Modal.showSimpleCustomDialog(
+          context,
+          "Create account fail!",null);
+      ConstantVar.registerToken = "";
+    }
+
+    return false;
   }
 
   Widget _signUpBtn(BuildContext context) {
@@ -78,6 +105,22 @@ class _SignUpScreenState extends State<SignUpScreen> {
         postUserDetail(context);
       }
     });
+  }
+
+  @override
+  void initState() {
+    if (jwt != "") {
+      print('confirm account');
+      confirmDetail(jwt);
+    }
+    print('confirm account' + jwt);
+
+    usernameController.text = "nhinhi";
+    passwordController.text = "123123";
+    fullNameController.text = "nhinhi";
+    addressController.text = "nghdgfhjkfgd";
+    phoneController.text = "123445";
+    emailController.text = "dddnhi@gmail.com";
   }
 
   @override
@@ -176,6 +219,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             ),
           ),
         ),
-        "USER", "Sign up");
+        "USER",
+        "Sign up");
   }
 }

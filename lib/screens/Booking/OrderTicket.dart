@@ -67,13 +67,13 @@ class _OrderTicketState extends State<OrderTicket> {
     } else {
       if (response.statusCode == 403) {
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => LoginScreen()));
+            context, MaterialPageRoute(builder: (context) => LoginScreen(handel: "")));
       }
     }
     return response;
   }
 
-  var filmDetail;
+  var filmDetail = null;
   Future<bool> fetchFilmDetail(String jwt) async {
     if (jwt != "" || jwt != null) {
       final response =

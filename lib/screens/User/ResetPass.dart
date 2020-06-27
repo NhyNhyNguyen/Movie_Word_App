@@ -8,6 +8,7 @@ import 'package:MovieWorld/constant/StringConstant.dart';
 import 'package:MovieWorld/constant/StyleConstant.dart';
 import 'package:MovieWorld/constant/UrlConstant.dart';
 import 'package:MovieWorld/layout/mainLayout.dart';
+import 'package:MovieWorld/screens/Homepage/NowshowingScreen.dart';
 import 'package:MovieWorld/screens/User/ChooseProfile.dart';
 import 'package:MovieWorld/screens/User/LoginScreen.dart';
 import 'package:MovieWorld/screens/User/ResetPassword.dart';
@@ -31,23 +32,24 @@ class _ResetPassScreenState extends State<ResetPassScreen> {
   TextEditingController emailController = TextEditingController();
 
   Future<String> resetPass() async {
-    var queryParameters = {
-      'email': emailController.text,
-    };
-    var uri = Uri.http(UrlConstant.HOST, '/api/reset-password', queryParameters);
+
+    var url = UrlConstant.HOST + '/api/reset-password' + '?email=' + emailController.text;
     http.Response response = await http.post(
-      uri,
+      url,
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
-        'Authorization': 'Bearer ' + ConstantVar.jwt,
       },
     );
 
     if (response.statusCode == 200) {
-
+      print("sign_up success");
+      Modal.showSimpleCustomDialog(
+          context, "Please enter mail to reset pass", (c) => {
+            Navigator.push(c, MaterialPageRoute(builder: (c) => NowshowingScreen()))
+      });
     } else {
-
-
+      Modal.showSimpleCustomDialog(
+          context, "Reset pass fail!", null);
     }
   }
 
@@ -81,8 +83,7 @@ class _ResetPassScreenState extends State<ResetPassScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return ConstantVar.userDetail != null
-        ? MainLayOut.getMailLayout(
+    return  MainLayOut.getMailLayout(
             context,
             Container(
               color: ColorConstant.VIOLET,
@@ -141,7 +142,6 @@ class _ResetPassScreenState extends State<ResetPassScreen> {
                 ),
               ),
             ),
-            "USER", "Reset password")
-        : LoginScreen();
+            "USER", "Reset password");
   }
 }

@@ -8,7 +8,9 @@ import 'package:MovieWorld/constant/UrlConstant.dart';
 import 'package:MovieWorld/layout/mainLayout.dart';
 import 'package:MovieWorld/model/User.dart';
 import 'package:MovieWorld/model/UserDetail.dart';
+import 'package:MovieWorld/screens/Homepage/NowshowingScreen.dart';
 import 'package:MovieWorld/screens/User/ChooseProfile.dart';
+import 'package:MovieWorld/screens/User/ResetPass.dart';
 import 'package:MovieWorld/screens/User/TextfieldWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -19,30 +21,43 @@ import 'DetailScreen.dart';
 import 'SignUpScreen.dart';
 
 class LoginScreen extends StatefulWidget {
+  final String handel;
+
+  const LoginScreen({Key key, this.handel}) : super(key: key);
+
   @override
-  _LoginScreenState createState() => _LoginScreenState();
+  _LoginScreenState createState() => _LoginScreenState(this.handel);
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final String handle;
+
+
   bool isLoading = true;
   bool _rememberMe = false;
   final _formKey = GlobalKey<FormState>();
   TextEditingController usernameController = TextEditingController();
   TextEditingController passController = TextEditingController();
 
-  Widget _forgetPassAndRememberMe() {
+  _LoginScreenState(this.handle);
+
+  Widget _forgetPassAndRememberMe(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: <Widget>[_rememberMeCheckBox(), _buildForgotPassBtn()],
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: <Widget>[_buildForgotPassBtn(context)],
     );
   }
 
-  Widget _buildForgotPassBtn() {
+  Widget _buildForgotPassBtn(BuildContext context) {
     return Container(
       alignment: Alignment.centerRight,
       child: FlatButton(
         padding: EdgeInsets.only(right: 0.0),
-        onPressed: () => {print("test")},
+        onPressed: () => {
+          print('reset pass'),
+        Navigator.push(
+        context, MaterialPageRoute(builder: (context) => ResetPassScreen()))
+        },
         child: Text(
           StringConstant.FORGOT_PASS,
           style: TextStyle(
@@ -122,12 +137,22 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void onPressedLoginSuccess(BuildContext context) {
-    UserDetail.fetchUserDetail(ConstantVar.jwt).then((value) => setState((){
-    }));
-    Modal.showSimpleCustomDialog(context, "Login successfull!", (c) =>{
-      Navigator.of(c, rootNavigator: true).pop('dialog'),
-      Navigator.of(context).pop()
-    });
+    UserDetail.fetchUserDetail(ConstantVar.jwt);
+    if(handle == ""){
+      print('redirect');
+      Modal.showSimpleCustomDialog(context, "Login successfull!", (c) =>{
+        Navigator.of(context, rootNavigator: true).pop('dialog'),
+        Navigator.of(context).pop(true)
+      });
+    }else{
+      print('');
+      Modal.showSimpleCustomDialog(context, "Login successfull!",
+              (c) =>{
+            Navigator.of(context, rootNavigator: true).pop('dialog'),
+            Navigator.push(context, MaterialPageRoute(builder: (context) => DetailScreen()) )
+          });
+    }
+
   }
 
   void onPressedLoginFail(BuildContext context) {
@@ -138,7 +163,7 @@ class _LoginScreenState extends State<LoginScreen> {
     return GestureDetector(
       onTap: () => {
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => SignUpScreen()))
+            context, MaterialPageRoute(builder: (context) => SignUpScreen(jwt: "")))
       },
       child: RichText(
         text: TextSpan(children: [
@@ -160,7 +185,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     usernameController.text = "trangnguyen";
     passController.text = "123123";
-    return MainLayOut.getMailLayout(
+    return ConstantVar.jwt == "" ?  MainLayOut.getMailLayout(
         context,
         Container(
           color: ColorConstant.VIOLET,
@@ -179,7 +204,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 Container(
                     padding:
-                        EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
+                    EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
                     decoration: BoxDecoration(
                         color: ColorConstant.LIGHT_VIOLET,
                         borderRadius: BorderRadius.circular(20),
@@ -212,7 +237,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               Icon(Icons.lock, color: Colors.white),
                               TextInputType.visiblePassword,
                               passController),
-                          _forgetPassAndRememberMe(),
+                          _forgetPassAndRememberMe(context),
                           SizedBox(
                             height: 15,
                           ),
@@ -228,6 +253,6 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
           ),
         ),
-        "USER", "Login");
+        "USER", "Login") : DetailScreen();
   }
 }

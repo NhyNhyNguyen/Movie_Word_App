@@ -47,7 +47,7 @@ class _RatingMovieDialogState extends State<RatingMovieDialog> {
           MaterialPageRoute(builder: (context) => DetailMovieScreen(idMovie)));
     } else {
       Navigator.push(context,
-          MaterialPageRoute(builder: (context) => LoginScreen()));
+          MaterialPageRoute(builder: (context) => LoginScreen(handel: "")));
     }
     return response;
   }
