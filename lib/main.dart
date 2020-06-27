@@ -17,6 +17,6 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
   void main() {
     runApp(MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Search(),
+      home: NowshowingScreen(),
     ));
   }

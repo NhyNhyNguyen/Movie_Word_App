@@ -6,6 +6,7 @@ import 'package:MovieWorld/constant/StyleConstant.dart';
 import 'package:MovieWorld/constant/UrlConstant.dart';
 import 'package:MovieWorld/screens/Homepage/Homepage.dart';
 import 'package:MovieWorld/screens/Homepage/NowshowingScreen.dart';
+import 'package:MovieWorld/screens/Homepage/Search.dart';
 import 'package:MovieWorld/screens/Menu/Menu.dart';
 import 'package:MovieWorld/screens/Menu/MenuItem.dart';
 import 'package:MovieWorld/screens/News/News.dart';
@@ -47,7 +48,9 @@ class MainLayOut {
               ),
               actions: <Widget>[
                 type == 'HOME' ? IconButton(
-                  icon: Icon(Icons.search, color: Colors.white), onPressed: () {},) : Container(),
+                  icon: Icon(Icons.search, color: Colors.white), onPressed: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => Search()));
+                },) : Container(),
               ]
               ,
               leading: new IconButton(

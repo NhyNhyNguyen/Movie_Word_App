@@ -123,7 +123,7 @@ class _SeatMapState extends State<SeatMap> {
                   setState(() {
                     if (seats[i - 1][j - 1].status == 0) {
                       seats[i - 1][j - 1].status = 2;
-                      seatSelected.add(seatRow[i] + (j).toString());
+                      seatSelected.add(seatRow[i-1] + (j).toString());
                     }
                   })
                 },
@@ -153,6 +153,8 @@ class _SeatMapState extends State<SeatMap> {
 
   Future<bool> fetchListSeat() async {
     //String time = dateTime.substring(5);
+    print(UrlConstant.HOST +
+        "/api/seats/showTime?filmId=$filmId&dateTime=$dateTime");
     final response = await http.get(
         UrlConstant.HOST +
             "/api/seats/showTime?filmId=$filmId&dateTime=$dateTime",
@@ -177,8 +179,10 @@ class _SeatMapState extends State<SeatMap> {
     } else {
       // If the server did not return a 200 K response,
       // then throw an exception.
-      ConstantVar.jwt = "";
-      ConstantVar.userDetail = null;
+      if(response.statusCode == 403){
+        ConstantVar.jwt = "";
+        ConstantVar.userDetail = null;
+      }
       return false;
     }
   }
