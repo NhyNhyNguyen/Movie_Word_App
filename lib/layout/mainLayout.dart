@@ -36,7 +36,7 @@ class MainLayOut {
         key: _scaffoldKey,
         appBar: PreferredSize(
           preferredSize:
-              Size.fromHeight(MediaQuery.of(context).size.height * 0.08),
+              Size.fromHeight(MediaQuery.of(context).size.height * 0.07),
           child: AppBar(
               elevation: 0,
               backgroundColor: ColorConstant.LIGHT_VIOLET,
@@ -44,6 +44,11 @@ class MainLayOut {
                 title,
                 style: StyleConstant.appBarText,
               ),
+              actions: <Widget>[
+                type == 'HOME' ? IconButton(
+                  icon: Icon(Icons.search, color: Colors.white), onPressed: () {},) : Container(),
+              ]
+              ,
               leading: new IconButton(
                   icon: new Icon(Icons.storage, color: ColorConstant.WHITE),
                   onPressed: () => _scaffoldKey.currentState.openDrawer())),
