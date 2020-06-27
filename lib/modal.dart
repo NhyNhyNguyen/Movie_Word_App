@@ -33,9 +33,10 @@ class Modal{
                   RaisedButton(
                     color: Colors.blue,
                     onPressed: () {
-                      onPressed != null ?
+                      onPressed == null ?
                       Navigator.of(context, rootNavigator: true).pop('dialog')
-                          : Navigator.of(context, rootNavigator: true).pop('dialog');
+                          :
+                      Navigator.of(context, rootNavigator: true).pop('dialog');
                       Navigator.push(context, MaterialPageRoute(builder: (context) => NowshowingScreen()))
                       ;
                     },

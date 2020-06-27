@@ -99,6 +99,6 @@ class _History extends State<History> {
                       ],
                     )),
                 "USER", "History")
-        : LoginScreen(handel: "");
+        : Container();
   }
 }

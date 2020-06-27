@@ -279,6 +279,7 @@ class _DetailScreenState extends State<DetailScreen> {
         fullNameController.text = ConstantVar.userDetail.fullName;
         addressController.text = ConstantVar.userDetail.address;
         phoneController.text = ConstantVar.userDetail.phone;
+        emailController.text = ConstantVar.userDetail.email;
       }));
 
   }

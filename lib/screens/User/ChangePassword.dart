@@ -29,7 +29,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
   TextEditingController passController = TextEditingController();
   TextEditingController passConfirmController = TextEditingController();
 
-  Future<String> resetPass() async {
+  Future<String> resetPass(BuildContext context) async {
     var uri = (UrlConstant.HOST+ '/api/change-password?oldpassword=' + passController.text + "&password=" + passConfirmController.text);
     print(uri);
     http.Response response = await http.put(
@@ -42,8 +42,8 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
 
     if (response.statusCode == 200) {
       Modal.showSimpleCustomDialog(
-          context, "Change pass successfull", (c) => {
-        Navigator.of(c, rootNavigator: true).pop('dialog'),
+          context, "Change pass successfull", (context) => {
+        Navigator.of(context, rootNavigator: true).pop('dialog'),
         Navigator.push(context,
             MaterialPageRoute(builder: (context) => ChooseProfile()))
       });
@@ -56,10 +56,10 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
 
 //  }
 
-  Widget _resetPassBtn() {
-    return ButtonGradientLarge(StringConstant.RESET_PASS, () {
+  Widget _resetPassBtn(BuildContext  context) {
+    return ButtonGradientLarge(StringConstant.CHANGE_PASS, () {
       if (_formKey.currentState.validate()) {}
-      resetPass();
+      resetPass(context);
     });
   }
 
@@ -114,21 +114,21 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                           child: Column(
                             children: <Widget>[
                               TextFieldWidget.buildTextField(
-                                  StringConstant.PASSWORD,
+                                  "Old password",
                                   StringConstant.PASSWORD_HINT,
                                   Icon(Icons.lock, color: Colors.white),
                                   TextInputType.visiblePassword,
                                   passController),
                               TextFieldWidget.buildTextField(
-                                  StringConstant.CONFIRM_PASSWORD,
-                                  StringConstant.CONFIRM_PASSWORD_HINT,
+                                  "New password",
+                                  "new password",
                                   Icon(Icons.lock_open, color: Colors.white),
                                   TextInputType.emailAddress,
                                   passConfirmController),
                               SizedBox(
                                 height: 15,
                               ),
-                              _resetPassBtn(),
+                              _resetPassBtn(context),
                             ],
                           ),
                         )),

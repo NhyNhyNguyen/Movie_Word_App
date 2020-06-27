@@ -118,8 +118,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
     usernameController.text = "nhinhi";
     passwordController.text = "123123";
     fullNameController.text = "nhinhi";
-    addressController.text = "nghdgfhjkfgd";
-    phoneController.text = "123445";
+    addressController.text = "Ha lang quang phu quang dien";
+    phoneController.text = "12345678910";
     emailController.text = "dddnhi@gmail.com";
   }
 

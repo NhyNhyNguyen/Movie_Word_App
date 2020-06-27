@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:MovieWorld/constant/ImageConstant.dart';
 
 class ShowtimeMovieItem extends StatelessWidget {
-  final String date;
+  String date;
   final int idFilm;
   final String name;
   final String imageUrl;
@@ -45,7 +45,8 @@ class ShowtimeMovieItem extends StatelessWidget {
         ),
         child: InkWell(
             onTap: (){
-              Navigator.push(context, MaterialPageRoute(builder: (context) => SeatMap(filmId: idFilm, dateTime:date + " " + time , filmName: name)));
+              date = date.replaceAll('/', '-');
+              Navigator.push(context, MaterialPageRoute(builder: (context) => SeatMap(filmId: idFilm, dateTime: date + " " + time , filmName: name)));
               print(date + " " + time);
             },
             child: Text(time, style: StyleConstant.mediumTxtStyle,)),
