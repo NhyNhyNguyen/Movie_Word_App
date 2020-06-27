@@ -1,4 +1,5 @@
 import 'package:MovieWorld/screens/News/News.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -28,7 +29,12 @@ class NewsDetailScreen extends StatelessWidget  {
           padding: EdgeInsets.all(10.0),
           child: Column(
             children: <Widget>[
-              Image.asset(data[index]['image'], height: 150),
+              ClipRRect(
+                  borderRadius: BorderRadius.all(Radius.circular(30)),
+                  child: Image.asset(data[index]['image'], height: 180, fit: BoxFit.cover,)),
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: 10),
+              ),
               Container(
                 padding: EdgeInsets.all(5.0),
                 child: Text(data[index]['detail'], style: TextStyle(color: ColorConstant.WHITE),),

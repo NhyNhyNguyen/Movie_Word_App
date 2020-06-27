@@ -122,7 +122,7 @@ class _DetailMovieScreenState extends State<DetailMovieScreen> {
                                 child:  Container(
                                   padding: EdgeInsets.only(top:60, left: 130),
                                   child: IconButton(
-                                    icon:  Icon(Icons.play_circle_outline, size: 80, color: ColorConstant.LIGHT_VIOLET,),
+                                    icon:  Icon(Icons.play_circle_outline, size: 80, color: ColorConstant.WHITE,),
                                     onPressed: playYoutubeVideo,
                                   ),
                                 ),
@@ -132,13 +132,9 @@ class _DetailMovieScreenState extends State<DetailMovieScreen> {
                           onTap: playYoutubeVideo,
                         ),
                       )
-
-
                     ],
                   ) ,
                 ),
-
-
                 //Trailer(data["trailer"]),
                 // comment//
                 Container(
@@ -146,7 +142,6 @@ class _DetailMovieScreenState extends State<DetailMovieScreen> {
                   padding: EdgeInsets.symmetric(vertical: 20),
                   child: Text("Comments", style: StyleConstant.bigTxtStyle , textAlign: TextAlign.left,),
                 ),
-
                 Stack(
                     children: <Widget>[
                       Container(

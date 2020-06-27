@@ -40,29 +40,36 @@ class _NewsScreen extends State<NewsScreen>  {
 //];
 
  static List listImage() {
-  return data.map((item) => Image.asset(item['image'], height: 150,)).toList();
+  return data.map((item) => ClipRRect(
+      borderRadius: BorderRadius.all(Radius.circular(30)),
+      child: Image.asset(item['image'], height: 180, fit: BoxFit.cover,))).toList();
 }
 
 
   @override
   Widget build(BuildContext context) {
-    List<InkWell> myWidgets = listImage().asMap().entries.map((item) {
-      return InkWell(
-        child: item.value,
-        onTap: (){
-          Navigator.push(context, MaterialPageRoute(builder: (context) => NewsDetailScreen(item.key, data)));
-
-        },
+    List<Widget> myWidgets = listImage().asMap().entries.map((item) {
+      return Container(
+        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+        child: InkWell(
+          child: item.value,
+          onTap: (){
+            Navigator.push(context, MaterialPageRoute(builder: (context) => NewsDetailScreen(item.key, data)));
+          },
+        ),
       );
     }).toList();
 
 
     Widget _listImage(){
       return Container(
-        height: 500,
-        child: ListView(
-          children: myWidgets,
-        ),
+        height: MediaQuery.of(context).size.height * 0.8,
+          child: GridView.count(
+              crossAxisCount: 1,
+              childAspectRatio: 2,
+              children: myWidgets,
+          ),
+
 
       );
     }
@@ -72,7 +79,8 @@ class _NewsScreen extends State<NewsScreen>  {
           color: ColorConstant.VIOLET,
           child: Column(
             children: <Widget>[
-              OptionTab('news'),
+              //OptionTab('news'),
+              Padding(padding: EdgeInsets.symmetric(vertical: 10)),
               _listImage(),
             ],
           ),
