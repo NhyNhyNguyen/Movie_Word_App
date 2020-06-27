@@ -18,6 +18,7 @@ class UrlConstant{
   static const String SHOW_TIME_FILM = HOST + "/api/showtimefilms/dateTime";
   static const String GET_LIST_SEAT = HOST + "/api/seats/showTime";
   static const String POST_BOOK = HOST + "/api/reservations";
+  static const String PUT_CANCEL = HOST + "api/reservations/cancels";
   static const String CONFIRM_ACCOUNT = HOST + "/api/confirm-account";
 
 
