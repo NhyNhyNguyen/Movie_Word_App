@@ -8,6 +8,7 @@ import 'package:MovieWorld/screens/Homepage/Homepage.dart';
 import 'package:MovieWorld/screens/Homepage/NowshowingScreen.dart';
 import 'package:MovieWorld/screens/Menu/Menu.dart';
 import 'package:MovieWorld/screens/Menu/MenuItem.dart';
+import 'package:MovieWorld/screens/News/News.dart';
 import 'package:MovieWorld/screens/News/TicketPrice.dart';
 import 'package:MovieWorld/screens/Showtime/Showtime.dart';
 import 'package:MovieWorld/screens/Showtime/ShowtimeScreen.dart';
@@ -140,7 +141,7 @@ class MainLayOut {
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) =>
-                                                TicketPriceScreen()));
+                                                NewsScreen()));
                                   },
                                   child: type == 'FILM'
                                       ? Image.asset(ImageConstant.FILM_YELLOW,
@@ -197,3 +198,4 @@ class MainLayOut {
     );
   }
 }
+

@@ -28,14 +28,19 @@ class _CategoryShowtimeMovieState extends State<CategoryShowtimeMovie>  {
   String url;
   List<dynamic> data;
 
-  List<dynamic> _getData(int duration) {
+  String _getDatefromDuration(int duration){
     DateTime newDate = date.add(Duration(days: duration));
     String dd = DateFormat('dd').format(newDate).toString();
     String mm = DateFormat('MM').format(newDate).toString();
     String yyyy = DateFormat('yyyy').format(newDate).toString();
     String dateShowtime = dd + "/" + mm + "/" + yyyy;
     print(dateShowtime);
-    url = UrlConstant.URL_GET_SHOWTIME + dateShowtime;
+    return dateShowtime;
+  }
+
+  List<dynamic> _getData(int duration) {
+    //_getDatefromDuration(duration);
+    url = UrlConstant.URL_GET_SHOWTIME + _getDatefromDuration(duration);
     if(data==null){
       http.get(url, headers: {
         'Content-Type': 'application/json',
@@ -71,7 +76,7 @@ class _CategoryShowtimeMovieState extends State<CategoryShowtimeMovie>  {
         childAspectRatio: 1.6,
         children:
         data.map(
-                (item) =>ShowtimeMovieItem(item['film']['name'], item['film']['poster'], item['film']['genres'], item['film']['filmDescription']['timeLimit'], item['time'])
+                (item) =>ShowtimeMovieItem(_getDatefromDuration(duration), item['film']['id'],item['film']['name'], item['film']['poster'], item['film']['genres'], item['film']['filmDescription']['timeLimit'], item['time'])
         ).toList()
     );
 

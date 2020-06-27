@@ -1,6 +1,7 @@
 import 'package:MovieWorld/constant/ColorConstant.dart';
 import 'package:MovieWorld/constant/StyleConstant.dart';
 import 'package:MovieWorld/constant/UrlConstant.dart';
+import 'package:MovieWorld/screens/Booking/SeatMap.dart';
 import 'package:MovieWorld/screens/DetailMovie/DetailMovieScreen.dart';
 import 'package:MovieWorld/screens/DetailMovie/Test.dart';
 import 'package:flutter/cupertino.dart';
@@ -8,6 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:MovieWorld/constant/ImageConstant.dart';
 
 class ShowtimeMovieItem extends StatelessWidget {
+  final String date;
+  final int idFilm;
   final String name;
   final String imageUrl;
   final List genres;
@@ -15,6 +18,8 @@ class ShowtimeMovieItem extends StatelessWidget {
   final List showtime;
 
   ShowtimeMovieItem(
+      @required this.date,
+      @required this.idFilm,
       @required this.name,
       @required this.imageUrl,
       @required this.genres,
@@ -22,25 +27,32 @@ class ShowtimeMovieItem extends StatelessWidget {
       @required this.showtime
       ) ;
 
-  Widget TimeItem(String time){
-    return Container(
-      margin: EdgeInsets.all(5),
-      padding: EdgeInsets.all(5),
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(5)),
-          border: Border.all(
-            color: ColorConstant.GRAY_TEXT,
-          ),
-      ),
-      child: InkWell(
-        onTap: null,
-          child: Text(time, style: StyleConstant.mediumTxtStyle,)),
-    );
-  }
 
 
   @override
   Widget build(BuildContext context) {
+
+
+    Widget TimeItem(String time){
+      return Container(
+        margin: EdgeInsets.all(5),
+        padding: EdgeInsets.all(5),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(5)),
+          border: Border.all(
+            color: ColorConstant.GRAY_TEXT,
+          ),
+        ),
+        child: InkWell(
+            onTap: (){
+              Navigator.push(context, MaterialPageRoute(builder: (context) => SeatMap(filmId: idFilm, dateTime:date + " " + time , filmName: name)));
+              print(date + " " + time);
+            },
+            child: Text(time, style: StyleConstant.mediumTxtStyle,)),
+      );
+    }
+
+
     String listGenres="";
     for(var item in genres){
       listGenres = listGenres + ", " + item['name'];
