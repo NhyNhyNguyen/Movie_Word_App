@@ -186,7 +186,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     usernameController.text = "trangnguyen";
     passController.text = "123123";
-    return ConstantVar.jwt == "" ? !isLoading ? MainLayOut.getMailLayout(
+    return ConstantVar.jwt == ""  ? MainLayOut.getMailLayout(
         context,
         Container(
           color: ColorConstant.VIOLET,
@@ -254,6 +254,6 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
           ),
         ),
-        "USER", "Login") : Loading(type: "USER", title: "Login") : DetailScreen();
+        "USER", "Login") : DetailScreen();
   }
 }
