@@ -16,7 +16,7 @@ List<Movie> data;
 List getRandomSubList(List list){
   listImageRandomed.clear();
   final _random = new Random();
-  for( var i =0; i< 1 ; i++){
+  for( var i =0; i<= list.length /2  + 1; i++){
 
     var element = list[_random.nextInt(list.length)];
     print("chose" + element);

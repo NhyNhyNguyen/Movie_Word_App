@@ -72,7 +72,7 @@ Không áp dụng cho các ngày Lễ, Tết, suất chiếu đặc biệt, ho�
   static const NEW_PASSWORD_HINT = "Enter your new password";
   static const CONFIRM_PASSWORD = "Confirm Password";
   static const CONFIRM_PASSWORD_HINT = "Enter your confirm password";
-  static const RESET_PASS = "Reset Password";
+  static const RESET_PASS = "Reset Pass";
   static const CHANGE_PASS = "Change Password";
   static const UPLOAD = "UPLOAD IMAGE";
 

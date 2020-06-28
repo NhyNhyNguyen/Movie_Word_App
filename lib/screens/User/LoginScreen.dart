@@ -151,7 +151,7 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void onPressedLoginFail(BuildContext context) {
-    Modal.showSimpleCustomDialog(context, "Login fail!", null);
+    Modal.showSimpleCustomDialog(context, "Invalid user name pass word!", null);
   }
 
   Widget _signInBtn() {
@@ -178,7 +178,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    usernameController.text = "trangnguyen";
+    usernameController.text = "nhinhi";
     passController.text = "123123";
     return ConstantVar.jwt == ""  ? MainLayOut.getMailLayout(
         context,
