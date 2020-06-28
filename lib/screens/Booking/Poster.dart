@@ -18,8 +18,8 @@ class _PosterState extends State<Poster> {
   Widget build(BuildContext context) {
    return Container(
       margin: EdgeInsets.only(right: 15),
-      width: 120,
-      height: 120,
+      width: 110,
+      height: 110,
       decoration: BoxDecoration(
         shape: BoxShape.rectangle,
         borderRadius:BorderRadius.all(Radius.circular(15)),

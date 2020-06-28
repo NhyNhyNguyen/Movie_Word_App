@@ -119,7 +119,7 @@ class _HistoryItemState extends State<HistoryItem> {
                   ),
                 ),
                 Container(
-                  padding: EdgeInsets.only(right: 5, bottom: 10, top: 10),
+                  padding: EdgeInsets.only(right: 1, bottom: 10, top: 10),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -127,7 +127,7 @@ class _HistoryItemState extends State<HistoryItem> {
                       ...content
                           .map((e) => Container(
                         height: 30,
-                        width: MediaQuery.of(context).size.width * 0.4,
+                        width: MediaQuery.of(context).size.width * 0.45,
                         child: Text(e,
                             style: TextStyle(
                               color: Colors.white,

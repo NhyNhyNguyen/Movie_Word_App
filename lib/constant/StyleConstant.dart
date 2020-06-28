@@ -65,14 +65,14 @@ class StyleConstant {
     color: ColorConstant.WHITE,
       fontFamily: "Open Sans",
       fontWeight: FontWeight.bold,
-      fontSize: 18
+      fontSize: 16
   );
 
   static const TextStyle btnNormalStyle = TextStyle(
     color: ColorConstant.BLACK,
       fontFamily: "Open Sans",
       fontWeight: FontWeight.bold,
-      fontSize: 18
+      fontSize: 16
   );
 
   static const btnLargeStyle = TextStyle(
