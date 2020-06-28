@@ -41,9 +41,7 @@ class _HistoryItemState extends State<HistoryItem> {
         'Authorization': 'Bearer ' + ConstantVar.jwt,
       },
     );
-    print(booking.idReservation.toString());
-    print(booking.status);
-    print(response.statusCode);
+    print(response.body);
     if (response.statusCode == 200) {
       Navigator.push(context,
           MaterialPageRoute(builder: (context) => History()));
@@ -58,6 +56,7 @@ class _HistoryItemState extends State<HistoryItem> {
       content.add(booking.name);
       content.add(booking.showTime);
       content.add(booking.room);
+      content.add(booking.code);
       content.add(booking.seats.join(", "));
   }
 
@@ -99,7 +98,7 @@ class _HistoryItemState extends State<HistoryItem> {
                         ),
                         child: Text(
                           "Canceled",
-                          style: StyleConstant.priceTextStyle,
+                          style: StyleConstant.btnSelectedStyle,
                         ),
                       ) : Container()
                        ),
@@ -127,16 +126,16 @@ class _HistoryItemState extends State<HistoryItem> {
                     children: <Widget>[
                       ...content
                           .map((e) => Container(
-                        height: 35,
-                        width: MediaQuery.of(context).size.width * 0.35,
+                        height: 30,
+                        width: MediaQuery.of(context).size.width * 0.4,
                         child: Text(e,
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 15,
                               fontWeight: FontWeight.w600,
                               fontFamily: "Open Sans",
-                            ),maxLines: 2,
-                          overflow: TextOverflow.clip,
+                            ),maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ))
                           .toList(),

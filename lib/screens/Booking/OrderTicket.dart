@@ -50,7 +50,7 @@ class _OrderTicketState extends State<OrderTicket> {
     "F1, F2 & F3"
   ];
 
-  Future<http.Response> postOrderTicket() async {
+  Future<http.Response> postOrderTicket(BuildContext context) async {
     final http.Response response = await http.post(
       UrlConstant.POST_BOOK,
       headers: <String, String>{
@@ -382,7 +382,7 @@ class _OrderTicketState extends State<OrderTicket> {
                                             MainAxisAlignment.center,
                                         children: <Widget>[
                                           ButtonGradientLarge("Buy ticket",
-                                              () => {postOrderTicket()})
+                                              () => {postOrderTicket(context)})
                                         ],
                                       )
                                     ],
