@@ -112,6 +112,14 @@ class _MenuState extends State<Menu> {
               ): Column(
                 children: <Widget>[
                   MenuItem(
+                    text: StringConstant.PROFILE,
+                    icon: Icons.person,
+                    selectHandle: () => {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => ChooseProfile()))
+                    },
+                  ),
+                  MenuItem(
                     text: StringConstant.EDIT,
                     icon: Icons.edit,
                     selectHandle: () => {

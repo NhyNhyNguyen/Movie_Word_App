@@ -52,8 +52,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
       },
       body: jsonEncode(<String, String>{
         "username": usernameController.text,
-        "fullName": passwordController.text,
-        "password": fullNameController.text,
+        "fullName": fullNameController.text,
+        "password": passwordController.text,
         "address": addressController.text,
         "phone": phoneController.text,
         "email": emailController.text

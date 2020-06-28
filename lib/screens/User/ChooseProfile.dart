@@ -87,7 +87,7 @@ class _ChooseProfile extends State<ChooseProfile> {
   @override
   Widget build(BuildContext context) {
     if (ConstantVar.jwt != null) {
-      return ConstantVar.userDetail != null ? MainLayOut.getMailLayout(
+      return ConstantVar.userDetail != null && !isLoading? MainLayOut.getMailLayout(
           context,
           Container(
             color: ColorConstant.VIOLET,
