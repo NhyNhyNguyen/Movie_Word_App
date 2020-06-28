@@ -97,7 +97,7 @@ class _OrderTicketState extends State<OrderTicket> {
         return false;
       }
     } else {
-      Modal.showSimpleCustomDialog(context, "Not found", () => {});
+      Modal.showSimpleCustomDialog(context, "Not found", "");
     }
     return false;
   }

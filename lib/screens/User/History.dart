@@ -59,7 +59,7 @@ class _History extends State<History> {
       } else {
         // If the server did not return a 200 OK response,
         // then throw an exception.
-        Modal.showSimpleCustomDialog(context, "Not found", ()=>{});
+        Modal.showSimpleCustomDialog(context, "Not found", "");
         if(response.statusCode == 403){
           ConstantVar.jwt = "";
           ConstantVar.userDetail = null;

@@ -139,19 +139,13 @@ class _LoginScreenState extends State<LoginScreen> {
 
   void onPressedLoginSuccess(BuildContext context) {
     UserDetail.fetchUserDetail(ConstantVar.jwt);
-    if(handle == ""){
+    if(handle == "LOGIN"){
       print('redirect');
-      Modal.showSimpleCustomDialog(context, "Login successfull!", (c) =>{
-        Navigator.of(context, rootNavigator: true).pop('dialog'),
-        Navigator.of(context).pop(true)
-      });
+      Modal.showSimpleCustomDialog(context, "Login successfull!", "DETAIL");
     }else{
       print('');
       Modal.showSimpleCustomDialog(context, "Login successfull!",
-              (c) =>{
-            Navigator.of(context, rootNavigator: true).pop('dialog'),
-            Navigator.push(context, MaterialPageRoute(builder: (context) => DetailScreen()) )
-          });
+          "");
     }
 
   }

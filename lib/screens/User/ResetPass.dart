@@ -44,9 +44,7 @@ class _ResetPassScreenState extends State<ResetPassScreen> {
     if (response.statusCode == 200) {
       print("sign_up success");
       Modal.showSimpleCustomDialog(
-          context, "Please enter mail to reset pass", (c) => {
-            Navigator.push(c, MaterialPageRoute(builder: (c) => NowshowingScreen()))
-      });
+          context, "Please enter mail to reset pass", "");
     } else {
       Modal.showSimpleCustomDialog(
           context, "Reset pass fail!", null);

@@ -1,10 +1,12 @@
 import 'package:MovieWorld/screens/Homepage/NowshowingScreen.dart';
+import 'package:MovieWorld/screens/User/ChooseProfile.dart';
+import 'package:MovieWorld/screens/User/DetailScreen.dart';
 import 'package:MovieWorld/screens/User/LoginScreen.dart';
 import 'package:flutter/material.dart';
 
 import 'constant/ColorConstant.dart';
 class Modal{
-  static void showSimpleCustomDialog(BuildContext context, String text,Function onPressed) {
+  static void showSimpleCustomDialog(BuildContext context, String text,String onPressed) {
     Dialog simpleDialog = Dialog(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12.0),
@@ -36,8 +38,18 @@ class Modal{
                      if( onPressed == null ){
                         Navigator.of(context, rootNavigator: true).pop('dialog');
                       }else{
-                       Navigator.of(context, rootNavigator: true).pop('dialog');
-                       Navigator.push(context, MaterialPageRoute(builder: (context) => NowshowingScreen()));
+                       if(onPressed == "LOGIN"){
+                         Navigator.of(context, rootNavigator: true).pop('dialog');
+                         Navigator.push(context, MaterialPageRoute(builder: (context) => LoginScreen()));
+                       }else{
+                         if(onPressed == "DETAIL"){
+                           Navigator.of(context, rootNavigator: true).pop('dialog');
+                           Navigator.push(context, MaterialPageRoute(builder: (context) => NowshowingScreen()));
+                         }else{
+                           Navigator.of(context, rootNavigator: true).pop('dialog');
+                           Navigator.of(context).pop(true);
+                         }
+                       }
                      }
                     },
                     child: Text(

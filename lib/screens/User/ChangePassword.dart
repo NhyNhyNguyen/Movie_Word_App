@@ -42,11 +42,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
 
     if (response.statusCode == 200) {
       Modal.showSimpleCustomDialog(
-          context, "Change pass successfull", (context) => {
-        Navigator.of(context, rootNavigator: true).pop('dialog'),
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => ChooseProfile()))
-      });
+          context, "Change pass successfull", "LOGIN");
     } else {
       Modal.showSimpleCustomDialog(
           context, "Change pass fail!", null);

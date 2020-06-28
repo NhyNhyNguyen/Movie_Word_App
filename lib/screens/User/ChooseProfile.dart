@@ -64,7 +64,7 @@ class _ChooseProfile extends State<ChooseProfile> {
   initState() {
     super.initState();
     ConstantVar.isLogin = false;
-    if(ConstantVar.jwt!=""){
+    if(ConstantVar.jwt!="" ){
       UserDetail.fetchUserDetail(ConstantVar.jwt).then((value) => setState(() {
         usernameController.text = ConstantVar.userDetail.username;
         fullNameController.text = ConstantVar.userDetail.fullName;
@@ -87,7 +87,7 @@ class _ChooseProfile extends State<ChooseProfile> {
   @override
   Widget build(BuildContext context) {
     if (ConstantVar.jwt != null) {
-      return ConstantVar.userDetail != null && !isLoading ? MainLayOut.getMailLayout(
+      return ConstantVar.userDetail != null ? MainLayOut.getMailLayout(
           context,
           Container(
             color: ColorConstant.VIOLET,

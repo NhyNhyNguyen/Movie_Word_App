@@ -21,7 +21,7 @@ import 'package:flutter/material.dart';
 class MainLayOut {
   void loginHandle(BuildContext context) {
     Navigator.push(
-        context, MaterialPageRoute(builder: (context) => LoginScreen(handel: "")));
+        context, MaterialPageRoute(builder: (context) => LoginScreen(handel: "LOGIN")));
   }
 
   static Widget getMailLayout(
@@ -158,7 +158,7 @@ class MainLayOut {
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) =>
-                                                LoginScreen(handel: "login",)));
+                                                LoginScreen(handel: "LOGIN",)));
                                   },
                                   child: type == 'USER'
                                       ? Image.asset(ImageConstant.PERSON_YELLOW,

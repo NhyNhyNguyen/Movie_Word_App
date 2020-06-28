@@ -82,12 +82,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     if (response.statusCode == 200) {
       Modal.showSimpleCustomDialog(
           context,
-          "Create account successfull!",
-          (c) => {
-            Navigator.of(c, rootNavigator: true).pop('dialog'),
-            Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => LoginScreen(handel: "")))
-              });
+          "Create account successfull!", "LOGIN");
       ConstantVar.registerToken = "";
     } else {
       Modal.showSimpleCustomDialog(

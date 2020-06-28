@@ -185,7 +185,7 @@ class _SeatMapState extends State<SeatMap> {
         ConstantVar.jwt = "";
         ConstantVar.userDetail = null;
       }
-      Modal.showSimpleCustomDialog(context, "Not found", () => {});
+      Modal.showSimpleCustomDialog(context, "Not found","");
       return false;
     }
   }

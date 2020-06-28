@@ -121,7 +121,7 @@ class _BookingTicketState extends State<BookingTicket> {
     } else {
       // If the server did not return a 200 K response,
       // then throw an exception.
-      Modal.showSimpleCustomDialog(context, "Not found", () => {});
+      Modal.showSimpleCustomDialog(context, "Not found", "");
       return false;
     }
   }

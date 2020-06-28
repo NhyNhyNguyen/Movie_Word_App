@@ -50,13 +50,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
     if (response.statusCode == 200) {
       Modal.showSimpleCustomDialog(
           context,
-          "Change pass successfull!",
-          (c) => {
-                Navigator.of(c, rootNavigator: true).pop('dialog'),
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => LoginScreen(handel: "now"
-                    ))),
-              });
+          "Change pass successfull!", "LOGIN");
       ConstantVar.resetPassWordToken = "";
       ConstantVar.userDetail = null;
       ConstantVar.jwt = "";
