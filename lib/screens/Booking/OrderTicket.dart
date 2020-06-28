@@ -64,6 +64,7 @@ class _OrderTicketState extends State<OrderTicket> {
 
     print(json.encode(response.body));
     if (response.statusCode == 200) {
+      Modal.showSimpleCustomDialog(context, "Your booking have send to your mail", null);
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => History()));
     } else {
