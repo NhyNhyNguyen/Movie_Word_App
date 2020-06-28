@@ -35,7 +35,7 @@ class  Booking{
       seats: list,
       status: json['status'],
       room: json['room'],
-      code: json['code']
+      code: "Mã code: " + json['code']
     );
   }
 

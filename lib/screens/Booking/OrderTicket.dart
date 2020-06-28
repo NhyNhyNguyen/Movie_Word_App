@@ -331,7 +331,7 @@ class _OrderTicketState extends State<OrderTicket> {
                                                 CrossAxisAlignment.start,
                                             children: <Widget>[
                                               Text(
-                                                "  :     45 VND",
+                                                "  :     45000 VND",
                                                 style: StyleConstant
                                                     .priceTextStyle,
                                               ),
@@ -362,7 +362,7 @@ class _OrderTicketState extends State<OrderTicket> {
                                               ),
                                               Text(
                                                 "  :     " +
-                                                    (seats.length * 45)
+                                                    (seats.length * 45000)
                                                         .toString() +
                                                     " VND",
                                                 style: StyleConstant

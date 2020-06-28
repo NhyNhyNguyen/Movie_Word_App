@@ -50,7 +50,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
     if (response.statusCode == 200) {
       Modal.showSimpleCustomDialog(
           context,
-          "Change pass successfull!", "LOGIN");
+          "Change pass successfull!", "LOGINRe");
       ConstantVar.resetPassWordToken = "";
       ConstantVar.userDetail = null;
       ConstantVar.jwt = "";

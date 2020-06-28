@@ -85,7 +85,7 @@ class _DetailScreenState extends State<DetailScreen> {
         data: formData,
       );
       if (response.statusCode == 200) {
-        Modal.showSimpleCustomDialog(context, "Upload Sucessfull!", null);
+        Modal.showSimpleCustomDialog(context, "Upload Successfull!", null);
       } else {
         Modal.showSimpleCustomDialog(context, "Upload fail!", null);
       }
