@@ -71,6 +71,9 @@ class _OrderTicketState extends State<OrderTicket> {
       if (response.statusCode == 403) {
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => LoginScreen(handel: "")));
+      }else{
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => History()));
       }
     }
     return response;
