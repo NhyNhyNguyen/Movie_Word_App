@@ -57,7 +57,7 @@ class _HistoryItemState extends State<HistoryItem> {
       content.add(booking.showTime);
       content.add(booking.room);
       content.add(booking.code);
-      content.add(booking.seats.join(", "));
+      content.add("Seats: " + booking.seats.join(", "));
   }
 
   @override

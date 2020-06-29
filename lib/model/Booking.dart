@@ -34,7 +34,7 @@ class  Booking{
       showTime: json['showTime'],
       seats: list,
       status: json['status'],
-      room: json['room'],
+      room: "Phòng: " +  json['room'],
       code: "Mã vé: " + json['code']
     );
   }
